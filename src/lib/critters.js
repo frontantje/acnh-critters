@@ -6,13 +6,17 @@ import { i18n, t, term } from './i18n.svelte.js';
 
 export { critters };
 
-/** @type {{ id: string, label: import('./i18n.svelte.js').MessageKey }[]} */
-export const TABS = [
-  { id: 'all', label: 'tabAll' },
+/** @typedef {{ id: string, label: import('./i18n.svelte.js').MessageKey }} Tab */
+
+/** The critter types, in Critterpedia order. @type {Tab[]} */
+export const CATEGORIES = [
   { id: 'fish', label: 'tabFish' },
   { id: 'bug', label: 'tabBugs' },
   { id: 'sea', label: 'tabSea' },
 ];
+
+/** @type {Tab[]} */
+export const TABS = [{ id: 'all', label: 'tabAll' }, ...CATEGORIES];
 
 /** @param {Critter} critter */
 export function critterName(critter) {

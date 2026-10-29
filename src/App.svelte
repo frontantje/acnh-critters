@@ -1,24 +1,34 @@
 <script>
+  import CritterpediaSync from './lib/CritterpediaSync.svelte';
   import MainView from './lib/MainView.svelte';
-  import Setup from './lib/Setup.svelte';
   import Welcome from './lib/Welcome.svelte';
   import { restore, save } from './lib/progress.svelte.js';
 
-  /** @type {'welcome' | 'setup' | 'main'} */
-  let screen = $state(restore() ? 'main' : 'welcome');
+  let showWelcome = $state(!restore());
+  let syncing = $state(false);
 
   // Saving here means the welcome screen isn't shown again, even when the
   // player skipped it.
-  function showMain() {
+  function leaveWelcome() {
     save();
-    screen = 'main';
+    showWelcome = false;
   }
 </script>
 
-{#if screen === 'welcome'}
-  <Welcome onimport={showMain} onsetup={() => (screen = 'setup')} onskip={showMain} />
-{:else if screen === 'setup'}
-  <Setup ondone={showMain} />
+{#if showWelcome}
+  <Welcome
+    onimport={leaveWelcome}
+    onsync={() => {
+      leaveWelcome();
+      syncing = true;
+    }}
+    onskip={leaveWelcome}
+  />
 {:else}
-  <MainView />
+  <MainView onsync={() => (syncing = true)} />
+{/if}
+
+<!-- Opens over the main view, which keeps its tab, filters and scroll position. -->
+{#if syncing}
+  <CritterpediaSync onexit={() => (syncing = false)} />
 {/if}

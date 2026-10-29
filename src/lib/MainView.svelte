@@ -5,6 +5,9 @@
   import { t } from './i18n.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
 
+  /** @type {{ onsync: () => void }} */
+  let { onsync } = $props();
+
   let tab = $state('all');
   // 1–12, or 0 for all months.
   let month = $state(new Date().getMonth() + 1);
@@ -26,7 +29,7 @@
 <div class="mx-auto max-w-6xl">
   <header class="flex items-center justify-between px-3 pt-2 md:px-4 md:pt-4">
     <h1 class="text-xl font-bold md:text-2xl">ACNH Critters</h1>
-    <AppMenu />
+    <AppMenu {onsync} />
   </header>
 
   <!-- Filters and tabs stay pinned while scrolling. Phones: filters above the tabs.

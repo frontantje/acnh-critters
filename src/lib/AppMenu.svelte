@@ -2,24 +2,27 @@
   import { i18n, LOCALES, setLocale, t } from './i18n.svelte.js';
   import { exportProgress } from './progress.svelte.js';
 
+  /** @type {{ onsync: () => void }} */
+  let { onsync } = $props();
+
   let open = $state(false);
   /** @type {HTMLElement} */
   let root;
+  /** @type {HTMLButtonElement} */
+  let toggle;
 
   /** @param {MouseEvent} event */
   function closeOnOutsideClick(event) {
     if (open && !root.contains(/** @type {Node} */ (event.target))) open = false;
   }
 
-  function exportAndClose() {
-    exportProgress();
+  // Focus moves back to the menu button first, since the clicked item disappears
+  // with the menu (and the sync dialog returns focus to it when it closes).
+  /** @param {() => void} action */
+  function runAndClose(action) {
     open = false;
-  }
-
-  /** @param {import('./i18n.svelte.js').Locale} locale */
-  function chooseLocale(locale) {
-    setLocale(locale);
-    open = false;
+    toggle.focus();
+    action();
   }
 </script>
 
@@ -27,6 +30,7 @@
 
 <div class="relative" bind:this={root}>
   <button
+    bind:this={toggle}
     class="grid size-11 place-items-center rounded-full text-stone-600 hover:bg-stone-200/70"
     aria-label={t('menu')}
     aria-expanded={open}
@@ -45,7 +49,10 @@
       id="app-menu"
       class="absolute top-full right-0 z-20 mt-1 min-w-52 rounded-xl border border-stone-200 bg-white p-1 shadow-lg"
     >
-      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={exportAndClose}>
+      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onsync)}>
+        {t('syncTitle')}
+      </button>
+      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(exportProgress)}>
         {t('exportData')}
       </button>
 
@@ -58,7 +65,7 @@
             class="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-stone-100"
             lang={id}
             aria-pressed={i18n.locale === id}
-            onclick={() => chooseLocale(id)}
+            onclick={() => runAndClose(() => setLocale(id))}
           >
             {label}
             {#if i18n.locale === id}<span class="text-green-700" aria-hidden="true">✓</span>{/if}

@@ -2,8 +2,8 @@
   import { t } from './i18n.svelte.js';
   import { importProgress } from './progress.svelte.js';
 
-  /** @type {{ onimport: () => void, onsetup: () => void, onskip: () => void }} */
-  let { onimport, onsetup, onskip } = $props();
+  /** @type {{ onimport: () => void, onsync: () => void, onskip: () => void }} */
+  let { onimport, onsync, onskip } = $props();
 
   let error = $state('');
   /** @type {HTMLInputElement} */
@@ -39,9 +39,9 @@
     </button>
     <button
       class="rounded-full border-2 border-green-600 px-5 py-3 font-bold text-green-700 hover:bg-green-50"
-      onclick={onsetup}
+      onclick={onsync}
     >
-      {t('welcomeSetup')}
+      {t('welcomeSync')}
     </button>
     <button class="mt-1 text-stone-500 underline hover:text-stone-700" onclick={onskip}>
       {t('welcomeSkip')}

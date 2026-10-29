@@ -1,13 +1,13 @@
-// The player's progress: settings plus caught and donated critters. Kept in
-// localStorage and exportable as a JSON file to move between devices. Both use
-// the same format:
+// The player's progress: settings, caught and donated critters, and which
+// categories have been through a Critterpedia Sync. Kept in localStorage and
+// exportable as a JSON file to move between devices. Both use the same format:
 //
 //   { "version": 1,
 //     "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false },
-//     "caught": ["bitterling", ...], "donated": ["bitterling", ...] }
+//     "caught": ["bitterling", ...], "donated": ["bitterling", ...], "synced": ["fish", ...] }
 
 import { SvelteSet } from 'svelte/reactivity';
-import { critters } from './critters.js';
+import { CATEGORIES, critters } from './critters.js';
 import { guessHemisphere } from './hemisphere.js';
 import { t } from './i18n.svelte.js';
 
@@ -16,6 +16,7 @@ import { t } from './i18n.svelte.js';
 const STORAGE_KEY = 'acnh-critters';
 const FORMAT_VERSION = 1;
 const KNOWN_IDS = new Set(critters.map((critter) => critter.id));
+const KNOWN_CATEGORIES = new Set(CATEGORIES.map((category) => category.id));
 
 export const progress = $state({
   hemisphere: /** @type {Hemisphere} */ ('north'),
@@ -23,6 +24,7 @@ export const progress = $state({
   showCaught: false,
   caught: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   donated: /** @type {SvelteSet<string>} */ (new SvelteSet()),
+  synced: /** @type {SvelteSet<string>} */ (new SvelteSet()),
 });
 
 /**
@@ -75,6 +77,18 @@ export function toggleCaught(id) {
   save();
 }
 
+/** @param {string} id */
+export function markCaught(id) {
+  progress.caught.add(id);
+  save();
+}
+
+/** @param {string} category */
+export function markSynced(category) {
+  progress.synced.add(category);
+  save();
+}
+
 /**
  * Replaces the current progress with an exported file's contents.
  * Throws an Error with a user-facing message if the file isn't valid.
@@ -114,6 +128,7 @@ function serialize() {
     },
     caught: [...progress.caught],
     donated: [...progress.donated],
+    synced: [...progress.synced],
   };
 }
 
@@ -121,7 +136,7 @@ function serialize() {
  * @param {string} text
  * @returns {{
  *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean,
- *   caught: string[], donated: string[],
+ *   caught: string[], donated: string[], synced: string[],
  * }}
  */
 function parse(text) {
@@ -138,16 +153,20 @@ function parse(text) {
     throw new Error(t('importTooNew'));
   }
 
-  // Drops anything that isn't a known critter id, e.g. from a hand-edited file.
-  /** @param {unknown} list */
-  const knownIds = (list) => (Array.isArray(list) ? list.filter((id) => KNOWN_IDS.has(id)) : []);
+  // Drops anything unknown, e.g. from a hand-edited file.
+  /**
+   * @param {unknown} list
+   * @param {Set<string>} known
+   */
+  const only = (list, known) => (Array.isArray(list) ? list.filter((id) => known.has(id)) : []);
   const settings = data.settings ?? {};
   return {
     hemisphere: settings.hemisphere === 'south' ? 'south' : 'north',
     trackDonations: settings.trackDonations === true,
     showCaught: settings.showCaught === true,
-    caught: knownIds(data.caught),
-    donated: knownIds(data.donated),
+    caught: only(data.caught, KNOWN_IDS),
+    donated: only(data.donated, KNOWN_IDS),
+    synced: only(data.synced, KNOWN_CATEGORIES),
   };
 }
 
@@ -158,4 +177,5 @@ function apply(saved) {
   progress.showCaught = saved.showCaught;
   progress.caught = new SvelteSet(saved.caught);
   progress.donated = new SvelteSet(saved.donated);
+  progress.synced = new SvelteSet(saved.synced);
 }
