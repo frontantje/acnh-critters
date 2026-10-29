@@ -1,6 +1,22 @@
 # ACNH Critters
 
-A tracker for catchable creatures in Animal Crossing: New Horizons.
+A tracker for catchable creatures in Animal Crossing: New Horizons, built with Svelte 5, Vite and
+Tailwind CSS 4.
+
+## Development
+
+```
+npm install
+npm run dev      # dev server at http://localhost:5173
+npm run check    # type-check (JSDoc types, strict)
+npm run build    # production build into dist/
+```
+
+Requires Node 24 (see `.nvmrc`). The npm 10.8 bundled with Node 20 crashes while resolving Vite 8's
+optional peer dependencies.
+
+Progress is stored in `localStorage` under `acnh-critters`, in the same JSON format as the export
+file (see `src/lib/progress.svelte.js`).
 
 ## Data
 
