@@ -32,14 +32,20 @@ const SOUTHERN_ZONES = new Set([
   'Pacific/Tongatapu', 'Pacific/Wallis',
 ]);
 
-/** @returns {import('./critters.js').Hemisphere} */
-export function guessHemisphere() {
-  let zone = '';
-  try {
-    zone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? '';
-  } catch {
-    // Very old browsers; fall through to the default.
-  }
-  const southern = SOUTHERN_ZONES.has(zone) || SOUTHERN_PREFIXES.some((prefix) => zone.startsWith(prefix));
+/**
+ * @param {string} [timeZone] an IANA time zone; defaults to the browser's
+ * @returns {import('./critters.js').Hemisphere}
+ */
+export function guessHemisphere(timeZone = browserTimeZone()) {
+  const southern = SOUTHERN_ZONES.has(timeZone) || SOUTHERN_PREFIXES.some((prefix) => timeZone.startsWith(prefix));
   return southern ? 'south' : 'north';
+}
+
+function browserTimeZone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone ?? '';
+  } catch {
+    // Very old browsers; falls back to north.
+    return '';
+  }
 }

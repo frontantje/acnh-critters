@@ -15,7 +15,7 @@ export const LOCALES = [
   { id: 'de', label: 'Deutsch' },
 ];
 
-export const i18n = $state({ locale: storedLocale() ?? browserLocale() });
+export const i18n = $state({ locale: storedLocale() ?? pickLocale(browserLanguages()) });
 document.documentElement.lang = i18n.locale;
 
 /** @param {Locale} locale */
@@ -50,21 +50,34 @@ export function term(english) {
 function storedLocale() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return stored === 'en' || stored === 'de' ? stored : null;
+    return isLocale(stored) ? stored : null;
   } catch {
     return null;
   }
 }
 
 /**
- * The first supported language in the browser's preference list.
+ * The first supported language in a preference list like navigator.languages,
+ * e.g. ['fr-FR', 'de-DE'] -> 'de'. Falls back to English.
+ * @param {readonly (string | undefined)[]} tags
  * @returns {Locale}
  */
-function browserLocale() {
-  const preferred = navigator.languages?.length ? navigator.languages : [navigator.language];
-  for (const tag of preferred) {
+export function pickLocale(tags) {
+  for (const tag of tags) {
     const base = tag?.toLowerCase().split('-')[0];
-    if (base === 'en' || base === 'de') return base;
+    if (isLocale(base)) return base;
   }
   return 'en';
+}
+
+function browserLanguages() {
+  return navigator.languages?.length ? navigator.languages : [navigator.language];
+}
+
+/**
+ * @param {unknown} value
+ * @returns {value is Locale}
+ */
+function isLocale(value) {
+  return LOCALES.some((locale) => locale.id === value);
 }

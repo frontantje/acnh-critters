@@ -21,14 +21,29 @@ file (see `src/lib/progress.svelte.js`).
 ## Tests
 
 ```
-npm test                               # all browser tests
+npm test             # unit tests, then browser tests
+npm run test:unit    # unit tests only (Vitest, a few seconds)
+npm run test:e2e     # browser tests only (Playwright, ~40 s)
+```
+
+### Unit tests
+
+`src/**/*.test.js`, run with Vitest in a simulated browser (jsdom). They cover the logic in
+`src/lib` (time and month formatting, reading save files, hemisphere and language guessing) and
+sanity-check `data/critters.json` and the translations: counts, ids, names, months and hours,
+south = north shifted by six months, and a German term for every location, shadow size and speed.
+Run them after regenerating the data. `npx vitest` keeps them running while you edit.
+
+### Browser tests
+
+```
 npx playwright test tests/sync.spec.js # one file
 npx playwright test --headed           # watch them run
 npx playwright test --ui               # interactive runner
 ```
 
-Browser tests in `tests/`, written with Playwright. They drive the installed Google Chrome (no
-browser download) and start the dev server unless one is already running on port 5173.
+`tests/`, written with Playwright. They drive the installed Google Chrome (no browser download)
+and start the dev server unless one is already running on port 5173.
 
 Every test runs as if it were 15 October 2026, in the Europe/Berlin time zone with an `en-US`
 browser unless the test sets its own. Critter icons are replaced with a placeholder, so no network
