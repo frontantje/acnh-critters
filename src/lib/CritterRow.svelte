@@ -1,4 +1,5 @@
 <script>
+  import { confettiFrom } from './confetti.js';
   import { critterName, locationText, notesText, timeText } from './critters.js';
   import { t } from './i18n.svelte.js';
   import { progress, toggleCaught } from './progress.svelte.js';
@@ -16,6 +17,13 @@
   const caught = $derived(progress.caught.has(critter.id));
   // Only uncaught critters need the "last chance" warning.
   const warn = $derived(leavingSoon && !caught);
+
+  /** @param {MouseEvent & { currentTarget: HTMLButtonElement }} event */
+  function onclick(event) {
+    // Before toggling: with caught critters hidden, the row goes away right after.
+    if (!caught) confettiFrom(event.currentTarget);
+    toggleCaught(critter.id);
+  }
 </script>
 
 <!-- Phones: icon | stacked details | button. md and up: one column per field. -->
@@ -50,7 +58,7 @@
         ? 'border-green-600 bg-white text-green-700 hover:bg-green-100'
         : 'border-green-600 bg-green-600 text-white hover:border-green-700 hover:bg-green-700',
     ]}
-    onclick={() => toggleCaught(critter.id)}
+    {onclick}
   >
     {caught ? t('caught') : t('caughtIt')}
   </button>

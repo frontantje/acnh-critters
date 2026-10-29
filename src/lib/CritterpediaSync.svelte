@@ -2,6 +2,7 @@
   import { tick } from 'svelte';
   import { CATEGORIES, critterName, critters } from './critters.js';
   import { t } from './i18n.svelte.js';
+  import { prefersReducedMotion } from './motion.js';
   import { markCaught, markSynced, progress } from './progress.svelte.js';
 
   /** @typedef {import('./critters.js').Critter} Critter */
@@ -62,17 +63,78 @@
     focusAfterRender('[data-action="caught"]');
   }
 
-  /** @param {boolean} caught */
-  function advance(caught) {
+  // Feedback on the critter before moving on: a happy pulse with a green glow
+  // for Caught, a little shake for Next.
+  const PULSE = [
+    { transform: 'scale(1)', filter: 'drop-shadow(0 0 0 rgb(22 163 74 / 0))' },
+    { transform: 'scale(1.12)', filter: 'drop-shadow(0 0 14px rgb(22 163 74 / 0.6))', offset: 0.45 },
+    { transform: 'scale(1)', filter: 'drop-shadow(0 0 0 rgb(22 163 74 / 0))' },
+  ];
+  const SHAKE = [0, -10, 9, -6, 4, 0].map((x) => ({ transform: `translateX(${x}px)` }));
+
+  /** The shown critter's element (icon and name); a new one for every critter. */
+  let card = $state(/** @type {HTMLElement | undefined} */ (undefined));
+  let busy = false;
+
+  /**
+   * Moves on, marking the critter first if it was caught. Unless the device asks
+   * for reduced motion, the critter pulses (caught) or shakes (next; not after a
+   * swipe, which already moved it), slides out to the left, and the next one
+   * slides in. Input during that is ignored, so a quick double tap can't mark a
+   * critter that hasn't been shown yet.
+   * @param {boolean} caught
+   * @param {number} [swipedTo] how far the critter was dragged when a swipe ended
+   */
+  async function advance(caught, swipedTo) {
+    if (busy) return;
     if (caught) markCaught(current.id);
+    if (card && !prefersReducedMotion()) {
+      busy = true;
+      try {
+        if (swipedTo === undefined) {
+          await card.animate(caught ? PULSE : SHAKE, { duration: caught ? 320 : 280, easing: 'ease-out' }).finished;
+        }
+        // Further left from wherever the critter is (after a swipe, the finger's spot).
+        const from = swipedTo ?? 0;
+        await card.animate(
+          [
+            { transform: `translateX(${from}px)`, opacity: 1 + from / 400 },
+            { transform: `translateX(${from - 160}px)`, opacity: 0 },
+          ],
+          { duration: 160, easing: 'ease-in', fill: 'forwards' },
+        ).finished;
+      } catch {
+        // The animation was cancelled; just move on.
+      } finally {
+        busy = false;
+      }
+    }
+    showNext();
+  }
+
+  function showNext() {
     if (index + 1 < queue.length) {
       index += 1;
+      slideIn();
     } else {
       const finished = /** @type {string} */ (category);
       markSynced(finished);
       category = null;
       focusAfterRender(`[data-category="${finished}"]`);
     }
+  }
+
+  // Doesn't block input: the next critter can be marked while it slides in.
+  async function slideIn() {
+    if (prefersReducedMotion()) return;
+    await tick();
+    card?.animate(
+      [
+        { transform: 'translateX(48px)', opacity: 0 },
+        { transform: 'translateX(0)', opacity: 1 },
+      ],
+      { duration: 180, easing: 'ease-out' },
+    );
   }
 
   // Keyboard shortcuts on the critter steps, wherever focus is: → means Next,
@@ -130,8 +192,9 @@
     if (swipe?.pointerId !== event.pointerId) return;
     const dx = event.clientX - swipe.x;
     const dy = event.clientY - swipe.y;
+    const draggedTo = dragX;
     cancelSwipe();
-    if (event.type === 'pointerup' && dx < -SWIPE_DISTANCE && Math.abs(dx) > Math.abs(dy)) advance(false);
+    if (event.type === 'pointerup' && dx < -SWIPE_DISTANCE && Math.abs(dx) > Math.abs(dy)) advance(false, draggedTo);
   }
 
   function cancelSwipe() {
@@ -212,8 +275,9 @@
            Swiping is a touch shortcut for the Next button (and the → key),
            so the area itself needs no role. -->
       <!-- svelte-ignore a11y_no_static_element_interactions -->
+      <!-- overflow-x-clip: the critter sliding out mustn't make the page scroll sideways. -->
       <div
-        class="flex flex-1 touch-pan-y touch-pinch-zoom flex-col items-center justify-center py-10 text-center select-none"
+        class="flex flex-1 touch-pan-y touch-pinch-zoom flex-col items-center justify-center overflow-x-clip py-10 text-center select-none"
         aria-live="polite"
         onpointerdown={onSwipeStart}
         onpointermove={onSwipeMove}
@@ -222,6 +286,7 @@
       >
         {#key current.id}
           <div
+            bind:this={card}
             class={['flex flex-col items-center', !dragging && 'transition-transform duration-200']}
             style:transform="translateX({dragX}px)"
             style:opacity={1 + dragX / 400}

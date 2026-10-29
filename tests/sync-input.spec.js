@@ -1,6 +1,10 @@
 // Keyboard shortcuts and the swipe gesture in the Critterpedia Sync.
 import { critters, expect, stored, test } from './support.js';
 
+// The input logic, with animations off (they ignore quick repeated input while
+// playing). The animations themselves are tested in effects.spec.js.
+test.use({ reducedMotion: 'reduce' });
+
 const sea = critters.filter((c) => c.type === 'sea');
 
 /** @param {import('@playwright/test').Page} page */

@@ -1,5 +1,9 @@
 import { critters, expect, importData, monthSelect, normalize, row, rows, skipWelcome, stored, test } from './support.js';
 
+// The sync's logic, with its animations off (they ignore quick repeated input
+// while playing). The animations themselves are tested in effects.spec.js.
+test.use({ reducedMotion: 'reduce' });
+
 const sea = critters.filter((c) => c.type === 'sea');
 const fishIds = critters.filter((c) => c.type === 'fish').map((c) => c.id);
 
