@@ -89,7 +89,8 @@ test.describe('German browser', () => {
     await page.getByRole('button', { name: 'English' }).click();
     await expect(page.getByRole('button', { name: 'English' })).toHaveCount(0);
     await expect(page.getByRole('tab').first()).toHaveText('All');
-    await expect(rows(page).first().locator('span').first()).toHaveText('Pale chub');
+    await expect(row(page, 'Pale chub')).toHaveCount(1);
+    await expect(row(page, 'Döbel')).toHaveCount(0);
 
     await page.reload();
     await expect(page.getByRole('tab').first()).toHaveText('All');

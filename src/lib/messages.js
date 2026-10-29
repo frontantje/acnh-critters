@@ -66,6 +66,7 @@ const en = {
 
   caughtIt: 'Caught it',
   caught: 'Caught ✓',
+  leavingSoon: 'Last chance: gone next month',
   diving: 'Sea (diving)',
   shadowSize: 'Shadow size: {value}',
   speed: 'Speed: {value}',
@@ -139,6 +140,7 @@ const de = {
 
   caughtIt: 'Gefangen!',
   caught: 'Gefangen ✓',
+  leavingSoon: 'Letzte Chance: nächsten Monat weg',
   diving: 'Meer (tauchen)',
   shadowSize: 'Schattengröße: {value}',
   speed: 'Tempo: {value}',

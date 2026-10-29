@@ -8,11 +8,14 @@
    *   critter: import('./critters.js').Critter,
    *   hemisphere: import('./critters.js').Hemisphere,
    *   month: number,
+   *   leavingSoon?: boolean,
    * }}
    */
-  let { critter, hemisphere, month } = $props();
+  let { critter, hemisphere, month, leavingSoon = false } = $props();
 
   const caught = $derived(progress.caught.has(critter.id));
+  // Only uncaught critters need the "last chance" warning.
+  const warn = $derived(leavingSoon && !caught);
 </script>
 
 <!-- Phones: icon | stacked details | button. md and up: one column per field. -->
@@ -20,7 +23,7 @@
   class={[
     'grid grid-cols-[3rem_1fr_auto] items-center gap-x-3 border-b border-stone-200 px-3 py-3',
     'md:grid-cols-[4rem_1fr_1.5fr_1fr_1fr_auto] md:gap-x-4 md:px-4',
-    caught ? 'bg-green-50' : 'bg-white',
+    caught ? 'bg-green-50' : warn ? 'bg-red-50' : 'bg-white',
   ]}
 >
   <img
@@ -34,6 +37,8 @@
   <!-- md:contents turns each field into its own column of the row's grid. -->
   <div class="flex min-w-0 flex-col gap-0.5 md:contents">
     <span class="font-bold">{critterName(critter)}</span>
+    <!-- The red tint in words, for screen readers. -->
+    {#if warn}<p class="sr-only">{t('leavingSoon')}</p>{/if}
     <span>{locationText(critter)}</span>
     <span>{timeText(critter, hemisphere, month)}</span>
     <span class="text-sm text-stone-500">{notesText(critter)}</span>

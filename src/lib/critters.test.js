@@ -1,5 +1,17 @@
 import { afterEach, describe, expect, test } from 'vitest';
-import { critterName, critters, isAvailableIn, locationText, monthName, notesText, timeText } from './critters.js';
+import {
+  critterName,
+  critters,
+  daysLeftInMonth,
+  isAvailableIn,
+  locationText,
+  monthName,
+  monthsLeft,
+  notesText,
+  sortForMonth,
+  timeOfDayGroup,
+  timeText,
+} from './critters.js';
 import { setLocale } from './i18n.svelte.js';
 
 /** @typedef {import('./critters.js').Critter} Critter */
@@ -121,6 +133,95 @@ describe('isAvailableIn', () => {
     expect(isAvailableIn(byId('char'), 'south', 4)).toBe(true);
     expect(isAvailableIn(byId('char'), 'south', 10)).toBe(true);
     expect(isAvailableIn(byId('char'), 'south', 7)).toBe(false);
+  });
+});
+
+describe('monthsLeft', () => {
+  test.each(
+    /** @type {const} */ ([
+      ['char', 'north', 3, 4],
+      ['char', 'north', 6, 1],
+      ['char', 'north', 7, 0],
+      ['char', 'north', 9, 3],
+      ['bitterling', 'north', 11, 5], // Nov – Mar, across the new year
+      ['bitterling', 'north', 3, 1],
+      ['bitterling', 'south', 5, 5],
+      ['crucian-carp', 'north', 10, 12], // all year
+    ]),
+  )('%s (%s) from month %i: %i', (id, hemisphere, month, left) => {
+    expect(monthsLeft(byId(id), hemisphere, month)).toBe(left);
+  });
+});
+
+describe('timeOfDayGroup', () => {
+  test.each(
+    /** @type {const} */ ([
+      ['char', 4, 20, 0], // 4 PM – 9 AM in spring
+      ['char', 4, 12, 1],
+      ['char', 10, 12, 2], // all day in autumn
+      ['piranha', 7, 10, 0], // 9 AM – 4 PM and 9 PM – 4 AM
+      ['piranha', 7, 17, 1],
+      ['piranha', 7, 22, 0],
+      ['tarantula', 1, 2, 0], // 7 PM – 4 AM, past midnight
+      ['tarantula', 1, 4, 1],
+      ['crucian-carp', 10, 3, 2],
+    ]),
+  )('%s in month %i at %i h: group %i', (id, month, hour, group) => {
+    expect(timeOfDayGroup(byId(id), 'north', month, hour)).toBe(group);
+  });
+});
+
+describe('sortForMonth', () => {
+  test('all months keeps Critterpedia order', () => {
+    expect(sortForMonth(critters, 'north', 0, 12)).toBe(critters);
+  });
+
+  test.each(
+    /** @type {const} */ ([
+      ['north', 10, 12],
+      ['north', 10, 21],
+      ['south', 10, 3],
+      ['north', 1, 0],
+      ['south', 6, 17],
+    ]),
+  )('%s, month %i, %i h: by season, then catchable now / later / all day, then Critterpedia order', (hemisphere, month, hour) => {
+    const available = critters.filter((c) => isAvailableIn(c, hemisphere, month));
+    const sorted = sortForMonth(available, hemisphere, month, hour);
+    const keys = sorted.map((c) => [monthsLeft(c, hemisphere, month), timeOfDayGroup(c, hemisphere, month, hour), critters.indexOf(c)]);
+
+    expect(sorted).toHaveLength(available.length);
+    expect(keys).toEqual([...keys].sort((a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2]));
+    expect(keys[0][0]).toBe(1);
+    expect(keys[keys.length - 1][0]).toBe(12);
+    // All three time groups show up, so the second key really does something.
+    expect(new Set(keys.map((k) => k[1]))).toEqual(new Set([0, 1, 2]));
+  });
+
+  test('the hour changes the order within a season', () => {
+    const available = critters.filter((c) => isAvailableIn(c, 'north', 10));
+    const names = (/** @type {number} */ hour) => sortForMonth(available, 'north', 10, hour).map((c) => c.id);
+    expect(names(12)).not.toEqual(names(21));
+    // All four leave after October. Each pair is the other way round in
+    // Critterpedia order, so only the time of day can put them like this.
+    // Noon: the ladybug (8 AM – 5 PM) before the snapping turtle (9 PM – 4 AM).
+    expect(names(12).indexOf('ladybug')).toBeLessThan(names(12).indexOf('snapping-turtle'));
+    // 9 PM: the scorpion (7 PM – 4 AM) before the red dragonfly (8 AM – 7 PM).
+    expect(names(21).indexOf('scorpion')).toBeLessThan(names(21).indexOf('red-dragonfly'));
+  });
+});
+
+describe('daysLeftInMonth', () => {
+  test.each([
+    ['2026-10-15', 17],
+    ['2026-10-25', 7],
+    ['2026-10-26', 6],
+    ['2026-10-31', 1],
+    ['2026-04-24', 7],
+    ['2026-02-28', 1],
+    ['2028-02-28', 2], // leap year
+    ['2026-12-31', 1],
+  ])('%s: %i, counting that day', (date, days) => {
+    expect(daysLeftInMonth(new Date(`${date}T12:00:00`))).toBe(days);
   });
 });
 
