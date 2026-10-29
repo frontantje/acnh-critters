@@ -1,5 +1,6 @@
 <script>
-  import { locationText, notesText, timeText } from './critters.js';
+  import { critterName, locationText, notesText, timeText } from './critters.js';
+  import { t } from './i18n.svelte.js';
   import { progress, toggleCaught } from './progress.svelte.js';
 
   /**
@@ -32,20 +33,20 @@
   />
   <!-- md:contents turns each field into its own column of the row's grid. -->
   <div class="flex min-w-0 flex-col gap-0.5 md:contents">
-    <span class="font-bold">{critter.name}</span>
+    <span class="font-bold">{critterName(critter)}</span>
     <span>{locationText(critter)}</span>
     <span>{timeText(critter, hemisphere, month)}</span>
     <span class="text-sm text-stone-500">{notesText(critter)}</span>
   </div>
   <button
     class={[
-      'min-h-12 w-28 rounded-full border-2 px-3 py-2 font-bold whitespace-nowrap md:w-auto md:px-6 md:py-3 md:text-lg',
+      'min-h-12 w-28 rounded-full border-2 px-2 py-2 font-bold whitespace-nowrap md:w-auto md:px-6 md:py-3 md:text-lg',
       caught
         ? 'border-green-600 bg-white text-green-700 hover:bg-green-100'
         : 'border-green-600 bg-green-600 text-white hover:border-green-700 hover:bg-green-700',
     ]}
     onclick={() => toggleCaught(critter.id)}
   >
-    {caught ? 'Caught ✓' : 'Caught it'}
+    {caught ? t('caught') : t('caughtIt')}
   </button>
 </li>

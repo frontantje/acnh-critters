@@ -18,6 +18,16 @@ optional peer dependencies.
 Progress is stored in `localStorage` under `acnh-critters`, in the same JSON format as the export
 file (see `src/lib/progress.svelte.js`).
 
+## Languages
+
+English and German. The app follows the browser's language (anything other than German falls back
+to English) until a language is picked in the menu; that choice is stored under
+`acnh-critters-locale` and is not part of exports.
+
+Critter names are the official in-game names from the data. Everything else, including the data's
+location, shadow size and speed values, is translated in `src/lib/messages.js`. Times and month
+names are formatted per language from the `hours` and `months` data.
+
 ## Data
 
 `data/critters.json` holds all 200 creatures (80 fish, 80 bugs, 40 sea creatures). It is generated from
@@ -35,7 +45,7 @@ Each entry looks like this:
   "id": "tarantula",
   "type": "bug",
   "number": 79,
-  "name": "Tarantula",
+  "name": { "en": "Tarantula", "de": "Vogelspinne" },
   "icon": "https://acnhcdn.com/latest/MenuIcon/Ins62.png",
   "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTaranchuraCropped.png",
   "price": 8000,
@@ -44,15 +54,16 @@ Each entry looks like this:
   "weather": "Any weather",
   "speed": null,
   "catchesToUnlock": 0,
-  "north": [{ "months": [1, 2, 3, 4, 11, 12], "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23], "time": "7 PM – 4 AM" }],
-  "south": [{ "months": [5, 6, 7, 8, 9, 10], "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23], "time": "7 PM – 4 AM" }]
+  "north": [{ "months": [1, 2, 3, 4, 11, 12], "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23] }],
+  "south": [{ "months": [5, 6, 7, 8, 9, 10], "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23] }]
 }
 ```
 
 | Field | Notes |
 | --- | --- |
-| `id` | Stable slug of the name. Use it to store which critters were caught. |
+| `id` | Stable slug of the English name. Use it to store which critters were caught. |
 | `type` | `fish`, `bug` or `sea` |
+| `name` | Official English and German names |
 | `number` | Critterpedia order within its type |
 | `icon` / `image` | Small menu icon (~10 KB) / large Critterpedia picture (~160 KB) |
 | `location` | Fish and bugs only (sea creatures are always caught by diving) |

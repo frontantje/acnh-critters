@@ -1,7 +1,8 @@
 <script>
   import AppMenu from './AppMenu.svelte';
   import CritterRow from './CritterRow.svelte';
-  import { critters, isAvailableIn, MONTHS, TABS } from './critters.js';
+  import { critters, isAvailableIn, monthName, TABS } from './critters.js';
+  import { t } from './i18n.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
 
   let tab = $state('all');
@@ -35,19 +36,19 @@
   >
     <div class="flex gap-2 md:order-last md:gap-4 md:self-center">
       <label class="flex flex-1 items-center gap-2 text-stone-600">
-        <span class="sr-only lg:not-sr-only">Hemisphere</span>
+        <span class="sr-only lg:not-sr-only">{t('hemisphere')}</span>
         <select class={selectClass} value={progress.hemisphere} onchange={(event) => setHemisphere(event.currentTarget.value)}>
-          <option value="north">Northern</option>
-          <option value="south">Southern</option>
+          <option value="north">{t('northern')}</option>
+          <option value="south">{t('southern')}</option>
         </select>
       </label>
 
       <label class="flex flex-1 items-center gap-2 text-stone-600">
-        <span class="sr-only lg:not-sr-only">Month</span>
+        <span class="sr-only lg:not-sr-only">{t('month')}</span>
         <select class={selectClass} bind:value={month}>
-          <option value={0}>All months</option>
-          {#each MONTHS as name, index (name)}
-            <option value={index + 1}>{name}</option>
+          <option value={0}>{t('allMonths')}</option>
+          {#each { length: 12 }, index}
+            <option value={index + 1}>{monthName(index + 1)}</option>
           {/each}
         </select>
       </label>
@@ -61,26 +62,26 @@
             role="tab"
             aria-selected={tab === id}
             class={[
-              'grow border-b-4 px-2 py-2.5 font-semibold whitespace-nowrap md:grow-0 md:px-4 md:py-3',
+              'grow border-b-4 px-1 py-2.5 font-semibold whitespace-nowrap md:grow-0 md:px-4 md:py-3',
               tab === id ? 'border-green-600 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-800',
             ]}
             onclick={() => (tab = id)}
           >
-            {label}
+            {t(label)}
           </button>
         {/each}
       </div>
 
-      <!-- Phones: small "Caught" label above the switch. md and up: "Show caught" beside it. -->
+      <!-- Phones: short label above the switch. md and up: full label beside it. -->
       <button
         role="switch"
         aria-checked={progress.showCaught}
-        aria-label="Show caught"
+        aria-label={t('showCaught')}
         class="flex shrink-0 flex-col items-center justify-center gap-1 self-stretch px-1 text-xs font-semibold text-stone-600 md:flex-row md:gap-2 md:text-sm"
         onclick={toggleShowCaught}
       >
-        <span class="md:hidden">Caught</span>
-        <span class="hidden md:inline">Show caught</span>
+        <span class="md:hidden">{t('showCaughtShort')}</span>
+        <span class="hidden md:inline">{t('showCaught')}</span>
         <span class={['relative h-5 w-9 rounded-full transition-colors', progress.showCaught ? 'bg-green-600' : 'bg-stone-300']}>
           <span
             class={[
@@ -98,7 +99,7 @@
       <CritterRow {critter} hemisphere={progress.hemisphere} {month} />
     {:else}
       <li class="p-8 text-center text-stone-500">
-        {inTabAndMonth.length ? "You've caught everything here!" : 'Nothing to catch here this month.'}
+        {inTabAndMonth.length ? t('allCaught') : t('nothingThisMonth')}
       </li>
     {/each}
   </ul>

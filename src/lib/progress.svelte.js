@@ -9,6 +9,7 @@
 import { SvelteSet } from 'svelte/reactivity';
 import { critters } from './critters.js';
 import { guessHemisphere } from './hemisphere.js';
+import { t } from './i18n.svelte.js';
 
 /** @typedef {import('./critters.js').Hemisphere} Hemisphere */
 
@@ -128,13 +129,13 @@ function parse(text) {
   try {
     data = JSON.parse(text);
   } catch {
-    throw new Error("This file isn't an ACNH Critters export.");
+    throw new Error(t('importInvalid'));
   }
   if (typeof data !== 'object' || data === null || !Array.isArray(data.caught)) {
-    throw new Error("This file isn't an ACNH Critters export.");
+    throw new Error(t('importInvalid'));
   }
   if (data.version > FORMAT_VERSION) {
-    throw new Error('This file was exported from a newer version of the app.');
+    throw new Error(t('importTooNew'));
   }
 
   // Drops anything that isn't a known critter id, e.g. from a hand-edited file.

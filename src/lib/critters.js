@@ -1,21 +1,32 @@
 import critters from '../../data/critters.json';
+import { i18n, t, term } from './i18n.svelte.js';
 
 /** @typedef {(typeof critters)[number]} Critter */
 /** @typedef {'north' | 'south'} Hemisphere */
 
 export { critters };
 
+/** @type {{ id: string, label: import('./i18n.svelte.js').MessageKey }[]} */
 export const TABS = [
-  { id: 'all', label: 'All' },
-  { id: 'fish', label: 'Fish' },
-  { id: 'bug', label: 'Insects' },
-  { id: 'sea', label: 'Sea creatures' },
+  { id: 'all', label: 'tabAll' },
+  { id: 'fish', label: 'tabFish' },
+  { id: 'bug', label: 'tabBugs' },
+  { id: 'sea', label: 'tabSea' },
 ];
 
-export const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
+/** @param {Critter} critter */
+export function critterName(critter) {
+  return critter.name[i18n.locale];
+}
+
+/**
+ * The month's name in the current language, e.g. 3 -> "March" / "März".
+ * @param {number} month 1–12
+ * @param {'long' | 'short'} [style]
+ */
+export function monthName(month, style = 'long') {
+  return new Date(2000, month - 1, 1).toLocaleString(i18n.locale, { month: style });
+}
 
 /**
  * @param {Critter} critter
@@ -27,8 +38,8 @@ export function isAvailableIn(critter, hemisphere, month) {
 }
 
 /**
- * The catch time in the given month, e.g. "4 AM – 9 PM". For all months
- * (month 0), critters whose hours change by season list each season.
+ * The catch time in the given month, e.g. "4 AM – 9 PM" / "4–21 Uhr". For all
+ * months (month 0), critters whose hours change by season list each season.
  * @param {Critter} critter
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12, or 0 for all months
@@ -36,44 +47,82 @@ export function isAvailableIn(critter, hemisphere, month) {
 export function timeText(critter, hemisphere, month) {
   const periods = critter[hemisphere];
   const current = periods.find((period) => period.months.includes(month));
-  if (current) return current.time;
-  if (periods.length === 1) return periods[0].time;
-  return periods.map((period) => `${formatMonths(period.months)}: ${period.time}`).join(' · ');
+  if (current) return formatHours(current.hours);
+  if (periods.length === 1) return formatHours(periods[0].hours);
+  return periods.map((period) => `${formatMonths(period.months)}: ${formatHours(period.hours)}`).join(' · ');
 }
 
 /** @param {Critter} critter */
 export function locationText(critter) {
-  return critter.location ?? 'Sea (diving)';
+  return critter.location ? term(critter.location) : t('diving');
 }
 
 /** @param {Critter} critter */
 export function notesText(critter) {
   const notes = [];
-  if (critter.shadow) notes.push(`Shadow size: ${critter.shadow}`);
-  if (critter.speed) notes.push(`Speed: ${critter.speed}`);
+  if (critter.shadow) notes.push(t('shadowSize', { value: term(critter.shadow) }));
+  if (critter.speed) notes.push(t('speed', { value: term(critter.speed) }));
   return notes.join(' · ');
 }
 
 /**
+ * Formats hours as ranges, e.g. [0, 1, 2, 3, 21, 22, 23] -> "9 PM – 4 AM" / "21–4 Uhr".
+ * @param {number[]} hours 0–23
+ */
+function formatHours(hours) {
+  if (hours.length === 24) return t('allDay');
+  return cyclicRuns(hours, 0, 23)
+    .map(([first, last]) => formatHourRange(first, (last + 1) % 24))
+    .join(', ');
+}
+
+/**
+ * Non-breaking spaces ( ) keep times together when the text wraps; the
+ * only break is before the dash.
+ * @param {number} start
+ * @param {number} end exclusive
+ */
+function formatHourRange(start, end) {
+  if (i18n.locale === 'de') return `${start}–${end || 24} Uhr`;
+  /** @param {number} hour */
+  const format = (hour) => `${hour % 12 || 12} ${hour < 12 ? 'AM' : 'PM'}`;
+  return `${format(start)} – ${format(end)}`;
+}
+
+/**
  * Formats months as ranges, e.g. [1, 2, 3, 11, 12] -> "Nov – Mar".
- * @param {number[]} months
+ * @param {number[]} months 1–12
  */
 function formatMonths(months) {
-  if (months.length === 12) return 'All year';
-  const included = new Set(months);
+  if (months.length === 12) return t('allYear');
   /** @param {number} month */
-  const next = (month) => (month % 12) + 1;
-  /** @param {number} month */
-  const name = (month) => MONTHS[month - 1].slice(0, 3);
+  const name = (month) => monthName(month, 'short');
+  return cyclicRuns(months, 1, 12)
+    .map(([first, last]) => (first === last ? name(first) : `${name(first)} – ${name(last)}`))
+    .join(', ');
+}
 
-  const ranges = [];
-  for (let start = 1; start <= 12; start++) {
-    // A range starts at an included month whose previous month isn't included.
-    const previous = start === 1 ? 12 : start - 1;
-    if (!included.has(start) || included.has(previous)) continue;
-    let end = start;
-    while (included.has(next(end))) end = next(end);
-    ranges.push(start === end ? name(start) : `${name(start)} – ${name(end)}`);
+/**
+ * Splits values on a cycle (hours 0–23, months 1–12) into runs of consecutive
+ * values, ordered by their first value: [1, 2, 11, 12] -> [[11, 2]].
+ * Not meant for the full cycle, which has no start.
+ * @param {number[]} values
+ * @param {number} min
+ * @param {number} max
+ */
+function cyclicRuns(values, min, max) {
+  const included = new Set(values);
+  /** @param {number} value */
+  const next = (value) => (value === max ? min : value + 1);
+  /** @type {[number, number][]} */
+  const runs = [];
+  for (let first = min; first <= max; first++) {
+    // A run starts at an included value whose previous value isn't included.
+    const previous = first === min ? max : first - 1;
+    if (!included.has(first) || included.has(previous)) continue;
+    let last = first;
+    while (included.has(next(last))) last = next(last);
+    runs.push([first, last]);
   }
-  return ranges.join(', ');
+  return runs;
 }

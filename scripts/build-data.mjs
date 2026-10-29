@@ -66,14 +66,14 @@ function periods(raw, hemisphere) {
     if (parsed.join() !== hours.join()) {
       throw new Error(`${raw.name} (${hemisphere}): "${source.time}" parsed as ${parsed}, source says ${hours}`);
     }
-    return [{ months: ascending(source.monthsArray), hours, time: source.time.join(', ') }];
+    return [{ months: ascending(source.monthsArray), hours }];
   }
 
   const overrideMonths = ascending(override.flatMap((p) => p.months));
   if (overrideMonths.join() !== ascending(source.monthsArray).join()) {
     throw new Error(`${raw.name} (${hemisphere}): override months ${overrideMonths} differ from source ${source.monthsArray}`);
   }
-  return override.map((p) => ({ months: p.months, hours: hoursFromTime(p.time), time: p.time }));
+  return override.map((p) => ({ months: p.months, hours: hoursFromTime(p.time) }));
 }
 
 // "Rajah Brooke's birdwing" -> "rajah-brookes-birdwing"
@@ -92,7 +92,10 @@ function toCritter(type, raw) {
     id: slugify(raw.name),
     type,
     number: raw.num,
-    name: raw.name.charAt(0).toUpperCase() + raw.name.slice(1),
+    name: {
+      en: raw.name.charAt(0).toUpperCase() + raw.name.slice(1),
+      de: raw.translations.eUde,
+    },
     icon: raw.iconImage,
     image: raw.critterpediaImage,
     price: raw.sell,

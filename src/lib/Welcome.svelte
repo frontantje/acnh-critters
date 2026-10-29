@@ -1,4 +1,5 @@
 <script>
+  import { t } from './i18n.svelte.js';
   import { importProgress } from './progress.svelte.js';
 
   /** @type {{ onimport: () => void, onsetup: () => void, onskip: () => void }} */
@@ -26,24 +27,24 @@
 </script>
 
 <main class="mx-4 mt-[12vh] max-w-md rounded-2xl bg-white p-8 text-center shadow-md sm:mx-auto">
-  <h1 class="text-2xl font-bold">Welcome to ACNH Critters</h1>
-  <p class="mt-2 text-stone-600">Keep track of every fish, insect and sea creature you've caught.</p>
+  <h1 class="text-2xl font-bold">{t('welcomeTitle')}</h1>
+  <p class="mt-2 text-stone-600">{t('welcomeIntro')}</p>
 
   <div class="mt-8 grid gap-3">
     <button
       class="rounded-full bg-green-600 px-5 py-3 font-bold text-white hover:bg-green-700"
       onclick={() => fileInput.click()}
     >
-      Import data from another device
+      {t('welcomeImport')}
     </button>
     <button
       class="rounded-full border-2 border-green-600 px-5 py-3 font-bold text-green-700 hover:bg-green-50"
       onclick={onsetup}
     >
-      Run the initial setup
+      {t('welcomeSetup')}
     </button>
     <button class="mt-1 text-stone-500 underline hover:text-stone-700" onclick={onskip}>
-      No thanks, just show me the list
+      {t('welcomeSkip')}
     </button>
   </div>
 
