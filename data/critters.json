@@ -1,0 +1,5622 @@
+[
+  {
+    "id": "bitterling",
+    "type": "fish",
+    "number": 1,
+    "name": "Bitterling",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish0.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishTanagoCropped.png",
+    "price": 900,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pale-chub",
+    "type": "fish",
+    "number": 2,
+    "name": "Pale chub",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish1.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishOikawaCropped.png",
+    "price": 200,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "crucian-carp",
+    "type": "fish",
+    "number": 3,
+    "name": "Crucian carp",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish2.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishFunaCropped.png",
+    "price": 160,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "dace",
+    "type": "fish",
+    "number": 4,
+    "name": "Dace",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish3.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishUguiCropped.png",
+    "price": 240,
+    "location": "River",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "carp",
+    "type": "fish",
+    "number": 5,
+    "name": "Carp",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish5.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKoiCropped.png",
+    "price": 300,
+    "location": "Pond",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "koi",
+    "type": "fish",
+    "number": 6,
+    "name": "Koi",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish6.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNishikigoiCropped.png",
+    "price": 4000,
+    "location": "Pond",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "goldfish",
+    "type": "fish",
+    "number": 7,
+    "name": "Goldfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish7.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKingyoCropped.png",
+    "price": 1300,
+    "location": "Pond",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pop-eyed-goldfish",
+    "type": "fish",
+    "number": 8,
+    "name": "Pop-eyed goldfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish8.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDemekinCropped.png",
+    "price": 1300,
+    "location": "Pond",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "ranchu-goldfish",
+    "type": "fish",
+    "number": 9,
+    "name": "Ranchu goldfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish85.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishRanchuCropped.png",
+    "price": 4500,
+    "location": "Pond",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "killifish",
+    "type": "fish",
+    "number": 10,
+    "name": "Killifish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish9.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishMedakaCropped.png",
+    "price": 300,
+    "location": "Pond",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "crawfish",
+    "type": "fish",
+    "number": 11,
+    "name": "Crawfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish10.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishZariganiCropped.png",
+    "price": 200,
+    "location": "Pond",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "soft-shelled-turtle",
+    "type": "fish",
+    "number": 12,
+    "name": "Soft-shelled turtle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish65.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSupponCropped.png",
+    "price": 3750,
+    "location": "River",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "snapping-turtle",
+    "type": "fish",
+    "number": 13,
+    "name": "Snapping turtle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish78.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKamitsukigameCropped.png",
+    "price": 5000,
+    "location": "River",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "tadpole",
+    "type": "fish",
+    "number": 14,
+    "name": "Tadpole",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish64.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishOtamajakusiCropped.png",
+    "price": 100,
+    "location": "Pond",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "frog",
+    "type": "fish",
+    "number": 15,
+    "name": "Frog",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish11.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKaeruCropped.png",
+    "price": 120,
+    "location": "Pond",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "freshwater-goby",
+    "type": "fish",
+    "number": 16,
+    "name": "Freshwater goby",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish12.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDonkoCropped.png",
+    "price": 400,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "loach",
+    "type": "fish",
+    "number": 17,
+    "name": "Loach",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish13.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDojouCropped.png",
+    "price": 400,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "catfish",
+    "type": "fish",
+    "number": 18,
+    "name": "Catfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish14.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNamazuCropped.png",
+    "price": 800,
+    "location": "Pond",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "giant-snakehead",
+    "type": "fish",
+    "number": 19,
+    "name": "Giant snakehead",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish16.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishRaigyoCropped.png",
+    "price": 5500,
+    "location": "Pond",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "bluegill",
+    "type": "fish",
+    "number": 20,
+    "name": "Bluegill",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish17.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishBlueguillCropped.png",
+    "price": 180,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "yellow-perch",
+    "type": "fish",
+    "number": 21,
+    "name": "Yellow perch",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish18.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishYellowparchCropped.png",
+    "price": 300,
+    "location": "River",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "black-bass",
+    "type": "fish",
+    "number": 22,
+    "name": "Black bass",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish19.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishBlackbassCropped.png",
+    "price": 400,
+    "location": "River",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "tilapia",
+    "type": "fish",
+    "number": 23,
+    "name": "Tilapia",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish76.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishThirapiaCropped.png",
+    "price": 800,
+    "location": "River",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pike",
+    "type": "fish",
+    "number": 24,
+    "name": "Pike",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish20.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishPaikuCropped.png",
+    "price": 1800,
+    "location": "River",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pond-smelt",
+    "type": "fish",
+    "number": 25,
+    "name": "Pond smelt",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish21.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishWakasagiCropped.png",
+    "price": 400,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sweetfish",
+    "type": "fish",
+    "number": 26,
+    "name": "Sweetfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish22.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishAyuCropped.png",
+    "price": 900,
+    "location": "River",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "cherry-salmon",
+    "type": "fish",
+    "number": 27,
+    "name": "Cherry salmon",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish23.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishYamameCropped.png",
+    "price": 1000,
+    "location": "River (clifftop)",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      },
+      {
+        "months": [9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      },
+      {
+        "months": [9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "char",
+    "type": "fish",
+    "number": 28,
+    "name": "Char",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish24.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishOoiwanaCropped.png",
+    "price": 3800,
+    "location": "River (clifftop)",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      },
+      {
+        "months": [9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      },
+      {
+        "months": [9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "golden-trout",
+    "type": "fish",
+    "number": 29,
+    "name": "Golden trout",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish79.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishGoldenTorautoCropped.png",
+    "price": 15000,
+    "location": "River (clifftop)",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [3, 4, 5, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "stringfish",
+    "type": "fish",
+    "number": 30,
+    "name": "Stringfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish26.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishItouCropped.png",
+    "price": 15000,
+    "location": "River (clifftop)",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "salmon",
+    "type": "fish",
+    "number": 31,
+    "name": "Salmon",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish27.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSakeCropped.png",
+    "price": 700,
+    "location": "River (mouth)",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "king-salmon",
+    "type": "fish",
+    "number": 32,
+    "name": "King salmon",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish28.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKingsalmonCropped.png",
+    "price": 1800,
+    "location": "River (mouth)",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "mitten-crab",
+    "type": "fish",
+    "number": 33,
+    "name": "Mitten crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish66.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSyanhaiganiCropped.png",
+    "price": 2000,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "guppy",
+    "type": "fish",
+    "number": 34,
+    "name": "Guppy",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish29.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishGuppiCropped.png",
+    "price": 1300,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "nibble-fish",
+    "type": "fish",
+    "number": 35,
+    "name": "Nibble fish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish67.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDokutaafishCropped.png",
+    "price": 1500,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "angelfish",
+    "type": "fish",
+    "number": 36,
+    "name": "Angelfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish30.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishAngelfishCropped.png",
+    "price": 3000,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "betta",
+    "type": "fish",
+    "number": 37,
+    "name": "Betta",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish77.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishBetaCropped.png",
+    "price": 2500,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "neon-tetra",
+    "type": "fish",
+    "number": 38,
+    "name": "Neon tetra",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish31.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNeontetoraCropped.png",
+    "price": 500,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "rainbowfish",
+    "type": "fish",
+    "number": 39,
+    "name": "Rainbowfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish80.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishRainbowfishCropped.png",
+    "price": 800,
+    "location": "River",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [9, 10, 11, 12, 13, 14, 15],
+        "time": "9 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "piranha",
+    "type": "fish",
+    "number": 40,
+    "name": "Piranha",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish32.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishPiraniaCropped.png",
+    "price": 2500,
+    "location": "River",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23],
+        "time": "9 AM – 4 PM, 9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23],
+        "time": "9 AM – 4 PM, 9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "arowana",
+    "type": "fish",
+    "number": 41,
+    "name": "Arowana",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish33.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishArowanaCropped.png",
+    "price": 10000,
+    "location": "River",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "dorado",
+    "type": "fish",
+    "number": 42,
+    "name": "Dorado",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish34.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDoladoCropped.png",
+    "price": 15000,
+    "location": "River",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "gar",
+    "type": "fish",
+    "number": 43,
+    "name": "Gar",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish35.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishGaCropped.png",
+    "price": 6000,
+    "location": "Pond",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "arapaima",
+    "type": "fish",
+    "number": 44,
+    "name": "Arapaima",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish36.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishPirarukuCropped.png",
+    "price": 10000,
+    "location": "River",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "saddled-bichir",
+    "type": "fish",
+    "number": 45,
+    "name": "Saddled bichir",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish68.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishEndorikeriiCropped.png",
+    "price": 4000,
+    "location": "River",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "sturgeon",
+    "type": "fish",
+    "number": 46,
+    "name": "Sturgeon",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish75.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishTyouzameCropped.png",
+    "price": 10000,
+    "location": "River (mouth)",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-butterfly",
+    "type": "fish",
+    "number": 47,
+    "name": "Sea butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish37.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKurioneCropped.png",
+    "price": 1000,
+    "location": "Sea",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-horse",
+    "type": "fish",
+    "number": 48,
+    "name": "Sea horse",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish39.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishTatsunootoshigoCropped.png",
+    "price": 1100,
+    "location": "Sea",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "clown-fish",
+    "type": "fish",
+    "number": 49,
+    "name": "Clown fish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish40.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKumanomiCropped.png",
+    "price": 650,
+    "location": "Sea",
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "surgeonfish",
+    "type": "fish",
+    "number": 50,
+    "name": "Surgeonfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish41.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNanyouhagiCropped.png",
+    "price": 1000,
+    "location": "Sea",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "butterfly-fish",
+    "type": "fish",
+    "number": 51,
+    "name": "Butterfly fish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish42.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishChouchouuoCropped.png",
+    "price": 1000,
+    "location": "Sea",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "napoleonfish",
+    "type": "fish",
+    "number": 52,
+    "name": "Napoleonfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish43.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNaporeonfishCropped.png",
+    "price": 10000,
+    "location": "Sea",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "zebra-turkeyfish",
+    "type": "fish",
+    "number": 53,
+    "name": "Zebra turkeyfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish44.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishMinokasagoCropped.png",
+    "price": 500,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "blowfish",
+    "type": "fish",
+    "number": 54,
+    "name": "Blowfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish73.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishFuguCropped.png",
+    "price": 5000,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "puffer-fish",
+    "type": "fish",
+    "number": 55,
+    "name": "Puffer fish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish45.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishHarisenbonCropped.png",
+    "price": 250,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "anchovy",
+    "type": "fish",
+    "number": 56,
+    "name": "Anchovy",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish81.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishAntyobiCropped.png",
+    "price": 200,
+    "location": "Sea",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "horse-mackerel",
+    "type": "fish",
+    "number": 57,
+    "name": "Horse mackerel",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish46.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishAjiCropped.png",
+    "price": 150,
+    "location": "Sea",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "barred-knifejaw",
+    "type": "fish",
+    "number": 58,
+    "name": "Barred knifejaw",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish47.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishIshidaiCropped.png",
+    "price": 5000,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-bass",
+    "type": "fish",
+    "number": 59,
+    "name": "Sea bass",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish48.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSuzukiCropped.png",
+    "price": 400,
+    "location": "Sea",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "red-snapper",
+    "type": "fish",
+    "number": 60,
+    "name": "Red snapper",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish49.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishTaiCropped.png",
+    "price": 3000,
+    "location": "Sea",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "dab",
+    "type": "fish",
+    "number": 61,
+    "name": "Dab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish50.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKareiCropped.png",
+    "price": 300,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "olive-flounder",
+    "type": "fish",
+    "number": 62,
+    "name": "Olive flounder",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish51.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishHirameCropped.png",
+    "price": 800,
+    "location": "Sea",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "squid",
+    "type": "fish",
+    "number": 63,
+    "name": "Squid",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish52.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishIkaCropped.png",
+    "price": 500,
+    "location": "Sea",
+    "shadow": "Medium",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "moray-eel",
+    "type": "fish",
+    "number": 64,
+    "name": "Moray eel",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish55.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishUtsuboCropped.png",
+    "price": 2000,
+    "location": "Sea",
+    "shadow": "Long",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3, 4],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "ribbon-eel",
+    "type": "fish",
+    "number": 65,
+    "name": "Ribbon eel",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish71.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishHanahigeutuboCropped.png",
+    "price": 600,
+    "location": "Sea",
+    "shadow": "Long",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "tuna",
+    "type": "fish",
+    "number": 66,
+    "name": "Tuna",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish57.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishMaguroCropped.png",
+    "price": 7000,
+    "location": "Pier",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "blue-marlin",
+    "type": "fish",
+    "number": 67,
+    "name": "Blue marlin",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish58.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKajikiCropped.png",
+    "price": 10000,
+    "location": "Pier",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 7, 8, 9, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "giant-trevally",
+    "type": "fish",
+    "number": 68,
+    "name": "Giant trevally",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish70.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishRouninajiCropped.png",
+    "price": 4500,
+    "location": "Pier",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "mahi-mahi",
+    "type": "fish",
+    "number": 69,
+    "name": "Mahi-mahi",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish82.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishShiiraCropped.png",
+    "price": 6000,
+    "location": "Pier",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "ocean-sunfish",
+    "type": "fish",
+    "number": 70,
+    "name": "Ocean sunfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish60.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishManbouCropped.png",
+    "price": 4000,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "ray",
+    "type": "fish",
+    "number": 71,
+    "name": "Ray",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish59.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishEiCropped.png",
+    "price": 3000,
+    "location": "Sea",
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [8, 9, 10, 11],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3, 4, 5],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "saw-shark",
+    "type": "fish",
+    "number": 72,
+    "name": "Saw shark",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish74.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishNokogirizameCropped.png",
+    "price": 12000,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "hammerhead-shark",
+    "type": "fish",
+    "number": 73,
+    "name": "Hammerhead shark",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish61.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishShumokuzameCropped.png",
+    "price": 8000,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "great-white-shark",
+    "type": "fish",
+    "number": 74,
+    "name": "Great white shark",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish62.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSameCropped.png",
+    "price": 15000,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "whale-shark",
+    "type": "fish",
+    "number": 75,
+    "name": "Whale shark",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish72.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishJinbeezameCropped.png",
+    "price": 13000,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "suckerfish",
+    "type": "fish",
+    "number": 76,
+    "name": "Suckerfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish83.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishKobanzameCropped.png",
+    "price": 1500,
+    "location": "Sea",
+    "shadow": "X-Large w/Fin",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "football-fish",
+    "type": "fish",
+    "number": 77,
+    "name": "Football fish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish56.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishChouchinankouCropped.png",
+    "price": 2500,
+    "location": "Sea",
+    "shadow": "Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "oarfish",
+    "type": "fish",
+    "number": 78,
+    "name": "Oarfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish69.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishRyuuguunotukaiCropped.png",
+    "price": 9000,
+    "location": "Sea",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "barreleye",
+    "type": "fish",
+    "number": 79,
+    "name": "Barreleye",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish84.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishDemenigisuCropped.png",
+    "price": 15000,
+    "location": "Sea",
+    "shadow": "Small",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "coelacanth",
+    "type": "fish",
+    "number": 80,
+    "name": "Coelacanth",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish63.png",
+    "image": "https://acnhcdn.com/latest/BookFishIcon/FishSirakansuCropped.png",
+    "price": 15000,
+    "location": "Sea (rainy days)",
+    "shadow": "XX-Large",
+    "weather": null,
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "common-butterfly",
+    "type": "bug",
+    "number": 1,
+    "name": "Common butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins0.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMonshirochoCropped.png",
+    "price": 160,
+    "location": "Flying",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "yellow-butterfly",
+    "type": "bug",
+    "number": 2,
+    "name": "Yellow butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins1.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMonkichoCropped.png",
+    "price": 160,
+    "location": "Flying",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 9, 10],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "tiger-butterfly",
+    "type": "bug",
+    "number": 3,
+    "name": "Tiger butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins2.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAgehachoCropped.png",
+    "price": 240,
+    "location": "Flying",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "peacock-butterfly",
+    "type": "bug",
+    "number": 4,
+    "name": "Peacock butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins3.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKarasuagehaCropped.png",
+    "price": 2500,
+    "location": "Flying near blue/purple/black flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [9, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "common-bluebottle",
+    "type": "bug",
+    "number": 5,
+    "name": "Common bluebottle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins72.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAosujiagehaCropped.png",
+    "price": 300,
+    "location": "Flying",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 10, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "paper-kite-butterfly",
+    "type": "bug",
+    "number": 6,
+    "name": "Paper kite butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins73.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhgomamadaraCropped.png",
+    "price": 1000,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "great-purple-emperor",
+    "type": "bug",
+    "number": 7,
+    "name": "Great purple emperor",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins74.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhmurasakiCropped.png",
+    "price": 3000,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "4 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "monarch-butterfly",
+    "type": "bug",
+    "number": 8,
+    "name": "Monarch butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins4.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhkabamadaraCropped.png",
+    "price": 140,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [9, 10, 11],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "4 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "4 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "emperor-butterfly",
+    "type": "bug",
+    "number": 9,
+    "name": "Emperor butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins5.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMorufuochoCropped.png",
+    "price": 4000,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 6, 7, 8, 9, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 6, 7, 8, 9, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "agrias-butterfly",
+    "type": "bug",
+    "number": 10,
+    "name": "Agrias butterfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins6.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMiirotatehaCropped.png",
+    "price": 3000,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "rajah-brookes-birdwing",
+    "type": "bug",
+    "number": 11,
+    "name": "Rajah Brooke's birdwing",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins7.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAkaeritoribaneagehaCropped.png",
+    "price": 2500,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 4, 5, 6, 7, 8, 9, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 6, 7, 8, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "queen-alexandras-birdwing",
+    "type": "bug",
+    "number": 12,
+    "name": "Queen Alexandra's birdwing",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins8.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectArekisandoratoribaneagehaCropped.png",
+    "price": 4000,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15],
+        "time": "8 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15],
+        "time": "8 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "moth",
+    "type": "bug",
+    "number": 13,
+    "name": "Moth",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins9.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGaCropped.png",
+    "price": 130,
+    "location": "Flying near light sources",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "atlas-moth",
+    "type": "bug",
+    "number": 14,
+    "name": "Atlas moth",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins10.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectYonagunisanCropped.png",
+    "price": 3000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "madagascan-sunset-moth",
+    "type": "bug",
+    "number": 15,
+    "name": "Madagascan sunset moth",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins79.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNishikiohtsubamegaCropped.png",
+    "price": 2500,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15],
+        "time": "8 AM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15],
+        "time": "8 AM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "long-locust",
+    "type": "bug",
+    "number": 16,
+    "name": "Long locust",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins13.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectShoryobattaCropped.png",
+    "price": 200,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "migratory-locust",
+    "type": "bug",
+    "number": 17,
+    "name": "Migratory locust",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins14.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTonosamabattaCropped.png",
+    "price": 600,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [8, 9, 10, 11],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3, 4, 5],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "rice-grasshopper",
+    "type": "bug",
+    "number": 18,
+    "name": "Rice grasshopper",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins67.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectInagoCropped.png",
+    "price": 400,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [8, 9, 10, 11],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3, 4, 5],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "grasshopper",
+    "type": "bug",
+    "number": 19,
+    "name": "Grasshopper",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins32.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKirigirisuCropped.png",
+    "price": 160,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "cricket",
+    "type": "bug",
+    "number": 20,
+    "name": "Cricket",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins30.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKohrogiCropped.png",
+    "price": 130,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "bell-cricket",
+    "type": "bug",
+    "number": 21,
+    "name": "Bell cricket",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins31.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSuzumushiCropped.png",
+    "price": 430,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "mantis",
+    "type": "bug",
+    "number": 22,
+    "name": "Mantis",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins15.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKamakiriCropped.png",
+    "price": 430,
+    "location": "On flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "orchid-mantis",
+    "type": "bug",
+    "number": 23,
+    "name": "Orchid mantis",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins16.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHanakamakiriCropped.png",
+    "price": 2400,
+    "location": "On white flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "honeybee",
+    "type": "bug",
+    "number": 24,
+    "name": "Honeybee",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins11.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMitsubachiCropped.png",
+    "price": 200,
+    "location": "Flying near flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "wasp",
+    "type": "bug",
+    "number": 25,
+    "name": "Wasp",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins12.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHachiCropped.png",
+    "price": 2500,
+    "location": "Shaking trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "brown-cicada",
+    "type": "bug",
+    "number": 26,
+    "name": "Brown cicada",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins17.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAburazemiCropped.png",
+    "price": 250,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "robust-cicada",
+    "type": "bug",
+    "number": 27,
+    "name": "Robust cicada",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins18.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMinminzemiCropped.png",
+    "price": 300,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "giant-cicada",
+    "type": "bug",
+    "number": 28,
+    "name": "Giant cicada",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins65.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKumazemiCropped.png",
+    "price": 500,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "walker-cicada",
+    "type": "bug",
+    "number": 29,
+    "name": "Walker cicada",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins19.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTsukutsukuhousiCropped.png",
+    "price": 400,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "evening-cicada",
+    "type": "bug",
+    "number": 30,
+    "name": "Evening cicada",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins20.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHigurashiCropped.png",
+    "price": 550,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [4, 5, 6, 7, 16, 17, 18],
+        "time": "4 AM – 8 AM, 4 PM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [4, 5, 6, 7, 16, 17, 18],
+        "time": "4 AM – 8 AM, 4 PM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "cicada-shell",
+    "type": "bug",
+    "number": 31,
+    "name": "Cicada shell",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins69.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSeminonukegaraCropped.png",
+    "price": 10,
+    "location": "On hardwood/cedar trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "red-dragonfly",
+    "type": "bug",
+    "number": 32,
+    "name": "Red dragonfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins22.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAkiakaneCropped.png",
+    "price": 180,
+    "location": "Flying near water",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [9, 10],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "darner-dragonfly",
+    "type": "bug",
+    "number": 33,
+    "name": "Darner dragonfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins23.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGinyanmaCropped.png",
+    "price": 230,
+    "location": "Flying near water",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "banded-dragonfly",
+    "type": "bug",
+    "number": 34,
+    "name": "Banded dragonfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins24.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOniyanmaCropped.png",
+    "price": 4500,
+    "location": "Flying near water",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "damselfly",
+    "type": "bug",
+    "number": 35,
+    "name": "Damselfly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins81.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectItotonboCropped.png",
+    "price": 500,
+    "location": "Flying near water",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "firefly",
+    "type": "bug",
+    "number": 36,
+    "name": "Firefly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins41.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHotaruCropped.png",
+    "price": 300,
+    "location": "Flying near water",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "mole-cricket",
+    "type": "bug",
+    "number": 37,
+    "name": "Mole cricket",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins33.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOkeraCropped.png",
+    "price": 500,
+    "location": "Underground (dig where noise is loudest)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pondskater",
+    "type": "bug",
+    "number": 38,
+    "name": "Pondskater",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins27.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAmenboCropped.png",
+    "price": 130,
+    "location": "On rivers/ponds",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "diving-beetle",
+    "type": "bug",
+    "number": 39,
+    "name": "Diving beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins28.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGengorouCropped.png",
+    "price": 800,
+    "location": "On rivers/ponds",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
+        "time": "8 AM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "giant-water-bug",
+    "type": "bug",
+    "number": 40,
+    "name": "Giant water bug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins76.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTagameCropped.png",
+    "price": 2000,
+    "location": "On rivers/ponds",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "stinkbug",
+    "type": "bug",
+    "number": 41,
+    "name": "Stinkbug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins64.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKamemushiCropped.png",
+    "price": 120,
+    "location": "On flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "man-faced-stink-bug",
+    "type": "bug",
+    "number": 42,
+    "name": "Man-faced stink bug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins78.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectJinmenkamemushiCropped.png",
+    "price": 1000,
+    "location": "On flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "ladybug",
+    "type": "bug",
+    "number": 43,
+    "name": "Ladybug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins37.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTentoumushiCropped.png",
+    "price": 200,
+    "location": "On flowers",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 10],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [4, 9, 10, 11, 12],
+        "hours": [8, 9, 10, 11, 12, 13, 14, 15, 16],
+        "time": "8 AM – 5 PM"
+      }
+    ]
+  },
+  {
+    "id": "tiger-beetle",
+    "type": "bug",
+    "number": 44,
+    "name": "Tiger beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins70.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHanmyouCropped.png",
+    "price": 1500,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "jewel-beetle",
+    "type": "bug",
+    "number": 45,
+    "name": "Jewel beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins44.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTamamushiCropped.png",
+    "price": 2400,
+    "location": "On tree stumps",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "violin-beetle",
+    "type": "bug",
+    "number": 46,
+    "name": "Violin beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins38.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectBaiorinmushiCropped.png",
+    "price": 450,
+    "location": "On tree stumps",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "citrus-long-horned-beetle",
+    "type": "bug",
+    "number": 47,
+    "name": "Citrus long-horned beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins39.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGomadarakamikiriCropped.png",
+    "price": 350,
+    "location": "On tree stumps",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "rosalia-batesi-beetle",
+    "type": "bug",
+    "number": 48,
+    "name": "Rosalia batesi beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins82.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectRuriboshikamikiriCropped.png",
+    "price": 3000,
+    "location": "On tree stumps",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "blue-weevil-beetle",
+    "type": "bug",
+    "number": 49,
+    "name": "Blue weevil beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins80.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHousekizoumushiCropped.png",
+    "price": 800,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "dung-beetle",
+    "type": "bug",
+    "number": 50,
+    "name": "Dung beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins40.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectFunkorogashiCropped.png",
+    "price": 3000,
+    "location": "Pushing snowballs",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "earth-boring-dung-beetle",
+    "type": "bug",
+    "number": 51,
+    "name": "Earth-boring dung beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins42.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhsenchikoganeCropped.png",
+    "price": 300,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "scarab-beetle",
+    "type": "bug",
+    "number": 52,
+    "name": "Scarab beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins43.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectPurachinakoganeCropped.png",
+    "price": 10000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 23],
+        "time": "11 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 23],
+        "time": "11 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "drone-beetle",
+    "type": "bug",
+    "number": 53,
+    "name": "Drone beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins75.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKanabunCropped.png",
+    "price": 200,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "goliath-beetle",
+    "type": "bug",
+    "number": 54,
+    "name": "Goliath beetle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins55.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGoraiasuohtsunohanamuguriCropped.png",
+    "price": 8000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "saw-stag",
+    "type": "bug",
+    "number": 55,
+    "name": "Saw stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins46.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNokogirikuwagataCropped.png",
+    "price": 2000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "miyama-stag",
+    "type": "bug",
+    "number": 56,
+    "name": "Miyama stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins45.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMiyamakuwagataCropped.png",
+    "price": 1000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "giant-stag",
+    "type": "bug",
+    "number": 57,
+    "name": "Giant stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins47.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhkuwagataCropped.png",
+    "price": 10000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 23],
+        "time": "11 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 23],
+        "time": "11 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "rainbow-stag",
+    "type": "bug",
+    "number": 58,
+    "name": "Rainbow stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins48.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNijiirokuwagataCropped.png",
+    "price": 6000,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 50,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "cyclommatus-stag",
+    "type": "bug",
+    "number": 59,
+    "name": "Cyclommatus stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins49.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHosoakakuwagataCropped.png",
+    "price": 8000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "golden-stag",
+    "type": "bug",
+    "number": 60,
+    "name": "Golden stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins50.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOugononikuwagataCropped.png",
+    "price": 12000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "giraffe-stag",
+    "type": "bug",
+    "number": 61,
+    "name": "Giraffe stag",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins77.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGirafanokogirikuwagataCropped.png",
+    "price": 12000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "horned-dynastid",
+    "type": "bug",
+    "number": 62,
+    "name": "Horned dynastid",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins51.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKabutomushiCropped.png",
+    "price": 1350,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "horned-atlas",
+    "type": "bug",
+    "number": 63,
+    "name": "Horned atlas",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins52.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKohkasasuohkabutoCropped.png",
+    "price": 8000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "horned-elephant",
+    "type": "bug",
+    "number": 64,
+    "name": "Horned elephant",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins53.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectZoukabutoCropped.png",
+    "price": 8000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "horned-hercules",
+    "type": "bug",
+    "number": 65,
+    "name": "Horned hercules",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins54.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHerakuresuohkabutoCropped.png",
+    "price": 12000,
+    "location": "On palm trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 100,
+    "north": [
+      {
+        "months": [7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "walking-stick",
+    "type": "bug",
+    "number": 66,
+    "name": "Walking stick",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins35.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNanafushiCropped.png",
+    "price": 600,
+    "location": "On trees (any kind)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [7, 8, 9, 10, 11],
+        "hours": [4, 5, 6, 7, 17, 18],
+        "time": "4 AM – 8 AM, 5 PM – 7 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5],
+        "hours": [4, 5, 6, 7, 17, 18],
+        "time": "4 AM – 8 AM, 5 PM – 7 PM"
+      }
+    ]
+  },
+  {
+    "id": "walking-leaf",
+    "type": "bug",
+    "number": 67,
+    "name": "Walking leaf",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins34.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKonohamushiCropped.png",
+    "price": 600,
+    "location": "Disguised under trees",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "bagworm",
+    "type": "bug",
+    "number": 68,
+    "name": "Bagworm",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins36.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMinomushiCropped.png",
+    "price": 600,
+    "location": "Shaking trees (hardwood or cedar only)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "ant",
+    "type": "bug",
+    "number": 69,
+    "name": "Ant",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins26.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAriCropped.png",
+    "price": 80,
+    "location": "On rotten turnips or candy",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "hermit-crab",
+    "type": "bug",
+    "number": 70,
+    "name": "Hermit crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins66.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectYadokariCropped.png",
+    "price": 1000,
+    "location": "Disguised on shoreline",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "wharf-roach",
+    "type": "bug",
+    "number": 71,
+    "name": "Wharf roach",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins71.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectFunamushiCropped.png",
+    "price": 200,
+    "location": "On beach rocks",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "fly",
+    "type": "bug",
+    "number": 72,
+    "name": "Fly",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins59.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHaeCropped.png",
+    "price": 60,
+    "location": "Flying near trash (boots, tires, cans, used fountain fireworks) or rotten turnips",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "mosquito",
+    "type": "bug",
+    "number": 73,
+    "name": "Mosquito",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins58.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKaCropped.png",
+    "price": 130,
+    "location": "Flying",
+    "shadow": null,
+    "weather": "Any except rain",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 17, 18, 19, 20, 21, 22, 23],
+        "time": "5 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "flea",
+    "type": "bug",
+    "number": 74,
+    "name": "Flea",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins56.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNomiCropped.png",
+    "price": 70,
+    "location": "On villagers",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "snail",
+    "type": "bug",
+    "number": 75,
+    "name": "Snail",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins29.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKatatsumuriCropped.png",
+    "price": 250,
+    "location": "On rocks/bushes",
+    "shadow": null,
+    "weather": "Rain only",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pill-bug",
+    "type": "bug",
+    "number": 76,
+    "name": "Pill bug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins57.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectDangomushiCropped.png",
+    "price": 250,
+    "location": "From hitting rocks",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 23],
+        "time": "11 PM – 4 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 23],
+        "time": "11 PM – 4 PM"
+      }
+    ]
+  },
+  {
+    "id": "centipede",
+    "type": "bug",
+    "number": 77,
+    "name": "Centipede",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins60.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMukadeCropped.png",
+    "price": 300,
+    "location": "From hitting rocks",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 9, 10, 11, 12],
+        "hours": [16, 17, 18, 19, 20, 21, 22],
+        "time": "4 PM – 11 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [16, 17, 18, 19, 20, 21, 22],
+        "time": "4 PM – 11 PM"
+      }
+    ]
+  },
+  {
+    "id": "spider",
+    "type": "bug",
+    "number": 78,
+    "name": "Spider",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins61.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKumoCropped.png",
+    "price": 600,
+    "location": "Shaking trees (hardwood or cedar only)",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23],
+        "time": "7 PM – 8 AM"
+      }
+    ]
+  },
+  {
+    "id": "tarantula",
+    "type": "bug",
+    "number": 79,
+    "name": "Tarantula",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins62.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTaranchuraCropped.png",
+    "price": 8000,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "scorpion",
+    "type": "bug",
+    "number": 80,
+    "name": "Scorpion",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins63.png",
+    "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSasoriCropped.png",
+    "price": 8000,
+    "location": "On the ground",
+    "shadow": null,
+    "weather": "Any weather",
+    "speed": null,
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 19, 20, 21, 22, 23],
+        "time": "7 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "seaweed",
+    "type": "sea",
+    "number": 1,
+    "name": "Seaweed",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Wakame.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishWakameCropped.png",
+    "price": 600,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Stationary",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-grapes",
+    "type": "sea",
+    "number": 2,
+    "name": "Sea grapes",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Umibudou.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUmibudouCropped.png",
+    "price": 900,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Stationary",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-cucumber",
+    "type": "sea",
+    "number": 3,
+    "name": "Sea cucumber",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Namako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishNamakoCropped.png",
+    "price": 500,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Very slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-pig",
+    "type": "sea",
+    "number": 4,
+    "name": "Sea pig",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Senjunamako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSenjunamakoCropped.png",
+    "price": 10000,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "sea-star",
+    "type": "sea",
+    "number": 5,
+    "name": "Sea star",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Hitode.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHitodeCropped.png",
+    "price": 500,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Very slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-urchin",
+    "type": "sea",
+    "number": 6,
+    "name": "Sea urchin",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Uni.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUniCropped.png",
+    "price": 1700,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "slate-pencil-urchin",
+    "type": "sea",
+    "number": 7,
+    "name": "Slate pencil urchin",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Paipuuni.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishPaipuuniCropped.png",
+    "price": 2000,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "sea-anemone",
+    "type": "sea",
+    "number": 8,
+    "name": "Sea anemone",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Isogintyaku.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishIsogintyakuCropped.png",
+    "price": 500,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Stationary",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "moon-jellyfish",
+    "type": "sea",
+    "number": 9,
+    "name": "Moon jellyfish",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Mizukurage.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMizukurageCropped.png",
+    "price": 600,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Very slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "sea-slug",
+    "type": "sea",
+    "number": 10,
+    "name": "Sea slug",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Umiushi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUmiushiCropped.png",
+    "price": 600,
+    "location": null,
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": "Very slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "pearl-oyster",
+    "type": "sea",
+    "number": 11,
+    "name": "Pearl oyster",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Akoyagai.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAkoyagaiCropped.png",
+    "price": 2800,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "mussel",
+    "type": "sea",
+    "number": 12,
+    "name": "Mussel",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Muhrugai.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMuhrugaiCropped.png",
+    "price": 1500,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "oyster",
+    "type": "sea",
+    "number": 13,
+    "name": "Oyster",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Kaki.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishOysterCropped.png",
+    "price": 1100,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "scallop",
+    "type": "sea",
+    "number": 14,
+    "name": "Scallop",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Hotate.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHotateCropped.png",
+    "price": 1200,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 5,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "whelk",
+    "type": "sea",
+    "number": 15,
+    "name": "Whelk",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Baigai.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishBaigaiCropped.png",
+    "price": 1000,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "turban-shell",
+    "type": "sea",
+    "number": 16,
+    "name": "Turban shell",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Sazae.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSazaeCropped.png",
+    "price": 1000,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "abalone",
+    "type": "sea",
+    "number": 17,
+    "name": "Abalone",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Awabi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAwabiCropped.png",
+    "price": 2000,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "gigas-giant-clam",
+    "type": "sea",
+    "number": 18,
+    "name": "Gigas giant clam",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Shakogai.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishShakogaiCropped.png",
+    "price": 15000,
+    "location": null,
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "chambered-nautilus",
+    "type": "sea",
+    "number": 19,
+    "name": "Chambered nautilus",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Oumugai.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishOumugaiCropped.png",
+    "price": 1800,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [3, 4, 5, 6, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "octopus",
+    "type": "sea",
+    "number": 20,
+    "name": "Octopus",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Tako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTakoCropped.png",
+    "price": 1200,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "umbrella-octopus",
+    "type": "sea",
+    "number": 21,
+    "name": "Umbrella octopus",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Mendako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMendakoCropped.png",
+    "price": 6000,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Fast",
+    "catchesToUnlock": 40,
+    "north": [
+      {
+        "months": [3, 4, 5, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "vampire-squid",
+    "type": "sea",
+    "number": 22,
+    "name": "Vampire squid",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Koumoridako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKoumoridakoCropped.png",
+    "price": 10000,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "firefly-squid",
+    "type": "sea",
+    "number": 23,
+    "name": "Firefly squid",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Hotaruika.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHotaruikaCropped.png",
+    "price": 1400,
+    "location": null,
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [3, 4, 5, 6],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "gazami-crab",
+    "type": "sea",
+    "number": 24,
+    "name": "Gazami crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Gazami.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishGazamiCropped.png",
+    "price": 2200,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "dungeness-crab",
+    "type": "sea",
+    "number": 25,
+    "name": "Dungeness crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/DungenessCrab.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishDungenessCrabCropped.png",
+    "price": 1900,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10, 11],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "snow-crab",
+    "type": "sea",
+    "number": 26,
+    "name": "Snow crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Zuwaigani.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishZuwaiganiCropped.png",
+    "price": 6000,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Fast",
+    "catchesToUnlock": 40,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "red-king-crab",
+    "type": "sea",
+    "number": 27,
+    "name": "Red king crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Tarabagani.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTarabaganiCropped.png",
+    "price": 8000,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [1, 2, 3, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [5, 6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "acorn-barnacle",
+    "type": "sea",
+    "number": 28,
+    "name": "Acorn barnacle",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fujitsubo.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishFujitsuboCropped.png",
+    "price": 600,
+    "location": null,
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": "Stationary",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "spider-crab",
+    "type": "sea",
+    "number": 29,
+    "name": "Spider crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Takaashigani.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTakaashiganiCropped.png",
+    "price": 12000,
+    "location": null,
+    "shadow": "X-Large",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [3, 4],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [9, 10],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "tiger-prawn",
+    "type": "sea",
+    "number": 30,
+    "name": "Tiger prawn",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Kurumaebi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKurumaebiCropped.png",
+    "price": 3000,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [6, 7, 8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "sweet-shrimp",
+    "type": "sea",
+    "number": 31,
+    "name": "Sweet shrimp",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Amaebi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAmaebiCropped.png",
+    "price": 1400,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [1, 2, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [3, 4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "mantis-shrimp",
+    "type": "sea",
+    "number": 32,
+    "name": "Mantis shrimp",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Shako.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSyakoCropped.png",
+    "price": 2500,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "spiny-lobster",
+    "type": "sea",
+    "number": 33,
+    "name": "Spiny lobster",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Iseebi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishIseebiCropped.png",
+    "price": 5000,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Fast",
+    "catchesToUnlock": 40,
+    "north": [
+      {
+        "months": [10, 11, 12],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [4, 5, 6],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "lobster",
+    "type": "sea",
+    "number": 34,
+    "name": "Lobster",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish54.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishLobsterCropped.png",
+    "price": 4500,
+    "location": null,
+    "shadow": "Large",
+    "weather": null,
+    "speed": "Fast",
+    "catchesToUnlock": 40,
+    "north": [
+      {
+        "months": [1, 4, 5, 6, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [6, 7, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "giant-isopod",
+    "type": "sea",
+    "number": 35,
+    "name": "Giant isopod",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Daiougusokumushi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishDaiougusokumushiCropped.png",
+    "price": 12000,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Very fast",
+    "catchesToUnlock": 80,
+    "north": [
+      {
+        "months": [7, 8, 9, 10],
+        "hours": [0, 1, 2, 3, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23],
+        "time": "9 AM – 4 PM, 9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4],
+        "hours": [0, 1, 2, 3, 9, 10, 11, 12, 13, 14, 15, 21, 22, 23],
+        "time": "9 AM – 4 PM, 9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "horseshoe-crab",
+    "type": "sea",
+    "number": 36,
+    "name": "Horseshoe crab",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Kabutogani.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKabutoganiCropped.png",
+    "price": 2500,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Medium",
+    "catchesToUnlock": 20,
+    "north": [
+      {
+        "months": [7, 8, 9],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3],
+        "hours": [0, 1, 2, 3, 21, 22, 23],
+        "time": "9 PM – 4 AM"
+      }
+    ]
+  },
+  {
+    "id": "sea-pineapple",
+    "type": "sea",
+    "number": 37,
+    "name": "Sea pineapple",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Hoya.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHoyaCropped.png",
+    "price": 1500,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  },
+  {
+    "id": "spotted-garden-eel",
+    "type": "sea",
+    "number": 38,
+    "name": "Spotted garden eel",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Chinanago.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishChinanagoCropped.png",
+    "price": 1100,
+    "location": null,
+    "shadow": "Small",
+    "weather": null,
+    "speed": "Slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [5, 6, 7, 8, 9, 10],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ],
+    "south": [
+      {
+        "months": [1, 2, 3, 4, 11, 12],
+        "hours": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "time": "4 AM – 9 PM"
+      }
+    ]
+  },
+  {
+    "id": "flatworm",
+    "type": "sea",
+    "number": 39,
+    "name": "Flatworm",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Hiramushi.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHiramushiCropped.png",
+    "price": 700,
+    "location": null,
+    "shadow": "X-Small",
+    "weather": null,
+    "speed": "Very slow",
+    "catchesToUnlock": 0,
+    "north": [
+      {
+        "months": [8, 9],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ],
+    "south": [
+      {
+        "months": [2, 3],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "4 PM – 9 AM"
+      }
+    ]
+  },
+  {
+    "id": "venus-flower-basket",
+    "type": "sea",
+    "number": 40,
+    "name": "Venus' flower basket",
+    "icon": "https://acnhcdn.com/latest/MenuIcon/Kairoudouketsu.png",
+    "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKairoudouketsuCropped.png",
+    "price": 5000,
+    "location": null,
+    "shadow": "Medium",
+    "weather": null,
+    "speed": "Fast",
+    "catchesToUnlock": 40,
+    "north": [
+      {
+        "months": [1, 2, 10, 11, 12],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ],
+    "south": [
+      {
+        "months": [4, 5, 6, 7, 8],
+        "hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "time": "All day"
+      }
+    ]
+  }
+]
