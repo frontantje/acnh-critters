@@ -1,0 +1,802 @@
+{
+  "bitterling": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pale-chub": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "crucian-carp": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "dace": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "carp": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "koi": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "goldfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pop-eyed-goldfish": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "ranchu-goldfish": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "killifish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "crawfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "soft-shelled-turtle": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "snapping-turtle": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "tadpole": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "frog": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "freshwater-goby": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "loach": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "catfish": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "giant-snakehead": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "bluegill": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "yellow-perch": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "black-bass": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "tilapia": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pike": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pond-smelt": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sweetfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "cherry-salmon": {
+    "north": "Mar – Jun: 4 PM – 9 AM · Sep – Nov: All day",
+    "south": "Mar – May: All day · Sep – Dec: 4 PM – 9 AM"
+  },
+  "char": {
+    "north": "Mar – Jun: 4 PM – 9 AM · Sep – Nov: All day",
+    "south": "Mar – May: All day · Sep – Dec: 4 PM – 9 AM"
+  },
+  "golden-trout": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "stringfish": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "salmon": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "king-salmon": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "mitten-crab": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "guppy": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "nibble-fish": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "angelfish": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "betta": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "neon-tetra": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "rainbowfish": {
+    "north": "9 AM – 4 PM",
+    "south": "9 AM – 4 PM"
+  },
+  "piranha": {
+    "north": "9 AM – 4 PM, 9 PM – 4 AM",
+    "south": "9 AM – 4 PM, 9 PM – 4 AM"
+  },
+  "arowana": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "dorado": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "gar": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "arapaima": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "saddled-bichir": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "sturgeon": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-butterfly": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-horse": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "clown-fish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "surgeonfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "butterfly-fish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "napoleonfish": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "zebra-turkeyfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "blowfish": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "puffer-fish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "anchovy": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "horse-mackerel": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "barred-knifejaw": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-bass": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "red-snapper": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "dab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "olive-flounder": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "squid": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "moray-eel": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "ribbon-eel": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "tuna": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "blue-marlin": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "giant-trevally": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "mahi-mahi": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "ocean-sunfish": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "ray": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "saw-shark": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "hammerhead-shark": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "great-white-shark": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "whale-shark": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "suckerfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "football-fish": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "oarfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "barreleye": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "coelacanth": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "common-butterfly": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "yellow-butterfly": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "tiger-butterfly": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "peacock-butterfly": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "common-bluebottle": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "paper-kite-butterfly": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "great-purple-emperor": {
+    "north": "4 AM – 7 PM",
+    "south": "4 AM – 7 PM"
+  },
+  "monarch-butterfly": {
+    "north": "4 AM – 5 PM",
+    "south": "4 AM – 5 PM"
+  },
+  "emperor-butterfly": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "agrias-butterfly": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "rajah-brookes-birdwing": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "queen-alexandras-birdwing": {
+    "north": "8 AM – 4 PM",
+    "south": "8 AM – 4 PM"
+  },
+  "moth": {
+    "north": "7 PM – 4 AM",
+    "south": "7 PM – 4 AM"
+  },
+  "atlas-moth": {
+    "north": "7 PM – 4 AM",
+    "south": "7 PM – 4 AM"
+  },
+  "madagascan-sunset-moth": {
+    "north": "8 AM – 4 PM",
+    "south": "8 AM – 4 PM"
+  },
+  "long-locust": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "migratory-locust": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "rice-grasshopper": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "grasshopper": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "cricket": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "bell-cricket": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "mantis": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "orchid-mantis": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "honeybee": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "wasp": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "brown-cicada": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "robust-cicada": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "giant-cicada": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "walker-cicada": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "evening-cicada": {
+    "north": "4 AM – 8 AM, 4 PM – 7 PM",
+    "south": "4 AM – 8 AM, 4 PM – 7 PM"
+  },
+  "cicada-shell": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "red-dragonfly": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "darner-dragonfly": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "banded-dragonfly": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "damselfly": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "firefly": {
+    "north": "7 PM – 4 AM",
+    "south": "7 PM – 4 AM"
+  },
+  "mole-cricket": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pondskater": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "diving-beetle": {
+    "north": "8 AM – 7 PM",
+    "south": "8 AM – 7 PM"
+  },
+  "giant-water-bug": {
+    "north": "7 PM – 8 AM",
+    "south": "7 PM – 8 AM"
+  },
+  "stinkbug": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "man-faced-stink-bug": {
+    "north": "7 PM – 8 AM",
+    "south": "7 PM – 8 AM"
+  },
+  "ladybug": {
+    "north": "8 AM – 5 PM",
+    "south": "8 AM – 5 PM"
+  },
+  "tiger-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "jewel-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "violin-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "citrus-long-horned-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "rosalia-batesi-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "blue-weevil-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "dung-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "earth-boring-dung-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "scarab-beetle": {
+    "north": "11 PM – 8 AM",
+    "south": "11 PM – 8 AM"
+  },
+  "drone-beetle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "goliath-beetle": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "saw-stag": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "miyama-stag": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "giant-stag": {
+    "north": "11 PM – 8 AM",
+    "south": "11 PM – 8 AM"
+  },
+  "rainbow-stag": {
+    "north": "7 PM – 8 AM",
+    "south": "7 PM – 8 AM"
+  },
+  "cyclommatus-stag": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "golden-stag": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "giraffe-stag": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "horned-dynastid": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "horned-atlas": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "horned-elephant": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "horned-hercules": {
+    "north": "5 PM – 8 AM",
+    "south": "5 PM – 8 AM"
+  },
+  "walking-stick": {
+    "north": "4 AM – 8 AM, 5 PM – 7 PM",
+    "south": "4 AM – 8 AM, 5 PM – 7 PM"
+  },
+  "walking-leaf": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "bagworm": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "ant": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "hermit-crab": {
+    "north": "7 PM – 8 AM",
+    "south": "7 PM – 8 AM"
+  },
+  "wharf-roach": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "fly": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "mosquito": {
+    "north": "5 PM – 4 AM",
+    "south": "5 PM – 4 AM"
+  },
+  "flea": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "snail": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pill-bug": {
+    "north": "11 PM – 4 PM",
+    "south": "11 PM – 4 PM"
+  },
+  "centipede": {
+    "north": "4 PM – 11 PM",
+    "south": "4 PM – 11 PM"
+  },
+  "spider": {
+    "north": "7 PM – 8 AM",
+    "south": "7 PM – 8 AM"
+  },
+  "tarantula": {
+    "north": "7 PM – 4 AM",
+    "south": "7 PM – 4 AM"
+  },
+  "scorpion": {
+    "north": "7 PM – 4 AM",
+    "south": "7 PM – 4 AM"
+  },
+  "seaweed": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-grapes": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-cucumber": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-pig": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "sea-star": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-urchin": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "slate-pencil-urchin": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "sea-anemone": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "moon-jellyfish": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "sea-slug": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "pearl-oyster": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "mussel": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "oyster": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "scallop": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "whelk": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "turban-shell": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "abalone": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "gigas-giant-clam": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "chambered-nautilus": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "octopus": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "umbrella-octopus": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "vampire-squid": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "firefly-squid": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "gazami-crab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "dungeness-crab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "snow-crab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "red-king-crab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "acorn-barnacle": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "spider-crab": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "tiger-prawn": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "sweet-shrimp": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "mantis-shrimp": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "spiny-lobster": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "lobster": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "giant-isopod": {
+    "north": "9 AM – 4 PM, 9 PM – 4 AM",
+    "south": "9 AM – 4 PM, 9 PM – 4 AM"
+  },
+  "horseshoe-crab": {
+    "north": "9 PM – 4 AM",
+    "south": "9 PM – 4 AM"
+  },
+  "sea-pineapple": {
+    "north": "All day",
+    "south": "All day"
+  },
+  "spotted-garden-eel": {
+    "north": "4 AM – 9 PM",
+    "south": "4 AM – 9 PM"
+  },
+  "flatworm": {
+    "north": "4 PM – 9 AM",
+    "south": "4 PM – 9 AM"
+  },
+  "venus-flower-basket": {
+    "north": "All day",
+    "south": "All day"
+  }
+}

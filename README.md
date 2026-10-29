@@ -18,6 +18,24 @@ optional peer dependencies.
 Progress is stored in `localStorage` under `acnh-critters`, in the same JSON format as the export
 file (see `src/lib/progress.svelte.js`).
 
+## Tests
+
+```
+npm test                               # all browser tests
+npx playwright test tests/sync.spec.js # one file
+npx playwright test --headed           # watch them run
+npx playwright test --ui               # interactive runner
+```
+
+Browser tests in `tests/`, written with Playwright. They drive the installed Google Chrome (no
+browser download) and start the dev server unless one is already running on port 5173.
+
+Every test runs as if it were 15 October 2026, in the Europe/Berlin time zone with an `en-US`
+browser unless the test sets its own. Critter icons are replaced with a placeholder, so no network
+is needed, and any console error fails the test (see `tests/support.js`).
+`tests/expected-times.json` holds the community spreadsheet's original time texts, which the app's
+own time formatting is checked against.
+
 ## Languages
 
 English and German. The app follows the browser's language (anything other than German falls back

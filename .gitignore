@@ -2,8 +2,10 @@
 node_modules/
 dist/
 
-# Logs
+# Logs and test output
 *.log
+test-results/
+playwright-report/
 
 # Local environment and OS files
 .env
