@@ -2,7 +2,8 @@
 // localStorage and exportable as a JSON file to move between devices. Both use
 // the same format:
 //
-//   { "version": 1, "settings": { "hemisphere": "north", "trackDonations": false },
+//   { "version": 1,
+//     "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false },
 //     "caught": ["bitterling", ...], "donated": ["bitterling", ...] }
 
 import { SvelteSet } from 'svelte/reactivity';
@@ -18,6 +19,7 @@ const KNOWN_IDS = new Set(critters.map((critter) => critter.id));
 export const progress = $state({
   hemisphere: /** @type {Hemisphere} */ ('north'),
   trackDonations: false,
+  showCaught: false,
   caught: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   donated: /** @type {SvelteSet<string>} */ (new SvelteSet()),
 });
@@ -52,6 +54,11 @@ export function save() {
 /** @param {string} value */
 export function setHemisphere(value) {
   progress.hemisphere = value === 'south' ? 'south' : 'north';
+  save();
+}
+
+export function toggleShowCaught() {
+  progress.showCaught = !progress.showCaught;
   save();
 }
 
@@ -99,7 +106,11 @@ function readStorage() {
 function serialize() {
   return {
     version: FORMAT_VERSION,
-    settings: { hemisphere: progress.hemisphere, trackDonations: progress.trackDonations },
+    settings: {
+      hemisphere: progress.hemisphere,
+      trackDonations: progress.trackDonations,
+      showCaught: progress.showCaught,
+    },
     caught: [...progress.caught],
     donated: [...progress.donated],
   };
@@ -107,7 +118,10 @@ function serialize() {
 
 /**
  * @param {string} text
- * @returns {{ hemisphere: Hemisphere, trackDonations: boolean, caught: string[], donated: string[] }}
+ * @returns {{
+ *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean,
+ *   caught: string[], donated: string[],
+ * }}
  */
 function parse(text) {
   let data;
@@ -130,6 +144,7 @@ function parse(text) {
   return {
     hemisphere: settings.hemisphere === 'south' ? 'south' : 'north',
     trackDonations: settings.trackDonations === true,
+    showCaught: settings.showCaught === true,
     caught: knownIds(data.caught),
     donated: knownIds(data.donated),
   };
@@ -139,6 +154,7 @@ function parse(text) {
 function apply(saved) {
   progress.hemisphere = saved.hemisphere;
   progress.trackDonations = saved.trackDonations;
+  progress.showCaught = saved.showCaught;
   progress.caught = new SvelteSet(saved.caught);
   progress.donated = new SvelteSet(saved.donated);
 }
