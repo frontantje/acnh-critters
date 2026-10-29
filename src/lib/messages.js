@@ -61,6 +61,9 @@ const en = {
   tabSea: 'Sea creatures',
   showCaughtShort: 'Caught',
   showCaught: 'Show caught',
+  legendLeaving: 'Gone after this month',
+  legendYearRound: 'Catchable all year',
+  legendCaught: 'Caught',
   allCaught: "You've caught everything here!",
   nothingThisMonth: 'Nothing to catch here this month.',
 
@@ -135,6 +138,9 @@ const de = {
   tabSea: 'Meerestiere',
   showCaughtShort: 'Gefangen',
   showCaught: 'Gefangene zeigen',
+  legendLeaving: 'Nach diesem Monat weg',
+  legendYearRound: 'Ganzjährig fangbar',
+  legendCaught: 'Gefangen',
   allCaught: 'Hier hast du schon alles gefangen!',
   nothingThisMonth: 'Diesen Monat gibt es hier nichts zu fangen.',
 

@@ -2,7 +2,6 @@ import { afterEach, describe, expect, test } from 'vitest';
 import {
   critterName,
   critters,
-  daysLeftInMonth,
   isAvailableIn,
   locationText,
   monthName,
@@ -157,24 +156,50 @@ describe('timeOfDayGroup', () => {
   test.each(
     /** @type {const} */ ([
       ['char', 4, 20, 0], // 4 PM – 9 AM in spring
-      ['char', 4, 12, 1],
-      ['char', 10, 12, 2], // all day in autumn
+      ['char', 4, 12, 2],
+      ['char', 10, 12, 1], // all day in autumn
       ['piranha', 7, 10, 0], // 9 AM – 4 PM and 9 PM – 4 AM
-      ['piranha', 7, 17, 1],
+      ['piranha', 7, 17, 2],
       ['piranha', 7, 22, 0],
       ['tarantula', 1, 2, 0], // 7 PM – 4 AM, past midnight
-      ['tarantula', 1, 4, 1],
-      ['crucian-carp', 10, 3, 2],
+      ['tarantula', 1, 4, 2],
+      ['crucian-carp', 10, 3, 1],
     ]),
   )('%s in month %i at %i h: group %i', (id, month, hour, group) => {
     expect(timeOfDayGroup(byId(id), 'north', month, hour)).toBe(group);
   });
 });
 
+test('a critter that is there all year is so in both hemispheres', () => {
+  // The row's blue tint relies on monthsLeft(…, 1) === 12 meaning "all year".
+  const yearRound = (/** @type {'north' | 'south'} */ hemisphere) =>
+    critters.filter((c) => monthsLeft(c, hemisphere, 1) === 12).map((c) => c.id);
+  expect(yearRound('north').length).toBeGreaterThan(0);
+  expect(yearRound('south')).toEqual(yearRound('north'));
+  expect(yearRound('north').every((id) => Array.from({ length: 12 }, (_, i) => i + 1).every((m) => isAvailableIn(byId(id), 'north', m)))).toBe(true);
+});
+
 describe('sortForMonth', () => {
   test('all months keeps Critterpedia order', () => {
     expect(sortForMonth(critters, 'north', 0, 12)).toBe(critters);
   });
+
+  /**
+   * Each critter's expected sort key: [bottom part?, months left, time group, Critterpedia index].
+   * The bottom part: outside their hours and not leaving after this month.
+   * @param {Critter[]} sorted
+   * @param {'north' | 'south'} hemisphere
+   * @param {number} month
+   * @param {number} hour
+   */
+  const keysOf = (sorted, hemisphere, month, hour) =>
+    sorted.map((c) => {
+      const left = monthsLeft(c, hemisphere, month);
+      const time = timeOfDayGroup(c, hemisphere, month, hour);
+      return [time === 2 && left > 1 ? 1 : 0, left, time, critters.indexOf(c)];
+    });
+  /** @param {number[]} a @param {number[]} b */
+  const byKeys = (a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2] || a[3] - b[3];
 
   test.each(
     /** @type {const} */ ([
@@ -184,17 +209,40 @@ describe('sortForMonth', () => {
       ['north', 1, 0],
       ['south', 6, 17],
     ]),
-  )('%s, month %i, %i h: by season, then catchable now / later / all day, then Critterpedia order', (hemisphere, month, hour) => {
+  )('%s, month %i, %i h: leaving soon stays together; others outside their hours at the bottom', (hemisphere, month, hour) => {
     const available = critters.filter((c) => isAvailableIn(c, hemisphere, month));
     const sorted = sortForMonth(available, hemisphere, month, hour);
-    const keys = sorted.map((c) => [monthsLeft(c, hemisphere, month), timeOfDayGroup(c, hemisphere, month, hour), critters.indexOf(c)]);
+    const keys = keysOf(sorted, hemisphere, month, hour);
 
     expect(sorted).toHaveLength(available.length);
-    expect(keys).toEqual([...keys].sort((a, b) => a[0] - b[0] || a[1] - b[1] || a[2] - b[2]));
-    expect(keys[0][0]).toBe(1);
-    expect(keys[keys.length - 1][0]).toBe(12);
-    // All three time groups show up, so the second key really does something.
-    expect(new Set(keys.map((k) => k[1]))).toEqual(new Set([0, 1, 2]));
+    expect(keys).toEqual([...keys].sort(byKeys));
+    // Leaving after this month comes first, whatever the hour: catchable now, all day, outside their hours.
+    const leaving = keys.filter((k) => k[1] === 1);
+    expect(keys.slice(0, leaving.length)).toEqual(leaving);
+    expect(leaving.map((k) => k[2])).toEqual(leaving.map((k) => k[2]).sort());
+    // The bottom part is exactly the others outside their hours.
+    const bottom = keys.findIndex((k) => k[0] === 1);
+    expect(bottom).toBeGreaterThan(0);
+    expect(keys.slice(bottom).every((k) => k[2] === 2 && k[1] > 1)).toBe(true);
+    expect(keys.slice(leaving.length, bottom).every((k) => k[2] !== 2)).toBe(true);
+    // Both parts end with all-year critters.
+    expect(keys[bottom - 1][1]).toBe(12);
+    expect(keys[keys.length - 1][1]).toBe(12);
+  });
+
+  test('a critter leaving after this month stays in its group outside its hours, at the group’s end', () => {
+    const sorted = sortForMonth(critters.filter((c) => isAvailableIn(c, 'north', 10)), 'north', 10, 12);
+    const ids = sorted.map((c) => c.id);
+    const turtle = ids.indexOf('snapping-turtle'); // leaves after October, out from 4 AM to 9 PM
+    const leavingAllDay = sorted
+      .filter((c) => monthsLeft(c, 'north', 10) === 1 && timeOfDayGroup(c, 'north', 10, 12) === 1)
+      .map((c) => ids.indexOf(c.id));
+
+    expect(turtle).toBeGreaterThan(ids.indexOf('ladybug')); // leaving too, catchable at noon
+    expect(leavingAllDay.length).toBeGreaterThan(0);
+    expect(turtle).toBeGreaterThan(Math.max(...leavingAllDay));
+    // …but above everything that stays longer.
+    expect(turtle).toBeLessThan(sorted.findIndex((c) => monthsLeft(c, 'north', 10) > 1));
   });
 
   test('the hour changes the order within a season', () => {
@@ -207,21 +255,6 @@ describe('sortForMonth', () => {
     expect(names(12).indexOf('ladybug')).toBeLessThan(names(12).indexOf('snapping-turtle'));
     // 9 PM: the scorpion (7 PM – 4 AM) before the red dragonfly (8 AM – 7 PM).
     expect(names(21).indexOf('scorpion')).toBeLessThan(names(21).indexOf('red-dragonfly'));
-  });
-});
-
-describe('daysLeftInMonth', () => {
-  test.each([
-    ['2026-10-15', 17],
-    ['2026-10-25', 7],
-    ['2026-10-26', 6],
-    ['2026-10-31', 1],
-    ['2026-04-24', 7],
-    ['2026-02-28', 1],
-    ['2028-02-28', 2], // leap year
-    ['2026-12-31', 1],
-  ])('%s: %i, counting that day', (date, days) => {
-    expect(daysLeftInMonth(new Date(`${date}T12:00:00`))).toBe(days);
   });
 });
 

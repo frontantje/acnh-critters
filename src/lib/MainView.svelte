@@ -1,15 +1,7 @@
 <script>
   import AppMenu from './AppMenu.svelte';
   import CritterRow from './CritterRow.svelte';
-  import {
-    critters,
-    daysLeftInMonth,
-    isAvailableIn,
-    monthName,
-    monthsLeft,
-    sortForMonth,
-    TABS,
-  } from './critters.js';
+  import { critters, isAvailableIn, monthName, monthsLeft, sortForMonth, TABS } from './critters.js';
   import { clock } from './clock.svelte.js';
   import { t } from './i18n.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
@@ -17,10 +9,8 @@
   /** @type {{ onsync: () => void, onexport: () => void, onimport: () => void }} */
   let { onsync, onexport, onimport } = $props();
 
-  // Only these parts of the time matter, so the list only re-sorts when they change.
+  // Only the hour matters for sorting, so the list only re-sorts when it changes.
   const hour = $derived(clock.now.getHours());
-  const currentMonth = $derived(clock.now.getMonth() + 1);
-  const daysLeft = $derived(daysLeftInMonth(clock.now));
 
   let tab = $state('all');
   // 1–12, or 0 for all months. Starts at the month the app was opened in.
@@ -33,6 +23,13 @@
         (month === 0 || isAvailableIn(critter, progress.hemisphere, month)),
     ),
   );
+  // Uncaught critters that are gone after the selected month get a red tint
+  // (the same ones the sort keeps together at the top).
+  /** @param {import('./critters.js').Critter} critter */
+  function isFlagged(critter) {
+    return month !== 0 && !progress.caught.has(critter.id) && monthsLeft(critter, progress.hemisphere, month) === 1;
+  }
+
   const visible = $derived(
     sortForMonth(
       progress.showCaught ? inTabAndMonth : inTabAndMonth.filter((critter) => !progress.caught.has(critter.id)),
@@ -41,10 +38,6 @@
       hour,
     ),
   );
-
-  // In the last days of the actual month (less than a week to go), critters
-  // that won't be there next month are flagged.
-  const monthEndingSoon = $derived(month === currentMonth && daysLeft < 7);
 
   const selectClass = 'w-full rounded-lg border border-stone-300 bg-white px-2 py-1.5 text-stone-800 md:w-auto';
 </script>
@@ -120,13 +113,34 @@
     </div>
   </div>
 
+  <!-- What the row colors mean, for the colors that can show right now. Not a
+       <ul>, so the critter list stays the page's first list. -->
+  <div class="flex flex-wrap gap-x-4 gap-y-1 px-3 py-2 text-xs text-stone-600 md:px-4 md:text-sm" data-testid="legend">
+    {#if month !== 0}
+      <span class="flex items-center gap-1.5">
+        <span class="size-3 shrink-0 rounded-sm border border-red-300 bg-red-50" aria-hidden="true"></span>
+        {t('legendLeaving')}
+      </span>
+    {/if}
+    <span class="flex items-center gap-1.5">
+      <span class="size-3 shrink-0 rounded-sm border border-sky-300 bg-sky-50" aria-hidden="true"></span>
+      {t('legendYearRound')}
+    </span>
+    {#if progress.showCaught}
+      <span class="flex items-center gap-1.5">
+        <span class="size-3 shrink-0 rounded-sm border border-green-300 bg-green-50" aria-hidden="true"></span>
+        {t('legendCaught')}
+      </span>
+    {/if}
+  </div>
+
   <ul>
     {#each visible as critter (critter.id)}
       <CritterRow
         {critter}
         hemisphere={progress.hemisphere}
         {month}
-        leavingSoon={monthEndingSoon && monthsLeft(critter, progress.hemisphere, month) === 1}
+        flagged={isFlagged(critter)}
       />
     {:else}
       <li class="p-8 text-center text-stone-500">

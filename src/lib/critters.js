@@ -56,7 +56,7 @@ export function monthsLeft(critter, hemisphere, month) {
 
 /**
  * Where the critter's hours in `month` stand at `hour`: 0 it has a time window
- * and can be caught now, 1 it's outside its window, 2 it's there all day.
+ * and can be caught now, 1 it's there all day, 2 it's outside its window.
  * @param {Critter} critter
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12
@@ -64,15 +64,19 @@ export function monthsLeft(critter, hemisphere, month) {
  */
 export function timeOfDayGroup(critter, hemisphere, month, hour) {
   const hours = critter[hemisphere].find((period) => period.months.includes(month))?.hours ?? [];
-  if (hours.length === 24) return 2;
-  return hours.includes(hour) ? 0 : 1;
+  if (hours.length === 24) return 1;
+  return hours.includes(hour) ? 0 : 2;
 }
 
 /**
- * Orders a list (given in Critterpedia order) for the month filter. With a
- * month: critters that leave soonest first and all-year ones last; within that,
- * catchable now, then outside their hours, then all day; ties keep Critterpedia
- * order. For all months (0): Critterpedia order.
+ * Orders a list (given in Critterpedia order) for the month filter. For all
+ * months (0): Critterpedia order. With a month:
+ *
+ * 1. Critters outside their hours right now go to the bottom, except those
+ *    leaving after this month, which stay at the bottom of their own group.
+ * 2. Then by season: leaving soonest first, all-year last.
+ * 3. Then catchable now, all day, outside their hours.
+ * 4. Ties keep Critterpedia order.
  * @param {Critter[]} list
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12, or 0 for all months
@@ -81,22 +85,13 @@ export function timeOfDayGroup(critter, hemisphere, month, hour) {
 export function sortForMonth(list, hemisphere, month, hour) {
   if (month === 0) return list;
   return list
-    .map((critter) => ({
-      critter,
-      left: monthsLeft(critter, hemisphere, month),
-      time: timeOfDayGroup(critter, hemisphere, month, hour),
-    }))
-    .sort((a, b) => a.left - b.left || a.time - b.time)
+    .map((critter) => {
+      const left = monthsLeft(critter, hemisphere, month);
+      const time = timeOfDayGroup(critter, hemisphere, month, hour);
+      return { critter, bottom: time === 2 && left > 1 ? 1 : 0, left, time };
+    })
+    .sort((a, b) => a.bottom - b.bottom || a.left - b.left || a.time - b.time)
     .map(({ critter }) => critter);
-}
-
-/**
- * Days left in the date's month, counting that day: 1 on the last day.
- * @param {Date} date
- */
-export function daysLeftInMonth(date) {
-  const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  return lastDay - date.getDate() + 1;
 }
 
 /**

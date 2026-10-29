@@ -1,5 +1,5 @@
-// The current time, for views that depend on it (sorting by time of day, the
-// end-of-month tint). Updated every minute, and right away when the app comes
+// The current time, for views that depend on it (sorting by time of day).
+// Updated every minute, and right away when the app comes
 // back into view, since phones pause timers in the background. Views derive
 // just the parts they need (e.g. the hour), so they only update when those
 // actually change.
