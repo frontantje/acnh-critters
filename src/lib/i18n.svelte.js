@@ -1,6 +1,6 @@
 // The UI language. Follows the browser's language until the player picks one
-// in the menu; that choice is kept in localStorage (separately from progress,
-// so importing an export never switches the language).
+// in the menu; that choice is kept in localStorage (next to the progress, not
+// in it). Exports include the choice, and importing one applies it.
 
 import { germanTerms, messages } from './messages.js';
 
@@ -15,7 +15,7 @@ export const LOCALES = [
   { id: 'de', label: 'Deutsch' },
 ];
 
-export const i18n = $state({ locale: storedLocale() ?? pickLocale(browserLanguages()) });
+export const i18n = $state({ locale: chosenLocale() ?? pickLocale(browserLanguages()) });
 document.documentElement.lang = i18n.locale;
 
 /** @param {Locale} locale */
@@ -46,8 +46,11 @@ export function term(english) {
   return i18n.locale === 'de' ? (germanTerms[english] ?? english) : english;
 }
 
-/** @returns {Locale | null} */
-function storedLocale() {
+/**
+ * The language picked in the menu, or null while following the browser.
+ * @returns {Locale | null}
+ */
+export function chosenLocale() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     return isLocale(stored) ? stored : null;
@@ -78,6 +81,6 @@ function browserLanguages() {
  * @param {unknown} value
  * @returns {value is Locale}
  */
-function isLocale(value) {
+export function isLocale(value) {
   return LOCALES.some((locale) => locale.id === value);
 }

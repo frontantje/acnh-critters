@@ -1,5 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { critters, expect, importFile, monthSelect, row, rows, skipWelcome, stored, test } from './support.js';
+import { critters, expect, importData, monthSelect, normalize, row, rows, skipWelcome, stored, test } from './support.js';
 
 const sea = critters.filter((c) => c.type === 'sea');
 const fishIds = critters.filter((c) => c.type === 'fish').map((c) => c.id);
@@ -56,7 +55,7 @@ test('goes through uncaught critters in Critterpedia order; Caught saves, Next s
 
 test('re-running a synced category shows only critters that are still uncaught', async ({ page }) => {
   await page.goto('/');
-  await importFile(page, { version: 1, caught: sea.filter((_, i) => i % 2 === 0).map((c) => c.id), synced: ['sea'] });
+  await importData(page, { version: 1, caught: sea.filter((_, i) => i % 2 === 0).map((c) => c.id), synced: ['sea'] });
   await openFromMenu(page);
   await expect(categories(page).nth(2)).toHaveText('Sea creatures 20 of 40 caught ✓ Synced');
 
@@ -102,9 +101,9 @@ test('Escape and Done exit, and the list keeps its tab and filters', async ({ pa
   await expect(dialog(page)).toHaveCount(0);
 });
 
-test('a fully caught category is marked synced right away, and checkmarks are kept and exported', async ({ page }) => {
+test('a fully caught category is marked synced right away, and checkmarks are kept and exported', async ({ page, newDevice }) => {
   await page.goto('/');
-  await importFile(page, { version: 1, caught: fishIds });
+  await importData(page, { version: 1, caught: fishIds });
   await openFromMenu(page);
 
   await categories(page).first().click();
@@ -117,9 +116,14 @@ test('a fully caught category is marked synced right away, and checkmarks are ke
   await expect(categories(page).first()).toContainText('✓');
   await dialog(page).getByRole('button', { name: 'Done' }).click();
 
+  // The checkmark travels in the transfer code.
   await page.getByRole('button', { name: 'Menu' }).click();
-  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export data' }).click()]);
-  expect(JSON.parse(await readFile(await download.path(), 'utf8')).synced).toEqual(['fish']);
+  await page.getByRole('button', { name: 'Export data' }).click();
+  const code = normalize((await page.getByRole('dialog').locator('output').textContent()) ?? '');
+  const other = await newDevice();
+  await importData(other, code);
+  await openFromMenu(other);
+  await expect(categories(other).first()).toHaveText('Fish 80 of 80 caught ✓ Synced');
 });
 
 test.describe('in German', () => {

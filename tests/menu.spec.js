@@ -1,5 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { expect, hemisphereSelect, row, skipWelcome, test } from './support.js';
+import { expect, skipWelcome, test } from './support.js';
 
 test.beforeEach(async ({ page }) => {
   await skipWelcome(page);
@@ -20,22 +19,13 @@ test('opens and closes with Escape or a click elsewhere', async ({ page }) => {
   await expect(exportItem).toHaveCount(0);
 });
 
-test('exports progress and settings as a JSON file', async ({ page }) => {
-  await row(page, 'Pale chub').getByRole('button', { name: 'Caught it' }).click();
-  await hemisphereSelect(page).selectOption('south');
-
+test('Export data opens the export dialog; closing it returns focus to the menu button', async ({ page }) => {
   await page.getByRole('button', { name: 'Menu' }).click();
-  const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Export data' }).click()]);
-
-  expect(download.suggestedFilename()).toBe('acnh-critters-2026-10-15.json');
-  expect(JSON.parse(await readFile(await download.path(), 'utf8'))).toEqual({
-    version: 1,
-    settings: { hemisphere: 'south', trackDonations: false, showCaught: false },
-    caught: ['pale-chub'],
-    donated: [],
-    synced: [],
-  });
-  // The menu closes and focus goes back to its button.
+  await page.getByRole('button', { name: 'Export data' }).click();
   await expect(page.getByRole('button', { name: 'Export data' })).toHaveCount(0);
+  await expect(page.getByRole('dialog', { name: 'Export data' })).toBeVisible();
+
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Menu' })).toBeFocused();
 });

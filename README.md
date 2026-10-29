@@ -15,8 +15,28 @@ npm run build    # production build into dist/
 Requires Node 24 (see `.nvmrc`). The npm 10.8 bundled with Node 20 crashes while resolving Vite 8's
 optional peer dependencies.
 
-Progress is stored in `localStorage` under `acnh-critters`, in the same JSON format as the export
-file (see `src/lib/progress.svelte.js`).
+Progress is stored in `localStorage` under `acnh-critters` (see `src/lib/progress.svelte.js`).
+
+## Moving data between devices
+
+Exports are **transfer codes** such as `ACNH1-MQEA…`: about 75 characters, up to about 100 with a
+name (see `src/lib/transfer.js`). A code holds everything stored in the browser: caught and donated
+critters, Critterpedia Sync checkmarks, hemisphere, the show-caught switch, the language picked in the
+menu, and an optional name of up to 20 characters. The name is shown at the bottom of the menu after
+exporting or importing.
+
+**Export data** in the menu shows the code and offers:
+
+- **Copy code** to the clipboard.
+- **Share:** the device's share menu (Web Share API), labelled "AirDrop, Mail & more" on Apple
+  devices and only shown where the browser has one. The Web Share API only works over HTTPS or on
+  `localhost`, so trying it on a phone needs the app served over HTTPS.
+- **Send by email:** a `mailto:` link with instructions and the code.
+- **Download as text file:** the same text as a `.txt` file.
+
+**Import data** (on the welcome screen, or in the menu to replace the current progress) takes the
+code, any text containing it (a whole email or message), or a downloaded file. The JSON format above
+is still accepted too, for older export files.
 
 ## Tests
 
@@ -53,9 +73,9 @@ own time formatting is checked against.
 
 ## Languages
 
-English and German. The app follows the browser's language (anything other than German falls back
-to English) until a language is picked in the menu; that choice is stored under
-`acnh-critters-locale` and is not part of exports.
+English and German. The app uses the first of the two in the browser's language list (English if
+neither is there) until a language is picked in the menu. That choice is stored under
+`acnh-critters-locale`, included in exports, and applied when importing.
 
 Critter names are the official in-game names from the data. Everything else, including the data's
 location, shadow size and speed values, is translated in `src/lib/messages.js`. Times and month

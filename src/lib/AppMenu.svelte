@@ -1,9 +1,9 @@
 <script>
   import { i18n, LOCALES, setLocale, t } from './i18n.svelte.js';
-  import { exportProgress } from './progress.svelte.js';
+  import { progress } from './progress.svelte.js';
 
-  /** @type {{ onsync: () => void }} */
-  let { onsync } = $props();
+  /** @type {{ onsync: () => void, onexport: () => void, onimport: () => void }} */
+  let { onsync, onexport, onimport } = $props();
 
   let open = $state(false);
   /** @type {HTMLElement} */
@@ -17,7 +17,7 @@
   }
 
   // Focus moves back to the menu button first, since the clicked item disappears
-  // with the menu (and the sync dialog returns focus to it when it closes).
+  // with the menu (and the dialogs return focus to it when they close).
   /** @param {() => void} action */
   function runAndClose(action) {
     open = false;
@@ -52,8 +52,11 @@
       <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onsync)}>
         {t('syncTitle')}
       </button>
-      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(exportProgress)}>
+      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onexport)}>
         {t('exportData')}
+      </button>
+      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onimport)}>
+        {t('importData')}
       </button>
 
       <div class="mt-1 border-t border-stone-200 pt-1" role="group" aria-labelledby="menu-language">
@@ -72,6 +75,18 @@
           </button>
         {/each}
       </div>
+
+      <!-- The name given when exporting, or carried by an imported code. -->
+      {#if progress.name}
+        <p class="mt-1 flex max-w-64 items-center gap-2 border-t border-stone-200 px-3 pt-2.5 pb-1.5 text-sm text-stone-500">
+          <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" />
+          </svg>
+          <span class="sr-only">{t('menuName')}:</span>
+          <span class="truncate" data-testid="menu-name">{progress.name}</span>
+        </p>
+      {/if}
     </div>
   {/if}
 </div>

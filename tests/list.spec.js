@@ -5,7 +5,7 @@ import {
   expect,
   fields,
   hemisphereSelect,
-  importFile,
+  importData,
   list,
   MONTH,
   monthSelect,
@@ -118,7 +118,7 @@ test.describe('catching', () => {
 
 test('says so when everything in a tab is caught', async ({ page, newDevice }) => {
   const device = await newDevice();
-  await importFile(device, { version: 1, caught: critters.filter((c) => c.type === 'fish').map((c) => c.id) });
+  await importData(device, { version: 1, caught: critters.filter((c) => c.type === 'fish').map((c) => c.id) });
   await device.getByRole('tab', { name: 'Fish', exact: true }).click();
   await expect(list(device).locator('li')).toHaveText(["You've caught everything here!"]);
 

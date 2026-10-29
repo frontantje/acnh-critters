@@ -1,14 +1,17 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { setLocale } from './i18n.svelte.js';
+import { chosenLocale, i18n, setLocale } from './i18n.svelte.js';
 import {
+  exportData,
   importProgress,
   markCaught,
   markSynced,
   progress,
   restore,
   setHemisphere,
+  setName,
   toggleCaught,
   toggleShowCaught,
+  transferCode,
 } from './progress.svelte.js';
 
 const STORAGE_KEY = 'acnh-critters';
@@ -18,6 +21,8 @@ const load = (data) => importProgress(JSON.stringify(data));
 
 beforeEach(() => {
   load({ version: 1, caught: [] });
+  setLocale('en');
+  // Also forgets the language choice, so the browser language applies again.
   localStorage.clear();
 });
 
@@ -25,7 +30,7 @@ describe('importProgress', () => {
   test('applies an export and saves it', () => {
     const file = {
       version: 1,
-      settings: { hemisphere: 'south', trackDonations: true, showCaught: true },
+      settings: { hemisphere: 'south', trackDonations: true, showCaught: true, name: 'Antje' },
       caught: ['pale-chub', 'koi'],
       donated: ['koi'],
       synced: ['fish'],
@@ -34,6 +39,7 @@ describe('importProgress', () => {
     expect(progress.hemisphere).toBe('south');
     expect(progress.trackDonations).toBe(true);
     expect(progress.showCaught).toBe(true);
+    expect(progress.name).toBe('Antje');
     expect([...progress.caught]).toEqual(['pale-chub', 'koi']);
     expect([...progress.donated]).toEqual(['koi']);
     expect([...progress.synced]).toEqual(['fish']);
@@ -48,10 +54,16 @@ describe('importProgress', () => {
   });
 
   test('uses defaults for missing or unexpected settings and lists', () => {
-    load({ caught: ['koi'], donated: 'koi', synced: {}, settings: { hemisphere: 'east', trackDonations: 'yes', showCaught: 1 } });
+    load({
+      caught: ['koi'],
+      donated: 'koi',
+      synced: {},
+      settings: { hemisphere: 'east', trackDonations: 'yes', showCaught: 1, name: 42 },
+    });
     expect(progress.hemisphere).toBe('north');
     expect(progress.trackDonations).toBe(false);
     expect(progress.showCaught).toBe(false);
+    expect(progress.name).toBe('');
     expect([...progress.donated]).toEqual([]);
     expect([...progress.synced]).toEqual([]);
   });
@@ -59,12 +71,12 @@ describe('importProgress', () => {
   test.each(['not json', 'null', '"koi"', '[]', '{}', '{"caught": "koi"}', '{"version": 1}'])(
     'rejects %s',
     (text) => {
-      expect(() => importProgress(text)).toThrow("This file isn't an ACNH Critters export.");
+      expect(() => importProgress(text)).toThrow("That's not an ACNH Critters transfer code.");
     },
   );
 
   test('rejects files from a newer version', () => {
-    expect(() => load({ version: 2, caught: [] })).toThrow('This file was exported from a newer version of the app.');
+    expect(() => load({ version: 2, caught: [] })).toThrow('This code is from a newer version of the app.');
   });
 
   test('keeps the current progress when a file is rejected', () => {
@@ -77,10 +89,101 @@ describe('importProgress', () => {
   test('error messages follow the language', () => {
     setLocale('de');
     try {
-      expect(() => importProgress('nope')).toThrow('Diese Datei ist kein ACNH-Critters-Export.');
+      expect(() => importProgress('nope')).toThrow('Das ist kein ACNH-Critters-Übertragungscode.');
     } finally {
       setLocale('en');
     }
+  });
+});
+
+describe('export', () => {
+  test('is the saved progress, plus the language if one was picked', () => {
+    load({ version: 1, settings: { hemisphere: 'south' }, caught: ['koi'] });
+    expect(exportData()).toEqual(saved());
+
+    setLocale('de');
+    expect(exportData()).toEqual({ ...saved(), settings: { ...saved().settings, locale: 'de' } });
+    // The saved progress itself never holds the language.
+    expect(saved().settings).not.toHaveProperty('locale');
+  });
+
+  test('importing one with a language applies and remembers it', () => {
+    load({ version: 1, settings: { locale: 'de' }, caught: [] });
+    expect(i18n.locale).toBe('de');
+    expect(chosenLocale()).toBe('de');
+    expect(saved().settings).not.toHaveProperty('locale');
+  });
+
+  test('importing one without a language, or an unknown one, keeps the current language', () => {
+    setLocale('de');
+    load({ version: 1, caught: [] });
+    load({ version: 1, settings: { locale: 'fr' }, caught: [] });
+    expect(i18n.locale).toBe('de');
+  });
+
+  test('a transfer code carries everything', () => {
+    load({
+      version: 1,
+      settings: { hemisphere: 'south', trackDonations: true, showCaught: true },
+      caught: ['koi', 'tarantula'],
+      donated: ['koi'],
+      synced: ['bug'],
+    });
+    setLocale('de');
+    const expected = exportData();
+    const code = transferCode();
+
+    load({ version: 1, caught: [] });
+    setLocale('en');
+    importProgress(code);
+    expect(exportData()).toEqual(expected);
+  });
+
+  test('a whole pasted email with a code imports too', () => {
+    load({ version: 1, caught: ['koi'] });
+    const code = transferCode();
+    load({ version: 1, caught: [] });
+    importProgress(`To import my progress on another device …\r\n\r\n${code}\r\n\r\nSent from my iPhone`);
+    expect([...progress.caught]).toEqual(['koi']);
+  });
+
+  test('a damaged code is rejected', () => {
+    expect(() => importProgress('ACNH1-broken')).toThrow("That's not an ACNH Critters transfer code.");
+  });
+
+  test('the code carries the name, and importing remembers it', () => {
+    load({ version: 1, caught: [] });
+    const code = transferCode('Antje’s Insel 🏝');
+    expect(progress.name).toBe(''); // only the code has it so far
+    importProgress(code);
+    expect(progress.name).toBe('Antje’s Insel 🏝');
+    expect(saved().settings.name).toBe('Antje’s Insel 🏝');
+  });
+
+  test('transferCode uses the saved name unless given another', () => {
+    setName('Antje');
+    const withSaved = transferCode();
+    load({ version: 1, caught: [] });
+    importProgress(withSaved);
+    expect(progress.name).toBe('Antje');
+  });
+});
+
+describe('setName', () => {
+  test('trims, cuts to 20 characters and saves', () => {
+    setName('  Antje  ');
+    expect(saved().settings.name).toBe('Antje');
+    setName('A very long island name indeed');
+    expect(progress.name).toBe('A very long island n');
+    // Emoji count as one character each.
+    setName('🏝'.repeat(25));
+    expect(Array.from(progress.name)).toHaveLength(20);
+  });
+
+  test('an empty name clears it', () => {
+    setName('Antje');
+    setName('   ');
+    expect(saved().settings.name).toBe('');
   });
 });
 

@@ -74,14 +74,17 @@ export async function skipWelcome(page, name = 'No thanks, just show me the list
 }
 
 /**
- * Picks a file through the welcome screen's import button.
+ * Pastes data into the import dialog and submits it. Opens the dialog with the
+ * given button (the welcome screen's by default) unless it's already open,
+ * e.g. after an error. Works in any language.
  * @param {import('@playwright/test').Page} page
- * @param {unknown} data JSON value, or a string for raw file contents
+ * @param {unknown} data a transfer code or other text, or a JSON value
  */
-export async function importFile(page, data, name = 'Import data from another device') {
-  const [chooser] = await Promise.all([page.waitForEvent('filechooser'), page.getByRole('button', { name }).click()]);
-  const contents = typeof data === 'string' ? data : JSON.stringify(data);
-  await chooser.setFiles({ name: 'export.json', mimeType: 'application/json', buffer: Buffer.from(contents) });
+export async function importData(page, data, opener = 'Import data from another device') {
+  const dialog = page.getByRole('dialog');
+  if (!(await dialog.isVisible())) await page.getByRole('button', { name: opener }).click();
+  await dialog.locator('textarea').fill(typeof data === 'string' ? data : JSON.stringify(data));
+  await dialog.locator('form').getByRole('button').click();
 }
 
 /** The saved progress, or null. @param {import('@playwright/test').Page} page */

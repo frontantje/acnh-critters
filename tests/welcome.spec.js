@@ -1,4 +1,4 @@
-import { expect, hemisphereSelect, importFile, showCaughtSwitch, skipWelcome, stored, test } from './support.js';
+import { expect, hemisphereSelect, importData, showCaughtSwitch, skipWelcome, stored, test } from './support.js';
 
 test('first visit shows the welcome screen with three choices', async ({ page }) => {
   await page.goto('/');
@@ -38,7 +38,7 @@ for (const [timezoneId, hemisphere] of [
 test.describe('import', () => {
   test('restores progress and settings from an export', async ({ page }) => {
     await page.goto('/');
-    await importFile(page, {
+    await importData(page, {
       version: 1,
       settings: { hemisphere: 'south', showCaught: true },
       caught: ['pale-chub', 'not-a-critter'],
@@ -54,23 +54,23 @@ test.describe('import', () => {
 
   test('uses the file’s hemisphere rather than the time zone guess', async ({ newDevice }) => {
     const page = await newDevice({ timezoneId: 'Australia/Sydney' });
-    await importFile(page, { version: 1, settings: { hemisphere: 'north' }, caught: [] });
+    await importData(page, { version: 1, settings: { hemisphere: 'north' }, caught: [] });
     await expect(hemisphereSelect(page)).toHaveValue('north');
   });
 
-  test('rejects a file that is not an export', async ({ page }) => {
+  test('rejects text that is not an export', async ({ page }) => {
     await page.goto('/');
-    await importFile(page, '{"hello": "world"}');
-    await expect(page.getByRole('alert')).toHaveText("This file isn't an ACNH Critters export.");
+    await importData(page, '{"hello": "world"}');
+    await expect(page.getByRole('alert')).toHaveText("That's not an ACNH Critters transfer code.");
     await expect(page.getByRole('heading', { name: 'Welcome to ACNH Critters' })).toBeVisible();
     expect(await stored(page)).toBeNull();
   });
 
-  test('rejects invalid JSON and files from a newer version', async ({ page }) => {
+  test('rejects invalid JSON and codes from a newer version', async ({ page }) => {
     await page.goto('/');
-    await importFile(page, 'not json');
-    await expect(page.getByRole('alert')).toHaveText("This file isn't an ACNH Critters export.");
-    await importFile(page, { version: 99, caught: [] });
-    await expect(page.getByRole('alert')).toHaveText('This file was exported from a newer version of the app.');
+    await importData(page, 'not json');
+    await expect(page.getByRole('alert')).toHaveText("That's not an ACNH Critters transfer code.");
+    await importData(page, { version: 99, caught: [] });
+    await expect(page.getByRole('alert')).toHaveText('This code is from a newer version of the app.');
   });
 });

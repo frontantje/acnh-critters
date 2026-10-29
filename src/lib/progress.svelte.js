@@ -1,17 +1,25 @@
 // The player's progress: settings, caught and donated critters, and which
-// categories have been through a Critterpedia Sync. Kept in localStorage and
-// exportable as a JSON file to move between devices. Both use the same format:
+// categories have been through a Critterpedia Sync. Kept in localStorage under
+// "acnh-critters" in this format:
 //
 //   { "version": 1,
-//     "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false },
+//     "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false, "name": "" },
 //     "caught": ["bitterling", ...], "donated": ["bitterling", ...], "synced": ["fish", ...] }
+//
+// "name" is the name given when exporting (or carried by an imported code).
+// Exports are transfer codes (see transfer.js) holding all of this plus the
+// language picked in the menu, which is stored separately (see i18n.svelte.js).
+// Import also still accepts the JSON above, e.g. from older export files.
 
 import { SvelteSet } from 'svelte/reactivity';
 import { CATEGORIES, critters } from './critters.js';
 import { guessHemisphere } from './hemisphere.js';
-import { t } from './i18n.svelte.js';
+import { chosenLocale, isLocale, setLocale, t } from './i18n.svelte.js';
+import { decodeTransferCode, encodeTransferCode, findTransferCode, normalizeName } from './transfer.js';
 
 /** @typedef {import('./critters.js').Hemisphere} Hemisphere */
+/** @typedef {import('./i18n.svelte.js').Locale} Locale */
+/** @typedef {import('./transfer.js').ExportData} ExportData */
 
 const STORAGE_KEY = 'acnh-critters';
 const FORMAT_VERSION = 1;
@@ -22,6 +30,7 @@ export const progress = $state({
   hemisphere: /** @type {Hemisphere} */ ('north'),
   trackDonations: false,
   showCaught: false,
+  name: '',
   caught: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   donated: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   synced: /** @type {SvelteSet<string>} */ (new SvelteSet()),
@@ -90,24 +99,43 @@ export function markSynced(category) {
 }
 
 /**
- * Replaces the current progress with an exported file's contents.
- * Throws an Error with a user-facing message if the file isn't valid.
+ * Remembers the name used for an export (trimmed, at most 20 characters).
+ * @param {string} name
+ */
+export function setName(name) {
+  progress.name = normalizeName(name);
+  save();
+}
+
+/**
+ * Everything saved in this browser, for moving to another device: the progress
+ * plus the language picked in the menu, if any.
+ * @returns {ExportData}
+ */
+export function exportData() {
+  const data = serialize();
+  const locale = chosenLocale();
+  return locale ? { ...data, settings: { ...data.settings, locale } } : data;
+}
+
+/**
+ * The export as a transfer code.
+ * @param {string} [name] name to put in the code instead of the saved one
+ */
+export function transferCode(name = progress.name) {
+  const data = exportData();
+  return encodeTransferCode({ ...data, settings: { ...data.settings, name } });
+}
+
+/**
+ * Replaces the current progress with an export: a transfer code, text
+ * containing one (e.g. a pasted message or a downloaded file), or the JSON
+ * format. Throws an Error with a user-facing message if it isn't valid.
  * @param {string} text
  */
 export function importProgress(text) {
   apply(parse(text));
   save();
-}
-
-/** Downloads the current progress as a JSON file. */
-export function exportProgress() {
-  const blob = new Blob([JSON.stringify(serialize(), null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `acnh-critters-${new Date().toISOString().slice(0, 10)}.json`;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function readStorage() {
@@ -125,6 +153,7 @@ function serialize() {
       hemisphere: progress.hemisphere,
       trackDonations: progress.trackDonations,
       showCaught: progress.showCaught,
+      name: progress.name,
     },
     caught: [...progress.caught],
     donated: [...progress.donated],
@@ -135,14 +164,15 @@ function serialize() {
 /**
  * @param {string} text
  * @returns {{
- *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean,
- *   caught: string[], donated: string[], synced: string[],
+ *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean, name: string,
+ *   locale: Locale | null, caught: string[], donated: string[], synced: string[],
  * }}
  */
 function parse(text) {
+  const code = text.trim().startsWith('{') ? null : findTransferCode(text);
   let data;
   try {
-    data = JSON.parse(text);
+    data = code ? decodeTransferCode(code) : JSON.parse(text);
   } catch {
     throw new Error(t('importInvalid'));
   }
@@ -164,6 +194,8 @@ function parse(text) {
     hemisphere: settings.hemisphere === 'south' ? 'south' : 'north',
     trackDonations: settings.trackDonations === true,
     showCaught: settings.showCaught === true,
+    name: normalizeName(settings.name),
+    locale: isLocale(settings.locale) ? settings.locale : null,
     caught: only(data.caught, KNOWN_IDS),
     donated: only(data.donated, KNOWN_IDS),
     synced: only(data.synced, KNOWN_CATEGORIES),
@@ -175,7 +207,10 @@ function apply(saved) {
   progress.hemisphere = saved.hemisphere;
   progress.trackDonations = saved.trackDonations;
   progress.showCaught = saved.showCaught;
+  progress.name = saved.name;
   progress.caught = new SvelteSet(saved.caught);
   progress.donated = new SvelteSet(saved.donated);
   progress.synced = new SvelteSet(saved.synced);
+  // Only exports carry a language; the saved progress never does.
+  if (saved.locale) setLocale(saved.locale);
 }

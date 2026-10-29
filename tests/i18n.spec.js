@@ -3,7 +3,7 @@ import {
   expect,
   fields,
   hemisphereSelect,
-  importFile,
+  importData,
   monthSelect,
   normalize,
   row,
@@ -79,8 +79,8 @@ test.describe('German browser', () => {
 
   test('shows import errors in German', async ({ page }) => {
     await page.goto('/');
-    await importFile(page, '{"x": 1}', 'Daten von einem anderen Gerät importieren');
-    await expect(page.getByRole('alert')).toHaveText('Diese Datei ist kein ACNH-Critters-Export.');
+    await importData(page, '{"x": 1}', 'Daten von einem anderen Gerät importieren');
+    await expect(page.getByRole('alert')).toHaveText('Das ist kein ACNH-Critters-Übertragungscode.');
   });
 
   test('the language picked in the menu wins over the browser and is remembered', async ({ page }) => {
@@ -94,7 +94,7 @@ test.describe('German browser', () => {
     await page.reload();
     await expect(page.getByRole('tab').first()).toHaveText('All');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    // The language is a per-device choice, not part of the progress/export.
+    // The language choice is stored next to the progress, not in it.
     expect(JSON.stringify(await stored(page))).not.toContain('locale');
 
     await page.getByRole('button', { name: 'Menu' }).click();
