@@ -7,10 +7,10 @@ import { decodeTransferCode, encodeTransferCode, findTransferCode, normalizeName
 /** @typedef {import('./critters.js').Hemisphere} Hemisphere */
 /** @typedef {import('./i18n.svelte.js').Locale} Locale */
 /** @typedef {import('./transfer.js').ExportData} ExportData */
-/** @typedef {{ id: number, name: string }} Profile */
+/** @typedef {{ id: number, name: string, avatar: string | null }} Profile */
 /**
  * @typedef {{
- *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean, name: string,
+ *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean, name: string, avatar: string | null,
  *   locale: Locale | null, caught: string[], donated: string[], synced: string[],
  * }} Saved
  */
@@ -28,6 +28,7 @@ export const progress = $state({
   trackDonations: false,
   showCaught: false,
   name: '',
+  avatar: /** @type {string | null} */ (null),
   /** null to follow the browser's language. */
   locale: /** @type {Locale | null} */ (null),
   caught: /** @type {SvelteSet<string>} */ (new SvelteSet()),
@@ -47,7 +48,7 @@ class Profiles {
    * @returns {Profile[]}
    */
   get list() {
-    return [...store].sort(([a], [b]) => a - b).map(([id, saved]) => ({ id, name: saved.name }));
+    return [...store].sort(([a], [b]) => a - b).map(([id, saved]) => ({ id, name: saved.name, avatar: saved.avatar }));
   }
 }
 
@@ -78,13 +79,15 @@ export function save() {
 /**
  * Not saved until its welcome screen is left, so closing the app there leaves no empty profile.
  * @param {string} name
+ * @param {string | null} [avatar]
  */
-export function addProfile(name) {
-  if (!nameAllowed(name, null)) return false;
+export function addProfile(name, avatar = null) {
+  if (!nameAllowed(name, null) || !avatarAllowed(avatar, null)) return false;
   previous = profiles.active;
   // Children sharing a tablet usually share the hemisphere and language too.
   startNew(progress.hemisphere, progress.locale);
   progress.name = normalizeName(name);
+  progress.avatar = avatar;
   return true;
 }
 
@@ -118,7 +121,7 @@ export function activeProfile() {
   return profiles.list.find(({ id }) => id === profiles.active);
 }
 
-/** @param {Profile} profile */
+/** @param {Pick<Profile, 'id' | 'name'>} profile */
 export function profileName(profile) {
   return profile.name || t('profileNumbered', { number: String(profile.id) });
 }
@@ -142,6 +145,23 @@ export function takenName(name, id = profiles.active) {
   const profile = { id: id ?? 0, name: normalized };
   const others = new Set(profiles.list.filter((other) => other.id !== id).flatMap(labels));
   return labels(profile).some((label) => others.has(label)) ? profileName(profile) : null;
+}
+
+/**
+ * No two profiles share a picture, so kids who can't read yet can still find their own.
+ * @param {string | null} avatar
+ * @param {number | null} [id] null for a new one
+ */
+export function avatarAllowed(avatar, id = profiles.active) {
+  return avatar === null || (KNOWN_IDS.has(avatar) && !profiles.list.some((other) => other.id !== id && other.avatar === avatar));
+}
+
+/** @param {string | null} avatar */
+export function setAvatar(avatar) {
+  if (!avatarAllowed(avatar)) return false;
+  progress.avatar = avatar;
+  if (profiles.active !== null) save();
+  return true;
 }
 
 /** @param {string} value */
@@ -219,6 +239,7 @@ export function importProgress(text) {
   apply({
     ...saved,
     name: progress.name || (takenName(saved.name) ? '' : saved.name),
+    avatar: progress.avatar ?? (avatarAllowed(saved.avatar) ? saved.avatar : null),
     locale: saved.locale ?? progress.locale,
   });
   save();
@@ -295,7 +316,7 @@ function showFirst(locale = null) {
 
 /**
  * Without a name, "Profile 2" in every language, so a name can't clash in either.
- * @param {Profile} profile
+ * @param {Pick<Profile, 'id' | 'name'>} profile
  */
 function labels(profile) {
   const names = profile.name
@@ -309,7 +330,7 @@ function labels(profile) {
  * @param {Locale | null} locale
  */
 function startNew(hemisphere, locale) {
-  apply({ hemisphere, trackDonations: false, showCaught: false, name: '', locale, caught: [], donated: [], synced: [] });
+  apply({ hemisphere, trackDonations: false, showCaught: false, name: '', avatar: null, locale, caught: [], donated: [], synced: [] });
   profiles.active = null;
 }
 
@@ -389,6 +410,7 @@ function snapshot() {
     trackDonations: progress.trackDonations,
     showCaught: progress.showCaught,
     name: progress.name,
+    avatar: progress.avatar,
     locale: progress.locale,
     caught: [...progress.caught],
     donated: [...progress.donated],
@@ -405,6 +427,7 @@ function toJSON(saved) {
       trackDonations: saved.trackDonations,
       showCaught: saved.showCaught,
       name: saved.name,
+      ...(saved.avatar ? { avatar: saved.avatar } : {}),
       ...(saved.locale ? { locale: saved.locale } : {}),
     },
     caught: saved.caught,
@@ -444,6 +467,7 @@ function parse(text) {
     trackDonations: settings.trackDonations === true,
     showCaught: settings.showCaught === true,
     name: normalizeName(settings.name),
+    avatar: KNOWN_IDS.has(settings.avatar) ? settings.avatar : null,
     locale: isLocale(settings.locale) ? settings.locale : null,
     caught: only(data.caught, KNOWN_IDS),
     donated: only(data.donated, KNOWN_IDS),
@@ -457,6 +481,7 @@ function apply(saved) {
   progress.trackDonations = saved.trackDonations;
   progress.showCaught = saved.showCaught;
   progress.name = saved.name;
+  progress.avatar = saved.avatar;
   progress.locale = saved.locale;
   progress.caught = new SvelteSet(saved.caught);
   progress.donated = new SvelteSet(saved.donated);

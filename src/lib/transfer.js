@@ -5,15 +5,17 @@ import { LOCALES } from './i18n.svelte.js';
 
 export const MAX_NAME_LENGTH = 20;
 
-const PREFIX = 'ACNH1-';
-const CODE_PATTERN = /ACNH1-[A-Za-z0-9_-]+/;
+// ACNH2 added a byte for the profile picture; ACNH1 codes sent earlier still import.
+const PREFIX = 'ACNH2-';
+const OLD_PREFIX = 'ACNH1-';
+const CODE_PATTERN = /ACNH[12]-[A-Za-z0-9_-]+/;
 const BITSET_BYTES = Math.ceil(critters.length / 8);
-const FIXED_BYTES = 1 + 2 * BITSET_BYTES;
+const HEADER_BYTES = 2;
 
 /**
  * @typedef {{
  *   version: number,
- *   settings: { hemisphere: string, trackDonations: boolean, showCaught: boolean, locale?: string, name?: string },
+ *   settings: { hemisphere: string, trackDonations: boolean, showCaught: boolean, locale?: string, name?: string, avatar?: string },
  *   caught: string[],
  *   donated: string[],
  *   synced: string[],
@@ -34,16 +36,18 @@ export function encodeTransferCode(data) {
   const { settings } = data;
   const locale = LOCALES.findIndex((option) => option.id === settings.locale) + 1;
   const name = new TextEncoder().encode(normalizeName(settings.name));
-  const bytes = new Uint8Array(FIXED_BYTES + name.length);
+  const fixed = HEADER_BYTES + 2 * BITSET_BYTES;
+  const bytes = new Uint8Array(fixed + name.length);
   bytes[0] =
     (settings.hemisphere === 'south' ? 1 : 0) |
     (settings.trackDonations ? 1 << 1 : 0) |
     (settings.showCaught ? 1 << 2 : 0) |
     (locale << 3) |
     CATEGORIES.reduce((bits, category, i) => (data.synced.includes(category.id) ? bits | (1 << (5 + i)) : bits), 0);
-  writeBits(bytes, 1, new Set(data.caught));
-  writeBits(bytes, 1 + BITSET_BYTES, new Set(data.donated));
-  bytes.set(name, FIXED_BYTES);
+  bytes[1] = critters.findIndex((critter) => critter.id === settings.avatar) + 1;
+  writeBits(bytes, HEADER_BYTES, new Set(data.caught));
+  writeBits(bytes, HEADER_BYTES + BITSET_BYTES, new Set(data.donated));
+  bytes.set(name, fixed);
   return PREFIX + toBase64Url(bytes);
 }
 
@@ -60,9 +64,12 @@ export function findTransferCode(text) {
  * @returns {ExportData}
  */
 export function decodeTransferCode(code) {
+  const header = code.startsWith(OLD_PREFIX) ? 1 : HEADER_BYTES;
+  const fixed = header + 2 * BITSET_BYTES;
   const bytes = fromBase64Url(code.slice(PREFIX.length));
-  const name = bytes && bytes.length >= FIXED_BYTES ? decodeName(bytes.subarray(FIXED_BYTES)) : null;
-  if (!bytes || name === null) throw new Error(`Invalid transfer code: ${code}`);
+  const name = bytes && bytes.length >= fixed ? decodeName(bytes.subarray(fixed)) : null;
+  const avatar = bytes && header === HEADER_BYTES ? bytes[1] : 0;
+  if (!bytes || name === null || avatar > critters.length) throw new Error(`Invalid transfer code: ${code}`);
 
   const flags = bytes[0];
   // Codes from older versions have no language (0), so the importing device keeps its own.
@@ -75,9 +82,10 @@ export function decodeTransferCode(code) {
       showCaught: Boolean(flags & (1 << 2)),
       ...(locale && { locale }),
       ...(name && { name }),
+      ...(avatar && { avatar: critters[avatar - 1].id }),
     },
-    caught: readBits(bytes, 1),
-    donated: readBits(bytes, 1 + BITSET_BYTES),
+    caught: readBits(bytes, header),
+    donated: readBits(bytes, header + BITSET_BYTES),
     synced: CATEGORIES.filter((_, i) => flags & (1 << (5 + i))).map((category) => category.id),
   };
 }

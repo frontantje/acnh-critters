@@ -1,7 +1,9 @@
 <script>
+  import AvatarPicker from './AvatarPicker.svelte';
+  import { avatarIcon } from './avatars.js';
   import { t } from './i18n.svelte.js';
   import NameField from './NameField.svelte';
-  import { nameAllowed, progress, setName, takenName } from './progress.svelte.js';
+  import { nameAllowed, progress, setAvatar, setName, takenName } from './progress.svelte.js';
   import { primaryButton } from './styles.js';
 
   /**
@@ -11,9 +13,13 @@
 
   // Only a fresh start or a deleted last profile gets here without a name; ones from the menu have it.
   let name = $state('');
+  let avatar = $state(/** @type {string | null} */ (null));
 </script>
 
 <main class="mx-4 mt-[12vh] max-w-md rounded-2xl bg-white p-8 text-center shadow-md sm:mx-auto">
+  {#if progress.avatar}
+    <img class="mx-auto mb-2 size-24 object-contain" src={avatarIcon(progress.avatar)} alt="" width="96" height="96" />
+  {/if}
   <h1 class="text-2xl font-bold">{progress.name ? t('welcomeNamed', { name: progress.name }) : t('welcomeTitle')}</h1>
   <p class="mt-2 text-stone-600">{t('welcomeIntro')}</p>
 
@@ -22,10 +28,12 @@
       class="mt-8 grid gap-3 text-left"
       onsubmit={(event) => {
         event.preventDefault();
+        setAvatar(avatar);
         setName(name);
       }}
     >
       <NameField bind:value={name} label={t('welcomeNameLabel')} hint={t('profileNameHint')} taken={takenName(name, null)} autofocus />
+      <AvatarPicker bind:value={avatar} id={null} />
       <button class={primaryButton} disabled={!nameAllowed(name, null)}>{t('welcomeNext')}</button>
     </form>
     <!-- A code from another device brings its name along. -->

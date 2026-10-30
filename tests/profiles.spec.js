@@ -52,6 +52,11 @@ async function switchTo(page, name) {
 }
 
 /** @param {import('@playwright/test').Page} page */
+const pickable = (page) => dialog(page).getByRole('radio');
+/** @param {import('@playwright/test').Page} page */
+const pickableIds = (page) => pickable(page).evaluateAll((inputs) => inputs.map((input) => /** @type {HTMLInputElement} */ (input).value));
+
+/** @param {import('@playwright/test').Page} page */
 async function openEdit(page) {
   await openMenuItem(page, 'Edit profile');
   await expect(dialog(page)).toBeVisible();
@@ -197,6 +202,66 @@ test('a new profile starts with the hemisphere and language; then each keeps its
   await menuButton(page, 'Menü').click();
   await profileGroup(page, 'Profil').getByRole('button', { name: 'Mia' }).click();
   await expect(page.getByRole('tab').first()).toHaveText('All');
+});
+
+test('each profile has its own critter, shown in the menu', async ({ page }) => {
+  await skipWelcome(page);
+  const kims = (await stored(page)).settings.avatar;
+  await openMenuItem(page, 'New profile');
+  await dialog(page).getByLabel('Name').fill('Mia');
+  await expect(pickable(page)).toHaveCount(16);
+  await expect(pickable(page).first()).toBeChecked();
+  expect(await pickableIds(page)).not.toContain(kims);
+  const mias = await pickable(page).nth(5).inputValue();
+  await pickable(page).nth(5).check();
+  await dialog(page).getByRole('button', { name: 'Add profile' }).click();
+  await expect(page.getByRole('main').locator('img')).toHaveAttribute('src', `icons/${mias}.png`);
+  await page.getByRole('button', { name: SKIP_WELCOME }).click();
+
+  await expect(menuButton(page).locator('img')).toHaveAttribute('src', `icons/${mias}.png`);
+  await menuButton(page).click();
+  const pictures = profileGroup(page).locator('img');
+  await expect(pictures).toHaveCount(2);
+  expect(await pictures.evaluateAll((images) => images.map((image) => image.getAttribute('src')))).toEqual([
+    `icons/${kims}.png`,
+    `icons/${mias}.png`,
+  ]);
+  await page.keyboard.press('Escape');
+
+  await openEdit(page);
+  const other = await pickable(page).nth(2).inputValue();
+  await pickable(page).nth(2).check();
+  await dialog(page).getByRole('button', { name: 'Save' }).click();
+  await expect(menuButton(page).locator('img')).toHaveAttribute('src', `icons/${other}.png`);
+  expect((await stored(page, 2)).settings.avatar).toBe(other);
+});
+
+test('the picker shows other critters each time, with the picked one first', async ({ page }) => {
+  await skipWelcome(page);
+  const kims = (await stored(page)).settings.avatar;
+  await openEdit(page);
+  const first = await pickableIds(page);
+  await expect(pickable(page).first()).toBeChecked();
+  await page.keyboard.press('Escape');
+  await openEdit(page);
+  const second = await pickableIds(page);
+  expect([first[0], second[0]]).toEqual([kims, kims]);
+  expect(second.slice(1)).not.toEqual(first.slice(1));
+});
+
+test('the critter comes along to another device', async ({ page, newDevice }) => {
+  await skipWelcome(page);
+  await openEdit(page);
+  const picked = await pickable(page).nth(1).inputValue();
+  await pickable(page).nth(1).check();
+  await dialog(page).getByRole('button', { name: 'Save' }).click();
+  await openMenuItem(page, 'Export data');
+  const code = (await dialog(page).locator('output').textContent())?.trim() ?? '';
+
+  const other = await newDevice();
+  await importData(other, code);
+  await expect(other.getByRole('tab', { name: 'All', exact: true })).toBeVisible();
+  expect((await stored(other)).settings).toMatchObject({ name: 'Kim', avatar: picked });
 });
 
 test('Edit profile renames it, and the export offers the new name', async ({ page }) => {

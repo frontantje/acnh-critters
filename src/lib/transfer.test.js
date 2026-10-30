@@ -21,6 +21,9 @@ describe('transfer codes', () => {
     ['nothing caught', data()],
     ['all settings on', data({ hemisphere: 'south', trackDonations: true, showCaught: true, locale: 'de' })],
     ['English picked', data({ locale: 'en' })],
+    ['a picture', data({ avatar: 'octopus' })],
+    ['the first critter as picture', data({ avatar: ids[0] })],
+    ['the last critter as picture', data({ avatar: ids[199] })],
     ['everything caught and donated', data({}, { caught: ids, donated: ids, synced: ['fish', 'bug', 'sea'] })],
     [
       'a mix, incl. first and last critter',
@@ -37,21 +40,31 @@ describe('transfer codes', () => {
 
   test('are short and safe to put in links and emails', () => {
     const code = encodeTransferCode(data({ locale: 'de' }, { caught: ids, donated: ids }));
-    expect(code).toMatch(/^ACNH1-[A-Za-z0-9_-]+$/);
+    expect(code).toMatch(/^ACNH2-[A-Za-z0-9_-]+$/);
     expect(code.length).toBeLessThanOrEqual(80);
   });
 
   test('stay the same for the same data', () => {
     // Guards the bit layout, since codes sent earlier must keep importing.
     expect(encodeTransferCode(data({ hemisphere: 'south', locale: 'de' }, { caught: [ids[0]], synced: ['fish'] }))).toBe(
-      'ACNH1-MQEA' + 'A'.repeat(64),
+      'ACNH2-MQAB' + 'A'.repeat(66),
     );
+  });
+
+  test('ACNH1 codes from before pictures still import', () => {
+    expect(decodeTransferCode('ACNH1-MQEA' + 'A'.repeat(64))).toEqual(
+      data({ hemisphere: 'south', locale: 'de' }, { caught: [ids[0]], synced: ['fish'] }),
+    );
+    expect(findTransferCode('Code: ACNH1-MQEA' + 'A'.repeat(64))).toBe('ACNH1-MQEA' + 'A'.repeat(64));
   });
 
   test.each([
     'ACNH1-',
     'ACNH1-AAAA',
     'ACNH1-***',
+    'ACNH2-AAAA',
+    // A picture byte past the last critter.
+    'ACNH2-AP8' + 'A'.repeat(67),
     // A trailing zero byte, which can't be part of a name.
     encodeTransferCode(data()) + 'AA',
     // Trailing bytes that aren't UTF-8.
@@ -78,9 +91,9 @@ describe('transfer codes', () => {
 
     test('keep the code short', () => {
       const code = encodeTransferCode(data({ locale: 'de', name: 'Twenty characters!!!' }, { caught: ids, donated: ids }));
-      expect(code).toMatch(/^ACNH1-[A-Za-z0-9_-]+$/);
-      // 51 fixed bytes + 20 name bytes = 95 base64 characters, plus "ACNH1-".
-      expect(code).toHaveLength(101);
+      expect(code).toMatch(/^ACNH2-[A-Za-z0-9_-]+$/);
+      // 52 fixed bytes + 20 name bytes = 96 base64 characters, plus "ACNH2-".
+      expect(code).toHaveLength(102);
     });
   });
 

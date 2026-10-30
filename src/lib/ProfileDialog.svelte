@@ -1,5 +1,6 @@
 <script>
   import { tick, untrack } from 'svelte';
+  import AvatarPicker from './AvatarPicker.svelte';
   import Dialog from './Dialog.svelte';
   import { t } from './i18n.svelte.js';
   import NameField from './NameField.svelte';
@@ -11,6 +12,7 @@
     profileName,
     profiles,
     progress,
+    setAvatar,
     setName,
     takenName,
   } from './progress.svelte.js';
@@ -24,10 +26,11 @@
 
   // The dialog doesn't switch between adding and editing while it's open.
   let name = $state(untrack(() => (adding ? '' : progress.name)));
+  let avatar = $state(untrack(() => (adding ? null : progress.avatar)));
   const id = $derived(adding ? null : profiles.active);
 
   function submit() {
-    if (adding ? addProfile(name) : setName(name)) modal.close();
+    if (adding ? addProfile(name, avatar) : setName(name) && setAvatar(avatar)) modal.close();
   }
 
   let deleting = $state(/** @type {{ name: string, last: boolean } | null} */ (null));
@@ -75,6 +78,7 @@
       taken={takenName(name, id)}
       autofocus={adding}
     />
+    <AvatarPicker bind:value={avatar} {id} />
     <button class={primaryButton} disabled={!nameAllowed(name, id)}>
       {adding ? t('profileAddButton') : t('profileSave')}
     </button>

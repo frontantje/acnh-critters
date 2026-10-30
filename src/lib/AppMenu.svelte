@@ -1,5 +1,6 @@
 <script>
   import { version } from '../../package.json';
+  import { avatarIcon } from './avatars.js';
   import { i18n, LOCALES, t } from './i18n.svelte.js';
   import { activeProfile, chooseLocale, profileName, profiles, switchProfile } from './progress.svelte.js';
 
@@ -20,10 +21,11 @@
   /** @type {HTMLButtonElement} */
   let toggle;
 
-  const shownProfile = $derived.by(() => {
+  const shown = $derived.by(() => {
     const active = activeProfile();
-    return profiles.list.length > 1 && active ? profileName(active) : null;
+    return profiles.list.length > 1 && active ? active : null;
   });
+  const shownProfile = $derived(shown && profileName(shown));
 
   /** @param {MouseEvent} event */
   function closeOnOutsideClick(event) {
@@ -44,11 +46,16 @@
 
 <svelte:window onclick={closeOnOutsideClick} onkeydown={(event) => event.key === 'Escape' && (open = false)} />
 
-{#snippet personIcon(className = '')}
-  <svg class={['size-4 shrink-0', className]} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <circle cx="12" cy="8" r="4" />
-    <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" />
-  </svg>
+<!-- The profile's critter, so kids who can't read yet find their own. -->
+{#snippet profileIcon(/** @type {string | null} */ avatar, className = '')}
+  {#if avatar}
+    <img class="size-7 shrink-0 object-contain" src={avatarIcon(avatar)} alt="" width="28" height="28" />
+  {:else}
+    <svg class={['size-4 shrink-0', className]} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" />
+    </svg>
+  {/if}
 {/snippet}
 
 {#snippet checkmark(/** @type {boolean} */ shown)}
@@ -67,8 +74,8 @@
     aria-controls="app-menu"
     onclick={() => (open = !open)}
   >
-    {#if shownProfile}
-      {@render personIcon()}
+    {#if shown}
+      {@render profileIcon(shown.avatar)}
       <span class="truncate font-semibold text-stone-700" data-testid="shown-profile">{shownProfile}</span>
     {/if}
     <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -97,7 +104,7 @@
             onclick={() => runAndClose(() => switchProfile(profile.id))}
           >
             <span class="flex min-w-0 items-center gap-2">
-              {@render personIcon('text-stone-500')}
+              {@render profileIcon(profile.avatar, 'text-stone-500')}
               <span class="truncate">{profileName(profile)}</span>
             </span>
             {@render checkmark(profile.id === profiles.active)}

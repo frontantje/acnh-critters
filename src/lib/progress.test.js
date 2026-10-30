@@ -15,6 +15,7 @@ import {
   progress,
   restore,
   save,
+  setAvatar,
   setHemisphere,
   setName,
   switchProfile,
@@ -47,6 +48,8 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+// Leaves out the pictures, for tests that aren't about them.
+const listed = () => profiles.list.map(({ id, name }) => ({ id, name }));
 const quietErrors = () => vi.spyOn(console, 'error').mockImplementation(() => {});
 
 describe('importProgress', () => {
@@ -246,7 +249,7 @@ describe('restore', () => {
   test('starts a new, unsaved profile when nothing is saved', () => {
     restore();
     expect(profiles.active).toBeNull();
-    expect(profiles.list).toEqual([]);
+    expect(listed()).toEqual([]);
   });
 
   test('loads saved progress', () => {
@@ -329,7 +332,7 @@ describe('profiles', () => {
   test('the first one is saved where the progress was before there were profiles', () => {
     markCaught('koi');
     setName('Antje');
-    expect(profiles.list).toEqual([{ id: 1, name: 'Antje' }]);
+    expect(listed()).toEqual([{ id: 1, name: 'Antje' }]);
     expect(saved()).toMatchObject({ settings: { name: 'Antje' }, caught: ['koi'] });
     expect(localStorage.getItem('acnh-critters-active')).toBe('1');
   });
@@ -345,12 +348,12 @@ describe('profiles', () => {
     expect(progress).toMatchObject({ name: 'Mia', hemisphere: 'south', locale: 'de', showCaught: false });
     expect([...progress.caught]).toEqual([]);
     // It's saved once its welcome screen is left.
-    expect(profiles.list).toEqual([{ id: 1, name: '' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }]);
     expect(localStorage.getItem('acnh-critters-active')).toBe('1');
 
     save();
     expect(profiles.active).toBe(2);
-    expect(profiles.list).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Mia' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Mia' }]);
     expect(saved(2)).toMatchObject({ settings: { name: 'Mia', hemisphere: 'south', locale: 'de' }, caught: [] });
     expect(saved().caught).toEqual(['koi']);
     expect(localStorage.getItem('acnh-critters-active')).toBe('2');
@@ -361,7 +364,7 @@ describe('profiles', () => {
     add('Mia');
     switchProfile(1);
     addProfile('Leo');
-    expect(previousProfile()).toEqual({ id: 1, name: '' });
+    expect(previousProfile()).toMatchObject({ id: 1, name: '' });
     cancelNewProfile();
     expect(profiles.active).toBe(1);
     expect([...progress.caught]).toEqual(['koi']);
@@ -381,7 +384,7 @@ describe('profiles', () => {
     addProfile('Mia');
     restore();
     expect(profiles.active).toBe(1);
-    expect(profiles.list).toEqual([{ id: 1, name: '' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }]);
   });
 
   test('each one has its own progress and language; the one switched to last opens next time', () => {
@@ -402,7 +405,7 @@ describe('profiles', () => {
     expect(profiles.active).toBe(2);
     expect(progress.name).toBe('Mia');
     expect(i18n.locale).toBe('de');
-    expect(profiles.list).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Mia' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Mia' }]);
   });
 
   test('switching only remembers the profile; a change only saves the profile', () => {
@@ -459,7 +462,7 @@ describe('profiles', () => {
 
     deleteProfile();
     expect(profiles.active).toBeNull();
-    expect(profiles.list).toEqual([]);
+    expect(listed()).toEqual([]);
     expect(progress.name).toBe('');
     expect(localStorage.length).toBe(0);
     restore();
@@ -473,7 +476,7 @@ describe('profiles', () => {
     switchProfile(2);
     deleteProfile();
     add('Ida');
-    expect(profiles.list).toEqual([{ id: 1, name: '' }, { id: 3, name: 'Leo' }, { id: 4, name: 'Ida' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }, { id: 3, name: 'Leo' }, { id: 4, name: 'Ida' }]);
   });
 
   test('a new one never takes the number of an unreadable profile, or of one added in another tab', () => {
@@ -486,6 +489,37 @@ describe('profiles', () => {
     expect(profiles.active).toBe(4);
     expect(localStorage.getItem('acnh-critters-2')).toBe('garbage');
     expect(saved(3).settings.name).toBe('Leo');
+  });
+
+  test('no two share a picture, which can be any critter', () => {
+    markCaught('koi');
+    expect(progress.avatar).toBeNull(); // never picked one
+    expect(addProfile('Mia', 'octopus')).toBe(true);
+    save();
+    expect(saved(2).settings.avatar).toBe('octopus');
+
+    expect(addProfile('Leo', 'octopus')).toBe(false); // Mia's
+    expect(addProfile('Leo', 'pill-bug')).toBe(true);
+    save();
+    expect(setAvatar('octopus')).toBe(false);
+    expect(setAvatar('not-a-critter')).toBe(false);
+    expect(setAvatar('koi')).toBe(true);
+    expect(saved(3).settings.avatar).toBe('koi');
+  });
+
+  test('the picture goes into the code; an import keeps a picture the profile has', () => {
+    markCaught('koi');
+    setAvatar('octopus');
+    const code = transferCode();
+
+    localStorage.clear();
+    restore();
+    importProgress(code);
+    expect(progress.avatar).toBe('octopus');
+
+    setAvatar('frog');
+    importProgress(code);
+    expect(progress.avatar).toBe('frog');
   });
 
   test('ones without a name are called by their number, which doesn’t change', () => {
@@ -558,7 +592,7 @@ describe('profiles', () => {
     const consoleError = quietErrors();
     restore();
     expect(profiles.active).toBe(2);
-    expect(profiles.list).toEqual([{ id: 2, name: 'Mia' }]);
+    expect(listed()).toEqual([{ id: 2, name: 'Mia' }]);
     expect(consoleError).toHaveBeenCalledOnce();
   });
 
@@ -580,7 +614,7 @@ describe('profiles', () => {
     switchProfile(2);
     expect([...progress.caught]).toEqual(['tarantula']);
     deleteProfile();
-    expect(profiles.list).toEqual([{ id: 1, name: '' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }]);
     expect([...progress.caught]).toEqual(['koi']);
   });
 });
@@ -600,7 +634,7 @@ describe('changes from another tab', () => {
   test('a profile added there shows up here', () => {
     markCaught('koi');
     otherTab('acnh-critters-2', JSON.stringify({ version: 1, settings: { name: 'Leo' }, caught: [] }));
-    expect(profiles.list).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Leo' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }, { id: 2, name: 'Leo' }]);
     expect(profiles.active).toBe(1);
   });
 
@@ -615,7 +649,7 @@ describe('changes from another tab', () => {
     add('Mia');
     otherTab('acnh-critters-2', null);
     expect(profiles.active).toBe(1);
-    expect(profiles.list).toEqual([{ id: 1, name: '' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }]);
     markCaught('tarantula');
     expect(saved(2)).toBeNull();
     expect(saved().caught).toEqual(['koi', 'tarantula']);
@@ -626,14 +660,14 @@ describe('changes from another tab', () => {
     localStorage.clear();
     window.dispatchEvent(new StorageEvent('storage', { key: null, storageArea: localStorage }));
     expect(profiles.active).toBeNull();
-    expect(profiles.list).toEqual([]);
+    expect(listed()).toEqual([]);
   });
 
   test('other keys and session storage are left alone', () => {
     markCaught('koi');
     otherTab('acnh-critters-active', '5');
     window.dispatchEvent(new StorageEvent('storage', { key: STORAGE_KEY, newValue: null, storageArea: sessionStorage }));
-    expect(profiles.list).toEqual([{ id: 1, name: '' }]);
+    expect(listed()).toEqual([{ id: 1, name: '' }]);
     expect(profiles.active).toBe(1);
   });
 });

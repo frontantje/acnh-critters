@@ -18,7 +18,7 @@ import {
 
 const IPHONE =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1';
-const CODE = /ACNH1-[A-Za-z0-9_-]+/;
+const CODE = /ACNH2-[A-Za-z0-9_-]+/;
 
 /** @param {import('@playwright/test').Page} page */
 const shownCode = async (page) => normalize((await dialog(page).locator('output').textContent()) ?? '');
@@ -143,7 +143,7 @@ test.describe('export', () => {
       await openExport(page, 'Menü', 'Daten exportieren');
       const href = await dialog(page).getByRole('link', { name: 'Per E-Mail senden' }).getAttribute('href');
       const body = new URL(href ?? '').searchParams.get('body') ?? '';
-      expect(body).toMatch(/^Um meinen ACNH-Critters-Fortschritt .* wähle „Daten importieren“ und füge diesen Code ein:\r\n\r\nACNH1-/);
+      expect(body).toMatch(/^Um meinen ACNH-Critters-Fortschritt .* wähle „Daten importieren“ und füge diesen Code ein:\r\n\r\nACNH2-/);
     });
   });
 });

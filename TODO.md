@@ -22,13 +22,12 @@ progress.
 
 - [x] **One profile per kid:** separate progress, name, hemisphere and language for each child on a
       shared tablet, switchable from the menu. The export name is the profile name (30 Oct 2026).
-- [ ] **A picture per profile:** each child picks a critter as their avatar, shown on the menu button
-      and in the profile list, so kids who can't read yet find their own.
+- [x] **A picture per profile:** each child picks a critter as their avatar, shown on the menu button
+      and in the profile list, so kids who can't read yet find their own (30 Oct 2026).
 - [ ] **Smaller parties along the way:** a category finished, the first 10 caught, half the
       Critterpedia done. Maybe stickers or stamps collected on a card.
 - [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
       when and where. The data already has `image` and `price`.
-- [ ] **Read names aloud** (speech synthesis) for kids who can't read yet.
 - [ ] **"Right now" view:** only what can be caught at this moment, as big picture tiles.
 - [ ] **Simple mode** for younger kids: just picture, name and button, no times or notes.
 - [x] **Installable app (PWA):** home-screen icon, works offline, critter icons stored locally (30 Oct 2026).

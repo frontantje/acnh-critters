@@ -1,4 +1,4 @@
-import { expect, hemisphereSelect, importData, showCaughtSwitch, skipWelcome, stored, test } from './support.js';
+import { critters, expect, hemisphereSelect, importData, showCaughtSwitch, skipWelcome, stored, test } from './support.js';
 
 test('first visit asks for a name, then offers three choices', async ({ page }) => {
   await page.goto('/');
@@ -9,6 +9,10 @@ test('first visit asks for a name, then offers three choices', async ({ page }) 
   await expect(next).toBeDisabled();
   // A code brings its own name, and there's no profile yet to go back to.
   await expect(page.getByRole('button')).toHaveText(['Next', 'Import data from another device']);
+
+  // 16 random critters, the first one picked unless another is.
+  await expect(page.getByRole('radio')).toHaveCount(16);
+  await expect(page.getByRole('radio').first()).toBeChecked();
 
   await field.fill('  Kim ');
   await next.click();
@@ -25,7 +29,9 @@ test('first visit asks for a name, then offers three choices', async ({ page }) 
 test('skipping saves, so the welcome screen is not shown again', async ({ page }) => {
   await skipWelcome(page);
   await expect(page.getByRole('tab', { name: 'All', exact: true })).toBeVisible();
-  expect((await stored(page)).settings.name).toBe('Kim');
+  const { settings } = await stored(page);
+  expect(settings.name).toBe('Kim');
+  expect(critters.map((critter) => critter.id)).toContain(settings.avatar);
 
   await page.reload();
   await expect(page.getByRole('tab', { name: 'All', exact: true })).toBeVisible();

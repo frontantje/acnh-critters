@@ -12,10 +12,13 @@ changes.
 - **Profiles:** several on one device, for example one per child or one for testing, each with its
   own progress, settings and language. Switch, add, rename and delete them in the menu. A new
   profile gets a name and starts on the welcome screen, which can also lead back to the profile
-  before. With more than one profile, the menu
-  button shows whose progress is on screen. No two profiles share a name.
-- A fresh start asks for a name first, and the welcome screen then greets by name ("Welcome,
-  Mia!"). Importing a code there instead takes the code's name.
+  before. With more than one profile, the menu button shows whose progress is on screen. No two
+  profiles share a name.
+- **Profile pictures:** each profile picks a critter, shown on the menu button, in the profile list
+  and on its welcome screen, so kids who can't read yet find their own. The picker shows 16 critters
+  drawn at random each time it opens, with the current one first. No two profiles share one.
+- A fresh start asks for a name and a picture first, and the welcome screen then greets by name
+  ("Welcome, Mia!"). Importing a code there instead takes the code's name and picture.
 - Other tabs or windows of the app pick up changes right away, so they can't undo each other's
   work.
 
@@ -26,6 +29,8 @@ changes.
 - Importing from the menu replaces only the profile shown. The profile keeps its name; a code's
   name only names a profile without one.
 - The name given when exporting is the profile's name, listed in the menu.
+- Transfer codes now start with `ACNH2-` and carry the profile's picture. `ACNH1-` codes still
+  import.
 
 ## [1.0.0] - 2026-10-30
 

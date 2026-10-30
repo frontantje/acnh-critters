@@ -23,14 +23,14 @@ number of the profile used last. Each profile looks like this:
 ```json
 {
   "version": 1,
-  "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false, "name": "Mia", "locale": "de" },
+  "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false, "name": "Mia", "avatar": "octopus", "locale": "de" },
   "caught": ["bitterling"],
   "donated": ["bitterling"],
   "synced": ["fish"]
 }
 ```
 
-`name` also goes into exports. `locale` is the language picked in the menu or brought by an import;
+`name` and `avatar` (the profile's critter, by id) also go into exports. `locale` is the language picked in the menu or brought by an import;
 it's missing while the profile follows the browser's language. Version 1.0.0 kept the language in
 `acnh-critters-locale` instead; it moves into profile 1 on the first start.
 
@@ -75,17 +75,22 @@ The production build is an installable web app (`vite-plugin-pwa`, configured in
 One device can hold several profiles, for example one per child or a spare one for testing. Each
 has its own caught critters, Critterpedia Sync checkmarks, settings and language. On a fresh start,
 the welcome screen first asks for the first profile's name, unless a transfer code is imported,
-which brings its own. The **Profile** section of the menu lists the profiles and switches between
-them. It also has:
+which brings its own. Each profile also gets a critter as its picture, so kids who can't read yet
+find their own. The picker shows 16 critters drawn at random from all 200 each time it opens
+(`src/lib/avatars.js`), with the profile's current picture first; a new profile starts with the
+first of them. No two profiles share a picture, so other profiles' critters are left out. The
+**Profile** section of the menu lists the profiles, with their pictures, and switches between them.
+It also has:
 
-- **New profile:** asks for a name, then starts on the welcome screen, like a first visit. The new
+- **New profile:** asks for a name and a picture, then starts on the welcome screen, like a first visit. The new
   profile takes over the hemisphere and language of the one shown before. It's only saved once
   the welcome screen is left, so closing the app there, or "Back to …" on it, leaves no empty
   profile behind.
-- **Edit profile:** renames or deletes the profile shown, after asking first. Deleting the last
+- **Edit profile:** renames the profile shown, changes its picture, or deletes it, after asking first. Deleting the last
   one starts the app over.
 
-With more than one profile, the menu button shows whose progress is on screen. A profile without a
+With more than one profile, the menu button shows whose progress is on screen, with the picture.
+A profile from before pictures shows a plain person icon until it gets one in Edit profile. A profile without a
 name (e.g. one from version 1.0.0) is called by its number, e.g. "Profile 1", and no name can be
 "Profile 1" or "Profil 1" while that profile exists. No two profiles can share a name, ignoring
 case. The app opens the profile switched to last.
@@ -96,24 +101,26 @@ pick up changes right away (through `storage` events), so they don't undo each o
 
 ## Moving data between devices
 
-Exports are **transfer codes** such as `ACNH1-MQEA…`: about 75 characters, up to about 100 with a
+Exports are **transfer codes** such as `ACNH2-MQAB…`: about 75 characters, up to about 100 with a
 name (see `src/lib/transfer.js`). A code holds one profile: caught and donated critters, Critterpedia
 Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked in the menu or taken
-from the browser), and the profile's name of up to 20 characters. The export dialog can change the
+from the browser), the profile's picture, and its name of up to 20 characters. The export dialog can change the
 name, which then renames the profile too.
 
-After `ACNH1-`, a code is base64url for these bytes (see `src/lib/transfer.js`):
+After `ACNH2-`, a code is base64url for these bytes (see `src/lib/transfer.js`):
 
 1. **Settings:** bit 0 southern hemisphere, bit 1 track donations, bit 2 show caught, bits 3–4 the
    language (its place in `LOCALES` plus 1; 0 means none, as in codes made before languages were
    included, so the importing profile keeps its own), bits 5–7 the Critterpedia Sync checkmarks in
    `CATEGORIES` order.
-2. **Caught:** one bit per critter, in `data/critters.json` order (25 bytes).
-3. **Donated:** the same.
-4. **Name:** the rest, as UTF-8, if there is one.
+2. **Picture:** the critter's place in `data/critters.json` plus 1, or 0 for none.
+3. **Caught:** one bit per critter, in `data/critters.json` order (25 bytes).
+4. **Donated:** the same.
+5. **Name:** the rest, as UTF-8, if there is one.
 
-Codes may already have been sent, so this layout can't change; a new layout needs a new prefix
-(`ACNH2-`). For the same reason, the number and order of critters in `data/critters.json` must stay
+`ACNH1-` codes, made before pictures, have the same bytes without the picture, and still import.
+Codes may already have been sent, so a layout can't change; a new one needs a new prefix
+(`ACNH3-`). For the same reason, the number and order of critters in `data/critters.json` must stay
 the same: the bit lists are sized and ordered by it.
 
 **Export data** in the menu shows the code and offers:
