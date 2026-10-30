@@ -1,4 +1,3 @@
-// Several profiles on one device, e.g. one for each child.
 import {
   dialog,
   expect,
@@ -15,12 +14,10 @@ import {
 
 /** @param {import('@playwright/test').Page} page */
 const menuButton = (page, name = 'Menu') => page.getByRole('button', { name });
-/** The name on the menu button, shown with more than one profile. @param {import('@playwright/test').Page} page */
+/** @param {import('@playwright/test').Page} page */
 const shownProfile = (page) => page.getByTestId('shown-profile');
 
 /**
- * Checks the profiles listed in the open menu, e.g. ['Mia', '✓ Leo'] while
- * Leo's is shown.
  * @param {import('@playwright/test').Page} page
  * @param {string[]} expected
  */
@@ -35,8 +32,6 @@ async function expectProfiles(page, expected, group = 'Profile') {
 }
 
 /**
- * Adds a profile from the menu. It starts on the welcome screen, which is
- * skipped unless told otherwise.
  * @param {import('@playwright/test').Page} page
  * @param {string} name
  */
@@ -80,7 +75,6 @@ test('there is one profile at first; a new one starts empty, on the welcome scre
   await expect(dialog(page).getByRole('heading', { name: 'New profile' })).toBeVisible();
   const field = dialog(page).getByLabel('Name');
   await expect(field).toBeFocused();
-  // A new profile needs a name.
   const add = dialog(page).getByRole('button', { name: 'Add profile' });
   await expect(add).toBeDisabled();
   await field.fill('   ');
@@ -88,10 +82,10 @@ test('there is one profile at first; a new one starts empty, on the welcome scre
   await field.fill('Test');
   await add.click();
 
-  // It has its name already, so its welcome screen goes straight to the choices.
+  // It has its name already, so its welcome screen skips the name step.
   await expect(page.getByRole('heading', { name: 'Welcome, Test!' })).toBeVisible();
   await page.getByRole('button', { name: SKIP_WELCOME }).click();
-  await expect(row(page, 'Pale chub')).toHaveCount(1); // not caught in this one
+  await expect(row(page, 'Pale chub')).toHaveCount(1);
   await expect(shownProfile(page)).toHaveText('Test');
   await expect(menuButton(page)).toHaveAccessibleName('Menu, Test');
   expect(await stored(page, 2)).toMatchObject({ settings: { name: 'Test' }, caught: [] });
@@ -120,7 +114,7 @@ test('a new profile closed on its welcome screen is not kept', async ({ page }) 
   expect(await stored(page, 2)).toBeNull();
 
   await page.reload();
-  await expect(row(page, 'Pale chub')).toHaveCount(0); // back in profile 1
+  await expect(row(page, 'Pale chub')).toHaveCount(0); // back in profile 1, where it's caught
   await menuButton(page).click();
   await expectProfiles(page, ['✓ Kim']);
 });
@@ -141,21 +135,19 @@ test('no two profiles share a name', async ({ page }) => {
   await skipWelcome(page);
   await addProfile(page, 'Mia');
 
-  // Not when adding one…
   await openMenuItem(page, 'New profile');
   await dialog(page).getByLabel('Name').fill('mia');
   await expect(dialog(page).getByText('There’s already a profile called “mia”.')).toBeVisible();
   await expect(dialog(page).getByRole('button', { name: 'Add profile' })).toBeDisabled();
   await page.keyboard.press('Escape');
 
-  // …or renaming one…
   await openEdit(page);
   await dialog(page).getByLabel('Name (optional)').fill('KIM');
   await expect(dialog(page).getByText('There’s already a profile called “KIM”.')).toBeVisible();
   await expect(dialog(page).getByRole('button', { name: 'Save' })).toBeDisabled();
   await page.keyboard.press('Escape');
 
-  // …or exporting, which renames it too.
+  // Exporting renames the profile too, so it checks the name as well.
   await openMenuItem(page, 'Export data');
   await dialog(page).getByLabel('Name (optional)').fill('Kim');
   await expect(dialog(page).getByText('There’s already a profile called “Kim”.')).toBeVisible();
@@ -197,7 +189,6 @@ test('a new profile starts with the hemisphere and language; then each keeps its
   await expect(hemisphereSelect(page)).toHaveValue('south');
   await expect(page.getByRole('tab').first()).toHaveText('Alle');
 
-  // Mia switches to English; Kim stays German.
   await openMenuItem(page, 'English', 'Menü');
   await expect(page.getByRole('tab').first()).toHaveText('All');
   await switchTo(page, 'Kim');
@@ -294,8 +285,7 @@ test('another tab of the app sees profiles added and deleted in this one', async
   await profileGroup(other).getByRole('button', { name: 'Test' }).click();
   await expect(shownProfile(other)).toHaveText('Test');
 
-  // Deleted here while the other tab shows it: it goes back to profile 1
-  // there, and doesn't bring the deleted one back by saving.
+  // Saving in the other tab must not bring back the profile deleted here.
   await openEdit(page);
   await dialog(page).getByRole('button', { name: 'Delete profile' }).click();
   await dialog(page).getByRole('button', { name: 'Delete', exact: true }).click();
@@ -324,7 +314,7 @@ test('progress saved before there were profiles becomes profile 1, with its lang
   await page.reload();
 
   await expect(page.getByRole('tab').first()).toHaveText('Alle');
-  await expect(row(page, 'Döbel')).toHaveCount(0); // caught
+  await expect(row(page, 'Döbel')).toHaveCount(0); // the caught pale chub
   await menuButton(page, 'Menü').click();
   await expectProfiles(page, ['✓ Antje'], 'Profil');
   expect((await stored(page)).settings.locale).toBe('de');
@@ -341,7 +331,7 @@ test.describe('on a small phone', () => {
     const button = await menuButton(page).boundingBox();
     expect(button && button.x + button.width).toBeLessThanOrEqual(360);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
-    // The name is cut short with an ellipsis, not wrapped.
+    // Overflowing text means it's cut with an ellipsis, not wrapped.
     expect(await shownProfile(page).evaluate((name) => name.scrollWidth > name.clientWidth)).toBe(true);
   });
 });

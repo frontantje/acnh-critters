@@ -1,8 +1,3 @@
-// A small confetti burst from an element, e.g. the "Caught it" button. Plain DOM
-// and Web Animations: the pieces live in a layer over the whole page (so the
-// burst survives the row disappearing) that is removed when they're done.
-// Skipped when the device asks for reduced motion.
-
 import { prefersReducedMotion } from './motion.js';
 
 const COLORS = ['#16a34a', '#4ade80', '#facc15', '#fb923c', '#38bdf8', '#f472b6'];
@@ -17,6 +12,7 @@ export function confettiFrom(element) {
   const x = box.left + box.width / 2;
   const y = box.top + box.height / 2;
 
+  // A layer over the whole page, so the burst survives the row disappearing.
   const layer = document.createElement('div');
   layer.dataset.confetti = '';
   layer.setAttribute('aria-hidden', 'true');
@@ -31,7 +27,6 @@ export function confettiFrom(element) {
       `width:${width}px;height:${width * 0.6}px;border-radius:1px;background:${COLORS[i % COLORS.length]}`;
     layer.append(piece);
 
-    // Up and out in a fan, then drifting down while fading.
     const angle = ((-90 + (Math.random() - 0.5) * 140) * Math.PI) / 180;
     const distance = 45 + Math.random() * 45;
     const dx = Math.cos(angle) * distance;

@@ -21,7 +21,6 @@
   const hour = $derived(clock.now.getHours());
 
   let tab = $state('all');
-  // 1–12, or 0 for all months. Starts at the month the app was opened in.
   let month = $state(new Date().getMonth() + 1);
 
   const inTabAndMonth = $derived(
@@ -31,8 +30,6 @@
         (month === 0 || isAvailableIn(critter, progress.hemisphere, month)),
     ),
   );
-  // Uncaught critters that are gone after the selected month get a red tint
-  // (the same ones the sort keeps together at the top).
   /** @param {import('./critters.js').Critter} critter */
   function isFlagged(critter) {
     return month !== 0 && !progress.caught.has(critter.id) && monthsLeft(critter, progress.hemisphere, month) === 1;
@@ -56,8 +53,6 @@
     <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} />
   </header>
 
-  <!-- Filters and tabs stay pinned while scrolling. Phones: filters above the tabs.
-       md and up: tabs on the left, filters on the right. -->
   <div
     class="sticky top-0 z-10 flex flex-col gap-2 border-b-2 border-stone-200 bg-amber-50 px-3 pt-2 md:flex-row md:items-end md:justify-between md:gap-6 md:px-4"
   >
@@ -99,7 +94,6 @@
         {/each}
       </div>
 
-      <!-- Phones: short label above the switch. md and up: full label beside it. -->
       <button
         role="switch"
         aria-checked={progress.showCaught}
@@ -121,8 +115,7 @@
     </div>
   </div>
 
-  <!-- What the row colors mean, for the colors that can show right now. Not a
-       <ul>, so the critter list stays the page's first list. -->
+  <!-- Not a <ul>, so the critter list stays the page's first list. -->
   <div class="flex flex-wrap gap-x-4 gap-y-1 px-3 py-2 text-xs text-stone-600 md:px-4 md:text-sm" data-testid="legend">
     {#if month !== 0}
       <span class="flex items-center gap-1.5">

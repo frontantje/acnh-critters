@@ -1,4 +1,3 @@
-// Keeps package.json's version and CHANGELOG.md in step.
 import { expect, test } from 'vitest';
 import changelog from '../../CHANGELOG.md?raw';
 import { version } from '../../package.json';

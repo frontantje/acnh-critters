@@ -1,8 +1,6 @@
-// Keyboard shortcuts and the swipe gesture in the Critterpedia Sync.
 import { critters, expect, startApp, stored, test } from './support.js';
 
-// The input logic, with animations off (they ignore quick repeated input while
-// playing). The animations themselves are tested in effects.spec.js.
+// Animations ignore quick repeated input while playing, so they're off here.
 test.use({ reducedMotion: 'reduce' });
 
 const sea = critters.filter((c) => c.type === 'sea');
@@ -43,7 +41,7 @@ test.describe('keyboard', () => {
   test('→ means Next, also with focus outside the buttons', async ({ page }) => {
     await startApp(page);
     await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
-    // Not on the category screen.
+    // → does nothing on the category screen.
     await page.keyboard.press('ArrowRight');
     await expect(dialog(page).locator('ul button')).toHaveCount(3);
 
@@ -70,8 +68,7 @@ test.describe('keyboard', () => {
 
   test('modifier combinations and ← do nothing', async ({ page }) => {
     await startSeaCreatures(page);
-    // With nothing focused, so only the shortcuts are tested (a focused button
-    // still reacts to Shift+Enter like any button).
+    // A focused button still reacts to Shift+Enter, so nothing is focused here.
     await blur(page);
     for (const key of ['Alt+ArrowRight', 'Shift+ArrowRight', 'ArrowLeft', 'Shift+Enter', 'Control+Enter']) {
       await page.keyboard.press(key);
@@ -153,8 +150,7 @@ test.describe('swipe', () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 
   /**
-   * Real touch input through the DevTools protocol, so Chrome's touch-action
-   * handling applies as it would on a phone.
+   * Uses CDP touch events, so Chrome's touch-action handling applies as on a phone.
    * @param {import('@playwright/test').Page} page
    * @param {[number, number]} from
    * @param {[number, number]} to
@@ -190,11 +186,11 @@ test.describe('swipe', () => {
   });
 
   test('sideways moves are kept from the browser, up-and-down ones are not', async ({ page }) => {
-    // So a browser (Safari in a tab) can't take a swipe over and cancel it halfway.
+    // So a browser (like Safari in a tab) can't take over a swipe and cancel it halfway.
     await startSeaCreatures(page);
     await page.evaluate(() => {
       /** @type {any} */ (window).moves = [];
-      // Bubbling to window, after the app's listener: defaultPrevented is final.
+      // On window it runs after the app's listener, so defaultPrevented is final.
       window.addEventListener('touchmove', (event) => /** @type {any} */ (window).moves.push(event.defaultPrevented));
     });
     const moves = () => page.evaluate(() => /** @type {boolean[]} */ (/** @type {any} */ (window).moves).splice(0));
@@ -202,8 +198,7 @@ test.describe('swipe', () => {
 
     await swipe(page, [x + 20, y], [x - 20, y]); // sideways, too short to move on
     const sideways = await moves();
-    // Chrome only reports moves after about 15 px, past the app's 8 px decision
-    // point, so every reported sideways move is held back.
+    // Chrome reports moves only after about 15 px, past the app's 8 px decision point.
     expect(sideways.length).toBeGreaterThan(0);
     expect(sideways.every(Boolean)).toBe(true);
 

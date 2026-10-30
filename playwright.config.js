@@ -1,17 +1,11 @@
 import { defineConfig } from '@playwright/test';
 
-// Browser tests (see tests/). Run with `npm run test:e2e`. They use the installed
-// Chrome, so no browser download is needed.
-//
-// Two projects:
-// - "dev": almost all tests, against the dev server (reused if already running on 5173).
-// - "built": the offline test, against a fresh production build served under
-//   /acnh-critters/ like on GitHub Pages, since the service worker only exists in builds.
 export default defineConfig({
   testDir: 'tests',
   fullyParallel: true,
   reporter: 'list',
   use: {
+    // The installed Chrome, so no browser download is needed.
     channel: 'chrome',
     locale: 'en-US',
     timezoneId: 'Europe/Berlin',
@@ -23,6 +17,7 @@ export default defineConfig({
       testIgnore: /offline\.spec\.js/,
       use: { baseURL: 'http://localhost:5173' },
     },
+    // The service worker only exists in builds, so the offline test runs on one served like on GitHub Pages.
     {
       name: 'built',
       testMatch: /offline\.spec\.js/,

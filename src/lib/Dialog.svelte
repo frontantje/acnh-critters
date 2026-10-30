@@ -2,9 +2,7 @@
   import { t } from './i18n.svelte.js';
 
   /**
-   * A modal dialog with a title and a close button, open while it's shown.
-   * Escape closes it too, focus starts on the first button or field (or one
-   * with autofocus) and stays inside, and afterwards goes back to where it was.
+   * Open while mounted; showModal() handles Escape, keeps focus inside and returns it afterwards.
    * @type {{ title: string, onclose: () => void, children: import('svelte').Snippet }}
    */
   let { title, onclose, children } = $props();

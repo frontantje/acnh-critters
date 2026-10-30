@@ -1,5 +1,3 @@
-// Sanity checks for data/critters.json and the translations, e.g. after
-// regenerating the data with `npm run data`.
 import { describe, expect, test } from 'vitest';
 import { CATEGORIES, critters } from './critters.js';
 import { germanTerms, messages } from './messages.js';

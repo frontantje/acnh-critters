@@ -42,9 +42,7 @@ describe('transfer codes', () => {
   });
 
   test('stay the same for the same data', () => {
-    // Guards the bit layout: codes sent earlier must keep importing. Settings
-    // byte 0x31 (south | German << 3 | fish synced << 5), then 0x01 for the
-    // first caught critter: base64 "MQEA", then zeros up to 51 bytes.
+    // Guards the bit layout, since codes sent earlier must keep importing.
     expect(encodeTransferCode(data({ hemisphere: 'south', locale: 'de' }, { caught: [ids[0]], synced: ['fish'] }))).toBe(
       'ACNH1-MQEA' + 'A'.repeat(64),
     );

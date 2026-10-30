@@ -20,9 +20,8 @@
     `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.replace(/\n/g, '\r\n'))}`,
   );
 
-  // The share menu (Web Share API) is how a web page reaches AirDrop, Mail and
-  // messengers. iPadOS reports itself as a Mac.
   const canShare = navigator.canShare?.({ text: 'ACNH' }) ?? typeof navigator.share === 'function';
+  // Macintosh too, since iPadOS reports itself as a Mac.
   const isApple = /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
 
   let copied = $state(false);
@@ -85,8 +84,7 @@
     {code}
   </output>
 
-  <!-- Off while the name is taken. The email link then has no address, which
-       also makes it plain text for screen readers. -->
+  <!-- Off while the name is taken; a link can't be disabled, but without an href it's plain text to screen readers too. -->
   <div class="mt-4 grid gap-3">
     <button class={[primaryButton, 'flex w-full items-center justify-center']} disabled={!!taken} onclick={copy}>
       <!-- Announced when it changes to "Copied!". -->

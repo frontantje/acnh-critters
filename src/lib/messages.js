@@ -1,5 +1,4 @@
-// UI text in English and German. Critter names come from the game data
-// (data/critters.json); everything else that's shown is translated here.
+// Critter names aren't here, since they're the official ones from data/critters.json.
 
 const en = {
   welcomeTitle: 'Welcome to ACNH Critters',
@@ -199,12 +198,10 @@ const de = {
 export const messages = { en, de };
 
 /**
- * German for the location, shadow size and speed values in the critter data,
- * keyed by the English value.
+ * The critter data's locations, shadow sizes and speeds are English only.
  * @type {Record<string, string>}
  */
 export const germanTerms = {
-  // Fish locations
   'Sea': 'Meer',
   'Sea (rainy days)': 'Meer (bei Regen)',
   'Pier': 'Steg',
@@ -213,7 +210,6 @@ export const germanTerms = {
   'River (mouth)': 'Flussmündung',
   'Pond': 'Teich',
 
-  // Insect locations
   'Disguised on shoreline': 'Getarnt am Strand',
   'Disguised under trees': 'Getarnt unter Bäumen',
   'Flying': 'Fliegend',
@@ -241,7 +237,6 @@ export const germanTerms = {
   'Shaking trees (hardwood or cedar only)': 'Bäume schütteln (nur Laubbäume oder Zedern)',
   'Underground (dig where noise is loudest)': 'Unter der Erde (dort graben, wo es am lautesten zirpt)',
 
-  // Shadow sizes
   'X-Small': 'Winzig',
   'Small': 'Klein',
   'Medium': 'Mittel',
@@ -251,7 +246,7 @@ export const germanTerms = {
   'XX-Large': 'Riesig',
   'Long': 'Lang',
 
-  // Sea creature speeds ('Medium' is shared with shadow sizes)
+  // 'Medium' is also a speed, so it's only listed with the shadow sizes.
   'Stationary': 'Unbeweglich',
   'Very slow': 'Sehr langsam',
   'Slow': 'Langsam',

@@ -7,8 +7,7 @@ test('first visit asks for a name, then offers three choices', async ({ page }) 
   await expect(field).toBeFocused();
   const next = page.getByRole('button', { name: 'Next' });
   await expect(next).toBeDisabled();
-  // Or straight to importing, since a code brings its name along. There's no
-  // profile yet to go back to.
+  // A code brings its own name, and there's no profile yet to go back to.
   await expect(page.getByRole('button')).toHaveText(['Next', 'Import data from another device']);
 
   await field.fill('  Kim ');
@@ -19,7 +18,7 @@ test('first visit asks for a name, then offers three choices', async ({ page }) 
     'Start Critterpedia Sync',
     'No thanks, just show me the list',
   ]);
-  // Saved once one of them is picked.
+  // Nothing is saved until one of the choices is picked.
   expect(await stored(page)).toBeNull();
 });
 

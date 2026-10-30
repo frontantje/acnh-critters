@@ -3,8 +3,6 @@
   import { MAX_NAME_LENGTH } from './transfer.js';
 
   /**
-   * A field for a profile's name, with a hint below it that turns into an
-   * error while another profile goes by the name (see takenName).
    * @type {{
    *   value: string,
    *   label: string,
@@ -22,7 +20,7 @@
 <div>
   <label class="block font-semibold">
     {label}
-    <!-- In a dialog, where showModal() moves focus to it. -->
+    <!-- Only turned on where typing the name is the first step. -->
     <!-- svelte-ignore a11y_autofocus -->
     <input
       class="mt-1 block w-full rounded-lg border border-stone-300 bg-white px-3 py-2 font-normal"

@@ -1,10 +1,7 @@
-// The installable, offline-capable app. Runs against the production build as
-// GitHub Pages serves it (project "built" in playwright.config.js), because the
-// service worker only exists in builds. URLs are relative to
-// http://localhost:4173/acnh-critters/, so they start with "./", not "/".
+// Runs on the build served under /acnh-critters/, since only builds have the service worker.
 import { critters, enterName, expect, SKIP_WELCOME, test } from './support.js';
 
-/** Waits until the service worker has stored everything and controls the page. @param {import('@playwright/test').Page} page */
+/** @param {import('@playwright/test').Page} page */
 async function waitForServiceWorker(page) {
   await page.evaluate(() => navigator.serviceWorker.ready);
   await expect.poll(() => page.evaluate(() => Boolean(navigator.serviceWorker.controller))).toBe(true);
@@ -23,7 +20,7 @@ test('after the first visit, the app and every critter icon work offline', async
 
   const icons = page.locator('ul').first().locator('img');
   await expect(icons).toHaveCount(critters.length);
-  // They load lazily, so each is scrolled into view before checking it rendered.
+  // Icons load lazily, so each one is scrolled into view first.
   const broken = [];
   for (const icon of await icons.all()) {
     await icon.scrollIntoViewIfNeeded();

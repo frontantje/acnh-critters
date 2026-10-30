@@ -12,7 +12,6 @@
    *   flagged?: boolean,
    * }}
    */
-  // flagged: the "last chance" warning (decided by the list, see MainView).
   let { critter, hemisphere, month, flagged = false } = $props();
 
   const caught = $derived(progress.caught.has(critter.id));
@@ -20,13 +19,12 @@
 
   /** @param {MouseEvent & { currentTarget: HTMLButtonElement }} event */
   function onclick(event) {
-    // Before toggling: with caught critters hidden, the row goes away right after.
+    // Confetti first, since with caught critters hidden the row goes away once toggled.
     if (!caught) confettiFrom(event.currentTarget);
     toggleCaught(critter.id);
   }
 </script>
 
-<!-- Phones: icon | stacked details | button. md and up: one column per field. -->
 <li
   class={[
     'grid grid-cols-[3rem_1fr_auto] items-center gap-x-3 border-b border-stone-200 px-3 py-3',
@@ -43,10 +41,10 @@
     height="64"
     loading="lazy"
   />
-  <!-- md:contents turns each field into its own column of the row's grid. -->
+  <!-- md:contents lets each field be its own column of the row's grid. -->
   <div class="flex min-w-0 flex-col gap-0.5 md:contents">
     <span class="font-bold">{critterName(critter)}</span>
-    <!-- The red and blue tints in words, for screen readers. -->
+    <!-- Screen readers can't see the red and blue tints. -->
     {#if flagged}<p class="sr-only">{t('leavingSoon')}</p>{/if}
     {#if yearRound && !caught}<p class="sr-only">{t('allYear')}</p>{/if}
     <span>{locationText(critter)}</span>

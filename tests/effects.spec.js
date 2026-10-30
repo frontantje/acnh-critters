@@ -1,4 +1,3 @@
-// UI effects: confetti in the list, pulse / shake / slide in the Critterpedia Sync.
 import { critters, expect, row, setShowCaught, skipWelcome, startApp, stored, test } from './support.js';
 
 const sea = critters.filter((c) => c.type === 'sea');
@@ -11,8 +10,7 @@ const dialog = (page) => page.getByRole('dialog');
 const progressLine = (page) => dialog(page).locator('p.text-center');
 
 /**
- * Records the transform keyframes of every animation started inside the sync
- * dialog, e.g. "scale(1) → scale(1.12) → scale(1)". Must run before the page loads.
+ * Call it before the page loads, since the patch runs as an init script.
  * @param {import('@playwright/test').Page} page
  */
 async function recordAnimations(page) {
@@ -56,8 +54,7 @@ test.describe('confetti in the list', () => {
     const button = row(page, 'Pale chub').getByRole('button');
     await button.click();
     await expect(confetti(page)).toHaveCount(1);
-    // Clickable straight through the confetti; un-catching adds no second burst
-    // (each burst has its own layer).
+    // Each burst has its own layer, so a second burst would make the count 2.
     await button.click();
     await expect(button).toHaveText('Caught it');
     await expect(confetti(page)).toHaveCount(1);
@@ -81,7 +78,7 @@ test.describe('Critterpedia Sync', () => {
     await recordAnimations(page);
     await startSeaCreatures(page);
     await dialog(page).getByRole('button', { name: 'Caught', exact: true }).click();
-    // Saved right away, before the animation ends.
+    // Saved right away, not when the animation ends.
     expect((await stored(page)).caught).toEqual([sea[0].id]);
 
     await expect(progressLine(page)).toHaveText('Sea creatures · 2 of 40');
@@ -135,7 +132,6 @@ test.describe('Critterpedia Sync', () => {
     await startSeaCreatures(page);
     await dialog(page).getByRole('button', { name: 'Caught', exact: true }).click();
     await expect(progressLine(page)).toHaveText('Sea creatures · 2 of 40');
-    // No waiting for the slide-in to finish.
     await dialog(page).getByRole('button', { name: 'Caught', exact: true }).click();
     await expect(progressLine(page)).toHaveText('Sea creatures · 3 of 40');
     expect((await stored(page)).caught).toEqual([sea[0].id, sea[1].id]);

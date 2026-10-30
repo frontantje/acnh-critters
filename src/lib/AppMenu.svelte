@@ -20,7 +20,6 @@
   /** @type {HTMLButtonElement} */
   let toggle;
 
-  // With more than one profile, the menu button says whose progress is shown.
   const shownProfile = $derived.by(() => {
     const active = activeProfile();
     return profiles.list.length > 1 && active ? profileName(active) : null;
@@ -31,8 +30,7 @@
     if (open && !root.contains(/** @type {Node} */ (event.target))) open = false;
   }
 
-  // Focus moves back to the menu button first, since the clicked item disappears
-  // with the menu (and the dialogs return focus to it when they close).
+  // The clicked item disappears, so focus goes to the button first, where dialogs also return it.
   /** @param {() => void} action */
   function runAndClose(action) {
     open = false;
@@ -53,7 +51,6 @@
   </svg>
 {/snippet}
 
-<!-- Marks the profile and the language chosen. -->
 {#snippet checkmark(/** @type {boolean} */ shown)}
   {#if shown}<span class="text-green-700" aria-hidden="true">✓</span>{/if}
 {/snippet}
@@ -82,7 +79,7 @@
   </button>
 
   {#if open}
-    <!-- Scrolls on short screens, where all the items may not fit. -->
+    <!-- Scrolls, since all the items may not fit on short screens. -->
     <div
       id="app-menu"
       class="absolute top-full right-0 z-20 mt-1 max-h-[calc(100dvh_-_4.5rem)] w-max max-w-72 min-w-52 overflow-y-auto rounded-xl border border-stone-200 bg-white p-1 shadow-lg"
@@ -139,7 +136,7 @@
         {/each}
       </div>
 
-      <!-- The app version (package.json; see CHANGELOG.md), e.g. to see that an update arrived. -->
+      <!-- Shows the version, so it's easy to tell that an update arrived. -->
       <p class="mt-1 border-t border-stone-200 px-3 pt-2.5 pb-1.5 text-xs text-stone-500" data-testid="menu-version">
         {t('version', { version })}
       </p>

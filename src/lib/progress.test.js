@@ -25,7 +25,6 @@ import {
 } from './progress.svelte.js';
 
 const STORAGE_KEY = 'acnh-critters';
-/** Profile 1, or another one. */
 const saved = (id = 1) => JSON.parse(localStorage.getItem(id === 1 ? STORAGE_KEY : `${STORAGE_KEY}-${id}`) ?? 'null');
 /** @param {unknown} data */
 const load = (data) => importProgress(JSON.stringify(data));
@@ -38,8 +37,7 @@ const add = (name) => {
   save();
 };
 
-// Every test starts like a first visit: nothing saved, in the browser's
-// language (English).
+// Every test starts like a first visit, in the browser's language (English).
 beforeEach(() => {
   localStorage.clear();
   restore();
@@ -49,7 +47,6 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-/** Hides the errors logged for unreadable or unsaveable progress. */
 const quietErrors = () => vi.spyOn(console, 'error').mockImplementation(() => {});
 
 describe('importProgress', () => {
@@ -129,7 +126,6 @@ describe('export', () => {
     expect(saved().settings).not.toHaveProperty('locale');
     expect(exportData()).toEqual({ ...saved(), settings: { ...saved().settings, locale: 'en' } });
 
-    // A language picked in the menu is saved with the profile.
     chooseLocale('de');
     expect(saved().settings.locale).toBe('de');
     expect(exportData()).toEqual(saved());
@@ -429,7 +425,6 @@ describe('profiles', () => {
   test('an import keeps the profile’s name; the export’s only names one without', () => {
     markCaught('koi');
     const code = transferCode('Antje');
-    // Imported on the welcome screen of a new profile called Mia.
     addProfile('Mia');
     importProgress(code);
     expect(progress.name).toBe('Mia');
@@ -507,8 +502,8 @@ describe('profiles', () => {
   });
 
   test('takenName finds a name another profile goes by, ignoring case', () => {
-    markCaught('koi'); // profile 1, without a name
-    add('Mia'); // profile 2, shown
+    markCaught('koi');
+    add('Mia');
     expect(takenName(' mia ')).toBeNull(); // its own
     expect(takenName('MIA', null)).toBe('MIA'); // for a new profile
     expect(takenName('profile 1')).toBe('profile 1');
@@ -592,7 +587,7 @@ describe('profiles', () => {
 
 describe('changes from another tab', () => {
   /**
-   * Another tab of the app sets a key, or deletes it (null).
+   * Browsers only send "storage" events to other tabs, so this fakes one.
    * @param {string} key
    * @param {string | null} value
    */

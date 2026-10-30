@@ -1,13 +1,3 @@
-// Downloads ACNH creature data and writes a slimmed-down data/critters.json,
-// plus each critter's icon to public/icons/<id>.png, so the app needs no
-// image server (and works offline).
-//
-// Source: https://github.com/Norviah/animal-crossing, a JSON export of the
-// community "Data Spreadsheet for Animal Crossing New Horizons". The icons come
-// from the image server that data links to (acnhcdn.com).
-//
-// Run with: node scripts/build-data.mjs
-
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -22,9 +12,7 @@ const SOURCES = [
   { type: 'sea', file: 'Sea Creatures.json', expected: 40 },
 ];
 
-// The source JSON keeps only one time per hemisphere, but these two fish are
-// around 4 PM – 9 AM in spring and all day in autumn. Taken from the per-month
-// columns of the original spreadsheet.
+// The source JSON keeps one time per hemisphere, so these seasonal hours come from the spreadsheet's per-month columns.
 const SPRING_EVENINGS_AUTUMN_ALL_DAY = {
   north: [
     { months: [3, 4, 5, 6], time: '4 PM – 9 AM' },
@@ -43,14 +31,12 @@ const TIME_OVERRIDES = {
 const ALL_HOURS = Array.from({ length: 24 }, (_, h) => h);
 const ascending = (list) => [...list].sort((a, b) => a - b);
 
-// "9 PM" -> 21, "12 AM" -> 0
 function parseHour(text) {
   const match = /^(\d{1,2}) (AM|PM)$/.exec(text.trim());
   if (!match) throw new Error(`Unrecognised hour: "${text}"`);
   return (Number(match[1]) % 12) + (match[2] === 'PM' ? 12 : 0);
 }
 
-// "4 PM – 9 AM" -> [0..8, 16..23]; the end hour is exclusive.
 function hoursFromTime(time) {
   if (time === 'All day') return ALL_HOURS;
   const [start, end] = time.split('–').map(parseHour);
@@ -64,7 +50,7 @@ function periods(raw, hemisphere) {
   const override = TIME_OVERRIDES[raw.name]?.[hemisphere];
 
   if (!override) {
-    // Creatures with two daily windows (e.g. piranha) have nested arrays here.
+    // Two daily windows (e.g. piranha) come as nested arrays.
     const hours = ascending(source.timeArray.flat());
     // Guards the parser that the overrides depend on.
     const parsed = ascending(new Set(source.time.flatMap(hoursFromTime)));
@@ -81,7 +67,6 @@ function periods(raw, hemisphere) {
   return override.map((p) => ({ months: p.months, hours: hoursFromTime(p.time) }));
 }
 
-// "Rajah Brooke's birdwing" -> "rajah-brookes-birdwing"
 function slugify(name) {
   return name
     .toLowerCase()
@@ -105,7 +90,7 @@ function toCritter(type, raw) {
     },
     // Relative to the page, like every asset (see vite.config.js).
     icon: `icons/${id}.png`,
-    // The big Critterpedia picture isn't used by the app yet, so it isn't downloaded.
+    // Not used by the app yet, so not downloaded.
     image: raw.critterpediaImage,
     price: raw.sell,
     location: raw.whereHow ?? null,
@@ -124,7 +109,6 @@ async function download(file) {
   return response.json();
 }
 
-/** Downloads every icon into ICON_DIR, a few at a time. */
 async function downloadIcons(icons) {
   await rm(ICON_DIR, { recursive: true, force: true });
   await mkdir(ICON_DIR, { recursive: true });

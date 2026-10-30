@@ -8,20 +8,15 @@
   import { cancelNewProfile, previousProfile, profileName, profiles, restore, save } from './lib/progress.svelte.js';
 
   restore();
-  // A profile that hasn't been saved yet starts on the welcome screen: on the
-  // first visit, after adding a profile, and after deleting the last one.
-  // Leaving it in any way saves the profile, so it isn't shown again.
+  // A new profile stays unsaved (profiles.active null) until its welcome screen is left.
   const showWelcome = $derived(profiles.active === null);
-  // A new profile's welcome screen also leads back to the profile before.
   const backTo = $derived.by(() => {
     const previous = previousProfile();
     return previous ? profileName(previous) : null;
   });
   let syncing = $state(false);
   let exporting = $state(false);
-  /** null: closed; 'new' from the welcome screen; 'replace' over existing progress. */
   let importMode = $state(/** @type {null | 'new' | 'replace'} */ (null));
-  /** null: closed; 'add' for a new profile; 'edit' to rename or delete the one shown. */
   let profileMode = $state(/** @type {null | 'add' | 'edit'} */ (null));
 </script>
 
@@ -46,7 +41,7 @@
   />
 {/if}
 
-<!-- These open over the main view, which keeps its tab, filters and scroll position. -->
+<!-- Opened over the main view, so it keeps its tab, filters and scroll position. -->
 {#if syncing}
   <CritterpediaSync onexit={() => (syncing = false)} />
 {/if}

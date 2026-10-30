@@ -1,4 +1,3 @@
-// Export (transfer codes), the name, and importing over existing progress.
 import { readFile } from 'node:fs/promises';
 import {
   dialog,
@@ -23,7 +22,7 @@ const CODE = /ACNH1-[A-Za-z0-9_-]+/;
 
 /** @param {import('@playwright/test').Page} page */
 const shownCode = async (page) => normalize((await dialog(page).locator('output').textContent()) ?? '');
-/** The profile shown, as listed in the open menu. @param {import('@playwright/test').Page} page */
+/** @param {import('@playwright/test').Page} page */
 const menuProfile = (page) => profileGroup(page).getByRole('button', { pressed: true });
 
 /** @param {import('@playwright/test').Page} page */
@@ -39,10 +38,9 @@ async function openImport(page) {
 }
 
 /**
- * Replaces the Web Share API (only real on devices) with a stand-in that
- * records what was shared. Must run before the page loads.
+ * Web Share only exists on real devices, so this fakes it; call it before the page loads.
  * @param {import('@playwright/test').Page} page
- * @param {{ outcome?: 'shared' | 'cancelled' | 'failed' } | null} options null: no Web Share at all
+ * @param {{ outcome?: 'shared' | 'cancelled' | 'failed' } | null} options
  */
 async function fakeShare(page, options) {
   await page.addInitScript((options) => {
@@ -80,19 +78,17 @@ test.describe('export', () => {
     const other = await newDevice();
     await importData(other, code);
     await expect(hemisphereSelect(other)).toHaveValue('south');
-    // The language shown here (from the browser) is picked there.
+    // The language shown here comes from the browser, but becomes the picked one there.
     expect(await stored(other)).toEqual({ ...before, settings: { ...before.settings, locale: 'en' } });
   });
 
   test('the language shown comes along, even if it was never picked in the menu', async ({ newDevice }) => {
-    // German from the browser on one device…
     const german = await newDevice({ locale: 'de-DE' });
     await enterName(german);
     await german.getByRole('button', { name: 'Nein danke, zeig mir einfach die Liste' }).click();
     await openExport(german, 'Menü', 'Daten exportieren');
     const code = await shownCode(german);
 
-    // …imported on a device whose browser is English.
     const english = await newDevice({ locale: 'en-US' });
     await importData(english, code);
     await expect(english.getByRole('tab').first()).toHaveText('Alle');
@@ -208,7 +204,7 @@ test.describe('name', () => {
     const before = await shownCode(page);
     const field = dialog(page).getByLabel('Name (optional)');
     await field.clear();
-    // Typed like a user would, so the input's maxlength applies.
+    // Typed key by key, so the input's maxlength applies.
     await field.pressSequentially('Antje’s island of many critters');
     await expect(field).toHaveValue('Antje’s island of ma');
     await expect.poll(() => shownCode(page)).not.toBe(before);
@@ -230,7 +226,6 @@ test.describe('name', () => {
     await page.getByRole('button', { name: 'Menu' }).click();
     await expect(menuProfile(page)).toHaveAccessibleName('Antje');
     expect((await stored(page)).settings.name).toBe('Antje');
-    // It's offered again next time.
     await page.getByRole('button', { name: 'Export data' }).click();
     await expect(dialog(page).getByLabel('Name (optional)')).toHaveValue('Antje');
   });

@@ -1,7 +1,6 @@
 import { critters, expect, importData, monthSelect, normalize, row, rows, skipWelcome, startApp, stored, test } from './support.js';
 
-// The sync's logic, with its animations off (they ignore quick repeated input
-// while playing). The animations themselves are tested in effects.spec.js.
+// Animations ignore quick repeated input while playing, so they're off here.
 test.use({ reducedMotion: 'reduce' });
 
 const sea = critters.filter((c) => c.type === 'sea');
@@ -46,7 +45,6 @@ test('goes through uncaught critters in Critterpedia order; Caught saves, Next s
     await dialog(page).getByRole('button', { name: i % 2 === 0 ? 'Caught' : 'Next', exact: true }).click();
   }
 
-  // Back at the categories, with a checkmark on the finished one.
   await expect(categories(page)).toHaveText([
     'Fish 0 of 80 caught',
     'Insects 0 of 80 caught',
@@ -80,7 +78,6 @@ test('exiting keeps what was caught so far, without a checkmark', async ({ page 
   await expect(dialog(page)).toHaveCount(0);
   expect(await stored(page)).toMatchObject({ caught: [sea[0].id, sea[1].id], synced: [] });
 
-  // The list hides them like any other catch.
   await page.getByRole('tab', { name: 'Sea creatures', exact: true }).click();
   await monthSelect(page).selectOption({ label: 'All months' });
   await expect(rows(page)).toHaveCount(38);
@@ -97,7 +94,6 @@ test('Escape and Done exit, and the list keeps its tab and filters', async ({ pa
   await expect(dialog(page)).toHaveCount(0);
   await expect(page.getByRole('tab', { name: 'Insects', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(monthSelect(page)).toHaveValue('0');
-  // Focus returns to the menu button.
   await expect(page.getByRole('button', { name: 'Menu' })).toBeFocused();
 
   await openFromMenu(page);
@@ -120,7 +116,6 @@ test('a fully caught category is marked synced right away, and checkmarks are ke
   await expect(categories(page).first()).toContainText('✓');
   await dialog(page).getByRole('button', { name: 'Done' }).click();
 
-  // The checkmark travels in the transfer code.
   await page.getByRole('button', { name: 'Menu' }).click();
   await page.getByRole('button', { name: 'Export data' }).click();
   const code = normalize((await page.getByRole('dialog').locator('output').textContent()) ?? '');

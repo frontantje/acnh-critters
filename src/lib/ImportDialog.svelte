@@ -4,11 +4,7 @@
   import { importProgress } from './progress.svelte.js';
   import { primaryButton } from './styles.js';
 
-  /**
-   * Imports into the profile shown. Importing saves it, so on the welcome
-   * screen that also leaves it.
-   * @type {{ replacing: boolean, onclose: () => void }}
-   */
+  /** @type {{ replacing: boolean, onclose: () => void }} */
   let { replacing, onclose } = $props();
 
   /** @type {{ close: () => void }} */
@@ -69,7 +65,7 @@
   <button class="mt-3 w-full text-center text-green-700 underline hover:text-green-800" onclick={() => fileInput.click()}>
     {t('importFromFile')}
   </button>
-  <!-- .txt from "Download as text file"; .json from older exports. -->
+  <!-- .json too, for files from older exports. -->
   <input
     bind:this={fileInput}
     type="file"

@@ -5,13 +5,11 @@
   import { primaryButton } from './styles.js';
 
   /**
-   * backTo: the profile to go back to instead, for a new profile.
    * @type {{ onimport: () => void, onsync: () => void, onskip: () => void, backTo: string | null, onback: () => void }}
    */
   let { onimport, onsync, onskip, backTo, onback } = $props();
 
-  // A profile without a name (on a fresh start, or after deleting the last
-  // one) gets one first. One added from the menu already has it.
+  // Only a fresh start or a deleted last profile gets here without a name; ones from the menu have it.
   let name = $state('');
 </script>
 

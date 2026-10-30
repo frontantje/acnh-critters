@@ -16,11 +16,7 @@
   } from './progress.svelte.js';
   import { primaryButton } from './styles.js';
 
-  /**
-   * Adds a profile (which then starts on the welcome screen), or renames or
-   * deletes the one shown.
-   * @type {{ adding: boolean, onclose: () => void }}
-   */
+  /** @type {{ adding: boolean, onclose: () => void }} */
   let { adding, onclose } = $props();
 
   /** @type {{ close: () => void }} */
@@ -28,20 +24,17 @@
 
   // The dialog doesn't switch between adding and editing while it's open.
   let name = $state(untrack(() => (adding ? '' : progress.name)));
-  /** The profile being named: null for a new one. */
   const id = $derived(adding ? null : profiles.active);
 
   function submit() {
     if (adding ? addProfile(name) : setName(name)) modal.close();
   }
 
-  /** What's about to be deleted, while asking. */
   let deleting = $state(/** @type {{ name: string, last: boolean } | null} */ (null));
   let deleteButton = $state(/** @type {HTMLButtonElement | undefined} */ (undefined));
   let keepButton = $state(/** @type {HTMLButtonElement | undefined} */ (undefined));
 
-  // The pressed button disappears, so focus moves on to the safe choice, or
-  // back to the delete button.
+  // The pressed button disappears, so focus moves to the safe choice, or back to Delete.
   async function askToDelete() {
     const shown = activeProfile();
     if (!shown) return;
@@ -74,8 +67,7 @@
       submit();
     }}
   >
-    <!-- A new profile starts with typing its name. One shown can go without
-         (it's then called "Profile 2" and so on). -->
+    <!-- A shown profile can go without a name, since it's then called "Profile 2" and so on. -->
     <NameField
       bind:value={name}
       label={adding ? t('profileNameLabel') : t('profileNameOptional')}

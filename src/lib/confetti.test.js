@@ -42,7 +42,6 @@ describe('confettiFrom', () => {
     expect(running).toHaveLength(18);
     expect(layer()?.getAttribute('aria-hidden')).toBe('true');
     expect(/** @type {HTMLElement} */ (layer()).style.pointerEvents).toBe('none');
-    // Each piece is centred on (120, 210).
     for (const piece of pieces) {
       expect(parseFloat(piece.style.left) + parseFloat(piece.style.width) / 2).toBeCloseTo(120);
     }

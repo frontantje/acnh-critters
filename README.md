@@ -18,7 +18,21 @@ optional peer dependencies.
 Progress is stored in `localStorage`, one key per profile (see `src/lib/progress.svelte.js`):
 `acnh-critters` for profile 1, which is where it was before there were profiles, and
 `acnh-critters-2`, `acnh-critters-3` and so on for the others. `acnh-critters-active` holds the
-number of the profile used last.
+number of the profile used last. Each profile looks like this:
+
+```json
+{
+  "version": 1,
+  "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false, "name": "Mia", "locale": "de" },
+  "caught": ["bitterling"],
+  "donated": ["bitterling"],
+  "synced": ["fish"]
+}
+```
+
+`name` also goes into exports. `locale` is the language picked in the menu or brought by an import;
+it's missing while the profile follows the browser's language. Version 1.0.0 kept the language in
+`acnh-critters-locale` instead; it moves into profile 1 on the first start.
 
 ## Versions
 
@@ -32,7 +46,9 @@ Changes are collected under "Unreleased" in [CHANGELOG.md](CHANGELOG.md). To rel
    `package-lock.json`.
 2. In `CHANGELOG.md`, rename "Unreleased" to `[x.y.z] - YYYY-MM-DD` and add a new empty
    "Unreleased" section above it. A unit test checks that the newest entry matches `package.json`.
-3. Commit, tag (`git tag vX.Y.Z`, `git push --tags`), and run the deploy workflow.
+3. Commit, tag (`git tag vX.Y.Z`, `git push --tags`), and run the deploy workflow: on GitHub,
+   Actions → Deploy to GitHub Pages → Run workflow. It runs the unit tests first and only starts by
+   hand.
 
 ## Offline and installing
 
@@ -70,8 +86,9 @@ them. It also has:
   one starts the app over.
 
 With more than one profile, the menu button shows whose progress is on screen. A profile without a
-name (such as the first one, until it gets one) is called by its number, e.g. "Profile 1". No two
-profiles can share a name, ignoring case. The app opens the profile switched to last.
+name (e.g. one from version 1.0.0) is called by its number, e.g. "Profile 1", and no name can be
+"Profile 1" or "Profil 1" while that profile exists. No two profiles can share a name, ignoring
+case. The app opens the profile switched to last.
 
 The app keeps all profiles in memory and saves every change, so it also works where storage is
 blocked, just without remembering anything. Other tabs or windows of the app on the same device
@@ -84,6 +101,20 @@ name (see `src/lib/transfer.js`). A code holds one profile: caught and donated c
 Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked in the menu or taken
 from the browser), and the profile's name of up to 20 characters. The export dialog can change the
 name, which then renames the profile too.
+
+After `ACNH1-`, a code is base64url for these bytes (see `src/lib/transfer.js`):
+
+1. **Settings:** bit 0 southern hemisphere, bit 1 track donations, bit 2 show caught, bits 3–4 the
+   language (its place in `LOCALES` plus 1; 0 means none, as in codes made before languages were
+   included, so the importing profile keeps its own), bits 5–7 the Critterpedia Sync checkmarks in
+   `CATEGORIES` order.
+2. **Caught:** one bit per critter, in `data/critters.json` order (25 bytes).
+3. **Donated:** the same.
+4. **Name:** the rest, as UTF-8, if there is one.
+
+Codes may already have been sent, so this layout can't change; a new layout needs a new prefix
+(`ACNH2-`). For the same reason, the number and order of critters in `data/critters.json` must stay
+the same: the bit lists are sized and ordered by it.
 
 **Export data** in the menu shows the code and offers:
 

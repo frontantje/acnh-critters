@@ -1,14 +1,4 @@
-// Transfer codes: the export format, e.g. "ACNH1-AQAAAAA…". Short enough to
-// copy, share, email or download as text, and pasted on the other device.
-//
-// Layout: one byte of settings, then one bit per critter for "caught" and one
-// for "donated" (in the order of data/critters.json), then the optional name as
-// UTF-8.
-//
-// Settings byte: bit 0 southern hemisphere, bit 1 track donations, bit 2 show
-// caught, bits 3–4 language (LOCALES index + 1; 0 = none, only in codes from
-// older app versions, which then keep the importing device's language), bits 5–7
-// synced categories in CATEGORIES order.
+// Codes pack the progress into bits so they stay short enough to copy, share or email.
 
 import { CATEGORIES, critters } from './critters.js';
 import { LOCALES } from './i18n.svelte.js';
@@ -21,7 +11,6 @@ const BITSET_BYTES = Math.ceil(critters.length / 8);
 const FIXED_BYTES = 1 + 2 * BITSET_BYTES;
 
 /**
- * What a code carries (and what the progress module exports).
  * @typedef {{
  *   version: number,
  *   settings: { hemisphere: string, trackDonations: boolean, showCaught: boolean, locale?: string, name?: string },
@@ -33,10 +22,7 @@ const FIXED_BYTES = 1 + 2 * BITSET_BYTES;
 
 const CONTROL_CHARACTERS = /\p{Cc}/gu;
 
-/**
- * Drops control characters, trims, and cuts to MAX_NAME_LENGTH characters.
- * @param {unknown} value
- */
+/** @param {unknown} value */
 export function normalizeName(value) {
   if (typeof value !== 'string') return '';
   const characters = Array.from(value.replace(CONTROL_CHARACTERS, '').trim());
@@ -62,7 +48,7 @@ export function encodeTransferCode(data) {
 }
 
 /**
- * Finds a transfer code in text, e.g. in a whole pasted message.
+ * Finds a code in text, so pasting a whole email or message works too.
  * @param {string} text
  */
 export function findTransferCode(text) {
@@ -70,7 +56,6 @@ export function findTransferCode(text) {
 }
 
 /**
- * Throws if the code is damaged or from a different set of critters.
  * @param {string} code
  * @returns {ExportData}
  */
@@ -80,6 +65,7 @@ export function decodeTransferCode(code) {
   if (!bytes || name === null) throw new Error(`Invalid transfer code: ${code}`);
 
   const flags = bytes[0];
+  // Codes from older versions have no language (0), so the importing device keeps its own.
   const locale = LOCALES[((flags >> 3) & 0b11) - 1]?.id;
   return {
     version: 1,
@@ -97,8 +83,7 @@ export function decodeTransferCode(code) {
 }
 
 /**
- * The name at the end of a code, or null if those bytes can't be a name
- * (not UTF-8, too long, or with control characters, e.g. from a damaged code).
+ * Null if the bytes can't be a name, which catches damaged codes.
  * @param {Uint8Array} bytes
  */
 function decodeName(bytes) {
@@ -111,6 +96,7 @@ function decodeName(bytes) {
 }
 
 /**
+ * Bits follow the order of data/critters.json, so reordering it breaks codes sent earlier.
  * @param {Uint8Array} bytes
  * @param {number} offset
  * @param {Set<string>} ids

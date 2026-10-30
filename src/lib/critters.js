@@ -8,7 +8,7 @@ export { critters };
 
 /** @typedef {{ id: string, label: import('./i18n.svelte.js').MessageKey }} Tab */
 
-/** The critter types, in Critterpedia order. @type {Tab[]} */
+/** @type {Tab[]} */
 export const CATEGORIES = [
   { id: 'fish', label: 'tabFish' },
   { id: 'bug', label: 'tabBugs' },
@@ -24,8 +24,7 @@ export function critterName(critter) {
 }
 
 /**
- * The month's name in the current language, e.g. 3 -> "March" / "März".
- * @param {number} month 1–12
+ * @param {number} month
  * @param {'long' | 'short'} [style]
  */
 export function monthName(month, style = 'long') {
@@ -42,11 +41,9 @@ export function isAvailableIn(critter, hemisphere, month) {
 }
 
 /**
- * How many months in a row, starting with `month`, the critter can be caught:
- * 0 if not in `month`, 1 if it's gone next month, 12 if it's there all year.
  * @param {Critter} critter
  * @param {Hemisphere} hemisphere
- * @param {number} month 1–12
+ * @param {number} month
  */
 export function monthsLeft(critter, hemisphere, month) {
   let count = 0;
@@ -55,12 +52,11 @@ export function monthsLeft(critter, hemisphere, month) {
 }
 
 /**
- * Where the critter's hours in `month` stand at `hour`: 0 it has a time window
- * and can be caught now, 1 it's there all day, 2 it's outside its window.
+ * A sort key: catchable now first, then all day, then outside its hours.
  * @param {Critter} critter
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12
- * @param {number} hour 0–23
+ * @param {number} hour
  */
 export function timeOfDayGroup(critter, hemisphere, month, hour) {
   const hours = critter[hemisphere].find((period) => period.months.includes(month))?.hours ?? [];
@@ -69,18 +65,11 @@ export function timeOfDayGroup(critter, hemisphere, month, hour) {
 }
 
 /**
- * Orders a list (given in Critterpedia order) for the month filter. For all
- * months (0): Critterpedia order. With a month:
- *
- * 1. Critters outside their hours right now go to the bottom, except those
- *    leaving after this month, which stay at the bottom of their own group.
- * 2. Then by season: leaving soonest first, all-year last.
- * 3. Then catchable now, all day, outside their hours.
- * 4. Ties keep Critterpedia order.
+ * Critters gone after this month stay together even outside their hours; ties keep the list's Critterpedia order.
  * @param {Critter[]} list
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12, or 0 for all months
- * @param {number} hour 0–23, the current hour
+ * @param {number} hour
  */
 export function sortForMonth(list, hemisphere, month, hour) {
   if (month === 0) return list;
@@ -95,8 +84,6 @@ export function sortForMonth(list, hemisphere, month, hour) {
 }
 
 /**
- * The catch time in the given month, e.g. "4 AM – 9 PM" / "4–21 Uhr". For all
- * months (month 0), critters whose hours change by season list each season.
  * @param {Critter} critter
  * @param {Hemisphere} hemisphere
  * @param {number} month 1–12, or 0 for all months
@@ -122,10 +109,7 @@ export function notesText(critter) {
   return notes.join(' · ');
 }
 
-/**
- * Formats hours as ranges, e.g. [0, 1, 2, 3, 21, 22, 23] -> "9 PM – 4 AM" / "21–4 Uhr".
- * @param {number[]} hours 0–23
- */
+/** @param {number[]} hours */
 function formatHours(hours) {
   if (hours.length === 24) return t('allDay');
   return cyclicRuns(hours, 0, 23)
@@ -134,8 +118,7 @@ function formatHours(hours) {
 }
 
 /**
- * Non-breaking spaces ( ) keep times together when the text wraps; the
- * only break is before the dash.
+ * Non-breaking spaces keep each time together, so the only line break is before the dash.
  * @param {number} start
  * @param {number} end exclusive
  */
@@ -146,10 +129,7 @@ function formatHourRange(start, end) {
   return `${format(start)} – ${format(end)}`;
 }
 
-/**
- * Formats months as ranges, e.g. [1, 2, 3, 11, 12] -> "Nov – Mar".
- * @param {number[]} months 1–12
- */
+/** @param {number[]} months */
 function formatMonths(months) {
   if (months.length === 12) return t('allYear');
   /** @param {number} month */
@@ -160,9 +140,7 @@ function formatMonths(months) {
 }
 
 /**
- * Splits values on a cycle (hours 0–23, months 1–12) into runs of consecutive
- * values, ordered by their first value: [1, 2, 11, 12] -> [[11, 2]].
- * Not meant for the full cycle, which has no start.
+ * The full cycle has no run start, so callers handle it first.
  * @param {number[]} values
  * @param {number} min
  * @param {number} max
@@ -174,7 +152,6 @@ function cyclicRuns(values, min, max) {
   /** @type {[number, number][]} */
   const runs = [];
   for (let first = min; first <= max; first++) {
-    // A run starts at an included value whose previous value isn't included.
     const previous = first === min ? max : first - 1;
     if (!included.has(first) || included.has(previous)) continue;
     let last = first;

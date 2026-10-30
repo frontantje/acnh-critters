@@ -19,8 +19,7 @@ import {
   test,
 } from './support.js';
 
-// Time texts from the community spreadsheet, as they were in the data before
-// the app started formatting times itself, in the "All months" format.
+// The community spreadsheet's time texts, from before the app formatted times itself.
 /** @type {Record<string, { north: string, south: string }>} */
 const expectedTimes = JSON.parse(readFileSync(new URL('./expected-times.json', import.meta.url), 'utf8'));
 

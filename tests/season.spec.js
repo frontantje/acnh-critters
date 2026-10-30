@@ -1,10 +1,8 @@
-// Sorting by season and time of day, and the "last chance" tint at the end of a month.
 import { available, critters, expect, hemisphereSelect, list, monthSelect, normalize, row, rows, setShowCaught, skipWelcome, test } from './support.js';
 
 const LAST_CHANCE = 'Last chance: gone next month';
 
 /**
- * Months in a row, from `month` on, that a critter can be caught (12 = all year).
  * @param {any} critter
  * @param {'north' | 'south'} hemisphere
  * @param {number} month
@@ -16,7 +14,6 @@ function monthsLeft(critter, hemisphere, month) {
 }
 
 /**
- * 0 catchable at `hour` (with a time window), 1 all day, 2 outside its window.
  * @param {any} critter
  * @param {'north' | 'south'} hemisphere
  * @param {number} month
@@ -28,11 +25,8 @@ function timeGroup(critter, hemisphere, month, hour) {
 }
 
 /**
- * The expected order, worked out independently of the app's code: critters
- * outside their hours at the bottom, unless they leave after this month (those
- * stay at the end of their group); then by season, time group and Critterpedia
- * order.
- * @param {any[]} list in Critterpedia order
+ * Worked out independently of the app's code, so it can't share its bugs.
+ * @param {any[]} list
  * @param {'north' | 'south'} hemisphere
  * @param {number} month
  * @param {number} hour
@@ -47,16 +41,16 @@ function expectedOrder(list, hemisphere, month, hour) {
     .sort((a, b) => a.bottom - b.bottom || a.left - b.left || a.time - b.time || a.i - b.i);
 }
 
-/** Names of the shown rows, top to bottom. @param {import('@playwright/test').Page} page */
+/** @param {import('@playwright/test').Page} page */
 const shownNames = async (page) => (await rows(page).locator('span:first-child').allTextContents()).map(normalize);
 
-/** Names of the rows carrying the "last chance" note. @param {import('@playwright/test').Page} page */
+/** @param {import('@playwright/test').Page} page */
 const warnedNames = async (page) =>
   (await list(page).locator('li').filter({ hasText: LAST_CHANCE }).locator('span:first-child').allTextContents()).map(normalize);
 
 /**
  * @param {import('@playwright/test').BrowserContext} context
- * @param {string} dateTime e.g. "2026-10-28T12:00"
+ * @param {string} dateTime
  */
 const setNow = (context, dateTime) => context.clock.setFixedTime(new Date(`${dateTime}:00`));
 
@@ -84,8 +78,7 @@ test.describe('sorting', () => {
   test('leaving-soon critters outside their hours stay at the end of their group', async ({ page }) => {
     await skipWelcome(page);
     const names = await shownNames(page);
-    // The snapping turtle (9 PM – 4 AM) leaves after October and is out at noon:
-    // after the ladybug (leaving too, catchable now), before the all-year crucian carp.
+    // Turtle and ladybug leave after October, the carp never; only the turtle is outside its hours.
     expect(names.indexOf('Snapping turtle')).toBeGreaterThan(names.indexOf('Ladybug'));
     expect(names.indexOf('Snapping turtle')).toBeLessThan(names.indexOf('Crucian carp'));
   });
@@ -97,7 +90,7 @@ test.describe('sorting', () => {
     expect(names).toEqual(expectedOrder(available('all'), 'north', 10, 21).map((e) => e.name));
     // Both leave after October; at noon the order would be the other way round.
     expect(names.indexOf('Scorpion')).toBeLessThan(names.indexOf('Red dragonfly'));
-    // The red dragonfly (8 AM – 7 PM) is out, but stays with the leaving-soon group.
+    // The red dragonfly is outside its hours at 9 PM, but stays with the leaving-soon group.
     expect(names.indexOf('Red dragonfly')).toBeLessThan(names.indexOf('Crucian carp'));
   });
 
@@ -136,10 +129,7 @@ test.describe('year-round tint', () => {
 });
 
 test.describe('last chance tint', () => {
-  /**
-   * Critters gone after `month` (north), in list order at noon: the top group.
-   * @param {number} month
-   */
+  /** @param {number} month */
   const leavingAfter = (month) =>
     expectedOrder(available('all', 'north', month), 'north', month, 12)
       .filter((e) => e.left === 1)
@@ -150,10 +140,8 @@ test.describe('last chance tint', () => {
     await skipWelcome(page);
     expect(leavingAfter(10).length).toBeGreaterThan(0);
     expect(await warnedNames(page)).toEqual(leavingAfter(10));
-    // They're exactly the top of the list.
     expect((await shownNames(page)).slice(0, leavingAfter(10).length)).toEqual(leavingAfter(10));
 
-    // The tint differs from normal and year-round rows.
     const background = (/** @type {string} */ name) => row(page, name).evaluate((li) => getComputedStyle(li).backgroundColor);
     const normal = available('all').find((c) => ![1, 12].includes(monthsLeft(c, 'north', 10)));
     const allYear = available('all').find((c) => monthsLeft(c, 'north', 10) === 12);
@@ -181,9 +169,7 @@ test.describe('last chance tint', () => {
 test.describe('color legend', () => {
   /** @param {import('@playwright/test').Page} page */
   const entries = (page) => page.getByTestId('legend').locator(':scope > span');
-  /**
-   * @param {import('@playwright/test').Locator} locator
-   */
+  /** @param {import('@playwright/test').Locator} locator */
   const backgroundOf = (locator) => locator.evaluate((el) => getComputedStyle(el).backgroundColor);
 
   test('explains just the colors that can show', async ({ page }) => {

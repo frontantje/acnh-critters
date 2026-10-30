@@ -10,7 +10,7 @@
   /** @type {{ onexit: () => void }} */
   let { onexit } = $props();
 
-  // A full-screen modal dialog: Escape exits, and focus stays inside it.
+  // Modal, so Escape exits and focus stays inside.
   /** @type {HTMLDialogElement} */
   let dialog;
   $effect(() => dialog.showModal());
@@ -22,9 +22,8 @@
   /** @param {string} category */
   const categoryLabel = (category) => t(CATEGORIES.find((c) => c.id === category)?.label ?? 'tabAll');
 
-  /** The category being synced, or null while choosing one. */
   let category = $state(/** @type {string | null} */ (null));
-  /** The category's uncaught critters when its sync started, in Critterpedia order. */
+  // Fixed when the sync starts, so catching a critter doesn't shift the steps.
   let queue = $state.raw(/** @type {Critter[]} */ ([]));
   let index = $state(0);
   const current = $derived(queue[index]);
@@ -41,9 +40,7 @@
     return { total: all.length, caught: all.filter((critter) => progress.caught.has(critter.id)).length };
   }
 
-  // The clicked button disappears when switching between the category list and
-  // the critter steps, so focus is moved on explicitly (it would otherwise fall
-  // back to the page body, outside the dialog).
+  // The clicked button disappears, and focus would otherwise fall back to the body, outside the dialog.
   /** @param {string} selector */
   async function focusAfterRender(selector) {
     await tick();
@@ -63,29 +60,22 @@
     focusAfterRender('[data-action="caught"]');
   }
 
-  // Feedback on the critter before moving on: a happy pulse with a green glow
-  // for Caught, a little shake for Next.
   const PULSE = [
     { transform: 'scale(1)', filter: 'drop-shadow(0 0 0 rgb(22 163 74 / 0))' },
     { transform: 'scale(1.12)', filter: 'drop-shadow(0 0 14px rgb(22 163 74 / 0.6))', offset: 0.45 },
     { transform: 'scale(1)', filter: 'drop-shadow(0 0 0 rgb(22 163 74 / 0))' },
   ];
-  /** The shake, around wherever the critter is (after a swipe, the finger's spot). @param {number} from */
+  /** @param {number} from */
   const shake = (from) =>
     [0, -10, 9, -6, 4, 0].map((x) => ({ transform: `translateX(${from + x}px)`, opacity: 1 + from / 400 }));
 
-  /** The shown critter's element (icon and name); a new one for every critter. */
   let card = $state(/** @type {HTMLElement | undefined} */ (undefined));
   let busy = false;
 
   /**
-   * Moves on, marking the critter first if it was caught. Unless the device asks
-   * for reduced motion, the critter pulses (caught) or shakes (next, also after a
-   * swipe, where it shakes at the finger's spot), slides out to the left, and
-   * the next one slides in. Input during that is ignored, so a quick double tap
-   * can't mark a critter that hasn't been shown yet.
+   * Input is ignored while it animates, so a quick double tap can't mark a critter not shown yet.
    * @param {boolean} caught
-   * @param {number} [swipedTo] how far the critter was dragged when a swipe ended
+   * @param {number} [swipedTo]
    */
   async function advance(caught, swipedTo) {
     if (busy) return;
@@ -95,7 +85,6 @@
       const from = swipedTo ?? 0;
       try {
         await card.animate(caught ? PULSE : shake(from), { duration: caught ? 320 : 280, easing: 'ease-out' }).finished;
-        // On to the left from there.
         await card.animate(
           [
             { transform: `translateX(${from}px)`, opacity: 1 + from / 400 },
@@ -137,13 +126,11 @@
     );
   }
 
-  // Keyboard shortcuts on the critter steps, wherever focus is: → means Next,
-  // Enter means Caught. On a focused button Enter keeps clicking that button
-  // (e.g. Next or ✕), as screen reader users expect. Held-down repeats are
-  // ignored so a long press can't skip or catch a whole run of critters.
+  // On a focused button, Enter still clicks that button, as screen reader users expect.
   /** @param {KeyboardEvent} event */
   function onkeydown(event) {
     if (category === null || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    // Repeats are ignored, so holding a key can't skip or catch a whole run of critters.
     if (event.key === 'ArrowRight') {
       event.preventDefault();
       if (!event.repeat) advance(false);
@@ -157,26 +144,15 @@
     }
   }
 
-  // Clicking or tapping Next leaves focus on it, so the next Enter would skip
-  // instead of catch; move it back to Caught. Keyboard presses (detail 0) keep
-  // focus on Next so repeated Space presses keep skipping.
+  // A click returns focus to Caught so Enter catches; key presses (detail 0) stay on Next to keep skipping.
   /** @param {MouseEvent} event */
   function onNextClick(event) {
     advance(false);
     if (event.detail > 0 && category !== null) focusAfterRender('[data-action="caught"]');
   }
 
-  // Swiping left on the critter also means Next. The critter follows the
-  // finger and springs back if the swipe is too short.
-  //
-  // Touch events rather than pointer events: once a move is clearly sideways,
-  // the browser is told to stay out of it (preventDefault), so it can't take
-  // the gesture over for scrolling, bouncing or page navigation and cancel the
-  // swipe halfway, as Safari did in a browser tab. Up-and-down moves are left
-  // to the browser, so the area still scrolls; a second finger (zooming) ends
-  // the swipe.
+  // Touch events, not pointer events: otherwise Safari took sideways swipes over and cancelled them halfway.
   const SWIPE_DISTANCE = 60;
-  /** How far a finger moves before it's decided whether that's sideways. */
   const SLOP = 8;
   /** @type {{ x: number, y: number, sideways: boolean | null } | null} */
   let swipe = null;
@@ -304,11 +280,7 @@
         <div class="h-full bg-green-600 transition-[width]" style:width="{(index / queue.length) * 100}%"></div>
       </div>
 
-      <!-- Swipe area (touch listeners above). touch-action tells the browser up
-           front that it may scroll vertically and zoom, but sideways moves are
-           the app's. Swiping is a touch shortcut for the Next button (and the →
-           key). overflow-x-clip: the critter sliding out mustn't make the page
-           scroll sideways. -->
+      <!-- touch-action saves sideways moves for the swipe; overflow-x-clip keeps the sliding critter from scrolling the page. -->
       <div
         bind:this={swipeArea}
         class="flex flex-1 touch-pan-y touch-pinch-zoom flex-col items-center justify-center overflow-x-clip py-10 text-center select-none"

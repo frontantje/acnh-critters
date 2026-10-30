@@ -1,14 +1,8 @@
-// Renders the app's home-screen icons into public/: a critter icon on a green
-// square, drawn by the installed Chrome (through Playwright). The critter sits
-// well inside the middle, so Android can crop the icon to any shape.
-//
-// Run with: node scripts/build-app-icons.mjs (after `npm run data`)
-
 import { chromium } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
-// The octopus, from the icons `npm run data` downloads.
+// Downloaded by `npm run data`, so run that first.
 const PICTURE = new URL('../public/icons/octopus.png', import.meta.url);
 const BACKGROUND = 'linear-gradient(160deg, #86efac, #16a34a)';
 const ICONS = [
@@ -23,6 +17,7 @@ const browser = await chromium.launch({ channel: 'chrome' });
 const page = await browser.newPage();
 for (const { file, size } of ICONS) {
   await page.setViewportSize({ width: size, height: size });
+  // The critter stays well inside the middle, so Android can crop the icon to any shape.
   await page.setContent(`
     <style>
       body { margin: 0; }

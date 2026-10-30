@@ -19,14 +19,13 @@ import { setLocale } from './i18n.svelte.js';
 /** @param {string} id */
 const byId = (id) => /** @type {Critter} */ (critters.find((critter) => critter.id === id));
 
-/** A real critter with made-up availability. @param {Period[]} periods */
+/** @param {Period[]} periods */
 const withPeriods = (periods) => ({ ...critters[0], north: periods, south: periods });
 
 const ALL_DAY = Array.from({ length: 24 }, (_, hour) => hour);
 /**
- * Hours from start (inclusive) to end (exclusive), wrapping past midnight.
  * @param {number} start
- * @param {number} end
+ * @param {number} end exclusive
  */
 function hours(start, end) {
   const list = [];
@@ -185,8 +184,6 @@ describe('sortForMonth', () => {
   });
 
   /**
-   * Each critter's expected sort key: [bottom part?, months left, time group, Critterpedia index].
-   * The bottom part: outside their hours and not leaving after this month.
    * @param {Critter[]} sorted
    * @param {'north' | 'south'} hemisphere
    * @param {number} month
@@ -216,16 +213,13 @@ describe('sortForMonth', () => {
 
     expect(sorted).toHaveLength(available.length);
     expect(keys).toEqual([...keys].sort(byKeys));
-    // Leaving after this month comes first, whatever the hour: catchable now, all day, outside their hours.
     const leaving = keys.filter((k) => k[1] === 1);
     expect(keys.slice(0, leaving.length)).toEqual(leaving);
     expect(leaving.map((k) => k[2])).toEqual(leaving.map((k) => k[2]).sort());
-    // The bottom part is exactly the others outside their hours.
     const bottom = keys.findIndex((k) => k[0] === 1);
     expect(bottom).toBeGreaterThan(0);
     expect(keys.slice(bottom).every((k) => k[2] === 2 && k[1] > 1)).toBe(true);
     expect(keys.slice(leaving.length, bottom).every((k) => k[2] !== 2)).toBe(true);
-    // Both parts end with all-year critters.
     expect(keys[bottom - 1][1]).toBe(12);
     expect(keys[keys.length - 1][1]).toBe(12);
   });
@@ -241,7 +235,6 @@ describe('sortForMonth', () => {
     expect(turtle).toBeGreaterThan(ids.indexOf('ladybug')); // leaving too, catchable at noon
     expect(leavingAllDay.length).toBeGreaterThan(0);
     expect(turtle).toBeGreaterThan(Math.max(...leavingAllDay));
-    // …but above everything that stays longer.
     expect(turtle).toBeLessThan(sorted.findIndex((c) => monthsLeft(c, 'north', 10) > 1));
   });
 
@@ -249,12 +242,9 @@ describe('sortForMonth', () => {
     const available = critters.filter((c) => isAvailableIn(c, 'north', 10));
     const names = (/** @type {number} */ hour) => sortForMonth(available, 'north', 10, hour).map((c) => c.id);
     expect(names(12)).not.toEqual(names(21));
-    // All four leave after October. Each pair is the other way round in
-    // Critterpedia order, so only the time of day can put them like this.
-    // Noon: the ladybug (8 AM – 5 PM) before the snapping turtle (9 PM – 4 AM).
-    expect(names(12).indexOf('ladybug')).toBeLessThan(names(12).indexOf('snapping-turtle'));
-    // 9 PM: the scorpion (7 PM – 4 AM) before the red dragonfly (8 AM – 7 PM).
-    expect(names(21).indexOf('scorpion')).toBeLessThan(names(21).indexOf('red-dragonfly'));
+    // All four leave after October and each pair is reversed in Critterpedia order, so only the hour can order them like this.
+    expect(names(12).indexOf('ladybug')).toBeLessThan(names(12).indexOf('snapping-turtle')); // 8–17 vs. 21–4
+    expect(names(21).indexOf('scorpion')).toBeLessThan(names(21).indexOf('red-dragonfly')); // 19–4 vs. 8–19
   });
 });
 
