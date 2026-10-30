@@ -30,6 +30,15 @@ describe('critter data', () => {
     }
   });
 
+  test('every icon is a file in public/icons, and there are no others', () => {
+    // So the app needs no image server and works offline.
+    const files = Object.keys(import.meta.glob('../../public/icons/*'))
+      .map((path) => path.replace('../../public/', ''))
+      .sort();
+    expect(critters.map((c) => c.icon).sort()).toEqual(files);
+    expect(critters.filter((c) => c.icon !== `icons/${c.id}.png`).map((c) => c.id)).toEqual([]);
+  });
+
   test('every critter has an English and a German name', () => {
     expect(critters.filter((c) => !c.name.en?.trim() || !c.name.de?.trim()).map((c) => c.id)).toEqual([]);
   });

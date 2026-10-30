@@ -1,7 +1,7 @@
 // Shared fixtures and helpers for the browser tests.
 //
-// Every test runs on a fixed date, with critter icons served locally, and fails
-// if the page logs a console error.
+// Every test runs on a fixed date, and fails if the page logs a console error
+// or loads anything from another server (the app must work offline).
 
 import { test as base, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
@@ -15,21 +15,18 @@ export const critters = JSON.parse(readFileSync(new URL('../data/critters.json',
 export const TODAY = new Date('2026-10-15T12:00:00');
 export const MONTH = 10;
 
-// A 1×1 PNG standing in for the icons from acnhcdn.com, so tests don't depend on
-// an external server.
-const PLACEHOLDER_ICON = Buffer.from(
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-  'base64',
-);
-
 /**
  * @param {import('@playwright/test').BrowserContext} context
  * @param {string[]} errors
  */
 async function prepare(context, errors) {
   await context.clock.setFixedTime(TODAY);
-  await context.route('https://acnhcdn.com/**', (route) =>
-    route.fulfill({ contentType: 'image/png', body: PLACEHOLDER_ICON }),
+  await context.route(
+    (url) => url.hostname !== 'localhost',
+    (route) => {
+      errors.push(`loaded from another server: ${route.request().url()}`);
+      return route.abort();
+    },
   );
   context.on('page', (page) => {
     page.on('console', (message) => message.type() === 'error' && errors.push(message.text()));

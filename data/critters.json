@@ -7,7 +7,7 @@
       "en": "Bitterling",
       "de": "Bitterling"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish0.png",
+    "icon": "icons/bitterling.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishTanagoCropped.png",
     "price": 900,
     "location": "River",
@@ -36,7 +36,7 @@
       "en": "Pale chub",
       "de": "Döbel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish1.png",
+    "icon": "icons/pale-chub.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishOikawaCropped.png",
     "price": 200,
     "location": "River",
@@ -65,7 +65,7 @@
       "en": "Crucian carp",
       "de": "Karausche"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish2.png",
+    "icon": "icons/crucian-carp.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishFunaCropped.png",
     "price": 160,
     "location": "River",
@@ -94,7 +94,7 @@
       "en": "Dace",
       "de": "Hasel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish3.png",
+    "icon": "icons/dace.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishUguiCropped.png",
     "price": 240,
     "location": "River",
@@ -123,7 +123,7 @@
       "en": "Carp",
       "de": "Karpfen"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish5.png",
+    "icon": "icons/carp.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKoiCropped.png",
     "price": 300,
     "location": "Pond",
@@ -152,7 +152,7 @@
       "en": "Koi",
       "de": "Koi-Karpfen"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish6.png",
+    "icon": "icons/koi.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNishikigoiCropped.png",
     "price": 4000,
     "location": "Pond",
@@ -181,7 +181,7 @@
       "en": "Goldfish",
       "de": "Goldfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish7.png",
+    "icon": "icons/goldfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKingyoCropped.png",
     "price": 1300,
     "location": "Pond",
@@ -210,7 +210,7 @@
       "en": "Pop-eyed goldfish",
       "de": "Teleskopauge"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish8.png",
+    "icon": "icons/pop-eyed-goldfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDemekinCropped.png",
     "price": 1300,
     "location": "Pond",
@@ -239,7 +239,7 @@
       "en": "Ranchu goldfish",
       "de": "Ranchu"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish85.png",
+    "icon": "icons/ranchu-goldfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishRanchuCropped.png",
     "price": 4500,
     "location": "Pond",
@@ -268,7 +268,7 @@
       "en": "Killifish",
       "de": "Killifisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish9.png",
+    "icon": "icons/killifish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishMedakaCropped.png",
     "price": 300,
     "location": "Pond",
@@ -297,7 +297,7 @@
       "en": "Crawfish",
       "de": "Flusskrebs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish10.png",
+    "icon": "icons/crawfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishZariganiCropped.png",
     "price": 200,
     "location": "Pond",
@@ -326,7 +326,7 @@
       "en": "Soft-shelled turtle",
       "de": "Weichschildkröte"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish65.png",
+    "icon": "icons/soft-shelled-turtle.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSupponCropped.png",
     "price": 3750,
     "location": "River",
@@ -355,7 +355,7 @@
       "en": "Snapping turtle",
       "de": "Schnappschildkröte"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish78.png",
+    "icon": "icons/snapping-turtle.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKamitsukigameCropped.png",
     "price": 5000,
     "location": "River",
@@ -384,7 +384,7 @@
       "en": "Tadpole",
       "de": "Kaulquappe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish64.png",
+    "icon": "icons/tadpole.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishOtamajakusiCropped.png",
     "price": 100,
     "location": "Pond",
@@ -413,7 +413,7 @@
       "en": "Frog",
       "de": "Frosch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish11.png",
+    "icon": "icons/frog.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKaeruCropped.png",
     "price": 120,
     "location": "Pond",
@@ -442,7 +442,7 @@
       "en": "Freshwater goby",
       "de": "Flussgrundel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish12.png",
+    "icon": "icons/freshwater-goby.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDonkoCropped.png",
     "price": 400,
     "location": "River",
@@ -471,7 +471,7 @@
       "en": "Loach",
       "de": "Bachschmerle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish13.png",
+    "icon": "icons/loach.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDojouCropped.png",
     "price": 400,
     "location": "River",
@@ -500,7 +500,7 @@
       "en": "Catfish",
       "de": "Katzenwels"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish14.png",
+    "icon": "icons/catfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNamazuCropped.png",
     "price": 800,
     "location": "Pond",
@@ -529,7 +529,7 @@
       "en": "Giant snakehead",
       "de": "Schlangenkopf"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish16.png",
+    "icon": "icons/giant-snakehead.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishRaigyoCropped.png",
     "price": 5500,
     "location": "Pond",
@@ -558,7 +558,7 @@
       "en": "Bluegill",
       "de": "Sonnenbarsch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish17.png",
+    "icon": "icons/bluegill.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishBlueguillCropped.png",
     "price": 180,
     "location": "River",
@@ -587,7 +587,7 @@
       "en": "Yellow perch",
       "de": "Flussbarsch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish18.png",
+    "icon": "icons/yellow-perch.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishYellowparchCropped.png",
     "price": 300,
     "location": "River",
@@ -616,7 +616,7 @@
       "en": "Black bass",
       "de": "Barsch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish19.png",
+    "icon": "icons/black-bass.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishBlackbassCropped.png",
     "price": 400,
     "location": "River",
@@ -645,7 +645,7 @@
       "en": "Tilapia",
       "de": "Tilapia"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish76.png",
+    "icon": "icons/tilapia.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishThirapiaCropped.png",
     "price": 800,
     "location": "River",
@@ -674,7 +674,7 @@
       "en": "Pike",
       "de": "Hecht"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish20.png",
+    "icon": "icons/pike.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishPaikuCropped.png",
     "price": 1800,
     "location": "River",
@@ -703,7 +703,7 @@
       "en": "Pond smelt",
       "de": "Stint"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish21.png",
+    "icon": "icons/pond-smelt.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishWakasagiCropped.png",
     "price": 400,
     "location": "River",
@@ -732,7 +732,7 @@
       "en": "Sweetfish",
       "de": "Ayu"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish22.png",
+    "icon": "icons/sweetfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishAyuCropped.png",
     "price": 900,
     "location": "River",
@@ -761,7 +761,7 @@
       "en": "Cherry salmon",
       "de": "Masulachs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish23.png",
+    "icon": "icons/cherry-salmon.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishYamameCropped.png",
     "price": 1000,
     "location": "River (clifftop)",
@@ -798,7 +798,7 @@
       "en": "Char",
       "de": "Saibling"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish24.png",
+    "icon": "icons/char.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishOoiwanaCropped.png",
     "price": 3800,
     "location": "River (clifftop)",
@@ -835,7 +835,7 @@
       "en": "Golden trout",
       "de": "Goldforelle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish79.png",
+    "icon": "icons/golden-trout.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishGoldenTorautoCropped.png",
     "price": 15000,
     "location": "River (clifftop)",
@@ -864,7 +864,7 @@
       "en": "Stringfish",
       "de": "Huchen"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish26.png",
+    "icon": "icons/stringfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishItouCropped.png",
     "price": 15000,
     "location": "River (clifftop)",
@@ -893,7 +893,7 @@
       "en": "Salmon",
       "de": "Lachs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish27.png",
+    "icon": "icons/salmon.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSakeCropped.png",
     "price": 700,
     "location": "River (mouth)",
@@ -922,7 +922,7 @@
       "en": "King salmon",
       "de": "Königslachs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish28.png",
+    "icon": "icons/king-salmon.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKingsalmonCropped.png",
     "price": 1800,
     "location": "River (mouth)",
@@ -951,7 +951,7 @@
       "en": "Mitten crab",
       "de": "Wollhandkrabbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish66.png",
+    "icon": "icons/mitten-crab.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSyanhaiganiCropped.png",
     "price": 2000,
     "location": "River",
@@ -980,7 +980,7 @@
       "en": "Guppy",
       "de": "Guppy"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish29.png",
+    "icon": "icons/guppy.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishGuppiCropped.png",
     "price": 1300,
     "location": "River",
@@ -1009,7 +1009,7 @@
       "en": "Nibble fish",
       "de": "Saugbarbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish67.png",
+    "icon": "icons/nibble-fish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDokutaafishCropped.png",
     "price": 1500,
     "location": "River",
@@ -1038,7 +1038,7 @@
       "en": "Angelfish",
       "de": "Skalar"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish30.png",
+    "icon": "icons/angelfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishAngelfishCropped.png",
     "price": 3000,
     "location": "River",
@@ -1067,7 +1067,7 @@
       "en": "Betta",
       "de": "Kampffisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish77.png",
+    "icon": "icons/betta.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishBetaCropped.png",
     "price": 2500,
     "location": "River",
@@ -1096,7 +1096,7 @@
       "en": "Neon tetra",
       "de": "Neonsalmler"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish31.png",
+    "icon": "icons/neon-tetra.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNeontetoraCropped.png",
     "price": 500,
     "location": "River",
@@ -1125,7 +1125,7 @@
       "en": "Rainbowfish",
       "de": "Regenbogenfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish80.png",
+    "icon": "icons/rainbowfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishRainbowfishCropped.png",
     "price": 800,
     "location": "River",
@@ -1154,7 +1154,7 @@
       "en": "Piranha",
       "de": "Piranha"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish32.png",
+    "icon": "icons/piranha.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishPiraniaCropped.png",
     "price": 2500,
     "location": "River",
@@ -1183,7 +1183,7 @@
       "en": "Arowana",
       "de": "Arowana"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish33.png",
+    "icon": "icons/arowana.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishArowanaCropped.png",
     "price": 10000,
     "location": "River",
@@ -1212,7 +1212,7 @@
       "en": "Dorado",
       "de": "Lachssalmler"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish34.png",
+    "icon": "icons/dorado.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDoladoCropped.png",
     "price": 15000,
     "location": "River",
@@ -1241,7 +1241,7 @@
       "en": "Gar",
       "de": "Knochenhecht"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish35.png",
+    "icon": "icons/gar.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishGaCropped.png",
     "price": 6000,
     "location": "Pond",
@@ -1270,7 +1270,7 @@
       "en": "Arapaima",
       "de": "Arapaima"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish36.png",
+    "icon": "icons/arapaima.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishPirarukuCropped.png",
     "price": 10000,
     "location": "River",
@@ -1299,7 +1299,7 @@
       "en": "Saddled bichir",
       "de": "Flösselhecht"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish68.png",
+    "icon": "icons/saddled-bichir.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishEndorikeriiCropped.png",
     "price": 4000,
     "location": "River",
@@ -1328,7 +1328,7 @@
       "en": "Sturgeon",
       "de": "Stör"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish75.png",
+    "icon": "icons/sturgeon.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishTyouzameCropped.png",
     "price": 10000,
     "location": "River (mouth)",
@@ -1357,7 +1357,7 @@
       "en": "Sea butterfly",
       "de": "See-Engel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish37.png",
+    "icon": "icons/sea-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKurioneCropped.png",
     "price": 1000,
     "location": "Sea",
@@ -1386,7 +1386,7 @@
       "en": "Sea horse",
       "de": "Seepferdchen"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish39.png",
+    "icon": "icons/sea-horse.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishTatsunootoshigoCropped.png",
     "price": 1100,
     "location": "Sea",
@@ -1415,7 +1415,7 @@
       "en": "Clown fish",
       "de": "Anemonenfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish40.png",
+    "icon": "icons/clown-fish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKumanomiCropped.png",
     "price": 650,
     "location": "Sea",
@@ -1444,7 +1444,7 @@
       "en": "Surgeonfish",
       "de": "Paletten-Doktorfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish41.png",
+    "icon": "icons/surgeonfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNanyouhagiCropped.png",
     "price": 1000,
     "location": "Sea",
@@ -1473,7 +1473,7 @@
       "en": "Butterfly fish",
       "de": "Falterfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish42.png",
+    "icon": "icons/butterfly-fish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishChouchouuoCropped.png",
     "price": 1000,
     "location": "Sea",
@@ -1502,7 +1502,7 @@
       "en": "Napoleonfish",
       "de": "Napoleonfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish43.png",
+    "icon": "icons/napoleonfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNaporeonfishCropped.png",
     "price": 10000,
     "location": "Sea",
@@ -1531,7 +1531,7 @@
       "en": "Zebra turkeyfish",
       "de": "Rotfeuerfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish44.png",
+    "icon": "icons/zebra-turkeyfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishMinokasagoCropped.png",
     "price": 500,
     "location": "Sea",
@@ -1560,7 +1560,7 @@
       "en": "Blowfish",
       "de": "Kugelfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish73.png",
+    "icon": "icons/blowfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishFuguCropped.png",
     "price": 5000,
     "location": "Sea",
@@ -1589,7 +1589,7 @@
       "en": "Puffer fish",
       "de": "Igelfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish45.png",
+    "icon": "icons/puffer-fish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishHarisenbonCropped.png",
     "price": 250,
     "location": "Sea",
@@ -1618,7 +1618,7 @@
       "en": "Anchovy",
       "de": "Sardelle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish81.png",
+    "icon": "icons/anchovy.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishAntyobiCropped.png",
     "price": 200,
     "location": "Sea",
@@ -1647,7 +1647,7 @@
       "en": "Horse mackerel",
       "de": "Makrele"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish46.png",
+    "icon": "icons/horse-mackerel.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishAjiCropped.png",
     "price": 150,
     "location": "Sea",
@@ -1676,7 +1676,7 @@
       "en": "Barred knifejaw",
       "de": "Schnabelbarsch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish47.png",
+    "icon": "icons/barred-knifejaw.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishIshidaiCropped.png",
     "price": 5000,
     "location": "Sea",
@@ -1705,7 +1705,7 @@
       "en": "Sea bass",
       "de": "Seebarsch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish48.png",
+    "icon": "icons/sea-bass.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSuzukiCropped.png",
     "price": 400,
     "location": "Sea",
@@ -1734,7 +1734,7 @@
       "en": "Red snapper",
       "de": "Kaiserschnapper"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish49.png",
+    "icon": "icons/red-snapper.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishTaiCropped.png",
     "price": 3000,
     "location": "Sea",
@@ -1763,7 +1763,7 @@
       "en": "Dab",
       "de": "Kliesche"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish50.png",
+    "icon": "icons/dab.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKareiCropped.png",
     "price": 300,
     "location": "Sea",
@@ -1792,7 +1792,7 @@
       "en": "Olive flounder",
       "de": "Flunder"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish51.png",
+    "icon": "icons/olive-flounder.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishHirameCropped.png",
     "price": 800,
     "location": "Sea",
@@ -1821,7 +1821,7 @@
       "en": "Squid",
       "de": "Kalmar"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish52.png",
+    "icon": "icons/squid.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishIkaCropped.png",
     "price": 500,
     "location": "Sea",
@@ -1850,7 +1850,7 @@
       "en": "Moray eel",
       "de": "Muräne"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish55.png",
+    "icon": "icons/moray-eel.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishUtsuboCropped.png",
     "price": 2000,
     "location": "Sea",
@@ -1879,7 +1879,7 @@
       "en": "Ribbon eel",
       "de": "Nasenmuräne"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish71.png",
+    "icon": "icons/ribbon-eel.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishHanahigeutuboCropped.png",
     "price": 600,
     "location": "Sea",
@@ -1908,7 +1908,7 @@
       "en": "Tuna",
       "de": "Thunfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish57.png",
+    "icon": "icons/tuna.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishMaguroCropped.png",
     "price": 7000,
     "location": "Pier",
@@ -1937,7 +1937,7 @@
       "en": "Blue marlin",
       "de": "Marlin"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish58.png",
+    "icon": "icons/blue-marlin.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKajikiCropped.png",
     "price": 10000,
     "location": "Pier",
@@ -1966,7 +1966,7 @@
       "en": "Giant trevally",
       "de": "Stachelmakrele"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish70.png",
+    "icon": "icons/giant-trevally.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishRouninajiCropped.png",
     "price": 4500,
     "location": "Pier",
@@ -1995,7 +1995,7 @@
       "en": "Mahi-mahi",
       "de": "Goldmakrele"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish82.png",
+    "icon": "icons/mahi-mahi.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishShiiraCropped.png",
     "price": 6000,
     "location": "Pier",
@@ -2024,7 +2024,7 @@
       "en": "Ocean sunfish",
       "de": "Mondfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish60.png",
+    "icon": "icons/ocean-sunfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishManbouCropped.png",
     "price": 4000,
     "location": "Sea",
@@ -2053,7 +2053,7 @@
       "en": "Ray",
       "de": "Rochen"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish59.png",
+    "icon": "icons/ray.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishEiCropped.png",
     "price": 3000,
     "location": "Sea",
@@ -2082,7 +2082,7 @@
       "en": "Saw shark",
       "de": "Sägehai"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish74.png",
+    "icon": "icons/saw-shark.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishNokogirizameCropped.png",
     "price": 12000,
     "location": "Sea",
@@ -2111,7 +2111,7 @@
       "en": "Hammerhead shark",
       "de": "Hammerhai"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish61.png",
+    "icon": "icons/hammerhead-shark.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishShumokuzameCropped.png",
     "price": 8000,
     "location": "Sea",
@@ -2140,7 +2140,7 @@
       "en": "Great white shark",
       "de": "Hai"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish62.png",
+    "icon": "icons/great-white-shark.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSameCropped.png",
     "price": 15000,
     "location": "Sea",
@@ -2169,7 +2169,7 @@
       "en": "Whale shark",
       "de": "Walhai"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish72.png",
+    "icon": "icons/whale-shark.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishJinbeezameCropped.png",
     "price": 13000,
     "location": "Sea",
@@ -2198,7 +2198,7 @@
       "en": "Suckerfish",
       "de": "Schiffshalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish83.png",
+    "icon": "icons/suckerfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishKobanzameCropped.png",
     "price": 1500,
     "location": "Sea",
@@ -2227,7 +2227,7 @@
       "en": "Football fish",
       "de": "Anglerfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish56.png",
+    "icon": "icons/football-fish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishChouchinankouCropped.png",
     "price": 2500,
     "location": "Sea",
@@ -2256,7 +2256,7 @@
       "en": "Oarfish",
       "de": "Riemenfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish69.png",
+    "icon": "icons/oarfish.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishRyuuguunotukaiCropped.png",
     "price": 9000,
     "location": "Sea",
@@ -2285,7 +2285,7 @@
       "en": "Barreleye",
       "de": "Glaskopffisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish84.png",
+    "icon": "icons/barreleye.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishDemenigisuCropped.png",
     "price": 15000,
     "location": "Sea",
@@ -2314,7 +2314,7 @@
       "en": "Coelacanth",
       "de": "Quastenflosser"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish63.png",
+    "icon": "icons/coelacanth.png",
     "image": "https://acnhcdn.com/latest/BookFishIcon/FishSirakansuCropped.png",
     "price": 15000,
     "location": "Sea (rainy days)",
@@ -2343,7 +2343,7 @@
       "en": "Common butterfly",
       "de": "Kohlweißling"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins0.png",
+    "icon": "icons/common-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMonshirochoCropped.png",
     "price": 160,
     "location": "Flying",
@@ -2372,7 +2372,7 @@
       "en": "Yellow butterfly",
       "de": "Zitronenfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins1.png",
+    "icon": "icons/yellow-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMonkichoCropped.png",
     "price": 160,
     "location": "Flying",
@@ -2401,7 +2401,7 @@
       "en": "Tiger butterfly",
       "de": "Schwalbenschwanz"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins2.png",
+    "icon": "icons/tiger-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAgehachoCropped.png",
     "price": 240,
     "location": "Flying",
@@ -2430,7 +2430,7 @@
       "en": "Peacock butterfly",
       "de": "Ritterfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins3.png",
+    "icon": "icons/peacock-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKarasuagehaCropped.png",
     "price": 2500,
     "location": "Flying near blue/purple/black flowers",
@@ -2459,7 +2459,7 @@
       "en": "Common bluebottle",
       "de": "Kolibrifalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins72.png",
+    "icon": "icons/common-bluebottle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAosujiagehaCropped.png",
     "price": 300,
     "location": "Flying",
@@ -2488,7 +2488,7 @@
       "en": "Paper kite butterfly",
       "de": "Weiße Baumnymphe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins73.png",
+    "icon": "icons/paper-kite-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhgomamadaraCropped.png",
     "price": 1000,
     "location": "Flying near flowers",
@@ -2517,7 +2517,7 @@
       "en": "Great purple emperor",
       "de": "Japan-Schillerfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins74.png",
+    "icon": "icons/great-purple-emperor.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhmurasakiCropped.png",
     "price": 3000,
     "location": "Flying near flowers",
@@ -2546,7 +2546,7 @@
       "en": "Monarch butterfly",
       "de": "Monarchfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins4.png",
+    "icon": "icons/monarch-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhkabamadaraCropped.png",
     "price": 140,
     "location": "Flying near flowers",
@@ -2575,7 +2575,7 @@
       "en": "Emperor butterfly",
       "de": "Himmelsfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins5.png",
+    "icon": "icons/emperor-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMorufuochoCropped.png",
     "price": 4000,
     "location": "Flying near flowers",
@@ -2604,7 +2604,7 @@
       "en": "Agrias butterfly",
       "de": "Agrias-Falter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins6.png",
+    "icon": "icons/agrias-butterfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMiirotatehaCropped.png",
     "price": 3000,
     "location": "Flying near flowers",
@@ -2633,7 +2633,7 @@
       "en": "Rajah Brooke's birdwing",
       "de": "Troides brookiana"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins7.png",
+    "icon": "icons/rajah-brookes-birdwing.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAkaeritoribaneagehaCropped.png",
     "price": 2500,
     "location": "Flying near flowers",
@@ -2662,7 +2662,7 @@
       "en": "Queen Alexandra's birdwing",
       "de": "Vogelfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins8.png",
+    "icon": "icons/queen-alexandras-birdwing.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectArekisandoratoribaneagehaCropped.png",
     "price": 4000,
     "location": "Flying near flowers",
@@ -2691,7 +2691,7 @@
       "en": "Moth",
       "de": "Motte"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins9.png",
+    "icon": "icons/moth.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGaCropped.png",
     "price": 130,
     "location": "Flying near light sources",
@@ -2720,7 +2720,7 @@
       "en": "Atlas moth",
       "de": "Atlasspinner"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins10.png",
+    "icon": "icons/atlas-moth.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectYonagunisanCropped.png",
     "price": 3000,
     "location": "On trees (any kind)",
@@ -2749,7 +2749,7 @@
       "en": "Madagascan sunset moth",
       "de": "Regenbogenfalter"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins79.png",
+    "icon": "icons/madagascan-sunset-moth.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNishikiohtsubamegaCropped.png",
     "price": 2500,
     "location": "Flying near flowers",
@@ -2778,7 +2778,7 @@
       "en": "Long locust",
       "de": "Nasenschrecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins13.png",
+    "icon": "icons/long-locust.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectShoryobattaCropped.png",
     "price": 200,
     "location": "On the ground",
@@ -2807,7 +2807,7 @@
       "en": "Migratory locust",
       "de": "Wanderschrecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins14.png",
+    "icon": "icons/migratory-locust.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTonosamabattaCropped.png",
     "price": 600,
     "location": "On the ground",
@@ -2836,7 +2836,7 @@
       "en": "Rice grasshopper",
       "de": "Heuschrecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins67.png",
+    "icon": "icons/rice-grasshopper.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectInagoCropped.png",
     "price": 400,
     "location": "On the ground",
@@ -2865,7 +2865,7 @@
       "en": "Grasshopper",
       "de": "Grashüpfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins32.png",
+    "icon": "icons/grasshopper.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKirigirisuCropped.png",
     "price": 160,
     "location": "On the ground",
@@ -2894,7 +2894,7 @@
       "en": "Cricket",
       "de": "Grille"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins30.png",
+    "icon": "icons/cricket.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKohrogiCropped.png",
     "price": 130,
     "location": "On the ground",
@@ -2923,7 +2923,7 @@
       "en": "Bell cricket",
       "de": "Singgrille"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins31.png",
+    "icon": "icons/bell-cricket.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSuzumushiCropped.png",
     "price": 430,
     "location": "On the ground",
@@ -2952,7 +2952,7 @@
       "en": "Mantis",
       "de": "Gottesanbeterin"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins15.png",
+    "icon": "icons/mantis.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKamakiriCropped.png",
     "price": 430,
     "location": "On flowers",
@@ -2981,7 +2981,7 @@
       "en": "Orchid mantis",
       "de": "Orchideenmantis"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins16.png",
+    "icon": "icons/orchid-mantis.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHanakamakiriCropped.png",
     "price": 2400,
     "location": "On white flowers",
@@ -3010,7 +3010,7 @@
       "en": "Honeybee",
       "de": "Honigbiene"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins11.png",
+    "icon": "icons/honeybee.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMitsubachiCropped.png",
     "price": 200,
     "location": "Flying near flowers",
@@ -3039,7 +3039,7 @@
       "en": "Wasp",
       "de": "Wespe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins12.png",
+    "icon": "icons/wasp.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHachiCropped.png",
     "price": 2500,
     "location": "Shaking trees",
@@ -3068,7 +3068,7 @@
       "en": "Brown cicada",
       "de": "Braunzikade"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins17.png",
+    "icon": "icons/brown-cicada.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAburazemiCropped.png",
     "price": 250,
     "location": "On hardwood/cedar trees",
@@ -3097,7 +3097,7 @@
       "en": "Robust cicada",
       "de": "Hyalessa-Zikade"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins18.png",
+    "icon": "icons/robust-cicada.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMinminzemiCropped.png",
     "price": 300,
     "location": "On hardwood/cedar trees",
@@ -3126,7 +3126,7 @@
       "en": "Giant cicada",
       "de": "Riesenzikade"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins65.png",
+    "icon": "icons/giant-cicada.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKumazemiCropped.png",
     "price": 500,
     "location": "On hardwood/cedar trees",
@@ -3155,7 +3155,7 @@
       "en": "Walker cicada",
       "de": "Bergzikade"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins19.png",
+    "icon": "icons/walker-cicada.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTsukutsukuhousiCropped.png",
     "price": 400,
     "location": "On hardwood/cedar trees",
@@ -3184,7 +3184,7 @@
       "en": "Evening cicada",
       "de": "Abendzikade"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins20.png",
+    "icon": "icons/evening-cicada.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHigurashiCropped.png",
     "price": 550,
     "location": "On hardwood/cedar trees",
@@ -3213,7 +3213,7 @@
       "en": "Cicada shell",
       "de": "Zikadenlarvenhaut"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins69.png",
+    "icon": "icons/cicada-shell.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSeminonukegaraCropped.png",
     "price": 10,
     "location": "On hardwood/cedar trees",
@@ -3242,7 +3242,7 @@
       "en": "Red dragonfly",
       "de": "Feuerlibelle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins22.png",
+    "icon": "icons/red-dragonfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAkiakaneCropped.png",
     "price": 180,
     "location": "Flying near water",
@@ -3271,7 +3271,7 @@
       "en": "Darner dragonfly",
       "de": "Königslibelle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins23.png",
+    "icon": "icons/darner-dragonfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGinyanmaCropped.png",
     "price": 230,
     "location": "Flying near water",
@@ -3300,7 +3300,7 @@
       "en": "Banded dragonfly",
       "de": "Quelljungfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins24.png",
+    "icon": "icons/banded-dragonfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOniyanmaCropped.png",
     "price": 4500,
     "location": "Flying near water",
@@ -3329,7 +3329,7 @@
       "en": "Damselfly",
       "de": "Wasserjungfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins81.png",
+    "icon": "icons/damselfly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectItotonboCropped.png",
     "price": 500,
     "location": "Flying near water",
@@ -3358,7 +3358,7 @@
       "en": "Firefly",
       "de": "Leuchtkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins41.png",
+    "icon": "icons/firefly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHotaruCropped.png",
     "price": 300,
     "location": "Flying near water",
@@ -3387,7 +3387,7 @@
       "en": "Mole cricket",
       "de": "Maulwurfsgrille"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins33.png",
+    "icon": "icons/mole-cricket.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOkeraCropped.png",
     "price": 500,
     "location": "Underground (dig where noise is loudest)",
@@ -3416,7 +3416,7 @@
       "en": "Pondskater",
       "de": "Wasserläufer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins27.png",
+    "icon": "icons/pondskater.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAmenboCropped.png",
     "price": 130,
     "location": "On rivers/ponds",
@@ -3445,7 +3445,7 @@
       "en": "Diving beetle",
       "de": "Schwimmkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins28.png",
+    "icon": "icons/diving-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGengorouCropped.png",
     "price": 800,
     "location": "On rivers/ponds",
@@ -3474,7 +3474,7 @@
       "en": "Giant water bug",
       "de": "Riesenwanze"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins76.png",
+    "icon": "icons/giant-water-bug.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTagameCropped.png",
     "price": 2000,
     "location": "On rivers/ponds",
@@ -3503,7 +3503,7 @@
       "en": "Stinkbug",
       "de": "Stinkwanze"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins64.png",
+    "icon": "icons/stinkbug.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKamemushiCropped.png",
     "price": 120,
     "location": "On flowers",
@@ -3532,7 +3532,7 @@
       "en": "Man-faced stink bug",
       "de": "Gesichtswanze"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins78.png",
+    "icon": "icons/man-faced-stink-bug.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectJinmenkamemushiCropped.png",
     "price": 1000,
     "location": "On flowers",
@@ -3561,7 +3561,7 @@
       "en": "Ladybug",
       "de": "Marienkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins37.png",
+    "icon": "icons/ladybug.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTentoumushiCropped.png",
     "price": 200,
     "location": "On flowers",
@@ -3590,7 +3590,7 @@
       "en": "Tiger beetle",
       "de": "Sandlaufkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins70.png",
+    "icon": "icons/tiger-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHanmyouCropped.png",
     "price": 1500,
     "location": "On the ground",
@@ -3619,7 +3619,7 @@
       "en": "Jewel beetle",
       "de": "Prachtkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins44.png",
+    "icon": "icons/jewel-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTamamushiCropped.png",
     "price": 2400,
     "location": "On tree stumps",
@@ -3648,7 +3648,7 @@
       "en": "Violin beetle",
       "de": "Geigenkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins38.png",
+    "icon": "icons/violin-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectBaiorinmushiCropped.png",
     "price": 450,
     "location": "On tree stumps",
@@ -3677,7 +3677,7 @@
       "en": "Citrus long-horned beetle",
       "de": "Fichtenbock"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins39.png",
+    "icon": "icons/citrus-long-horned-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGomadarakamikiriCropped.png",
     "price": 350,
     "location": "On tree stumps",
@@ -3706,7 +3706,7 @@
       "en": "Rosalia batesi beetle",
       "de": "Alpenbock"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins82.png",
+    "icon": "icons/rosalia-batesi-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectRuriboshikamikiriCropped.png",
     "price": 3000,
     "location": "On tree stumps",
@@ -3735,7 +3735,7 @@
       "en": "Blue weevil beetle",
       "de": "Blaurüsselkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins80.png",
+    "icon": "icons/blue-weevil-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHousekizoumushiCropped.png",
     "price": 800,
     "location": "On palm trees",
@@ -3764,7 +3764,7 @@
       "en": "Dung beetle",
       "de": "Mistkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins40.png",
+    "icon": "icons/dung-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectFunkorogashiCropped.png",
     "price": 3000,
     "location": "Pushing snowballs",
@@ -3793,7 +3793,7 @@
       "en": "Earth-boring dung beetle",
       "de": "Gold-Mistkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins42.png",
+    "icon": "icons/earth-boring-dung-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhsenchikoganeCropped.png",
     "price": 300,
     "location": "On the ground",
@@ -3822,7 +3822,7 @@
       "en": "Scarab beetle",
       "de": "Goldskarabäus"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins43.png",
+    "icon": "icons/scarab-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectPurachinakoganeCropped.png",
     "price": 10000,
     "location": "On trees (any kind)",
@@ -3851,7 +3851,7 @@
       "en": "Drone beetle",
       "de": "Japan-Rosenkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins75.png",
+    "icon": "icons/drone-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKanabunCropped.png",
     "price": 200,
     "location": "On trees (any kind)",
@@ -3880,7 +3880,7 @@
       "en": "Goliath beetle",
       "de": "Goliathkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins55.png",
+    "icon": "icons/goliath-beetle.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGoraiasuohtsunohanamuguriCropped.png",
     "price": 8000,
     "location": "On palm trees",
@@ -3909,7 +3909,7 @@
       "en": "Saw stag",
       "de": "Sägezahn-Hirschkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins46.png",
+    "icon": "icons/saw-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNokogirikuwagataCropped.png",
     "price": 2000,
     "location": "On trees (any kind)",
@@ -3938,7 +3938,7 @@
       "en": "Miyama stag",
       "de": "Hirschkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins45.png",
+    "icon": "icons/miyama-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMiyamakuwagataCropped.png",
     "price": 1000,
     "location": "On trees (any kind)",
@@ -3967,7 +3967,7 @@
       "en": "Giant stag",
       "de": "Riesen-Hirschkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins47.png",
+    "icon": "icons/giant-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOhkuwagataCropped.png",
     "price": 10000,
     "location": "On trees (any kind)",
@@ -3996,7 +3996,7 @@
       "en": "Rainbow stag",
       "de": "Pracht-Hirschkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins48.png",
+    "icon": "icons/rainbow-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNijiirokuwagataCropped.png",
     "price": 6000,
     "location": "On trees (any kind)",
@@ -4025,7 +4025,7 @@
       "en": "Cyclommatus stag",
       "de": "Cyclommatus"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins49.png",
+    "icon": "icons/cyclommatus-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHosoakakuwagataCropped.png",
     "price": 8000,
     "location": "On palm trees",
@@ -4054,7 +4054,7 @@
       "en": "Golden stag",
       "de": "Allotopus rosenbergi"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins50.png",
+    "icon": "icons/golden-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectOugononikuwagataCropped.png",
     "price": 12000,
     "location": "On palm trees",
@@ -4083,7 +4083,7 @@
       "en": "Giraffe stag",
       "de": "Giraffenhirschkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins77.png",
+    "icon": "icons/giraffe-stag.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectGirafanokogirikuwagataCropped.png",
     "price": 12000,
     "location": "On palm trees",
@@ -4112,7 +4112,7 @@
       "en": "Horned dynastid",
       "de": "Nashornkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins51.png",
+    "icon": "icons/horned-dynastid.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKabutomushiCropped.png",
     "price": 1350,
     "location": "On trees (any kind)",
@@ -4141,7 +4141,7 @@
       "en": "Horned atlas",
       "de": "Atlaskäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins52.png",
+    "icon": "icons/horned-atlas.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKohkasasuohkabutoCropped.png",
     "price": 8000,
     "location": "On palm trees",
@@ -4170,7 +4170,7 @@
       "en": "Horned elephant",
       "de": "Elefantenkäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins53.png",
+    "icon": "icons/horned-elephant.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectZoukabutoCropped.png",
     "price": 8000,
     "location": "On palm trees",
@@ -4199,7 +4199,7 @@
       "en": "Horned hercules",
       "de": "Herkuleskäfer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins54.png",
+    "icon": "icons/horned-hercules.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHerakuresuohkabutoCropped.png",
     "price": 12000,
     "location": "On palm trees",
@@ -4228,7 +4228,7 @@
       "en": "Walking stick",
       "de": "Stabschrecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins35.png",
+    "icon": "icons/walking-stick.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNanafushiCropped.png",
     "price": 600,
     "location": "On trees (any kind)",
@@ -4257,7 +4257,7 @@
       "en": "Walking leaf",
       "de": "Blattschrecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins34.png",
+    "icon": "icons/walking-leaf.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKonohamushiCropped.png",
     "price": 600,
     "location": "Disguised under trees",
@@ -4286,7 +4286,7 @@
       "en": "Bagworm",
       "de": "Sackträger"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins36.png",
+    "icon": "icons/bagworm.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMinomushiCropped.png",
     "price": 600,
     "location": "Shaking trees (hardwood or cedar only)",
@@ -4315,7 +4315,7 @@
       "en": "Ant",
       "de": "Ameise"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins26.png",
+    "icon": "icons/ant.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectAriCropped.png",
     "price": 80,
     "location": "On rotten turnips or candy",
@@ -4344,7 +4344,7 @@
       "en": "Hermit crab",
       "de": "Einsiedlerkrebs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins66.png",
+    "icon": "icons/hermit-crab.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectYadokariCropped.png",
     "price": 1000,
     "location": "Disguised on shoreline",
@@ -4373,7 +4373,7 @@
       "en": "Wharf roach",
       "de": "Ligia exotica"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins71.png",
+    "icon": "icons/wharf-roach.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectFunamushiCropped.png",
     "price": 200,
     "location": "On beach rocks",
@@ -4402,7 +4402,7 @@
       "en": "Fly",
       "de": "Fliege"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins59.png",
+    "icon": "icons/fly.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectHaeCropped.png",
     "price": 60,
     "location": "Flying near trash (boots, tires, cans, used fountain fireworks) or rotten turnips",
@@ -4431,7 +4431,7 @@
       "en": "Mosquito",
       "de": "Mücke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins58.png",
+    "icon": "icons/mosquito.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKaCropped.png",
     "price": 130,
     "location": "Flying",
@@ -4460,7 +4460,7 @@
       "en": "Flea",
       "de": "Floh"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins56.png",
+    "icon": "icons/flea.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectNomiCropped.png",
     "price": 70,
     "location": "On villagers",
@@ -4489,7 +4489,7 @@
       "en": "Snail",
       "de": "Schnecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins29.png",
+    "icon": "icons/snail.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKatatsumuriCropped.png",
     "price": 250,
     "location": "On rocks/bushes",
@@ -4518,7 +4518,7 @@
       "en": "Pill bug",
       "de": "Kugelassel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins57.png",
+    "icon": "icons/pill-bug.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectDangomushiCropped.png",
     "price": 250,
     "location": "From hitting rocks",
@@ -4547,7 +4547,7 @@
       "en": "Centipede",
       "de": "Hundertfüßer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins60.png",
+    "icon": "icons/centipede.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectMukadeCropped.png",
     "price": 300,
     "location": "From hitting rocks",
@@ -4576,7 +4576,7 @@
       "en": "Spider",
       "de": "Spinne"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins61.png",
+    "icon": "icons/spider.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectKumoCropped.png",
     "price": 600,
     "location": "Shaking trees (hardwood or cedar only)",
@@ -4605,7 +4605,7 @@
       "en": "Tarantula",
       "de": "Vogelspinne"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins62.png",
+    "icon": "icons/tarantula.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTaranchuraCropped.png",
     "price": 8000,
     "location": "On the ground",
@@ -4634,7 +4634,7 @@
       "en": "Scorpion",
       "de": "Skorpion"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Ins63.png",
+    "icon": "icons/scorpion.png",
     "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectSasoriCropped.png",
     "price": 8000,
     "location": "On the ground",
@@ -4663,7 +4663,7 @@
       "en": "Seaweed",
       "de": "Wakame-Alge"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Wakame.png",
+    "icon": "icons/seaweed.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishWakameCropped.png",
     "price": 600,
     "location": null,
@@ -4692,7 +4692,7 @@
       "en": "Sea grapes",
       "de": "Kriechsprossalge"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Umibudou.png",
+    "icon": "icons/sea-grapes.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUmibudouCropped.png",
     "price": 900,
     "location": null,
@@ -4721,7 +4721,7 @@
       "en": "Sea cucumber",
       "de": "Seegurke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Namako.png",
+    "icon": "icons/sea-cucumber.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishNamakoCropped.png",
     "price": 500,
     "location": null,
@@ -4750,7 +4750,7 @@
       "en": "Sea pig",
       "de": "Scotoplanes"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Senjunamako.png",
+    "icon": "icons/sea-pig.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSenjunamakoCropped.png",
     "price": 10000,
     "location": null,
@@ -4779,7 +4779,7 @@
       "en": "Sea star",
       "de": "Seestern"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Hitode.png",
+    "icon": "icons/sea-star.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHitodeCropped.png",
     "price": 500,
     "location": null,
@@ -4808,7 +4808,7 @@
       "en": "Sea urchin",
       "de": "Seeigel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Uni.png",
+    "icon": "icons/sea-urchin.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUniCropped.png",
     "price": 1700,
     "location": null,
@@ -4837,7 +4837,7 @@
       "en": "Slate pencil urchin",
       "de": "Griffelseeigel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Paipuuni.png",
+    "icon": "icons/slate-pencil-urchin.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishPaipuuniCropped.png",
     "price": 2000,
     "location": null,
@@ -4866,7 +4866,7 @@
       "en": "Sea anemone",
       "de": "Seeanemone"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Isogintyaku.png",
+    "icon": "icons/sea-anemone.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishIsogintyakuCropped.png",
     "price": 500,
     "location": null,
@@ -4895,7 +4895,7 @@
       "en": "Moon jellyfish",
       "de": "Ohrenqualle"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Mizukurage.png",
+    "icon": "icons/moon-jellyfish.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMizukurageCropped.png",
     "price": 600,
     "location": null,
@@ -4924,7 +4924,7 @@
       "en": "Sea slug",
       "de": "Nacktkiemer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Umiushi.png",
+    "icon": "icons/sea-slug.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishUmiushiCropped.png",
     "price": 600,
     "location": null,
@@ -4953,7 +4953,7 @@
       "en": "Pearl oyster",
       "de": "Perlmuschel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Akoyagai.png",
+    "icon": "icons/pearl-oyster.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAkoyagaiCropped.png",
     "price": 2800,
     "location": null,
@@ -4982,7 +4982,7 @@
       "en": "Mussel",
       "de": "Miesmuschel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Muhrugai.png",
+    "icon": "icons/mussel.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMuhrugaiCropped.png",
     "price": 1500,
     "location": null,
@@ -5011,7 +5011,7 @@
       "en": "Oyster",
       "de": "Auster"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Kaki.png",
+    "icon": "icons/oyster.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishOysterCropped.png",
     "price": 1100,
     "location": null,
@@ -5040,7 +5040,7 @@
       "en": "Scallop",
       "de": "Kammmuschel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Hotate.png",
+    "icon": "icons/scallop.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHotateCropped.png",
     "price": 1200,
     "location": null,
@@ -5069,7 +5069,7 @@
       "en": "Whelk",
       "de": "Babylon-Seeschnecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Baigai.png",
+    "icon": "icons/whelk.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishBaigaiCropped.png",
     "price": 1000,
     "location": null,
@@ -5098,7 +5098,7 @@
       "en": "Turban shell",
       "de": "Turbanschnecke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Sazae.png",
+    "icon": "icons/turban-shell.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSazaeCropped.png",
     "price": 1000,
     "location": null,
@@ -5127,7 +5127,7 @@
       "en": "Abalone",
       "de": "Seeohr"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Awabi.png",
+    "icon": "icons/abalone.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAwabiCropped.png",
     "price": 2000,
     "location": null,
@@ -5156,7 +5156,7 @@
       "en": "Gigas giant clam",
       "de": "Gigas-Riesenmuschel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Shakogai.png",
+    "icon": "icons/gigas-giant-clam.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishShakogaiCropped.png",
     "price": 15000,
     "location": null,
@@ -5185,7 +5185,7 @@
       "en": "Chambered nautilus",
       "de": "Perlboot"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Oumugai.png",
+    "icon": "icons/chambered-nautilus.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishOumugaiCropped.png",
     "price": 1800,
     "location": null,
@@ -5214,7 +5214,7 @@
       "en": "Octopus",
       "de": "Oktopus"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Tako.png",
+    "icon": "icons/octopus.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTakoCropped.png",
     "price": 1200,
     "location": null,
@@ -5243,7 +5243,7 @@
       "en": "Umbrella octopus",
       "de": "Regenschirm-Oktopus"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Mendako.png",
+    "icon": "icons/umbrella-octopus.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishMendakoCropped.png",
     "price": 6000,
     "location": null,
@@ -5272,7 +5272,7 @@
       "en": "Vampire squid",
       "de": "Vampirtintenfisch"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Koumoridako.png",
+    "icon": "icons/vampire-squid.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKoumoridakoCropped.png",
     "price": 10000,
     "location": null,
@@ -5301,7 +5301,7 @@
       "en": "Firefly squid",
       "de": "Leuchtkalmar"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Hotaruika.png",
+    "icon": "icons/firefly-squid.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHotaruikaCropped.png",
     "price": 1400,
     "location": null,
@@ -5330,7 +5330,7 @@
       "en": "Gazami crab",
       "de": "Gazami-Krabbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Gazami.png",
+    "icon": "icons/gazami-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishGazamiCropped.png",
     "price": 2200,
     "location": null,
@@ -5359,7 +5359,7 @@
       "en": "Dungeness crab",
       "de": "Pazifik-Taschenkrebs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/DungenessCrab.png",
+    "icon": "icons/dungeness-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishDungenessCrabCropped.png",
     "price": 1900,
     "location": null,
@@ -5388,7 +5388,7 @@
       "en": "Snow crab",
       "de": "Schneekrabbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Zuwaigani.png",
+    "icon": "icons/snow-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishZuwaiganiCropped.png",
     "price": 6000,
     "location": null,
@@ -5417,7 +5417,7 @@
       "en": "Red king crab",
       "de": "Königskrabbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Tarabagani.png",
+    "icon": "icons/red-king-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTarabaganiCropped.png",
     "price": 8000,
     "location": null,
@@ -5446,7 +5446,7 @@
       "en": "Acorn barnacle",
       "de": "Seepocke"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fujitsubo.png",
+    "icon": "icons/acorn-barnacle.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishFujitsuboCropped.png",
     "price": 600,
     "location": null,
@@ -5475,7 +5475,7 @@
       "en": "Spider crab",
       "de": "Riesenkrabbe"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Takaashigani.png",
+    "icon": "icons/spider-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishTakaashiganiCropped.png",
     "price": 12000,
     "location": null,
@@ -5504,7 +5504,7 @@
       "en": "Tiger prawn",
       "de": "Kuruma-Garnele"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Kurumaebi.png",
+    "icon": "icons/tiger-prawn.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKurumaebiCropped.png",
     "price": 3000,
     "location": null,
@@ -5533,7 +5533,7 @@
       "en": "Sweet shrimp",
       "de": "Botan-Garnele"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Amaebi.png",
+    "icon": "icons/sweet-shrimp.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishAmaebiCropped.png",
     "price": 1400,
     "location": null,
@@ -5562,7 +5562,7 @@
       "en": "Mantis shrimp",
       "de": "Fangschreckenkrebs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Shako.png",
+    "icon": "icons/mantis-shrimp.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishSyakoCropped.png",
     "price": 2500,
     "location": null,
@@ -5591,7 +5591,7 @@
       "en": "Spiny lobster",
       "de": "Languste"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Iseebi.png",
+    "icon": "icons/spiny-lobster.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishIseebiCropped.png",
     "price": 5000,
     "location": null,
@@ -5620,7 +5620,7 @@
       "en": "Lobster",
       "de": "Hummer"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Fish54.png",
+    "icon": "icons/lobster.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishLobsterCropped.png",
     "price": 4500,
     "location": null,
@@ -5649,7 +5649,7 @@
       "en": "Giant isopod",
       "de": "Riesenassel"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Daiougusokumushi.png",
+    "icon": "icons/giant-isopod.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishDaiougusokumushiCropped.png",
     "price": 12000,
     "location": null,
@@ -5678,7 +5678,7 @@
       "en": "Horseshoe crab",
       "de": "Pfeilschwanzkrebs"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Kabutogani.png",
+    "icon": "icons/horseshoe-crab.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKabutoganiCropped.png",
     "price": 2500,
     "location": null,
@@ -5707,7 +5707,7 @@
       "en": "Sea pineapple",
       "de": "Seeananas"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Hoya.png",
+    "icon": "icons/sea-pineapple.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHoyaCropped.png",
     "price": 1500,
     "location": null,
@@ -5736,7 +5736,7 @@
       "en": "Spotted garden eel",
       "de": "Röhrenaal"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Chinanago.png",
+    "icon": "icons/spotted-garden-eel.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishChinanagoCropped.png",
     "price": 1100,
     "location": null,
@@ -5765,7 +5765,7 @@
       "en": "Flatworm",
       "de": "Meerstrudelwurm"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Hiramushi.png",
+    "icon": "icons/flatworm.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishHiramushiCropped.png",
     "price": 700,
     "location": null,
@@ -5794,7 +5794,7 @@
       "en": "Venus' flower basket",
       "de": "Gießkannenschwamm"
     },
-    "icon": "https://acnhcdn.com/latest/MenuIcon/Kairoudouketsu.png",
+    "icon": "icons/venus-flower-basket.png",
     "image": "https://acnhcdn.com/latest/BookDiveFishIcon/DiveFishKairoudouketsuCropped.png",
     "price": 5000,
     "location": null,

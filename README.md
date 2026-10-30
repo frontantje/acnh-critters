@@ -17,6 +17,26 @@ optional peer dependencies.
 
 Progress is stored in `localStorage` under `acnh-critters` (see `src/lib/progress.svelte.js`).
 
+## Offline and installing
+
+Everything the app shows ships with it, so it needs no other server. The 200 critter icons are
+in `public/icons/`, and the home-screen icons are `public/app-icon-*.png` and
+`public/apple-touch-icon.png`.
+
+The production build is an installable web app (`vite-plugin-pwa`, configured in `vite.config.js`):
+
+- **Offline:** on the first visit, a service worker stores the app and all icons on the device
+  (about 2.3 MB). After that it starts without a connection.
+- **Updates:** a new version downloads in the background and is used from the next start on. The
+  page is never reloaded while it's in use.
+- **Installing:** the web manifest lets browsers add it to the home screen. Use "Add to Home
+  Screen" in Safari's share menu on iPhone or iPad, or the install prompt in Chrome. It then opens
+  without browser bars.
+- **Not in dev:** `npm run dev` has no service worker, so nothing gets cached while developing.
+  `npm run build && npx vite preview` runs the real thing.
+- **App icons:** `node scripts/build-app-icons.mjs` renders them from a critter icon with the
+  installed Chrome, after `npm run data`.
+
 ## Moving data between devices
 
 Exports are **transfer codes** such as `ACNH1-MQEA…`: about 75 characters, up to about 100 with a
@@ -62,12 +82,18 @@ npx playwright test --headed           # watch them run
 npx playwright test --ui               # interactive runner
 ```
 
-`tests/`, written with Playwright. They drive the installed Google Chrome (no browser download)
-and start the dev server unless one is already running on port 5173.
+`tests/`, written with Playwright. They drive the installed Google Chrome (no browser download).
+There are two projects:
+
+- **dev:** almost all tests, against the dev server. A dev server already running on port 5173 is
+  reused.
+- **built:** `tests/offline.spec.js`, against a fresh production build that Playwright makes and
+  serves under `/acnh-critters/` on port 4173, as on GitHub Pages. The service worker only exists in
+  builds. Port 4173 has to be free.
 
 Every test runs as if it were 15 October 2026, in the Europe/Berlin time zone with an `en-US`
-browser unless the test sets its own. Critter icons are replaced with a placeholder, so no network
-is needed, and any console error fails the test (see `tests/support.js`).
+browser unless the test sets its own. A test fails if the page logs a console error or loads
+anything from another server (see `tests/support.js`).
 `tests/expected-times.json` holds the community spreadsheet's original time texts, which the app's
 own time formatting is checked against.
 
@@ -85,10 +111,10 @@ names are formatted per language from the `hours` and `months` data.
 
 `data/critters.json` holds all 200 creatures (80 fish, 80 bugs, 40 sea creatures). It is generated from
 [Norviah/animal-crossing](https://github.com/Norviah/animal-crossing), a JSON export of the community
-ACNH data spreadsheet. To regenerate it (Node 18+):
+ACNH data spreadsheet. To regenerate it, which also downloads the icons into `public/icons/`:
 
 ```
-node scripts/build-data.mjs
+npm run data
 ```
 
 Each entry looks like this:
@@ -99,7 +125,7 @@ Each entry looks like this:
   "type": "bug",
   "number": 79,
   "name": { "en": "Tarantula", "de": "Vogelspinne" },
-  "icon": "https://acnhcdn.com/latest/MenuIcon/Ins62.png",
+  "icon": "icons/tarantula.png",
   "image": "https://acnhcdn.com/latest/BookInsectIcon/InsectTaranchuraCropped.png",
   "price": 8000,
   "location": "On the ground",
@@ -118,7 +144,8 @@ Each entry looks like this:
 | `type` | `fish`, `bug` or `sea` |
 | `name` | Official English and German names |
 | `number` | Critterpedia order within its type |
-| `icon` / `image` | Small menu icon (~10 KB) / large Critterpedia picture (~160 KB) |
+| `icon` | Menu icon in `public/icons/` (128×128, ~10 KB), relative to the page |
+| `image` | Large Critterpedia picture (~40–230 KB). Still on acnhcdn.com and not used by the app yet, so not available offline |
 | `location` | Fish and bugs only (sea creatures are always caught by diving) |
 | `shadow` | Fish and sea creatures only |
 | `weather` | Bugs only. Fish that need rain say so in `location` (coelacanth) |

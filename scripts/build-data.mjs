@@ -1,15 +1,20 @@
-// Downloads ACNH creature data and writes a slimmed-down data/critters.json.
+// Downloads ACNH creature data and writes a slimmed-down data/critters.json,
+// plus each critter's icon to public/icons/<id>.png, so the app needs no
+// image server (and works offline).
 //
 // Source: https://github.com/Norviah/animal-crossing, a JSON export of the
-// community "Data Spreadsheet for Animal Crossing New Horizons".
+// community "Data Spreadsheet for Animal Crossing New Horizons". The icons come
+// from the image server that data links to (acnhcdn.com).
 //
 // Run with: node scripts/build-data.mjs
 
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const BASE_URL = 'https://raw.githubusercontent.com/Norviah/animal-crossing/master/json/data/';
 const OUT_FILE = fileURLToPath(new URL('../data/critters.json', import.meta.url));
+const ICON_DIR = fileURLToPath(new URL('../public/icons/', import.meta.url));
+const PARALLEL_DOWNLOADS = 8;
 
 const SOURCES = [
   { type: 'fish', file: 'Fish.json', expected: 80 },
@@ -88,15 +93,19 @@ function slugify(name) {
 }
 
 function toCritter(type, raw) {
+  const id = slugify(raw.name);
+  if (!raw.translations?.eUde?.trim()) throw new Error(`${raw.name}: no German name`);
   return {
-    id: slugify(raw.name),
+    id,
     type,
     number: raw.num,
     name: {
       en: raw.name.charAt(0).toUpperCase() + raw.name.slice(1),
       de: raw.translations.eUde,
     },
-    icon: raw.iconImage,
+    // Relative to the page, like every asset (see vite.config.js).
+    icon: `icons/${id}.png`,
+    // The big Critterpedia picture isn't used by the app yet, so it isn't downloaded.
     image: raw.critterpediaImage,
     price: raw.sell,
     location: raw.whereHow ?? null,
@@ -115,12 +124,36 @@ async function download(file) {
   return response.json();
 }
 
+/** Downloads every icon into ICON_DIR, a few at a time. */
+async function downloadIcons(icons) {
+  await rm(ICON_DIR, { recursive: true, force: true });
+  await mkdir(ICON_DIR, { recursive: true });
+  const queue = [...icons];
+  async function worker() {
+    for (let next = queue.shift(); next; next = queue.shift()) {
+      const response = await fetch(next.url);
+      const type = response.headers.get('content-type') ?? '';
+      if (!response.ok || !type.startsWith('image/png')) {
+        throw new Error(`${next.id}: icon ${next.url} answered ${response.status} ${type}`);
+      }
+      await writeFile(`${ICON_DIR}${next.id}.png`, Buffer.from(await response.arrayBuffer()));
+    }
+  }
+  await Promise.all(Array.from({ length: PARALLEL_DOWNLOADS }, worker));
+}
+
 const critters = [];
+const icons = [];
 for (const { type, file, expected } of SOURCES) {
   const raw = await download(file);
   if (raw.length !== expected) console.warn(`Warning: ${file} has ${raw.length} entries, expected ${expected}`);
-  critters.push(...raw.map((entry) => toCritter(type, entry)).sort((a, b) => a.number - b.number));
+  for (const entry of raw) {
+    const critter = toCritter(type, entry);
+    critters.push(critter);
+    icons.push({ id: critter.id, url: entry.iconImage });
+  }
 }
+critters.sort((a, b) => SOURCES.findIndex((s) => s.type === a.type) - SOURCES.findIndex((s) => s.type === b.type) || a.number - b.number);
 
 const seen = new Set();
 for (const { id } of critters) {
@@ -137,3 +170,6 @@ const json = JSON.stringify(critters, null, 2).replace(
 await mkdir(fileURLToPath(new URL('../data/', import.meta.url)), { recursive: true });
 await writeFile(OUT_FILE, json + '\n');
 console.log(`Wrote ${critters.length} critters to ${OUT_FILE}`);
+
+await downloadIcons(icons);
+console.log(`Downloaded ${icons.length} icons to ${ICON_DIR}`);
