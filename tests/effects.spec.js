@@ -155,7 +155,7 @@ test.describe('Critterpedia Sync', () => {
   test.describe('swiping on a phone', () => {
     test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 
-    test('skips the shake and slides on from where the finger let go', async ({ page }) => {
+    test('shakes where the finger let go, then slides on from there', async ({ page }) => {
       await recordAnimations(page);
       await startSeaCreatures(page);
       const area = await dialog(page).locator('[aria-live]').boundingBox();
@@ -170,7 +170,11 @@ test.describe('Critterpedia Sync', () => {
       await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
 
       await expect(progressLine(page)).toHaveText('Sea creatures · 2 of 40');
-      await expect.poll(() => animations(page)).toEqual(['translateX(-160px) → translateX(-320px)', 'translateX(48px) → translateX(0)']);
+      await expect.poll(() => animations(page)).toEqual([
+        'translateX(-160px) → translateX(-170px) → translateX(-151px) → translateX(-166px) → translateX(-156px) → translateX(-160px)',
+        'translateX(-160px) → translateX(-320px)',
+        'translateX(48px) → translateX(0)',
+      ]);
     });
   });
 

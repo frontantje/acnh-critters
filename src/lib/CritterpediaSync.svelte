@@ -70,7 +70,9 @@
     { transform: 'scale(1.12)', filter: 'drop-shadow(0 0 14px rgb(22 163 74 / 0.6))', offset: 0.45 },
     { transform: 'scale(1)', filter: 'drop-shadow(0 0 0 rgb(22 163 74 / 0))' },
   ];
-  const SHAKE = [0, -10, 9, -6, 4, 0].map((x) => ({ transform: `translateX(${x}px)` }));
+  /** The shake, around wherever the critter is (after a swipe, the finger's spot). @param {number} from */
+  const shake = (from) =>
+    [0, -10, 9, -6, 4, 0].map((x) => ({ transform: `translateX(${from + x}px)`, opacity: 1 + from / 400 }));
 
   /** The shown critter's element (icon and name); a new one for every critter. */
   let card = $state(/** @type {HTMLElement | undefined} */ (undefined));
@@ -78,10 +80,10 @@
 
   /**
    * Moves on, marking the critter first if it was caught. Unless the device asks
-   * for reduced motion, the critter pulses (caught) or shakes (next; not after a
-   * swipe, which already moved it), slides out to the left, and the next one
-   * slides in. Input during that is ignored, so a quick double tap can't mark a
-   * critter that hasn't been shown yet.
+   * for reduced motion, the critter pulses (caught) or shakes (next, also after a
+   * swipe, where it shakes at the finger's spot), slides out to the left, and
+   * the next one slides in. Input during that is ignored, so a quick double tap
+   * can't mark a critter that hasn't been shown yet.
    * @param {boolean} caught
    * @param {number} [swipedTo] how far the critter was dragged when a swipe ended
    */
@@ -90,12 +92,10 @@
     if (caught) markCaught(current.id);
     if (card && !prefersReducedMotion()) {
       busy = true;
+      const from = swipedTo ?? 0;
       try {
-        if (swipedTo === undefined) {
-          await card.animate(caught ? PULSE : SHAKE, { duration: caught ? 320 : 280, easing: 'ease-out' }).finished;
-        }
-        // Further left from wherever the critter is (after a swipe, the finger's spot).
-        const from = swipedTo ?? 0;
+        await card.animate(caught ? PULSE : shake(from), { duration: caught ? 320 : 280, easing: 'ease-out' }).finished;
+        // On to the left from there.
         await card.animate(
           [
             { transform: `translateX(${from}px)`, opacity: 1 + from / 400 },
@@ -168,33 +168,67 @@
 
   // Swiping left on the critter also means Next. The critter follows the
   // finger and springs back if the swipe is too short.
+  //
+  // Touch events rather than pointer events: once a move is clearly sideways,
+  // the browser is told to stay out of it (preventDefault), so it can't take
+  // the gesture over for scrolling, bouncing or page navigation and cancel the
+  // swipe halfway, as Safari did in a browser tab. Up-and-down moves are left
+  // to the browser, so the area still scrolls; a second finger (zooming) ends
+  // the swipe.
   const SWIPE_DISTANCE = 60;
-  /** @type {{ x: number, y: number, pointerId: number } | null} */
+  /** How far a finger moves before it's decided whether that's sideways. */
+  const SLOP = 8;
+  /** @type {{ x: number, y: number, sideways: boolean | null } | null} */
   let swipe = null;
   let dragX = $state(0);
   let dragging = $state(false);
+  let swipeArea = $state(/** @type {HTMLElement | undefined} */ (undefined));
 
-  /** @param {PointerEvent} event */
-  function onSwipeStart(event) {
-    if (event.pointerType === 'mouse') return;
-    swipe = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
-    dragging = true;
+  // Registered by hand: preventDefault needs a touchmove listener that isn't passive.
+  $effect(() => {
+    const area = swipeArea;
+    if (!area) return;
+    area.addEventListener('touchstart', onTouchStart, { passive: true });
+    area.addEventListener('touchmove', onTouchMove, { passive: false });
+    area.addEventListener('touchend', onTouchEnd);
+    area.addEventListener('touchcancel', cancelSwipe);
+    return () => {
+      area.removeEventListener('touchstart', onTouchStart);
+      area.removeEventListener('touchmove', onTouchMove);
+      area.removeEventListener('touchend', onTouchEnd);
+      area.removeEventListener('touchcancel', cancelSwipe);
+    };
+  });
+
+  /** @param {TouchEvent} event */
+  function onTouchStart(event) {
+    if (event.touches.length !== 1) return cancelSwipe();
+    swipe = { x: event.touches[0].clientX, y: event.touches[0].clientY, sideways: null };
   }
 
-  /** @param {PointerEvent} event */
-  function onSwipeMove(event) {
-    if (swipe?.pointerId !== event.pointerId) return;
-    dragX = Math.min(0, event.clientX - swipe.x);
+  /** @param {TouchEvent} event */
+  function onTouchMove(event) {
+    if (!swipe) return;
+    if (event.touches.length !== 1) return cancelSwipe();
+    const dx = event.touches[0].clientX - swipe.x;
+    const dy = event.touches[0].clientY - swipe.y;
+    if (swipe.sideways === null) {
+      if (Math.hypot(dx, dy) < SLOP) return;
+      swipe.sideways = Math.abs(dx) > Math.abs(dy);
+      if (!swipe.sideways) return cancelSwipe();
+      dragging = true;
+    }
+    if (event.cancelable) event.preventDefault();
+    dragX = Math.min(0, dx);
   }
 
-  /** @param {PointerEvent} event */
-  function onSwipeEnd(event) {
-    if (swipe?.pointerId !== event.pointerId) return;
-    const dx = event.clientX - swipe.x;
-    const dy = event.clientY - swipe.y;
+  /** @param {TouchEvent} event */
+  function onTouchEnd(event) {
+    if (!swipe?.sideways) return cancelSwipe();
+    const dx = event.changedTouches[0].clientX - swipe.x;
     const draggedTo = dragX;
     cancelSwipe();
-    if (event.type === 'pointerup' && dx < -SWIPE_DISTANCE && Math.abs(dx) > Math.abs(dy)) advance(false, draggedTo);
+    if (dx < -SWIPE_DISTANCE) advance(false, draggedTo);
   }
 
   function cancelSwipe() {
@@ -270,19 +304,15 @@
         <div class="h-full bg-green-600 transition-[width]" style:width="{(index / queue.length) * 100}%"></div>
       </div>
 
-      <!-- Swipe area. touch-action lets the browser keep vertical scrolling and
-           pinch-zoom while horizontal moves come through as pointer events.
-           Swiping is a touch shortcut for the Next button (and the → key),
-           so the area itself needs no role. -->
-      <!-- svelte-ignore a11y_no_static_element_interactions -->
-      <!-- overflow-x-clip: the critter sliding out mustn't make the page scroll sideways. -->
+      <!-- Swipe area (touch listeners above). touch-action tells the browser up
+           front that it may scroll vertically and zoom, but sideways moves are
+           the app's. Swiping is a touch shortcut for the Next button (and the →
+           key). overflow-x-clip: the critter sliding out mustn't make the page
+           scroll sideways. -->
       <div
+        bind:this={swipeArea}
         class="flex flex-1 touch-pan-y touch-pinch-zoom flex-col items-center justify-center overflow-x-clip py-10 text-center select-none"
         aria-live="polite"
-        onpointerdown={onSwipeStart}
-        onpointermove={onSwipeMove}
-        onpointerup={onSwipeEnd}
-        onpointercancel={onSwipeEnd}
       >
         {#key current.id}
           <div

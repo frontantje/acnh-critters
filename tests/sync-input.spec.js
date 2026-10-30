@@ -189,6 +189,29 @@ test.describe('swipe', () => {
     await expect(dialog(page).locator('[aria-live]')).toHaveCSS('touch-action', 'pan-y pinch-zoom');
   });
 
+  test('sideways moves are kept from the browser, up-and-down ones are not', async ({ page }) => {
+    // So a browser (Safari in a tab) can't take a swipe over and cancel it halfway.
+    await startSeaCreatures(page);
+    await page.evaluate(() => {
+      /** @type {any} */ (window).moves = [];
+      // Bubbling to window, after the app's listener: defaultPrevented is final.
+      window.addEventListener('touchmove', (event) => /** @type {any} */ (window).moves.push(event.defaultPrevented));
+    });
+    const moves = () => page.evaluate(() => /** @type {boolean[]} */ (/** @type {any} */ (window).moves).splice(0));
+    const { x, y } = await center(page);
+
+    await swipe(page, [x + 20, y], [x - 20, y]); // sideways, too short to move on
+    const sideways = await moves();
+    // Chrome only reports moves after about 15 px, past the app's 8 px decision
+    // point, so every reported sideways move is held back.
+    expect(sideways.length).toBeGreaterThan(0);
+    expect(sideways.every(Boolean)).toBe(true);
+
+    await swipe(page, [x, y - 60], [x - 10, y + 60]);
+    expect((await moves()).every((prevented) => !prevented)).toBe(true);
+    await expectAt(page, 1, 0);
+  });
+
   test('swiping left means Next; the critter follows the finger', async ({ page }) => {
     await startSeaCreatures(page);
     const { x, y } = await center(page);
