@@ -1,7 +1,15 @@
+import { readFileSync } from 'node:fs';
 import { expect, skipWelcome, test } from './support.js';
+
+const { version } = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 test.beforeEach(async ({ page }) => {
   await skipWelcome(page);
+});
+
+test('shows the app version at the bottom', async ({ page }) => {
+  await page.getByRole('button', { name: 'Menu' }).click();
+  await expect(page.getByTestId('menu-version')).toHaveText(`Version ${version}`);
 });
 
 test('opens and closes with Escape or a click elsewhere', async ({ page }) => {

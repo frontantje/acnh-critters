@@ -17,6 +17,20 @@ optional peer dependencies.
 
 Progress is stored in `localStorage` under `acnh-critters` (see `src/lib/progress.svelte.js`).
 
+## Versions
+
+The version in `package.json` follows [Semantic Versioning](https://semver.org/): patch for fixes,
+minor for new features, major for big changes. It's shown at the bottom of the menu, which is handy
+for seeing whether the installed app has picked up an update.
+
+Changes are collected under "Unreleased" in [CHANGELOG.md](CHANGELOG.md). To release:
+
+1. `npm version minor --no-git-tag-version` (or `patch` / `major`). This updates `package.json` and
+   `package-lock.json`.
+2. In `CHANGELOG.md`, rename "Unreleased" to `[x.y.z] - YYYY-MM-DD` and add a new empty
+   "Unreleased" section above it. A unit test checks that the newest entry matches `package.json`.
+3. Commit, tag (`git tag vX.Y.Z`, `git push --tags`), and run the deploy workflow.
+
 ## Offline and installing
 
 Everything the app shows ships with it, so it needs no other server. The 200 critter icons are
@@ -41,8 +55,8 @@ The production build is an installable web app (`vite-plugin-pwa`, configured in
 
 Exports are **transfer codes** such as `ACNH1-MQEA…`: about 75 characters, up to about 100 with a
 name (see `src/lib/transfer.js`). A code holds everything stored in the browser: caught and donated
-critters, Critterpedia Sync checkmarks, hemisphere, the show-caught switch, the language picked in the
-menu, and an optional name of up to 20 characters. The name is shown at the bottom of the menu after
+critters, Critterpedia Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked
+in the menu or taken from the browser), and an optional name of up to 20 characters. The name is shown at the bottom of the menu after
 exporting or importing.
 
 **Export data** in the menu shows the code and offers:
@@ -101,7 +115,8 @@ own time formatting is checked against.
 
 English and German. The app uses the first of the two in the browser's language list (English if
 neither is there) until a language is picked in the menu. That choice is stored under
-`acnh-critters-locale`, included in exports, and applied when importing.
+`acnh-critters-locale`. Exports carry the language shown, and importing applies it as if it had
+been picked in the menu.
 
 Critter names are the official in-game names from the data. Everything else, including the data's
 location, shadow size and speed values, is translated in `src/lib/messages.js`. Times and month

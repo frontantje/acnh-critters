@@ -1,4 +1,5 @@
 <script>
+  import { version } from '../../package.json';
   import { i18n, LOCALES, setLocale, t } from './i18n.svelte.js';
   import { progress } from './progress.svelte.js';
 
@@ -87,6 +88,14 @@
           <span class="truncate" data-testid="menu-name">{progress.name}</span>
         </p>
       {/if}
+
+      <!-- The app version (package.json; see CHANGELOG.md), e.g. to see that an update arrived. -->
+      <p
+        class={['px-3 pt-1 pb-1.5 text-xs text-stone-500', !progress.name && 'mt-1 border-t border-stone-200 pt-2.5']}
+        data-testid="menu-version"
+      >
+        {t('version', { version })}
+      </p>
     </div>
   {/if}
 </div>

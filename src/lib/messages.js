@@ -48,6 +48,7 @@ const en = {
 
   menu: 'Menu',
   menuName: 'Name',
+  version: 'Version {version}',
   language: 'Language',
 
   hemisphere: 'Hemisphere',
@@ -125,6 +126,7 @@ const de = {
 
   menu: 'Menü',
   menuName: 'Name',
+  version: 'Version {version}',
   language: 'Sprache',
 
   hemisphere: 'Hemisphäre',
