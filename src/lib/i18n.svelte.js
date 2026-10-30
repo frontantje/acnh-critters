@@ -1,14 +1,12 @@
-// The UI language. Follows the browser's language until the player picks one
-// in the menu; that choice is kept in localStorage (next to the progress, not
-// in it). Exports carry the language shown, and importing one applies it as if
-// it had been picked in the menu.
+// The UI language. Each profile follows the browser's language until one is
+// picked in the menu; the profile keeps that choice (see progress.svelte.js).
+// Exports carry the language shown, and importing one applies it as if it had
+// been picked in the menu.
 
 import { germanTerms, messages } from './messages.js';
 
 /** @typedef {'en' | 'de'} Locale */
 /** @typedef {keyof typeof messages.en} MessageKey */
-
-const STORAGE_KEY = 'acnh-critters-locale';
 
 /** @type {{ id: Locale, label: string }[]} */
 export const LOCALES = [
@@ -16,27 +14,27 @@ export const LOCALES = [
   { id: 'de', label: 'Deutsch' },
 ];
 
-export const i18n = $state({ locale: chosenLocale() ?? pickLocale(browserLanguages()) });
+export const i18n = $state({ locale: browserLocale() });
 document.documentElement.lang = i18n.locale;
 
-/** @param {Locale} locale */
+/**
+ * Shows the app in a language.
+ * @param {Locale} locale
+ */
 export function setLocale(locale) {
   i18n.locale = locale;
   document.documentElement.lang = locale;
-  try {
-    localStorage.setItem(STORAGE_KEY, locale);
-  } catch {
-    // Storage unavailable; the choice just won't be remembered.
-  }
 }
 
 /**
- * The current language's text for a message, with {placeholders} filled in.
+ * The current (or another) language's text for a message, with {placeholders}
+ * filled in.
  * @param {MessageKey} key
  * @param {Record<string, string>} [values]
+ * @param {Locale} [locale]
  */
-export function t(key, values = {}) {
-  return messages[i18n.locale][key].replace(/\{(\w+)\}/g, (_, name) => values[name] ?? '');
+export function t(key, values = {}, locale = i18n.locale) {
+  return messages[locale][key].replace(/\{(\w+)\}/g, (_, name) => values[name] ?? '');
 }
 
 /**
@@ -48,16 +46,11 @@ export function term(english) {
 }
 
 /**
- * The language picked in the menu, or null while following the browser.
- * @returns {Locale | null}
+ * The first supported language in the browser's list, or English.
+ * @returns {Locale}
  */
-export function chosenLocale() {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    return isLocale(stored) ? stored : null;
-  } catch {
-    return null;
-  }
+export function browserLocale() {
+  return pickLocale(navigator.languages?.length ? navigator.languages : [navigator.language]);
 }
 
 /**
@@ -72,10 +65,6 @@ export function pickLocale(tags) {
     if (isLocale(base)) return base;
   }
   return 'en';
-}
-
-function browserLanguages() {
-  return navigator.languages?.length ? navigator.languages : [navigator.language];
 }
 
 /**

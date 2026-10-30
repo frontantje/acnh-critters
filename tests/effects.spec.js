@@ -1,5 +1,5 @@
 // UI effects: confetti in the list, pulse / shake / slide in the Critterpedia Sync.
-import { critters, expect, row, setShowCaught, skipWelcome, stored, test } from './support.js';
+import { critters, expect, row, setShowCaught, skipWelcome, startApp, stored, test } from './support.js';
 
 const sea = critters.filter((c) => c.type === 'sea');
 
@@ -34,7 +34,7 @@ const animations = (page) => page.evaluate(() => /** @type {string[]} */ (/** @t
 
 /** @param {import('@playwright/test').Page} page */
 async function startSeaCreatures(page) {
-  await page.goto('/');
+  await startApp(page);
   await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
   await dialog(page).locator('[data-category="sea"]').click();
   await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');

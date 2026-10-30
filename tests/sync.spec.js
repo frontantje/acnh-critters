@@ -1,4 +1,4 @@
-import { critters, expect, importData, monthSelect, normalize, row, rows, skipWelcome, stored, test } from './support.js';
+import { critters, expect, importData, monthSelect, normalize, row, rows, skipWelcome, startApp, stored, test } from './support.js';
 
 // The sync's logic, with its animations off (they ignore quick repeated input
 // while playing). The animations themselves are tested in effects.spec.js.
@@ -24,7 +24,7 @@ async function openFromMenu(page, menu = 'Menu', item = 'Critterpedia Sync') {
 }
 
 test('starts from the welcome screen as a modal dialog', async ({ page }) => {
-  await page.goto('/');
+  await startApp(page);
   await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
 
   await expect(page.getByRole('dialog', { name: 'Critterpedia Sync' })).toBeVisible();
@@ -35,7 +35,7 @@ test('starts from the welcome screen as a modal dialog', async ({ page }) => {
 });
 
 test('goes through uncaught critters in Critterpedia order; Caught saves, Next skips', async ({ page }) => {
-  await page.goto('/');
+  await startApp(page);
   await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
   await dialog(page).getByRole('button', { name: /Sea creatures/ }).click();
   await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');
@@ -69,7 +69,7 @@ test('re-running a synced category shows only critters that are still uncaught',
 });
 
 test('exiting keeps what was caught so far, without a checkmark', async ({ page }) => {
-  await page.goto('/');
+  await startApp(page);
   await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
   await dialog(page).getByRole('button', { name: /Sea creatures/ }).click();
   await dialog(page).getByRole('button', { name: 'Caught', exact: true }).click();
@@ -134,7 +134,7 @@ test.describe('in German', () => {
   test.use({ locale: 'de-DE' });
 
   test('is called Faunapädie-Abgleich', async ({ page }) => {
-    await page.goto('/');
+    await startApp(page);
     await page.getByRole('button', { name: 'Faunapädie-Abgleich starten' }).click();
     await expect(page.getByRole('dialog', { name: 'Faunapädie-Abgleich' })).toBeVisible();
     await expect(categories(page)).toHaveText(['Fische 0 von 80 gefangen', 'Insekten 0 von 80 gefangen', 'Meerestiere 0 von 40 gefangen']);

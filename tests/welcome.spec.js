@@ -1,18 +1,32 @@
 import { expect, hemisphereSelect, importData, showCaughtSwitch, skipWelcome, stored, test } from './support.js';
 
-test('first visit shows the welcome screen with three choices', async ({ page }) => {
+test('first visit asks for a name, then offers three choices', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Welcome to ACNH Critters' })).toBeVisible();
-  for (const name of ['Import data from another device', 'Start Critterpedia Sync', 'No thanks, just show me the list']) {
-    await expect(page.getByRole('button', { name })).toBeVisible();
-  }
+  const field = page.getByRole('textbox', { name: 'What’s your name?' });
+  await expect(field).toBeFocused();
+  const next = page.getByRole('button', { name: 'Next' });
+  await expect(next).toBeDisabled();
+  // Or straight to importing, since a code brings its name along. There's no
+  // profile yet to go back to.
+  await expect(page.getByRole('button')).toHaveText(['Next', 'Import data from another device']);
+
+  await field.fill('  Kim ');
+  await next.click();
+  await expect(page.getByRole('heading', { name: 'Welcome, Kim!' })).toBeVisible();
+  await expect(page.getByRole('button')).toHaveText([
+    'Import data from another device',
+    'Start Critterpedia Sync',
+    'No thanks, just show me the list',
+  ]);
+  // Saved once one of them is picked.
   expect(await stored(page)).toBeNull();
 });
 
 test('skipping saves, so the welcome screen is not shown again', async ({ page }) => {
   await skipWelcome(page);
   await expect(page.getByRole('tab', { name: 'All', exact: true })).toBeVisible();
-  expect(await stored(page)).not.toBeNull();
+  expect((await stored(page)).settings.name).toBe('Kim');
 
   await page.reload();
   await expect(page.getByRole('tab', { name: 'All', exact: true })).toBeVisible();

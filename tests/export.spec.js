@@ -1,29 +1,40 @@
 // Export (transfer codes), the name, and importing over existing progress.
 import { readFile } from 'node:fs/promises';
-import { expect, hemisphereSelect, importData, normalize, row, skipWelcome, stored, test } from './support.js';
+import {
+  dialog,
+  enterName,
+  expect,
+  FIRST_NAME,
+  hemisphereSelect,
+  importData,
+  normalize,
+  openMenuItem,
+  profileGroup,
+  row,
+  SKIP_WELCOME,
+  skipWelcome,
+  stored,
+  test,
+} from './support.js';
 
 const IPHONE =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1';
 const CODE = /ACNH1-[A-Za-z0-9_-]+/;
 
 /** @param {import('@playwright/test').Page} page */
-const dialog = (page) => page.getByRole('dialog');
-/** @param {import('@playwright/test').Page} page */
 const shownCode = async (page) => normalize((await dialog(page).locator('output').textContent()) ?? '');
-/** @param {import('@playwright/test').Page} page */
-const menuName = (page) => page.getByTestId('menu-name');
+/** The profile shown, as listed in the open menu. @param {import('@playwright/test').Page} page */
+const menuProfile = (page) => profileGroup(page).getByRole('button', { pressed: true });
 
 /** @param {import('@playwright/test').Page} page */
 async function openExport(page, menu = 'Menu', item = 'Export data') {
-  await page.getByRole('button', { name: menu }).click();
-  await page.getByRole('button', { name: item }).click();
+  await openMenuItem(page, item, menu);
   await expect(dialog(page)).toBeVisible();
 }
 
 /** @param {import('@playwright/test').Page} page */
 async function openImport(page) {
-  await page.getByRole('button', { name: 'Menu' }).click();
-  await page.getByRole('button', { name: 'Import data' }).click();
+  await openMenuItem(page, 'Import data');
   await expect(dialog(page)).toBeVisible();
 }
 
@@ -69,12 +80,14 @@ test.describe('export', () => {
     const other = await newDevice();
     await importData(other, code);
     await expect(hemisphereSelect(other)).toHaveValue('south');
-    expect(await stored(other)).toEqual(before);
+    // The language shown here (from the browser) is picked there.
+    expect(await stored(other)).toEqual({ ...before, settings: { ...before.settings, locale: 'en' } });
   });
 
   test('the language shown comes along, even if it was never picked in the menu', async ({ newDevice }) => {
     // German from the browser on one device…
     const german = await newDevice({ locale: 'de-DE' });
+    await enterName(german);
     await german.getByRole('button', { name: 'Nein danke, zeig mir einfach die Liste' }).click();
     await openExport(german, 'Menü', 'Daten exportieren');
     const code = await shownCode(german);
@@ -103,7 +116,7 @@ test.describe('export', () => {
     const href = await dialog(page).getByRole('link', { name: 'Send by email' }).getAttribute('href');
     const mail = new URL(href ?? '');
     expect(mail.protocol).toBe('mailto:');
-    expect(mail.searchParams.get('subject')).toBe('My ACNH Critters data');
+    expect(mail.searchParams.get('subject')).toBe(`ACNH Critters data: ${FIRST_NAME}`);
     expect(mail.searchParams.get('body')).toBe(
       `To import my ACNH Critters progress on another device, open the app, choose "Import data" and paste this code:\r\n\r\n${code}`,
     );
@@ -154,7 +167,7 @@ test.describe('share menu', () => {
     await dialog(page).getByRole('button', { name: 'Share', exact: true }).click();
     await expect.poll(() => shared(page)).toHaveLength(1);
     const [{ title, text }] = await shared(page);
-    expect(title).toBe('My ACNH Critters data');
+    expect(title).toBe(`ACNH Critters data: ${FIRST_NAME}`);
     expect(text).toContain('choose "Import data"');
     expect(text.match(CODE)?.[0]).toBe(await shownCode(page));
   });
@@ -192,28 +205,30 @@ test.describe('name', () => {
   test('is at most 20 characters, goes into the code and the email subject', async ({ page }) => {
     await skipWelcome(page);
     await openExport(page);
-    const withoutName = await shownCode(page);
+    const before = await shownCode(page);
     const field = dialog(page).getByLabel('Name (optional)');
+    await field.clear();
     // Typed like a user would, so the input's maxlength applies.
     await field.pressSequentially('Antje’s island of many critters');
     await expect(field).toHaveValue('Antje’s island of ma');
-    await expect.poll(() => shownCode(page)).not.toBe(withoutName);
+    await expect.poll(() => shownCode(page)).not.toBe(before);
     const href = await dialog(page).getByRole('link', { name: 'Send by email' }).getAttribute('href');
     expect(new URL(href ?? '').searchParams.get('subject')).toBe('ACNH Critters data: Antje’s island of ma');
   });
 
-  test('is shown at the bottom of the menu after exporting', async ({ page, context }) => {
+  test('names the profile after exporting', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await skipWelcome(page);
     await page.getByRole('button', { name: 'Menu' }).click();
-    await expect(menuName(page)).toHaveCount(0);
+    await expect(menuProfile(page)).toHaveAccessibleName(FIRST_NAME);
     await page.getByRole('button', { name: 'Export data' }).click();
+    await expect(dialog(page).getByLabel('Name (optional)')).toHaveValue(FIRST_NAME);
     await dialog(page).getByLabel('Name (optional)').fill('  Antje  ');
     await dialog(page).getByRole('button', { name: 'Copy code' }).click();
     await page.keyboard.press('Escape');
 
     await page.getByRole('button', { name: 'Menu' }).click();
-    await expect(menuName(page)).toHaveText('Antje');
+    await expect(menuProfile(page)).toHaveAccessibleName('Antje');
     expect((await stored(page)).settings.name).toBe('Antje');
     // It's offered again next time.
     await page.getByRole('button', { name: 'Export data' }).click();
@@ -226,7 +241,7 @@ test.describe('name', () => {
     await dialog(page).getByLabel('Name (optional)').fill('Antje');
     await page.keyboard.press('Escape');
     await page.getByRole('button', { name: 'Menu' }).click();
-    await expect(menuName(page)).toHaveCount(0);
+    await expect(menuProfile(page)).toHaveAccessibleName(FIRST_NAME);
   });
 
   test('comes along when importing', async ({ page, newDevice }) => {
@@ -238,14 +253,15 @@ test.describe('name', () => {
     const other = await newDevice();
     await importData(other, code);
     await other.getByRole('button', { name: 'Menu' }).click();
-    await expect(menuName(other)).toHaveText('Antje');
+    await expect(menuProfile(other)).toHaveAccessibleName('Antje');
   });
 });
 
 test.describe('import from the menu', () => {
-  test('replaces the progress on this device, after a warning', async ({ page, newDevice }) => {
+  test('replaces the progress in this profile, after a warning', async ({ page, newDevice }) => {
     const source = await newDevice();
-    await source.getByRole('button', { name: 'No thanks, just show me the list' }).click();
+    await enterName(source);
+    await source.getByRole('button', { name: SKIP_WELCOME }).click();
     await row(source, 'Koi').getByRole('button', { name: 'Caught it' }).click();
     await openExport(source);
     const code = await shownCode(source);
@@ -253,7 +269,7 @@ test.describe('import from the menu', () => {
     await skipWelcome(page);
     await row(page, 'Pale chub').getByRole('button', { name: 'Caught it' }).click();
     await openImport(page);
-    await expect(dialog(page).getByText('This replaces the progress on this device.')).toBeVisible();
+    await expect(dialog(page).getByText('This replaces the progress in this profile.')).toBeVisible();
     const replace = dialog(page).getByRole('button', { name: 'Replace my progress' });
     await expect(replace).toBeDisabled();
     await dialog(page).getByLabel('Transfer code').fill(`Here you go:\n${code}\nCheers`);
@@ -282,7 +298,7 @@ test.describe('import from the menu', () => {
   test('the welcome screen’s import has no warning', async ({ page }) => {
     await page.goto('/');
     await page.getByRole('button', { name: 'Import data from another device' }).click();
-    await expect(dialog(page).getByText('This replaces the progress on this device.')).toHaveCount(0);
+    await expect(dialog(page).getByText('This replaces the progress in this profile.')).toHaveCount(0);
     await expect(dialog(page).getByRole('button', { name: 'Import', exact: true })).toBeDisabled();
   });
 });

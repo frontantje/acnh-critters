@@ -64,11 +64,55 @@ export const test = base.extend({
   },
 });
 
-/** @param {import('@playwright/test').Page} page */
-export async function skipWelcome(page, name = 'No thanks, just show me the list') {
-  await page.goto('/');
-  await page.getByRole('button', { name }).click();
+/** The welcome screen's button for going straight to the list. */
+export const SKIP_WELCOME = 'No thanks, just show me the list';
+/** The name the tests give the first profile. */
+export const FIRST_NAME = 'Kim';
+
+/**
+ * Gives the profile on a fresh start its name, the welcome screen's first
+ * step. Works in any language.
+ * @param {import('@playwright/test').Page} page
+ */
+export async function enterName(page, name = FIRST_NAME) {
+  const field = page.getByRole('textbox');
+  await field.fill(name);
+  await field.press('Enter');
 }
+
+/**
+ * Opens the app on a fresh start and gives the profile its name.
+ * @param {import('@playwright/test').Page} page
+ */
+export async function startApp(page, name = FIRST_NAME) {
+  await page.goto('/');
+  await enterName(page, name);
+}
+
+/**
+ * Opens the app on a fresh start, names the profile and goes to the list.
+ * @param {import('@playwright/test').Page} page
+ */
+export async function skipWelcome(page, label = SKIP_WELCOME) {
+  await startApp(page);
+  await page.getByRole('button', { name: label }).click();
+}
+
+/** @param {import('@playwright/test').Page} page */
+export const dialog = (page) => page.getByRole('dialog');
+
+/**
+ * Picks an item in the ⋮ menu.
+ * @param {import('@playwright/test').Page} page
+ * @param {string} item
+ */
+export async function openMenuItem(page, item, menu = 'Menu') {
+  await page.getByRole('button', { name: menu }).click();
+  await page.getByRole('button', { name: item }).click();
+}
+
+/** The profile section of the open menu. @param {import('@playwright/test').Page} page */
+export const profileGroup = (page, name = 'Profile') => page.getByRole('group', { name });
 
 /**
  * Pastes data into the import dialog and submits it. Opens the dialog with the
@@ -78,15 +122,18 @@ export async function skipWelcome(page, name = 'No thanks, just show me the list
  * @param {unknown} data a transfer code or other text, or a JSON value
  */
 export async function importData(page, data, opener = 'Import data from another device') {
-  const dialog = page.getByRole('dialog');
-  if (!(await dialog.isVisible())) await page.getByRole('button', { name: opener }).click();
-  await dialog.locator('textarea').fill(typeof data === 'string' ? data : JSON.stringify(data));
-  await dialog.locator('form').getByRole('button').click();
+  if (!(await dialog(page).isVisible())) await page.getByRole('button', { name: opener }).click();
+  await dialog(page).locator('textarea').fill(typeof data === 'string' ? data : JSON.stringify(data));
+  await dialog(page).locator('form').getByRole('button').click();
 }
 
-/** The saved progress, or null. @param {import('@playwright/test').Page} page */
-export function stored(page) {
-  return page.evaluate(() => JSON.parse(localStorage.getItem('acnh-critters') ?? 'null'));
+/**
+ * The saved progress of profile 1 (or another one), or null.
+ * @param {import('@playwright/test').Page} page
+ */
+export function stored(page, profile = 1) {
+  const key = profile === 1 ? 'acnh-critters' : `acnh-critters-${profile}`;
+  return page.evaluate((key) => JSON.parse(localStorage.getItem(key) ?? 'null'), key);
 }
 
 // The main critter list is the first list on the page; the sync dialog's comes later.

@@ -1,11 +1,9 @@
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { i18n, pickLocale, setLocale, t, term } from './i18n.svelte.js';
-
-const STORAGE_KEY = 'acnh-critters-locale';
+import { browserLocale, i18n, pickLocale, setLocale, t, term } from './i18n.svelte.js';
 
 afterEach(() => {
   setLocale('en');
-  localStorage.clear();
+  vi.restoreAllMocks();
 });
 
 describe('pickLocale', () => {
@@ -48,24 +46,25 @@ describe('term', () => {
 });
 
 describe('setLocale', () => {
-  test('remembers the choice and sets the page language', () => {
+  test('switches the text and the page language', () => {
     setLocale('de');
     expect(i18n.locale).toBe('de');
-    expect(localStorage.getItem(STORAGE_KEY)).toBe('de');
     expect(document.documentElement.lang).toBe('de');
   });
+});
 
-  test('a remembered choice wins over the browser language on the next visit', async () => {
-    localStorage.setItem(STORAGE_KEY, 'de');
+// Remembering a language picked in the menu is up to the profile (progress.test.js).
+describe('browserLocale', () => {
+  test('is the first supported language in the browser’s list', () => {
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-FR', 'de-AT', 'en']);
+    expect(browserLocale()).toBe('de');
+  });
+
+  test('is what the app starts in', async () => {
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['de-DE']);
     vi.resetModules();
     const fresh = await import('./i18n.svelte.js');
     expect(fresh.i18n.locale).toBe('de');
-  });
-
-  test('an unsupported remembered value is ignored', async () => {
-    localStorage.setItem(STORAGE_KEY, 'fr');
-    vi.resetModules();
-    const fresh = await import('./i18n.svelte.js');
-    expect(fresh.i18n.locale).toBe('en');
+    expect(document.documentElement.lang).toBe('de');
   });
 });

@@ -15,7 +15,10 @@ npm run build    # production build into dist/
 Requires Node 24 (see `.nvmrc`). The npm 10.8 bundled with Node 20 crashes while resolving Vite 8's
 optional peer dependencies.
 
-Progress is stored in `localStorage` under `acnh-critters` (see `src/lib/progress.svelte.js`).
+Progress is stored in `localStorage`, one key per profile (see `src/lib/progress.svelte.js`):
+`acnh-critters` for profile 1, which is where it was before there were profiles, and
+`acnh-critters-2`, `acnh-critters-3` and so on for the others. `acnh-critters-active` holds the
+number of the profile used last.
 
 ## Versions
 
@@ -51,13 +54,36 @@ The production build is an installable web app (`vite-plugin-pwa`, configured in
 - **App icons:** `node scripts/build-app-icons.mjs` renders them from a critter icon with the
   installed Chrome, after `npm run data`.
 
+## Profiles
+
+One device can hold several profiles, for example one per child or a spare one for testing. Each
+has its own caught critters, Critterpedia Sync checkmarks, settings and language. On a fresh start,
+the welcome screen first asks for the first profile's name, unless a transfer code is imported,
+which brings its own. The **Profile** section of the menu lists the profiles and switches between
+them. It also has:
+
+- **New profile:** asks for a name, then starts on the welcome screen, like a first visit. The new
+  profile takes over the hemisphere and language of the one shown before. It's only saved once
+  the welcome screen is left, so closing the app there, or "Back to …" on it, leaves no empty
+  profile behind.
+- **Edit profile:** renames or deletes the profile shown, after asking first. Deleting the last
+  one starts the app over.
+
+With more than one profile, the menu button shows whose progress is on screen. A profile without a
+name (such as the first one, until it gets one) is called by its number, e.g. "Profile 1". No two
+profiles can share a name, ignoring case. The app opens the profile switched to last.
+
+The app keeps all profiles in memory and saves every change, so it also works where storage is
+blocked, just without remembering anything. Other tabs or windows of the app on the same device
+pick up changes right away (through `storage` events), so they don't undo each other's work.
+
 ## Moving data between devices
 
 Exports are **transfer codes** such as `ACNH1-MQEA…`: about 75 characters, up to about 100 with a
-name (see `src/lib/transfer.js`). A code holds everything stored in the browser: caught and donated
-critters, Critterpedia Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked
-in the menu or taken from the browser), and an optional name of up to 20 characters. The name is shown at the bottom of the menu after
-exporting or importing.
+name (see `src/lib/transfer.js`). A code holds one profile: caught and donated critters, Critterpedia
+Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked in the menu or taken
+from the browser), and the profile's name of up to 20 characters. The export dialog can change the
+name, which then renames the profile too.
 
 **Export data** in the menu shows the code and offers:
 
@@ -68,9 +94,11 @@ exporting or importing.
 - **Send by email:** a `mailto:` link with instructions and the code.
 - **Download as text file:** the same text as a `.txt` file.
 
-**Import data** (on the welcome screen, or in the menu to replace the current progress) takes the
-code, any text containing it (a whole email or message), or a downloaded file. The JSON format above
-is still accepted too, for older export files.
+**Import data** (on the welcome screen, or in the menu to replace the progress of the profile shown)
+takes the code, any text containing it (a whole email or message), or a downloaded file. The
+profile keeps its own name; the code's name is only used for a profile without one, if no other
+profile has it. A code without a language keeps the profile's. The JSON format above is still
+accepted too, for older export files.
 
 ## Tests
 
@@ -114,9 +142,10 @@ own time formatting is checked against.
 ## Languages
 
 English and German. The app uses the first of the two in the browser's language list (English if
-neither is there) until a language is picked in the menu. That choice is stored under
-`acnh-critters-locale`. Exports carry the language shown, and importing applies it as if it had
-been picked in the menu.
+neither is there) until a language is picked in the menu. That choice is saved with the profile, so
+each profile can have its own. (Version 1.0.0 kept it under `acnh-critters-locale`; it moves into
+profile 1 on the first start.) Exports carry the language shown, and importing applies it as if it
+had been picked in the menu.
 
 Critter names are the official in-game names from the data. Everything else, including the data's
 location, shadow size and speed values, is translated in `src/lib/messages.js`. Times and month

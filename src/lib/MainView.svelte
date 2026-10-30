@@ -6,8 +6,16 @@
   import { t } from './i18n.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
 
-  /** @type {{ onsync: () => void, onexport: () => void, onimport: () => void }} */
-  let { onsync, onexport, onimport } = $props();
+  /**
+   * @type {{
+   *   onsync: () => void,
+   *   onexport: () => void,
+   *   onimport: () => void,
+   *   onaddprofile: () => void,
+   *   oneditprofile: () => void,
+   * }}
+   */
+  let { onsync, onexport, onimport, onaddprofile, oneditprofile } = $props();
 
   // Only the hour matters for sorting, so the list only re-sorts when it changes.
   const hour = $derived(clock.now.getHours());
@@ -43,9 +51,9 @@
 </script>
 
 <div class="mx-auto max-w-6xl">
-  <header class="flex items-center justify-between px-3 pt-2 md:px-4 md:pt-4">
-    <h1 class="text-xl font-bold md:text-2xl">ACNH Critters</h1>
-    <AppMenu {onsync} {onexport} {onimport} />
+  <header class="flex items-center justify-between gap-2 px-3 pt-2 md:px-4 md:pt-4">
+    <h1 class="shrink-0 text-xl font-bold md:text-2xl">ACNH Critters</h1>
+    <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} />
   </header>
 
   <!-- Filters and tabs stay pinned while scrolling. Phones: filters above the tabs.

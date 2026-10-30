@@ -2,7 +2,7 @@
 // GitHub Pages serves it (project "built" in playwright.config.js), because the
 // service worker only exists in builds. URLs are relative to
 // http://localhost:4173/acnh-critters/, so they start with "./", not "/".
-import { critters, expect, test } from './support.js';
+import { critters, enterName, expect, SKIP_WELCOME, test } from './support.js';
 
 /** Waits until the service worker has stored everything and controls the page. @param {import('@playwright/test').Page} page */
 async function waitForServiceWorker(page) {
@@ -17,7 +17,8 @@ test('after the first visit, the app and every critter icon work offline', async
 
   await context.setOffline(true);
   await page.reload();
-  await page.getByRole('button', { name: 'No thanks, just show me the list' }).click();
+  await enterName(page);
+  await page.getByRole('button', { name: SKIP_WELCOME }).click();
   await page.locator('select').nth(1).selectOption({ label: 'All months' });
 
   const icons = page.locator('ul').first().locator('img');
@@ -41,7 +42,8 @@ test('progress made offline is kept', async ({ page, context }) => {
   await waitForServiceWorker(page);
   await context.setOffline(true);
   await page.reload();
-  await page.getByRole('button', { name: 'No thanks, just show me the list' }).click();
+  await enterName(page);
+  await page.getByRole('button', { name: SKIP_WELCOME }).click();
   await page.locator('ul').first().locator('li').first().getByRole('button').click();
 
   await page.reload();

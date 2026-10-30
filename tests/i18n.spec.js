@@ -25,6 +25,9 @@ test.describe('German browser', () => {
     await page.goto('/');
     await expect(page.getByRole('heading', { name: 'Willkommen bei ACNH Critters' })).toBeVisible();
     await expect(page.locator('html')).toHaveAttribute('lang', 'de');
+    await page.getByRole('textbox', { name: 'Wie heißt du?' }).fill('Kim');
+    await page.getByRole('button', { name: 'Weiter' }).click();
+    await expect(page.getByRole('heading', { name: 'Willkommen, Kim!' })).toBeVisible();
   });
 
   test('shows the list in German', async ({ page }) => {
@@ -95,8 +98,8 @@ test.describe('German browser', () => {
     await page.reload();
     await expect(page.getByRole('tab').first()).toHaveText('All');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    // The language choice is stored next to the progress, not in it.
-    expect(JSON.stringify(await stored(page))).not.toContain('locale');
+    // Each profile keeps its own language choice.
+    expect((await stored(page)).settings.locale).toBe('en');
 
     await page.getByRole('button', { name: 'Menu' }).click();
     await expect(page.getByRole('button', { name: 'English' })).toHaveAttribute('aria-pressed', 'true');

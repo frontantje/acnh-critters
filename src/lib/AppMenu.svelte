@@ -1,16 +1,30 @@
 <script>
   import { version } from '../../package.json';
-  import { i18n, LOCALES, setLocale, t } from './i18n.svelte.js';
-  import { progress } from './progress.svelte.js';
+  import { i18n, LOCALES, t } from './i18n.svelte.js';
+  import { activeProfile, chooseLocale, profileName, profiles, switchProfile } from './progress.svelte.js';
 
-  /** @type {{ onsync: () => void, onexport: () => void, onimport: () => void }} */
-  let { onsync, onexport, onimport } = $props();
+  /**
+   * @type {{
+   *   onsync: () => void,
+   *   onexport: () => void,
+   *   onimport: () => void,
+   *   onaddprofile: () => void,
+   *   oneditprofile: () => void,
+   * }}
+   */
+  let { onsync, onexport, onimport, onaddprofile, oneditprofile } = $props();
 
   let open = $state(false);
   /** @type {HTMLElement} */
   let root;
   /** @type {HTMLButtonElement} */
   let toggle;
+
+  // With more than one profile, the menu button says whose progress is shown.
+  const shownProfile = $derived.by(() => {
+    const active = activeProfile();
+    return profiles.list.length > 1 && active ? profileName(active) : null;
+  });
 
   /** @param {MouseEvent} event */
   function closeOnOutsideClick(event) {
@@ -25,20 +39,42 @@
     toggle.focus();
     action();
   }
+
+  const itemClass = 'flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left hover:bg-stone-100';
+  const groupLabelClass = 'px-3 pt-1.5 pb-1 text-xs font-semibold text-stone-500 uppercase';
 </script>
 
 <svelte:window onclick={closeOnOutsideClick} onkeydown={(event) => event.key === 'Escape' && (open = false)} />
 
-<div class="relative" bind:this={root}>
+{#snippet personIcon(className = '')}
+  <svg class={['size-4 shrink-0', className]} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" />
+  </svg>
+{/snippet}
+
+<!-- Marks the profile and the language chosen. -->
+{#snippet checkmark(/** @type {boolean} */ shown)}
+  {#if shown}<span class="text-green-700" aria-hidden="true">✓</span>{/if}
+{/snippet}
+
+<div class="relative min-w-0" bind:this={root}>
   <button
     bind:this={toggle}
-    class="grid size-11 place-items-center rounded-full text-stone-600 hover:bg-stone-200/70"
-    aria-label={t('menu')}
+    class={[
+      'flex h-11 max-w-full items-center gap-1.5 rounded-full text-stone-600 hover:bg-stone-200/70',
+      shownProfile ? 'pr-2 pl-3' : 'w-11 justify-center',
+    ]}
+    aria-label={shownProfile ? `${t('menu')}, ${shownProfile}` : t('menu')}
     aria-expanded={open}
     aria-controls="app-menu"
     onclick={() => (open = !open)}
   >
-    <svg class="size-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    {#if shownProfile}
+      {@render personIcon()}
+      <span class="truncate font-semibold text-stone-700" data-testid="shown-profile">{shownProfile}</span>
+    {/if}
+    <svg class="size-6 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <circle cx="12" cy="5" r="2" />
       <circle cx="12" cy="12" r="2" />
       <circle cx="12" cy="19" r="2" />
@@ -46,54 +82,65 @@
   </button>
 
   {#if open}
+    <!-- Scrolls on short screens, where all the items may not fit. -->
     <div
       id="app-menu"
-      class="absolute top-full right-0 z-20 mt-1 min-w-52 rounded-xl border border-stone-200 bg-white p-1 shadow-lg"
+      class="absolute top-full right-0 z-20 mt-1 max-h-[calc(100dvh_-_4.5rem)] w-max max-w-72 min-w-52 overflow-y-auto rounded-xl border border-stone-200 bg-white p-1 shadow-lg"
     >
-      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onsync)}>
-        {t('syncTitle')}
-      </button>
-      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onexport)}>
-        {t('exportData')}
-      </button>
-      <button class="w-full rounded-lg px-3 py-2.5 text-left hover:bg-stone-100" onclick={() => runAndClose(onimport)}>
-        {t('importData')}
-      </button>
+      <button class={itemClass} onclick={() => runAndClose(onsync)}>{t('syncTitle')}</button>
+      <button class={itemClass} onclick={() => runAndClose(onexport)}>{t('exportData')}</button>
+      <button class={itemClass} onclick={() => runAndClose(onimport)}>{t('importData')}</button>
+
+      <div class="mt-1 border-t border-stone-200 pt-1" role="group" aria-labelledby="menu-profile">
+        <p id="menu-profile" class={groupLabelClass}>{t('profile')}</p>
+        {#each profiles.list as profile (profile.id)}
+          <button
+            class={itemClass}
+            aria-pressed={profile.id === profiles.active}
+            onclick={() => runAndClose(() => switchProfile(profile.id))}
+          >
+            <span class="flex min-w-0 items-center gap-2">
+              {@render personIcon('text-stone-500')}
+              <span class="truncate">{profileName(profile)}</span>
+            </span>
+            {@render checkmark(profile.id === profiles.active)}
+          </button>
+        {/each}
+        <button class={itemClass} onclick={() => runAndClose(onaddprofile)}>
+          <span class="flex items-center gap-2">
+            <svg class="size-4 shrink-0 text-stone-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+            </svg>
+            {t('profileAdd')}
+          </span>
+        </button>
+        <button class={itemClass} onclick={() => runAndClose(oneditprofile)}>
+          <span class="flex items-center gap-2">
+            <svg class="size-4 shrink-0 text-stone-500" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M4 17.25V20h2.75L17.8 8.95l-2.75-2.75zM20.7 6.04a1 1 0 0 0 0-1.41l-1.33-1.33a1 1 0 0 0-1.41 0l-1.04 1.04 2.75 2.75z" />
+            </svg>
+            {t('profileEdit')}
+          </span>
+        </button>
+      </div>
 
       <div class="mt-1 border-t border-stone-200 pt-1" role="group" aria-labelledby="menu-language">
-        <p id="menu-language" class="px-3 pt-1.5 pb-1 text-xs font-semibold text-stone-500 uppercase">
-          {t('language')}
-        </p>
+        <p id="menu-language" class={groupLabelClass}>{t('language')}</p>
         {#each LOCALES as { id, label } (id)}
           <button
-            class="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left hover:bg-stone-100"
+            class={itemClass}
             lang={id}
             aria-pressed={i18n.locale === id}
-            onclick={() => runAndClose(() => setLocale(id))}
+            onclick={() => runAndClose(() => chooseLocale(id))}
           >
             {label}
-            {#if i18n.locale === id}<span class="text-green-700" aria-hidden="true">✓</span>{/if}
+            {@render checkmark(i18n.locale === id)}
           </button>
         {/each}
       </div>
 
-      <!-- The name given when exporting, or carried by an imported code. -->
-      {#if progress.name}
-        <p class="mt-1 flex max-w-64 items-center gap-2 border-t border-stone-200 px-3 pt-2.5 pb-1.5 text-sm text-stone-500">
-          <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <circle cx="12" cy="8" r="4" />
-            <path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5z" />
-          </svg>
-          <span class="sr-only">{t('menuName')}:</span>
-          <span class="truncate" data-testid="menu-name">{progress.name}</span>
-        </p>
-      {/if}
-
       <!-- The app version (package.json; see CHANGELOG.md), e.g. to see that an update arrived. -->
-      <p
-        class={['px-3 pt-1 pb-1.5 text-xs text-stone-500', !progress.name && 'mt-1 border-t border-stone-200 pt-2.5']}
-        data-testid="menu-version"
-      >
+      <p class="mt-1 border-t border-stone-200 px-3 pt-2.5 pb-1.5 text-xs text-stone-500" data-testid="menu-version">
         {t('version', { version })}
       </p>
     </div>

@@ -20,8 +20,10 @@ progress.
 
 ## Suggestions (from Claude)
 
-- [ ] **One profile per kid:** separate progress, name and hemisphere for each child on a shared
-      tablet, switchable from the menu. The export name could become the profile name.
+- [x] **One profile per kid:** separate progress, name, hemisphere and language for each child on a
+      shared tablet, switchable from the menu. The export name is the profile name (30 Oct 2026).
+- [ ] **A picture per profile:** each child picks a critter as their avatar, shown on the menu button
+      and in the profile list, so kids who can't read yet find their own.
 - [ ] **Smaller parties along the way:** a category finished, the first 10 caught, half the
       Critterpedia done. Maybe stickers or stamps collected on a card.
 - [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
@@ -43,6 +45,7 @@ progress.
 - [ ] Hold back re-sorting for a few seconds after a tap (rows can jump on the full hour).
 - [ ] Language switch on the welcome screen, not only in the menu.
 - [ ] Preview before importing ("This code has 34 caught critters from Antje").
+- [x] "Welcome, Mia!" on the welcome screen of a new profile with a name (30 Oct 2026).
 
 ## Open code-review findings
 
@@ -86,3 +89,6 @@ progress.
   - A web manifest and home-screen icons (the octopus) let it be installed.
 - **Tests:** a browser test fails if anything is loaded from another server. There's an offline
   test against the production build.
+- **Versions:** 1.0.0, with a changelog and the version at the bottom of the menu.
+- **Profiles:** several per device, each with its own progress, settings and language. Switch, add,
+  rename and delete them in the menu.

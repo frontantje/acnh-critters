@@ -1,5 +1,5 @@
 // Keyboard shortcuts and the swipe gesture in the Critterpedia Sync.
-import { critters, expect, stored, test } from './support.js';
+import { critters, expect, startApp, stored, test } from './support.js';
 
 // The input logic, with animations off (they ignore quick repeated input while
 // playing). The animations themselves are tested in effects.spec.js.
@@ -20,7 +20,7 @@ const nextButton = (page) => dialog(page).getByRole('button', { name: 'Next', ex
 
 /** @param {import('@playwright/test').Page} page */
 async function startSeaCreatures(page) {
-  await page.goto('/');
+  await startApp(page);
   await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
   await dialog(page).locator('[data-category="sea"]').click();
   await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');
@@ -41,7 +41,7 @@ const blur = (page) => page.evaluate(() => /** @type {HTMLElement | null} */ (do
 
 test.describe('keyboard', () => {
   test('→ means Next, also with focus outside the buttons', async ({ page }) => {
-    await page.goto('/');
+    await startApp(page);
     await page.getByRole('button', { name: 'Start Critterpedia Sync' }).click();
     // Not on the category screen.
     await page.keyboard.press('ArrowRight');

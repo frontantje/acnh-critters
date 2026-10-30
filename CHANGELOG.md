@@ -7,6 +7,26 @@ changes.
 
 ## [Unreleased]
 
+### Added
+
+- **Profiles:** several on one device, for example one per child or one for testing, each with its
+  own progress, settings and language. Switch, add, rename and delete them in the menu. A new
+  profile gets a name and starts on the welcome screen, which can also lead back to the profile
+  before. With more than one profile, the menu
+  button shows whose progress is on screen. No two profiles share a name.
+- A fresh start asks for a name first, and the welcome screen then greets by name ("Welcome,
+  Mia!"). Importing a code there instead takes the code's name.
+- Other tabs or windows of the app pick up changes right away, so they can't undo each other's
+  work.
+
+### Changed
+
+- The language picked in the menu now belongs to the profile, and so does an imported one. Progress
+  from 1.0.0 becomes profile 1, with its language.
+- Importing from the menu replaces only the profile shown. The profile keeps its name; a code's
+  name only names a profile without one.
+- The name given when exporting is the profile's name, listed in the menu.
+
 ## [1.0.0] - 2026-10-30
 
 The first version.
