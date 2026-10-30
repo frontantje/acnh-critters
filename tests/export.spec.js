@@ -72,6 +72,21 @@ test.describe('export', () => {
     expect(await stored(other)).toEqual(before);
   });
 
+  test('the language shown comes along, even if it was never picked in the menu', async ({ newDevice }) => {
+    // German from the browser on one device…
+    const german = await newDevice({ locale: 'de-DE' });
+    await german.getByRole('button', { name: 'Nein danke, zeig mir einfach die Liste' }).click();
+    await openExport(german, 'Menü', 'Daten exportieren');
+    const code = await shownCode(german);
+
+    // …imported on a device whose browser is English.
+    const english = await newDevice({ locale: 'en-US' });
+    await importData(english, code);
+    await expect(english.getByRole('tab').first()).toHaveText('Alle');
+    await english.reload();
+    await expect(english.getByRole('tab').first()).toHaveText('Alle');
+  });
+
   test('Copy code puts the code on the clipboard', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await skipWelcome(page);

@@ -6,7 +6,8 @@
 // UTF-8.
 //
 // Settings byte: bit 0 southern hemisphere, bit 1 track donations, bit 2 show
-// caught, bits 3–4 chosen language (0 = none, else LOCALES index + 1), bits 5–7
+// caught, bits 3–4 language (LOCALES index + 1; 0 = none, only in codes from
+// older app versions, which then keep the importing device's language), bits 5–7
 // synced categories in CATEGORIES order.
 
 import { CATEGORIES, critters } from './critters.js';

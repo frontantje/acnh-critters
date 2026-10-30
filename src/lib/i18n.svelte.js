@@ -1,6 +1,7 @@
 // The UI language. Follows the browser's language until the player picks one
 // in the menu; that choice is kept in localStorage (next to the progress, not
-// in it). Exports include the choice, and importing one applies it.
+// in it). Exports carry the language shown, and importing one applies it as if
+// it had been picked in the menu.
 
 import { germanTerms, messages } from './messages.js';
 

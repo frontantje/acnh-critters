@@ -97,14 +97,28 @@ describe('importProgress', () => {
 });
 
 describe('export', () => {
-  test('is the saved progress, plus the language if one was picked', () => {
+  test('is the saved progress plus the language shown, even if it was never picked in the menu', () => {
     load({ version: 1, settings: { hemisphere: 'south' }, caught: ['koi'] });
-    expect(exportData()).toEqual(saved());
+    expect(chosenLocale()).toBeNull(); // following the browser
+    expect(exportData()).toEqual({ ...saved(), settings: { ...saved().settings, locale: 'en' } });
 
     setLocale('de');
     expect(exportData()).toEqual({ ...saved(), settings: { ...saved().settings, locale: 'de' } });
     // The saved progress itself never holds the language.
     expect(saved().settings).not.toHaveProperty('locale');
+  });
+
+  test('a browser language carries over, too', () => {
+    // German from the browser, never picked in the menu…
+    i18n.locale = 'de';
+    expect(chosenLocale()).toBeNull();
+    const code = transferCode();
+
+    // …imported on a device whose browser is English.
+    i18n.locale = 'en';
+    importProgress(code);
+    expect(i18n.locale).toBe('de');
+    expect(chosenLocale()).toBe('de');
   });
 
   test('importing one with a language applies and remembers it', () => {

@@ -8,13 +8,13 @@
 //
 // "name" is the name given when exporting (or carried by an imported code).
 // Exports are transfer codes (see transfer.js) holding all of this plus the
-// language picked in the menu, which is stored separately (see i18n.svelte.js).
+// language shown, which is stored separately (see i18n.svelte.js).
 // Import also still accepts the JSON above, e.g. from older export files.
 
 import { SvelteSet } from 'svelte/reactivity';
 import { CATEGORIES, critters } from './critters.js';
 import { guessHemisphere } from './hemisphere.js';
-import { chosenLocale, isLocale, setLocale, t } from './i18n.svelte.js';
+import { i18n, isLocale, setLocale, t } from './i18n.svelte.js';
 import { decodeTransferCode, encodeTransferCode, findTransferCode, normalizeName } from './transfer.js';
 
 /** @typedef {import('./critters.js').Hemisphere} Hemisphere */
@@ -108,14 +108,14 @@ export function setName(name) {
 }
 
 /**
- * Everything saved in this browser, for moving to another device: the progress
- * plus the language picked in the menu, if any.
+ * Everything for moving to another device: the progress plus the language
+ * shown right now, whether it was picked in the menu or came from the browser.
+ * (Importing applies it as if picked in the menu.)
  * @returns {ExportData}
  */
 export function exportData() {
   const data = serialize();
-  const locale = chosenLocale();
-  return locale ? { ...data, settings: { ...data.settings, locale } } : data;
+  return { ...data, settings: { ...data.settings, locale: i18n.locale } };
 }
 
 /**
