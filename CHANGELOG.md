@@ -7,6 +7,8 @@ changes.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-10-30
+
 ### Added
 
 - **Profiles:** several on one device, for example one per child or one for testing, each with its
@@ -30,7 +32,7 @@ changes.
   name only names a profile without one.
 - The name given when exporting is the profile's name, listed in the menu.
 - Transfer codes now start with `ACNH2-` and carry the profile's picture. `ACNH1-` codes still
-  import.
+  import, but version 1.0.0 can't read the new ones, so update every device before sending codes.
 
 ## [1.0.0] - 2026-10-30
 
