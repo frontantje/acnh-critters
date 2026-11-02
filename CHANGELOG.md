@@ -7,6 +7,8 @@ changes.
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-02
+
 ### Added
 
 - **Going back in the Critterpedia Sync:** each critter gets a green ✓ or a red ✗ on its picture as
