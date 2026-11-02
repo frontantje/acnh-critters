@@ -23,6 +23,7 @@ import {
   toggleCaught,
   toggleShowCaught,
   transferCode,
+  unmarkCaught,
 } from './progress.svelte.js';
 
 const STORAGE_KEY = 'acnh-critters';
@@ -682,6 +683,12 @@ describe('changes are saved right away', () => {
 
     toggleCaught('koi');
     expect(saved()).toMatchObject({ caught: ['koi'], donated: [] });
+  });
+
+  test('unmarkCaught takes a catch back, with the donation', () => {
+    load({ version: 1, caught: ['koi', 'frog'], donated: ['koi'] });
+    unmarkCaught('koi');
+    expect(saved()).toMatchObject({ caught: ['frog'], donated: [] });
   });
 
   test('markCaught and markSynced only ever add', () => {

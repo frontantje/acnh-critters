@@ -90,7 +90,7 @@ test.describe('catching', () => {
 
     await setShowCaught(page, true);
     await expect(rows(page)).toHaveCount(available('fish').length);
-    await expect(row(page, 'Pale chub').getByRole('button')).toHaveText('Caught ✓');
+    await expect(row(page, 'Pale chub').getByRole('button')).toHaveAccessibleName('Caught');
   });
 
   test('caught critters and the switch are remembered', async ({ page }) => {
@@ -98,14 +98,29 @@ test.describe('catching', () => {
     await setShowCaught(page, true);
     await page.reload();
     await expect(showCaughtSwitch(page)).toHaveAttribute('aria-checked', 'true');
-    await expect(row(page, 'Pale chub').getByRole('button')).toHaveText('Caught ✓');
+    await expect(row(page, 'Pale chub').getByRole('button')).toHaveAccessibleName('Caught');
   });
 
-  test('clicking Caught ✓ un-catches', async ({ page }) => {
+  test('a caught one shows a ✓, which turns into a ✗ on hover, but not right after catching', async ({ page }) => {
+    await setShowCaught(page, true);
+    const button = row(page, 'Pale chub').getByRole('button');
+    const symbol = () => button.locator('span:visible').textContent();
+    await button.click();
+    await expect(button).toHaveAccessibleName('Caught');
+    // Still under the mouse, which shouldn't look like a mistake.
+    expect(await symbol()).toBe('✓');
+    await page.mouse.move(0, 0);
+    await button.hover();
+    expect(await symbol()).toBe('✗');
+    await page.mouse.move(0, 0);
+    expect(await symbol()).toBe('✓');
+  });
+
+  test('clicking a caught one un-catches', async ({ page }) => {
     await setShowCaught(page, true);
     const button = row(page, 'Pale chub').getByRole('button');
     await button.click();
-    await expect(button).toHaveText('Caught ✓');
+    await expect(button).toHaveAccessibleName('Caught');
     await button.click();
     await expect(button).toHaveText('Caught it');
     expect((await stored(page)).caught).toEqual([]);

@@ -92,7 +92,7 @@ test.describe('Critterpedia Sync', () => {
   test('Next: a little shake instead, then the same slide', async ({ page }) => {
     await recordAnimations(page);
     await startSeaCreatures(page);
-    await dialog(page).getByRole('button', { name: 'Next', exact: true }).click();
+    await dialog(page).getByRole('button', { name: 'Not caught', exact: true }).click();
     await expect(progressLine(page)).toHaveText('Sea creatures · 2 of 40');
     await expect.poll(() => animations(page)).toEqual([
       'translateX(0px) → translateX(-10px) → translateX(9px) → translateX(-6px) → translateX(4px) → translateX(0px)',
@@ -139,7 +139,7 @@ test.describe('Critterpedia Sync', () => {
 
   test('the page never scrolls sideways while the critter slides out', async ({ page }) => {
     await startSeaCreatures(page);
-    await dialog(page).getByRole('button', { name: 'Next', exact: true }).click();
+    await dialog(page).getByRole('button', { name: 'Not caught', exact: true }).click();
     const overflow = [];
     for (let i = 0; i < 8; i++) {
       overflow.push(await dialog(page).evaluate((d) => d.scrollWidth - d.clientWidth));

@@ -7,6 +7,21 @@ changes.
 
 ## [Unreleased]
 
+### Added
+
+- **Going back in the Critterpedia Sync:** each critter gets a green ✓ or a red ✗ on its picture as
+  it's decided. "Back" (or ←, or a swipe to the right) shows the critters before with their ✓ or ✗,
+  also right after a category is finished, and "Caught" or "Not caught" there changes the verdict.
+  The sync then carries on where it left off.
+
+### Changed
+
+- **The list's catch button:** "Hab ich!" in German. A caught critter's button shows just a ✓, which
+  turns red with a ✗ on hover or while pressed, since pressing it un-catches. Right after catching,
+  it stays green until the pointer has left it.
+- **The sync's buttons:** "Next" is now "Not caught" (German "Hab ich nicht"), and German "Caught" is
+  "Hab ich".
+
 ## [1.1.0] - 2026-10-30
 
 ### Added

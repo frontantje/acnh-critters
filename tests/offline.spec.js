@@ -45,7 +45,7 @@ test('progress made offline is kept', async ({ page, context }) => {
 
   await page.reload();
   await page.getByRole('switch').click();
-  await expect(page.getByRole('button', { name: 'Caught ✓' })).toHaveCount(1);
+  await expect(page.getByRole('button', { name: 'Caught', exact: true })).toHaveCount(1);
 });
 
 test('the manifest makes it installable', async ({ page, request }) => {

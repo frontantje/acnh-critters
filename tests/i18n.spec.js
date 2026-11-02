@@ -39,7 +39,7 @@ test.describe('German browser', () => {
       'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember',
     ]);
     await expect(showCaughtSwitch(page)).toHaveAccessibleName('Gefangene zeigen');
-    await expect(rows(page).first().getByRole('button')).toHaveText('Gefangen!');
+    await expect(rows(page).first().getByRole('button')).toHaveText('Hab ich!');
   });
 
   test('translates every name, location, size and time', async ({ page }) => {
@@ -77,7 +77,7 @@ test.describe('German browser', () => {
     await setShowCaught(page, true);
     const button = rows(page).first().getByRole('button');
     await button.click();
-    await expect(button).toHaveText('Gefangen ✓');
+    await expect(button).toHaveAccessibleName('Gefangen');
   });
 
   test('shows import errors in German', async ({ page }) => {

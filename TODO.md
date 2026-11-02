@@ -32,7 +32,8 @@ progress.
 - [ ] **Simple mode** for younger kids: just picture, name and button, no times or notes.
 - [x] **Installable app (PWA):** home-screen icon, works offline, critter icons stored locally (30 Oct 2026).
 - [ ] **Donation tracking UI.** The data model already has it (`trackDonations`, `donated`).
-- [ ] **Undo** for an accidental "Caught it", e.g. a short "Pale chub caught · Undo" message.
+- [ ] **Undo** for an accidental "Caught it" in the list, e.g. a short "Pale chub caught · Undo"
+      message. The Critterpedia Sync can go back and change a verdict already (2 Nov 2026).
 
 ## Smaller ideas mentioned along the way
 
@@ -48,7 +49,7 @@ progress.
 
 ## Open code-review findings
 
-- [ ] German catch button: "Gefangen!" and "Gefangen ✓" read almost the same.
+- [x] German catch button: "Gefangen!" and "Gefangen ✓" read almost the same. Now "Hab ich!" (2 Nov 2026).
 - [ ] The non-breaking space after the en dash in times may still allow a line break there; a word
       joiner (U+2060) would prevent it.
 - [ ] The catch button is a fixed `w-28` on phones; `min-w-28` would leave room for longer labels.

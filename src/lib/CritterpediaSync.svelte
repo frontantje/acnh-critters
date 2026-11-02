@@ -3,7 +3,7 @@
   import { CATEGORIES, critterName, critters } from './critters.js';
   import { t } from './i18n.svelte.js';
   import { prefersReducedMotion } from './motion.js';
-  import { markCaught, markSynced, progress } from './progress.svelte.js';
+  import { markCaught, markSynced, progress, unmarkCaught } from './progress.svelte.js';
 
   /** @typedef {import('./critters.js').Critter} Critter */
 
@@ -27,6 +27,12 @@
   let queue = $state.raw(/** @type {Critter[]} */ ([]));
   let index = $state(0);
   const current = $derived(queue[index]);
+  let verdicts = $state.raw(/** @type {boolean[]} */ ([]));
+  const verdict = $derived(verdicts[index]);
+  // Right after a category is finished, Back leads into it again, to its last critter.
+  const backTo = $derived(
+    category === null ? (verdicts.length > 0 && verdicts.length === queue.length ? queue.at(-1) : undefined) : queue[index - 1],
+  );
 
   // Preload the next icon so it shows without a delay.
   $effect(() => {
@@ -49,13 +55,13 @@
 
   /** @param {string} id */
   function start(id) {
-    const uncaught = critters.filter((critter) => critter.type === id && !progress.caught.has(critter.id));
-    if (uncaught.length === 0) {
+    queue = critters.filter((critter) => critter.type === id && !progress.caught.has(critter.id));
+    verdicts = [];
+    index = 0;
+    if (queue.length === 0) {
       markSynced(id);
       return;
     }
-    queue = uncaught;
-    index = 0;
     category = id;
     focusAfterRender('[data-action="caught"]');
   }
@@ -77,9 +83,13 @@
    * @param {boolean} caught
    * @param {number} [swipedTo]
    */
-  async function advance(caught, swipedTo) {
+  async function decide(caught, swipedTo) {
     if (busy) return;
-    if (caught) markCaught(current.id);
+    if (caught && !verdict) markCaught(current.id);
+    if (!caught && verdict) unmarkCaught(current.id);
+    const changed = [...verdicts];
+    changed[index] = caught;
+    verdicts = changed;
     if (card && !prefersReducedMotion()) {
       busy = true;
       const from = swipedTo ?? 0;
@@ -98,13 +108,10 @@
         busy = false;
       }
     }
-    showNext();
-  }
-
-  function showNext() {
-    if (index + 1 < queue.length) {
-      index += 1;
-      slideIn();
+    // Always on to the first undecided critter, so Not caught can't un-catch the ones in between after going back.
+    if (verdicts.length < queue.length) {
+      index = verdicts.length;
+      slideIn(48);
     } else {
       const finished = /** @type {string} */ (category);
       markSynced(finished);
@@ -114,40 +121,58 @@
   }
 
   // Doesn't block input: the next critter can be marked while it slides in.
-  async function slideIn() {
+  /** @param {number} from */
+  async function slideIn(from) {
     if (prefersReducedMotion()) return;
     await tick();
     card?.animate(
       [
-        { transform: 'translateX(48px)', opacity: 0 },
+        { transform: `translateX(${from}px)`, opacity: 0 },
         { transform: 'translateX(0)', opacity: 1 },
       ],
       { duration: 180, easing: 'ease-out' },
     );
   }
 
+  // Only shows the critter with its verdict; Caught or Not caught then changes it.
+  function back() {
+    if (busy || !backTo) return;
+    const fromList = category === null;
+    if (fromList) category = backTo.type;
+    index = queue.indexOf(backTo);
+    slideIn(-48);
+    // Focus stays on Back while it can go further, so pressing it again doesn't catch.
+    if (fromList || index === 0) focusAfterRender('[data-action="caught"]');
+  }
+
   // On a focused button, Enter still clicks that button, as screen reader users expect.
   /** @param {KeyboardEvent} event */
   function onkeydown(event) {
-    if (category === null || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
-    // Repeats are ignored, so holding a key can't skip or catch a whole run of critters.
+    if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    // Repeats are ignored, so holding a key can't skip, catch or go back over a whole run of critters.
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      if (!event.repeat) back();
+      return;
+    }
+    if (category === null) return;
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      if (!event.repeat) advance(false);
+      if (!event.repeat) decide(false);
     } else if (event.key === 'Enter') {
       if (event.repeat) {
         event.preventDefault();
       } else if (!(event.target instanceof Element && event.target.closest('button'))) {
         event.preventDefault();
-        advance(true);
+        decide(true);
       }
     }
   }
 
-  // A click returns focus to Caught so Enter catches; key presses (detail 0) stay on Next to keep skipping.
+  // A click returns focus to Caught so Enter catches; key presses (detail 0) stay on Not caught to keep skipping.
   /** @param {MouseEvent} event */
   function onNextClick(event) {
-    advance(false);
+    decide(false);
     if (event.detail > 0 && category !== null) focusAfterRender('[data-action="caught"]');
   }
 
@@ -195,7 +220,8 @@
       dragging = true;
     }
     if (event.cancelable) event.preventDefault();
-    dragX = Math.min(0, dx);
+    // Rightwards only when there's a critter to go back to.
+    dragX = backTo ? dx : Math.min(0, dx);
   }
 
   /** @param {TouchEvent} event */
@@ -204,7 +230,8 @@
     const dx = event.changedTouches[0].clientX - swipe.x;
     const draggedTo = dragX;
     cancelSwipe();
-    if (dx < -SWIPE_DISTANCE) advance(false, draggedTo);
+    if (dx < -SWIPE_DISTANCE) decide(false, draggedTo);
+    else if (dx > SWIPE_DISTANCE) back();
   }
 
   function cancelSwipe() {
@@ -215,6 +242,21 @@
 </script>
 
 <svelte:window {onkeydown} />
+
+{#snippet backButton()}
+  <!-- Kept in place but hidden when there's nothing to go back to, so the buttons above never move. -->
+  <button
+    class={['mx-auto mt-3 flex min-h-11 items-center gap-2 rounded-full px-4 font-semibold text-stone-600 hover:bg-stone-200/70', !backTo && 'invisible']}
+    data-action="back"
+    aria-keyshortcuts="ArrowLeft"
+    aria-label={backTo && t('syncBackLabel', { name: critterName(backTo) })}
+    onclick={back}
+  >
+    <span aria-hidden="true">←</span>
+    {#if backTo}<img class="size-6 object-contain" src={backTo.icon} alt="" width="24" height="24" />{/if}
+    {t('syncBack')}
+  </button>
+{/snippet}
 
 <dialog
   bind:this={dialog}
@@ -266,6 +308,10 @@
         {/each}
       </ul>
 
+      {#if backTo}
+        {@render backButton()}
+      {/if}
+
       <button
         class="mt-8 rounded-full border-2 border-green-600 px-5 py-3 font-bold text-green-700 hover:bg-green-100"
         onclick={() => dialog.close()}
@@ -277,7 +323,7 @@
         {categoryLabel(category)} · {t('syncProgress', { current: String(index + 1), total: String(queue.length) })}
       </p>
       <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-stone-200" aria-hidden="true">
-        <div class="h-full bg-green-600 transition-[width]" style:width="{(index / queue.length) * 100}%"></div>
+        <div class="h-full bg-green-600 transition-[width]" style:width="{(verdicts.length / queue.length) * 100}%"></div>
       </div>
 
       <!-- touch-action saves sideways moves for the swipe; overflow-x-clip keeps the sliding critter from scrolling the page. -->
@@ -291,9 +337,23 @@
             bind:this={card}
             class={['flex flex-col items-center', !dragging && 'transition-transform duration-200']}
             style:transform="translateX({dragX}px)"
-            style:opacity={1 + dragX / 400}
+            style:opacity={1 - Math.abs(dragX) / 400}
           >
-            <img class="size-32 object-contain" src={current.icon} alt="" width="128" height="128" draggable="false" />
+            <div class="relative">
+              <img class="size-32 object-contain" src={current.icon} alt="" width="128" height="128" draggable="false" />
+              {#if verdict !== undefined}
+                <span
+                  class={[
+                    'absolute -right-2 -bottom-1 grid size-11 place-items-center rounded-full text-2xl font-bold text-white shadow-md ring-4 ring-amber-50',
+                    verdict ? 'bg-green-600' : 'bg-red-600',
+                  ]}
+                  data-verdict={verdict ? 'caught' : 'not-caught'}
+                >
+                  <span aria-hidden="true">{verdict ? '✓' : '✗'}</span>
+                  <span class="sr-only">{verdict ? t('syncVerdictCaught') : t('syncVerdictNotCaught')}</span>
+                </span>
+              {/if}
+            </div>
             <p class="mt-4 text-2xl font-bold">{critterName(current)}</p>
           </div>
         {/key}
@@ -311,11 +371,12 @@
           class="min-h-14 rounded-full border-2 border-green-600 bg-green-600 px-4 text-lg font-bold text-white hover:border-green-700 hover:bg-green-700"
           data-action="caught"
           aria-keyshortcuts="Enter"
-          onclick={() => advance(true)}
+          onclick={() => decide(true)}
         >
           {t('syncCaught')}
         </button>
       </div>
+      {@render backButton()}
     {/if}
   </div>
 </dialog>

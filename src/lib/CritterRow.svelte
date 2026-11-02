@@ -17,11 +17,15 @@
   const caught = $derived(progress.caught.has(critter.id));
   const yearRound = $derived(monthsLeft(critter, hemisphere, 1) === 12);
 
+  // Off until the pointer leaves, so a critter just caught doesn't turn red under the mouse right away.
+  let hoverWarns = $state(true);
+
   /** @param {MouseEvent & { currentTarget: HTMLButtonElement }} event */
   function onclick(event) {
     // Confetti first, since with caught critters hidden the row goes away once toggled.
     if (!caught) confettiFrom(event.currentTarget);
     toggleCaught(critter.id);
+    hoverWarns = false;
   }
 </script>
 
@@ -51,15 +55,26 @@
     <span>{timeText(critter, hemisphere, month)}</span>
     <span class="text-sm text-stone-500">{notesText(critter)}</span>
   </div>
+  <!-- A caught one turns red with a ✗ while hovered or pressed, since pressing it un-catches. -->
   <button
     class={[
-      'min-h-12 w-28 rounded-full border-2 px-2 py-2 font-bold whitespace-nowrap md:w-auto md:px-6 md:py-3 md:text-lg',
+      'group min-h-12 w-28 rounded-full border-2 px-2 py-2 font-bold whitespace-nowrap md:w-auto md:min-w-36 md:px-6 md:py-3 md:text-lg',
       caught
-        ? 'border-green-600 bg-white text-green-700 hover:bg-green-100'
+        ? [
+            'border-green-600 bg-white text-green-700 active:border-red-600 active:bg-red-50 active:text-red-600',
+            hoverWarns && 'hover:border-red-600 hover:bg-red-50 hover:text-red-600',
+          ]
         : 'border-green-600 bg-green-600 text-white hover:border-green-700 hover:bg-green-700',
     ]}
+    aria-label={caught ? t('caught') : undefined}
     {onclick}
+    onpointerleave={() => (hoverWarns = true)}
   >
-    {caught ? t('caught') : t('caughtIt')}
+    {#if caught}
+      <span class={['text-2xl leading-none group-active:hidden', hoverWarns && 'group-hover:hidden']} aria-hidden="true">✓</span>
+      <span class={['hidden text-2xl leading-none group-active:inline', hoverWarns && 'group-hover:inline']} aria-hidden="true">✗</span>
+    {:else}
+      {t('caughtIt')}
+    {/if}
   </button>
 </li>

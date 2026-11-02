@@ -14,7 +14,7 @@ const currentName = (page) => dialog(page).locator('[aria-live] p');
 /** @param {import('@playwright/test').Page} page */
 const caughtButton = (page) => dialog(page).getByRole('button', { name: 'Caught', exact: true });
 /** @param {import('@playwright/test').Page} page */
-const nextButton = (page) => dialog(page).getByRole('button', { name: 'Next', exact: true });
+const nextButton = (page) => dialog(page).getByRole('button', { name: 'Not caught', exact: true });
 
 /** @param {import('@playwright/test').Page} page */
 async function startSeaCreatures(page) {
@@ -217,7 +217,7 @@ test.describe('swipe', () => {
     expect(await offset(page)).toBe('translateX(0px)');
   });
 
-  test('short, rightward and vertical swipes do nothing', async ({ page }) => {
+  test('on the first critter, short, rightward and vertical swipes do nothing', async ({ page }) => {
     await startSeaCreatures(page);
     const { x, y } = await center(page);
     await swipe(page, [x + 20, y], [x - 20, y]);
@@ -225,6 +225,18 @@ test.describe('swipe', () => {
     await swipe(page, [x, y - 100], [x - 70, y + 100]);
     await expectAt(page, 1, 0);
     await expect.poll(() => offset(page)).toBe('translateX(0px)');
+  });
+
+  test('swiping right goes back to the critter before, with its verdict', async ({ page }) => {
+    await startSeaCreatures(page);
+    const { x, y } = await center(page);
+    await swipe(page, [x + 80, y], [x - 80, y]);
+    await expectAt(page, 2, 0);
+    const during = await swipe(page, [x - 80, y], [x + 80, y], () => offset(page));
+    expect(during).toMatch(/^translateX\(\d+/);
+    await expectAt(page, 1, 0);
+    await expect(currentName(page)).toHaveText(sea[0].name.en);
+    await expect(dialog(page).locator('[data-verdict]')).toHaveAttribute('data-verdict', 'not-caught');
   });
 
   test('a swipe across the Caught button neither advances nor catches; taps still work', async ({ page }) => {

@@ -184,19 +184,21 @@ export function toggleShowCaught() {
 
 /** @param {string} id */
 export function toggleCaught(id) {
-  if (progress.caught.has(id)) {
-    progress.caught.delete(id);
-    // A critter can't be donated without being caught.
-    progress.donated.delete(id);
-  } else {
-    progress.caught.add(id);
-  }
-  save();
+  if (progress.caught.has(id)) unmarkCaught(id);
+  else markCaught(id);
 }
 
 /** @param {string} id */
 export function markCaught(id) {
   progress.caught.add(id);
+  save();
+}
+
+/** @param {string} id */
+export function unmarkCaught(id) {
+  progress.caught.delete(id);
+  // A critter can't be donated without being caught.
+  progress.donated.delete(id);
   save();
 }
 
