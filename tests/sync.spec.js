@@ -14,6 +14,12 @@ const categories = (page) => dialog(page).locator('ul button');
 const progressLine = (page) => dialog(page).locator('p.text-center');
 /** @param {import('@playwright/test').Page} page */
 const currentName = (page) => dialog(page).locator('[aria-live] p');
+/** @param {import('@playwright/test').Page} page */
+const badge = (page) => dialog(page).locator('[data-verdict]');
+/** @param {import('@playwright/test').Page} page */
+const caughtButton = (page) => dialog(page).getByRole('button', { name: 'Caught', exact: true });
+/** @param {import('@playwright/test').Page} page */
+const nextButton = (page) => dialog(page).getByRole('button', { name: 'Not caught', exact: true });
 
 /** @param {import('@playwright/test').Page} page */
 async function openFromMenu(page, menu = 'Menu', item = 'Critterpedia Sync') {
@@ -55,15 +61,31 @@ test('goes through uncaught critters in Critterpedia order; Caught saves, Next s
   expect(saved.synced).toEqual(['sea']);
 });
 
-test('re-running a synced category shows only critters that are still uncaught', async ({ page }) => {
+test('running a synced category again shows every critter with its ✓ or ✗', async ({ page }) => {
   await page.goto('/');
   await importData(page, { version: 1, caught: sea.filter((_, i) => i % 2 === 0).map((c) => c.id), synced: ['sea'] });
   await openFromMenu(page);
   await expect(categories(page).nth(2)).toHaveText('Sea creatures 20 of 40 caught ✓ Synced');
 
   await categories(page).nth(2).click();
-  await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 20');
+  await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');
+  await expect(currentName(page)).toHaveText(sea[0].name.en);
+  await expect(badge(page)).toHaveAttribute('data-verdict', 'caught');
+  await page.keyboard.press('ArrowRight');
   await expect(currentName(page)).toHaveText(sea[1].name.en);
+  await expect(badge(page)).toHaveAttribute('data-verdict', 'not-caught');
+});
+
+test('moving on with → keeps a verdict; the buttons change it', async ({ page }) => {
+  await page.goto('/');
+  await importData(page, { version: 1, caught: [sea[0].id, sea[1].id], synced: ['sea'] });
+  await openFromMenu(page);
+  await categories(page).nth(2).click();
+  await page.keyboard.press('ArrowRight');
+  await nextButton(page).click();
+  await caughtButton(page).click();
+  await expect(progressLine(page)).toHaveText('Sea creatures · 4 of 40');
+  expect([...(await stored(page)).caught].sort()).toEqual([sea[0].id, sea[2].id].sort());
 });
 
 test('exiting keeps what was caught so far, without a checkmark', async ({ page }) => {
@@ -101,14 +123,16 @@ test('Escape and Done exit, and the list keeps its tab and filters', async ({ pa
   await expect(dialog(page)).toHaveCount(0);
 });
 
-test('a fully caught category is marked synced right away, and checkmarks are kept and exported', async ({ page, newDevice }) => {
+test('a fully caught category shows its ✓ on every critter; checkmarks are kept and exported', async ({ page, newDevice }) => {
   await page.goto('/');
   await importData(page, { version: 1, caught: fishIds });
   await openFromMenu(page);
 
   await categories(page).first().click();
+  await expect(progressLine(page)).toHaveText('Fish · 1 of 80');
+  await expect(badge(page)).toHaveAttribute('data-verdict', 'caught');
+  for (let i = 0; i < 80; i++) await page.keyboard.press('ArrowRight');
   await expect(categories(page).first()).toHaveText('Fish 80 of 80 caught ✓ Synced');
-  await expect(dialog(page).locator('[aria-live]')).toHaveCount(0);
 
   await dialog(page).getByRole('button', { name: 'Done' }).click();
   await page.reload();
@@ -128,12 +152,6 @@ test('a fully caught category is marked synced right away, and checkmarks are ke
 test.describe('going back', () => {
   /** @param {import('@playwright/test').Page} page */
   const backButton = (page) => dialog(page).locator('[data-action="back"]');
-  /** @param {import('@playwright/test').Page} page */
-  const caughtButton = (page) => dialog(page).getByRole('button', { name: 'Caught', exact: true });
-  /** @param {import('@playwright/test').Page} page */
-  const nextButton = (page) => dialog(page).getByRole('button', { name: 'Not caught', exact: true });
-  /** @param {import('@playwright/test').Page} page */
-  const badge = (page) => dialog(page).locator('[data-verdict]');
 
   /** @param {import('@playwright/test').Page} page */
   async function startSeaCreatures(page) {
@@ -167,14 +185,14 @@ test.describe('going back', () => {
     await expect(backButton(page)).toBeHidden();
     await expect(caughtButton(page)).toBeFocused();
 
-    // Changed to not caught, then on to where it left off.
+    // Changed to not caught, then on to the next one, which keeps its ✗.
     await nextButton(page).click();
-    await expect(progressLine(page)).toHaveText('Sea creatures · 3 of 40');
-    await expect(badge(page)).toHaveCount(0);
+    await expect(progressLine(page)).toHaveText('Sea creatures · 2 of 40');
+    await expect(badge(page)).toHaveAttribute('data-verdict', 'not-caught');
     expect((await stored(page)).caught).toEqual([]);
   });
 
-  test('after changing one further back, it continues where it left off', async ({ page }) => {
+  test('after changing one further back, → goes on over the others without changing them', async ({ page }) => {
     await startSeaCreatures(page);
     for (let i = 0; i < 3; i++) await caughtButton(page).click();
     await expect(progressLine(page)).toHaveText('Sea creatures · 4 of 40');
@@ -182,8 +200,11 @@ test.describe('going back', () => {
     await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');
 
     await nextButton(page).click();
-    // Not on to the second one, which Next would otherwise un-catch.
+    await expect(badge(page)).toHaveAttribute('data-verdict', 'caught');
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowRight');
     await expect(progressLine(page)).toHaveText('Sea creatures · 4 of 40');
+    await expect(badge(page)).toHaveCount(0);
     expect((await stored(page)).caught).toEqual([sea[1].id, sea[2].id]);
   });
 
@@ -201,31 +222,34 @@ test.describe('going back', () => {
     expect((await stored(page)).caught).toEqual([sea[0].id]);
   });
 
-  test('right after a category is finished, leads back to its last critter', async ({ page }) => {
+  /** @param {import('@playwright/test').Page} page */
+  async function finishSeaCreatures(page) {
     await page.goto('/');
-    await importData(page, { version: 1, caught: sea.slice(1).map((c) => c.id) });
+    await importData(page, { version: 1, caught: sea.slice(0, -1).map((c) => c.id) });
     await openFromMenu(page);
     await categories(page).nth(2).click();
+    for (let i = 0; i < 39; i++) await page.keyboard.press('ArrowRight');
+    await expect(progressLine(page)).toHaveText('Sea creatures · 40 of 40');
     await caughtButton(page).click();
     await expect(categories(page).nth(2)).toHaveText('Sea creatures 40 of 40 caught ✓ Synced');
+  }
 
-    await dialog(page).getByRole('button', { name: `Back to ${sea[0].name.en}` }).click();
-    await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 1');
+  test('right after a category is finished, leads back to its last critter', async ({ page }) => {
+    await finishSeaCreatures(page);
+    const last = sea[sea.length - 1];
+    await dialog(page).getByRole('button', { name: `Back to ${last.name.en}` }).click();
+    await expect(progressLine(page)).toHaveText('Sea creatures · 40 of 40');
     await expect(badge(page)).toHaveAttribute('data-verdict', 'caught');
     await expect(caughtButton(page)).toBeFocused();
     expect((await stored(page)).synced).toEqual(['sea']);
 
     await nextButton(page).click();
     await expect(categories(page).nth(2)).toHaveText('Sea creatures 39 of 40 caught ✓ Synced');
-    expect((await stored(page)).caught).not.toContain(sea[0].id);
+    expect((await stored(page)).caught).not.toContain(last.id);
   });
 
   test('is gone once another category is started', async ({ page }) => {
-    await page.goto('/');
-    await importData(page, { version: 1, caught: sea.slice(1).map((c) => c.id) });
-    await openFromMenu(page);
-    await categories(page).nth(2).click();
-    await caughtButton(page).click();
+    await finishSeaCreatures(page);
     await categories(page).first().click();
     await expect(backButton(page)).toBeHidden();
   });

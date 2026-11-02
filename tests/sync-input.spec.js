@@ -119,7 +119,7 @@ test.describe('keyboard', () => {
     await expect(category).toHaveText('Sea creatures 1 of 40 caught ✓ Synced');
     await expect(category).toBeFocused();
     await page.keyboard.press('Enter');
-    await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 39');
+    await expect(progressLine(page)).toHaveText('Sea creatures · 1 of 40');
     await expect(currentName(page)).toHaveText(sea[0].name.en);
   });
 

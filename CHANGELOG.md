@@ -7,6 +7,16 @@ changes.
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-11-02
+
+### Changed
+
+- **The Critterpedia Sync always goes through every critter of a category**, in Critterpedia order,
+  so its count matches the game's numbers. Running a category again shows each critter's ✓ (caught)
+  or ✗ (not caught at the last sync), so kids can go through it again and fix what changed.
+- In the sync, swiping left or → moves on and keeps a critter's ✓ or ✗; only the buttons change it.
+  A critter not decided yet still counts as not caught when skipped.
+
 ## [1.2.0] - 2026-11-02
 
 ### Added

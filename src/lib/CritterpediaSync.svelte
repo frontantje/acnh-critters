@@ -24,16 +24,14 @@
   const categoryLabel = (category) => t(CATEGORIES.find((c) => c.id === category)?.label ?? 'tabAll');
 
   let category = $state(/** @type {string | null} */ (null));
-  // Fixed when the sync starts, so catching a critter doesn't shift the steps.
   let queue = $state.raw(/** @type {Critter[]} */ ([]));
   let index = $state(0);
   const current = $derived(queue[index]);
-  let verdicts = $state.raw(/** @type {boolean[]} */ ([]));
+  let verdicts = $state.raw(/** @type {(boolean | undefined)[]} */ ([]));
   const verdict = $derived(verdicts[index]);
+  let finished = $state(false);
   // Right after a category is finished, Back leads into it again, to its last critter.
-  const backTo = $derived(
-    category === null ? (verdicts.length > 0 && verdicts.length === queue.length ? queue.at(-1) : undefined) : queue[index - 1],
-  );
+  const backTo = $derived(category === null ? (finished ? queue.at(-1) : undefined) : queue[index - 1]);
 
   // Preload the next icon so it shows without a delay.
   $effect(() => {
@@ -55,14 +53,14 @@
   }
 
   /** @param {string} id */
+  // Every critter, in Critterpedia order, so a run can go over everything again and fix it.
   function start(id) {
-    queue = critters.filter((critter) => critter.type === id && !progress.caught.has(critter.id));
-    verdicts = [];
+    queue = critters.filter((critter) => critter.type === id);
+    // After an earlier sync, the ones not caught were decided then.
+    const synced = progress.synced.has(id);
+    verdicts = queue.map((critter) => (progress.caught.has(critter.id) ? true : synced ? false : undefined));
     index = 0;
-    if (queue.length === 0) {
-      markSynced(id);
-      return;
-    }
+    finished = false;
     category = id;
     focusAfterRender('[data-action="caught"]');
   }
@@ -84,18 +82,32 @@
    * @param {boolean} caught
    * @param {number} [swipedTo]
    */
-  async function decide(caught, swipedTo) {
+  async function decide(caught, swipedTo = 0) {
     if (busy) return;
     if (caught && !verdict) markCaught(current.id);
     if (!caught && verdict) unmarkCaught(current.id);
-    const changed = [...verdicts];
-    changed[index] = caught;
-    verdicts = changed;
+    verdicts = verdicts.with(index, caught);
+    await leave(caught ? PULSE : shake(swipedTo), caught ? 320 : 280, swipedTo);
+  }
+
+  // Keeps a verdict, so a run can swipe through what's right; one not decided yet counts as not caught.
+  /** @param {number} [swipedTo] */
+  function moveOn(swipedTo = 0) {
+    if (busy) return;
+    if (verdict === undefined) decide(false, swipedTo);
+    else leave(null, 0, swipedTo);
+  }
+
+  /**
+   * @param {Keyframe[] | null} feedback
+   * @param {number} duration
+   * @param {number} from
+   */
+  async function leave(feedback, duration, from) {
     if (card && !prefersReducedMotion()) {
       busy = true;
-      const from = swipedTo ?? 0;
       try {
-        await card.animate(caught ? PULSE : shake(from), { duration: caught ? 320 : 280, easing: 'ease-out' }).finished;
+        if (feedback) await card.animate(feedback, { duration, easing: 'ease-out' }).finished;
         await card.animate(
           [
             { transform: `translateX(${from}px)`, opacity: 1 + from / 400 },
@@ -109,15 +121,15 @@
         busy = false;
       }
     }
-    // Always on to the first undecided critter, so Not caught can't un-catch the ones in between after going back.
-    if (verdicts.length < queue.length) {
-      index = verdicts.length;
+    if (index + 1 < queue.length) {
+      index += 1;
       slideIn(48);
     } else {
-      const finished = /** @type {string} */ (category);
-      markSynced(finished);
+      const done = /** @type {string} */ (category);
+      markSynced(done);
+      finished = true;
       category = null;
-      focusAfterRender(`[data-category="${finished}"]`);
+      focusAfterRender(`[data-category="${done}"]`);
     }
   }
 
@@ -159,7 +171,7 @@
     if (category === null) return;
     if (event.key === 'ArrowRight') {
       event.preventDefault();
-      if (!event.repeat) decide(false);
+      if (!event.repeat) moveOn();
     } else if (event.key === 'Enter') {
       if (event.repeat) {
         event.preventDefault();
@@ -231,7 +243,7 @@
     const dx = event.changedTouches[0].clientX - swipe.x;
     const draggedTo = dragX;
     cancelSwipe();
-    if (dx < -SWIPE_DISTANCE) decide(false, draggedTo);
+    if (dx < -SWIPE_DISTANCE) moveOn(draggedTo);
     else if (dx > SWIPE_DISTANCE) back();
   }
 
@@ -324,7 +336,7 @@
         {categoryLabel(category)} · {t('syncProgress', { current: String(index + 1), total: String(queue.length) })}
       </p>
       <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-stone-200" aria-hidden="true">
-        <div class="h-full bg-green-600 transition-[width]" style:width="{(verdicts.length / queue.length) * 100}%"></div>
+        <div class="h-full bg-green-600 transition-[width]" style:width="{(index / queue.length) * 100}%"></div>
       </div>
 
       <!-- touch-action saves sideways moves for the swipe; overflow-x-clip keeps the sliding critter from scrolling the page. -->
