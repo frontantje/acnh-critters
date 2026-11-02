@@ -44,17 +44,17 @@
     ),
   );
 
-  const selectClass = 'w-full rounded-lg border border-stone-300 bg-white px-2 py-1.5 text-stone-800 md:w-auto';
+  const selectClass = 'w-full rounded-xl border-2 border-stone-200 bg-white px-2 py-1.5 font-semibold text-stone-800 md:w-auto';
 </script>
 
 <div class="mx-auto max-w-6xl">
   <header class="flex items-center justify-between gap-2 px-3 pt-2 md:px-4 md:pt-4">
-    <h1 class="shrink-0 text-xl font-bold md:text-2xl">ACNH Critters</h1>
+    <h1 class="shrink-0 text-xl font-black md:text-2xl">ACNH Critters</h1>
     <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} />
   </header>
 
   <div
-    class="sticky top-0 z-10 flex flex-col gap-2 border-b-2 border-stone-200 bg-amber-50 px-3 pt-2 md:flex-row md:items-end md:justify-between md:gap-6 md:px-4"
+    class="bg-sand-dots sticky top-0 z-10 flex flex-col gap-2 px-3 pt-2 pb-2 md:flex-row md:items-center md:justify-between md:gap-6 md:px-4"
   >
     <div class="flex gap-2 md:order-last md:gap-4 md:self-center">
       <label class="flex flex-1 items-center gap-2 text-stone-600">
@@ -76,20 +76,25 @@
       </label>
     </div>
 
-    <!-- -mb-0.5 lets the active tab's underline cover the bar's bottom border. -->
-    <div class="-mb-0.5 flex items-center gap-2 md:gap-4">
-      <div class="flex min-w-0 flex-1 overflow-x-auto" role="tablist">
+    <div class="flex items-center gap-2 md:gap-4">
+      <div class="flex min-w-0 flex-1 gap-1.5 overflow-x-auto" role="tablist">
         {#each TABS as { id, label } (id)}
           <button
             role="tab"
             aria-selected={tab === id}
             class={[
-              'grow border-b-4 px-1 py-2.5 font-semibold whitespace-nowrap md:grow-0 md:px-4 md:py-3',
-              tab === id ? 'border-green-600 text-stone-900' : 'border-transparent text-stone-500 hover:text-stone-800',
+              'min-h-11 grow rounded-full px-2 font-extrabold whitespace-nowrap md:grow-0 md:px-5',
+              tab === id ? 'bg-stone-800 text-stone-50' : 'bg-stone-50 text-stone-500 hover:text-stone-800',
             ]}
             onclick={() => (tab = id)}
           >
-            {t(label)}
+            <!-- "Meerestiere" doesn't fit next to the other tabs on a phone. -->
+            {#if id === 'sea'}
+              <span class="md:hidden">{t('tabSeaShort')}</span>
+              <span class="hidden md:inline">{t(label)}</span>
+            {:else}
+              {t(label)}
+            {/if}
           </button>
         {/each}
       </div>
@@ -98,7 +103,7 @@
         role="switch"
         aria-checked={progress.showCaught}
         aria-label={t('showCaught')}
-        class="flex shrink-0 flex-col items-center justify-center gap-1 self-stretch px-1 text-xs font-semibold text-stone-600 md:flex-row md:gap-2 md:text-sm"
+        class="flex shrink-0 flex-col items-center justify-center gap-1 self-stretch px-1 text-xs font-bold text-stone-600 md:flex-row md:gap-2 md:text-sm"
         onclick={toggleShowCaught}
       >
         <span class="md:hidden">{t('showCaughtShort')}</span>
@@ -115,27 +120,7 @@
     </div>
   </div>
 
-  <!-- Not a <ul>, so the critter list stays the page's first list. -->
-  <div class="flex flex-wrap gap-x-4 gap-y-1 px-3 py-2 text-xs text-stone-600 md:px-4 md:text-sm" data-testid="legend">
-    {#if month !== 0}
-      <span class="flex items-center gap-1.5">
-        <span class="size-3 shrink-0 rounded-sm border border-red-300 bg-red-50" aria-hidden="true"></span>
-        {t('legendLeaving')}
-      </span>
-    {/if}
-    <span class="flex items-center gap-1.5">
-      <span class="size-3 shrink-0 rounded-sm border border-sky-300 bg-sky-50" aria-hidden="true"></span>
-      {t('legendYearRound')}
-    </span>
-    {#if progress.showCaught}
-      <span class="flex items-center gap-1.5">
-        <span class="size-3 shrink-0 rounded-sm border border-green-300 bg-green-50" aria-hidden="true"></span>
-        {t('legendCaught')}
-      </span>
-    {/if}
-  </div>
-
-  <ul>
+  <ul class="grid gap-2 px-3 pb-6 md:px-4">
     {#each visible as critter (critter.id)}
       <CritterRow
         {critter}
@@ -144,7 +129,7 @@
         flagged={isFlagged(critter)}
       />
     {:else}
-      <li class="p-8 text-center text-stone-500">
+      <li class="rounded-2xl bg-white p-8 text-center text-stone-500">
         {inTabAndMonth.length ? t('allCaught') : t('nothingThisMonth')}
       </li>
     {/each}

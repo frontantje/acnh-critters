@@ -3,7 +3,7 @@
   import { t } from './i18n.svelte.js';
   import NameField from './NameField.svelte';
   import { progress, setName, takenName, transferCode } from './progress.svelte.js';
-  import { primaryButton } from './styles.js';
+  import { primaryButton, secondaryButton } from './styles.js';
   import { normalizeName } from './transfer.js';
 
   /** @type {{ onclose: () => void }} */
@@ -65,8 +65,7 @@
     exported();
   }
 
-  const optionClass =
-    'flex min-h-12 w-full items-center justify-center rounded-full border-2 border-green-600 bg-white px-4 py-2 font-bold text-green-700 hover:bg-green-50 disabled:opacity-50';
+  const optionClass = `flex w-full items-center justify-center ${secondaryButton}`;
 </script>
 
 <Dialog title={t('exportData')} {onclose}>

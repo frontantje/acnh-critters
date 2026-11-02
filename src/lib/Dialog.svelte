@@ -21,11 +21,11 @@
   bind:this={dialog}
   {onclose}
   aria-labelledby={titleId}
-  class="m-auto max-h-[calc(100%_-_2rem)] w-[calc(100%_-_2rem)] max-w-md overflow-y-auto rounded-2xl bg-amber-50 p-0 text-stone-800 shadow-xl backdrop:bg-stone-900/40"
+  class="m-auto max-h-[calc(100%_-_2rem)] w-[calc(100%_-_2rem)] max-w-md overflow-y-auto rounded-2xl bg-stone-50 p-0 text-stone-800 shadow-xl backdrop:bg-stone-900/40"
 >
   <div class="p-5">
     <div class="flex items-start justify-between gap-4">
-      <h2 id={titleId} class="pt-2 text-xl font-bold">{title}</h2>
+      <h2 id={titleId} class="pt-2 text-xl font-black">{title}</h2>
       <button
         class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full text-stone-600 hover:bg-stone-200/70"
         aria-label={t('close')}

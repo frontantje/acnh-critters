@@ -16,7 +16,7 @@
     setName,
     takenName,
   } from './progress.svelte.js';
-  import { primaryButton } from './styles.js';
+  import { dangerButton, plainButton, primaryButton } from './styles.js';
 
   /** @type {{ adding: boolean, onclose: () => void }} */
   let { adding, onclose } = $props();
@@ -96,14 +96,14 @@
         <div class="mt-4 grid grid-cols-2 gap-3">
           <button
             bind:this={keepButton}
-            class="min-h-12 rounded-full border-2 border-stone-300 bg-white px-4 py-2 font-bold text-stone-700 hover:bg-stone-100"
+            class={plainButton}
             aria-describedby="profile-delete-question"
             onclick={keep}
           >
             {t('profileDeleteNo')}
           </button>
           <button
-            class="min-h-12 rounded-full border-2 border-red-600 bg-red-600 px-4 py-2 font-bold text-white hover:border-red-700 hover:bg-red-700"
+            class={dangerButton}
             aria-describedby="profile-delete-question"
             onclick={remove}
           >

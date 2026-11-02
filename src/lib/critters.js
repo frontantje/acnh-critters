@@ -118,12 +118,12 @@ function formatHours(hours) {
 }
 
 /**
- * Non-breaking spaces keep each time together, so the only line break is before the dash.
+ * Non-breaking spaces and a word joiner after the German dash keep each time together; English can still break before its dash.
  * @param {number} start
  * @param {number} end exclusive
  */
 function formatHourRange(start, end) {
-  if (i18n.locale === 'de') return `${start}–${end || 24} Uhr`;
+  if (i18n.locale === 'de') return `${start}–⁠${end || 24} Uhr`;
   /** @param {number} hour */
   const format = (hour) => `${hour % 12 || 12} ${hour < 12 ? 'AM' : 'PM'}`;
   return `${format(start)} – ${format(end)}`;

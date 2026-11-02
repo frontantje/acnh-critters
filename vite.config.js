@@ -18,8 +18,8 @@ export default defineConfig({
         description: 'Keep track of the fish, insects and sea creatures caught in Animal Crossing: New Horizons.',
         lang: 'en',
         display: 'standalone',
-        background_color: '#fffbeb',
-        theme_color: '#fffbeb',
+        background_color: '#f1e6c9',
+        theme_color: '#f1e6c9',
         icons: [
           { src: 'app-icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'app-icon-512.png', sizes: '512x512', type: 'image/png' },
@@ -28,7 +28,7 @@ export default defineConfig({
       },
       workbox: {
         // Includes the 200 critter icons, so they work offline too.
-        globPatterns: ['**/*.{js,css,html,png}'],
+        globPatterns: ['**/*.{js,css,html,png,woff2}'],
       },
       // The pattern above already covers the manifest's icons.
       includeManifestIcons: false,

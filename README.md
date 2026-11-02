@@ -54,7 +54,8 @@ Changes are collected under "Unreleased" in [CHANGELOG.md](CHANGELOG.md). To rel
 
 Everything the app shows ships with it, so it needs no other server. The 200 critter icons are
 in `public/icons/`, and the home-screen icons are `public/app-icon-*.png` and
-`public/apple-touch-icon.png`.
+`public/apple-touch-icon.png`. The font, Nunito, comes from `@fontsource-variable/nunito`;
+`src/app.css` loads only its Latin files, which cover English and German.
 
 The production build is an installable web app (`vite-plugin-pwa`, configured in `vite.config.js`):
 

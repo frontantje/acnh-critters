@@ -16,6 +16,12 @@ changes.
 
 ### Changed
 
+- **A new look:** the rounded Nunito font (part of the app, so it works offline), the Critterpedia's
+  dotted sand, warm brown text and chunky green buttons, all checked for contrast.
+- **Clearer rows:** each critter is a card, and a chip under its name says "⏳ Last chance", "↻ All
+  year" or "✓ Caught" in words, so the colour legend is gone. The tabs are big pills; on phones the
+  sea tab says just "Sea" so they all fit, and place and time share a line.
+- German times no longer break after the dash ("4–" / "17 Uhr").
 - **The list's catch button:** "Hab ich!" in German. A caught critter's button shows just a ✓, which
   turns red with a ✗ on hover or while pressed, since pressing it un-catches. Right after catching,
   it stays green until the pointer has left it.

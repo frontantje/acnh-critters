@@ -4,7 +4,7 @@
   import { t } from './i18n.svelte.js';
   import NameField from './NameField.svelte';
   import { nameAllowed, progress, setAvatar, setName, takenName } from './progress.svelte.js';
-  import { primaryButton } from './styles.js';
+  import { primaryButton, secondaryButton } from './styles.js';
 
   /**
    * @type {{ onimport: () => void, onsync: () => void, onskip: () => void, backTo: string | null, onback: () => void }}
@@ -20,7 +20,7 @@
   {#if progress.avatar}
     <img class="mx-auto mb-2 size-24 object-contain" src={avatarIcon(progress.avatar)} alt="" width="96" height="96" />
   {/if}
-  <h1 class="text-2xl font-bold">{progress.name ? t('welcomeNamed', { name: progress.name }) : t('welcomeTitle')}</h1>
+  <h1 class="text-2xl font-black">{progress.name ? t('welcomeNamed', { name: progress.name }) : t('welcomeTitle')}</h1>
   <p class="mt-2 text-stone-600">{t('welcomeIntro')}</p>
 
   {#if !progress.name}
@@ -42,13 +42,10 @@
     </button>
   {:else}
     <div class="mt-8 grid gap-3">
-      <button class="rounded-full bg-green-600 px-5 py-3 font-bold text-white hover:bg-green-700" onclick={onimport}>
+      <button class={primaryButton} onclick={onimport}>
         {t('welcomeImport')}
       </button>
-      <button
-        class="rounded-full border-2 border-green-600 px-5 py-3 font-bold text-green-700 hover:bg-green-50"
-        onclick={onsync}
-      >
+      <button class={secondaryButton} onclick={onsync}>
         {t('welcomeSync')}
       </button>
       <button class="mt-1 text-stone-500 underline hover:text-stone-700" onclick={onskip}>

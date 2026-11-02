@@ -129,7 +129,11 @@ export async function fields(row) {
 }
 
 /** @param {string} text */
-export const normalize = (text) => text.replace(/\s+/g, ' ').trim();
+export const normalize = (text) => text.replace(/⁠/g, '').replace(/\s+/g, ' ').trim();
+
+/** @param {import('@playwright/test').Locator} rows */
+export const rowNames = async (rows) =>
+  (await rows.evaluateAll((items) => items.map((item) => item.querySelector('span')?.textContent ?? ''))).map(normalize);
 
 /** @param {import('@playwright/test').Page} page */
 export const hemisphereSelect = (page) => page.locator('select').first();

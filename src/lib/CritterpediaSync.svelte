@@ -4,6 +4,7 @@
   import { t } from './i18n.svelte.js';
   import { prefersReducedMotion } from './motion.js';
   import { markCaught, markSynced, progress, unmarkCaught } from './progress.svelte.js';
+  import { plainButton, primaryButton, secondaryButton } from './styles.js';
 
   /** @typedef {import('./critters.js').Critter} Critter */
 
@@ -262,11 +263,11 @@
   bind:this={dialog}
   onclose={onexit}
   aria-labelledby="sync-title"
-  class="m-0 size-full max-h-none max-w-none overscroll-contain bg-amber-50 p-0 text-stone-800"
+  class="m-0 size-full max-h-none max-w-none overscroll-contain bg-sand-dots p-0 text-stone-800"
 >
   <div class="mx-auto flex min-h-full max-w-md flex-col px-4 pb-6">
     <header class="flex items-center justify-between gap-4 pt-2 pb-4">
-      <h2 id="sync-title" class="text-xl font-bold">{t('syncTitle')}</h2>
+      <h2 id="sync-title" class="text-xl font-black">{t('syncTitle')}</h2>
       <button
         class="grid size-11 shrink-0 place-items-center rounded-full text-stone-600 hover:bg-stone-200/70"
         aria-label={t('syncExit')}
@@ -286,13 +287,13 @@
           {@const count = counts(id)}
           <li>
             <button
-              class="flex w-full items-center gap-4 rounded-2xl bg-white p-4 text-left shadow-sm hover:bg-green-50"
+              class="flex w-full items-center gap-4 rounded-2xl bg-white p-4 text-left shadow-[0_2px_0_var(--color-stone-200)] hover:bg-green-50"
               data-category={id}
               onclick={() => start(id)}
             >
               <img class="size-12 object-contain" src={categoryIcon(id)} alt="" width="48" height="48" />
               <span class="flex-1">
-                <span class="block text-lg font-bold">{t(label)}</span>
+                <span class="block text-lg font-extrabold">{t(label)}</span>
                 <span class="text-sm text-stone-500">
                   {t('syncCount', { caught: String(count.caught), total: String(count.total) })}
                 </span>
@@ -313,7 +314,7 @@
       {/if}
 
       <button
-        class="mt-8 rounded-full border-2 border-green-600 px-5 py-3 font-bold text-green-700 hover:bg-green-100"
+        class={['mt-8', secondaryButton]}
         onclick={() => dialog.close()}
       >
         {t('syncDone')}
@@ -344,7 +345,7 @@
               {#if verdict !== undefined}
                 <span
                   class={[
-                    'absolute -right-2 -bottom-1 grid size-11 place-items-center rounded-full text-2xl font-bold text-white shadow-md ring-4 ring-amber-50',
+                    'absolute -right-2 -bottom-1 grid size-11 place-items-center rounded-full text-2xl font-bold text-white shadow-md ring-4 ring-sand',
                     verdict ? 'bg-green-600' : 'bg-red-600',
                   ]}
                   data-verdict={verdict ? 'caught' : 'not-caught'}
@@ -354,21 +355,21 @@
                 </span>
               {/if}
             </div>
-            <p class="mt-4 text-2xl font-bold">{critterName(current)}</p>
+            <p class="mt-4 text-2xl font-black">{critterName(current)}</p>
           </div>
         {/key}
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <button
-          class="min-h-14 rounded-full border-2 border-stone-300 bg-white px-4 text-lg font-bold text-stone-700 hover:bg-stone-100"
+          class={['min-h-14 text-lg', plainButton]}
           aria-keyshortcuts="ArrowRight"
           onclick={onNextClick}
         >
           {t('syncNext')}
         </button>
         <button
-          class="min-h-14 rounded-full border-2 border-green-600 bg-green-600 px-4 text-lg font-bold text-white hover:border-green-700 hover:bg-green-700"
+          class={['min-h-14 text-lg', primaryButton]}
           data-action="caught"
           aria-keyshortcuts="Enter"
           onclick={() => decide(true)}

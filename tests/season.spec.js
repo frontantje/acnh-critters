@@ -1,6 +1,6 @@
-import { available, critters, expect, hemisphereSelect, list, monthSelect, normalize, row, rows, setShowCaught, skipWelcome, test } from './support.js';
+import { available, critters, expect, hemisphereSelect, list, monthSelect, row, rowNames, rows, setShowCaught, skipWelcome, test } from './support.js';
 
-const LAST_CHANCE = 'Last chance: gone next month';
+const LAST_CHANCE = 'Last chance';
 
 /**
  * @param {any} critter
@@ -42,11 +42,11 @@ function expectedOrder(list, hemisphere, month, hour) {
 }
 
 /** @param {import('@playwright/test').Page} page */
-const shownNames = async (page) => (await rows(page).locator('span:first-child').allTextContents()).map(normalize);
+const shownNames = (page) => rowNames(rows(page));
 
 /** @param {import('@playwright/test').Page} page */
 const warnedNames = async (page) =>
-  (await list(page).locator('li').filter({ hasText: LAST_CHANCE }).locator('span:first-child').allTextContents()).map(normalize);
+  rowNames(list(page).locator('li').filter({ hasText: LAST_CHANCE }));
 
 /**
  * @param {import('@playwright/test').BrowserContext} context
@@ -101,20 +101,17 @@ test.describe('sorting', () => {
   });
 });
 
-test.describe('year-round tint', () => {
+test.describe('year-round mark', () => {
   const yearRound = critters.filter((c) => monthsLeft(c, 'north', 1) === 12).map((c) => c.name.en);
   /** @param {import('@playwright/test').Page} page */
   const notedYearRound = async (page) =>
-    (await list(page).locator('li').filter({ hasText: 'All year' }).locator('span:first-child').allTextContents()).map(normalize);
+    rowNames(list(page).locator('li').filter({ hasText: 'All year' }));
 
-  test('uncaught critters catchable all year are tinted, in a month and for all months', async ({ page }) => {
+  test('uncaught critters catchable all year say so, in a month and for all months', async ({ page }) => {
     await skipWelcome(page);
     expect(yearRound.length).toBeGreaterThan(0);
     expect((await notedYearRound(page)).sort()).toEqual([...yearRound].sort());
-
-    const background = (/** @type {string} */ name) => row(page, name).evaluate((li) => getComputedStyle(li).backgroundColor);
-    const seasonal = available('all').find((c) => monthsLeft(c, 'north', 10) < 12);
-    expect(await background(yearRound[0])).not.toBe(await background(seasonal.name.en));
+    await expect(row(page, yearRound[0]).locator('p', { hasText: 'All year' })).toBeVisible();
 
     await monthSelect(page).selectOption({ label: 'All months' });
     expect(await notedYearRound(page)).toEqual(critters.filter((c) => yearRound.includes(c.name.en)).map((c) => c.name.en));
@@ -128,7 +125,7 @@ test.describe('year-round tint', () => {
   });
 });
 
-test.describe('last chance tint', () => {
+test.describe('last chance mark', () => {
   /** @param {number} month */
   const leavingAfter = (month) =>
     expectedOrder(available('all', 'north', month), 'north', month, 12)
@@ -141,13 +138,8 @@ test.describe('last chance tint', () => {
     expect(leavingAfter(10).length).toBeGreaterThan(0);
     expect(await warnedNames(page)).toEqual(leavingAfter(10));
     expect((await shownNames(page)).slice(0, leavingAfter(10).length)).toEqual(leavingAfter(10));
-
-    const background = (/** @type {string} */ name) => row(page, name).evaluate((li) => getComputedStyle(li).backgroundColor);
-    const normal = available('all').find((c) => ![1, 12].includes(monthsLeft(c, 'north', 10)));
-    const allYear = available('all').find((c) => monthsLeft(c, 'north', 10) === 12);
-    const red = await background(leavingAfter(10)[0]);
-    expect(red).not.toBe(await background(normal.name.en));
-    expect(red).not.toBe(await background(allYear.name.en));
+    // In words, not only in colour.
+    await expect(row(page, leavingAfter(10)[0]).locator('p', { hasText: LAST_CHANCE })).toBeVisible();
   });
 
   test('another month flags what leaves after that month; all months flags nothing', async ({ page }) => {
@@ -166,54 +158,27 @@ test.describe('last chance tint', () => {
   });
 });
 
-test.describe('color legend', () => {
-  /** @param {import('@playwright/test').Page} page */
-  const entries = (page) => page.getByTestId('legend').locator(':scope > span');
-  /** @param {import('@playwright/test').Locator} locator */
-  const backgroundOf = (locator) => locator.evaluate((el) => getComputedStyle(el).backgroundColor);
-
-  test('explains just the colors that can show', async ({ page }) => {
+test.describe('caught mark', () => {
+  test('a caught critter says so instead of its other marks; the card turns green', async ({ page }) => {
     await skipWelcome(page);
-    await expect(entries(page)).toHaveText(['Gone after this month', 'Catchable all year']);
     await setShowCaught(page, true);
-    await expect(entries(page)).toHaveText(['Gone after this month', 'Catchable all year', 'Caught']);
-    await monthSelect(page).selectOption({ label: 'All months' });
-    await expect(entries(page)).toHaveText(['Catchable all year', 'Caught']);
-  });
-
-  test('its squares have the rows’ colors', async ({ page }) => {
-    await skipWelcome(page);
-    const swatch = (/** @type {number} */ i) => entries(page).nth(i).locator('span');
     const leaving = available('all').find((c) => monthsLeft(c, 'north', 10) === 1);
-    const allYear = available('all').find((c) => monthsLeft(c, 'north', 10) === 12);
-    expect(await backgroundOf(swatch(0))).toBe(await backgroundOf(row(page, leaving.name.en)));
-    expect(await backgroundOf(swatch(1))).toBe(await backgroundOf(row(page, allYear.name.en)));
-  });
-
-  test('sits between the pinned bar and the list, and scrolls away with it', async ({ page }) => {
-    await skipWelcome(page);
-    const bar = await page.locator('div.sticky').boundingBox();
-    const legend = await page.getByTestId('legend').boundingBox();
-    const firstRow = await rows(page).first().boundingBox();
-    if (!bar || !legend || !firstRow) throw new Error('not rendered');
-    expect(legend.y).toBeGreaterThanOrEqual(bar.y + bar.height - 1);
-    expect(legend.y + legend.height).toBeLessThanOrEqual(firstRow.y + 1);
-
-    await page.evaluate(() => scrollTo(0, 1500));
-    await expect(page.getByTestId('legend')).not.toBeInViewport();
+    const card = row(page, leaving.name.en);
+    const background = () => card.evaluate((li) => getComputedStyle(li).backgroundColor);
+    const before = await background();
+    await card.getByRole('button', { name: 'Caught it' }).click();
+    await expect(card.locator('p', { hasText: 'Caught' })).toBeVisible();
+    await expect(card.locator('p', { hasText: LAST_CHANCE })).toHaveCount(0);
+    expect(await background()).not.toBe(before);
   });
 });
 
-test.describe('last chance tint in German', () => {
+test.describe('marks in German', () => {
   test.use({ locale: 'de-DE' });
 
-  test('the note is translated', async ({ page }) => {
+  test('are translated', async ({ page }) => {
     await skipWelcome(page, 'Nein danke, zeig mir einfach die Liste');
-    await expect(list(page).getByText('Letzte Chance: nächsten Monat weg').first()).toBeAttached();
-  });
-
-  test('so is the legend', async ({ page }) => {
-    await skipWelcome(page, 'Nein danke, zeig mir einfach die Liste');
-    await expect(page.getByTestId('legend').locator(':scope > span')).toHaveText(['Nach diesem Monat weg', 'Ganzjährig fangbar']);
+    await expect(list(page).locator('li p', { hasText: 'Letzte Chance' }).first()).toBeVisible();
+    await expect(list(page).locator('li p', { hasText: 'Ganzjährig' }).first()).toBeVisible();
   });
 });

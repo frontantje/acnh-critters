@@ -5,11 +5,11 @@ progress.
 
 ## Next up
 
-- [ ] **UI polish:** fonts and color scheme. A rounded, friendly font, self-hosted so it works
-      offline. A palette that fits the game, checked for contrast. The row tints
-      (red / blue / green) need to work in it too.
-- [ ] **Dark theme:** follow the device setting, maybe with a switch in the menu. Every tint and the
-      legend need dark versions.
+- [x] **UI polish:** Nunito, self-hosted for offline use; dotted sand, warm browns and chunky green
+      buttons, checked for contrast. Rows are cards with a word chip for last chance, all year and
+      caught (2 Nov 2026).
+- [ ] **Dark theme:** follow the device setting, maybe with a switch in the menu. The colours are
+      Tailwind's stone and green, retuned in `src/app.css`; the chips and cards need dark versions.
 - [ ] **Sounds:** e.g. a short jingle for "Caught it", a pop for the sync's "Caught", a soft swoosh
       for "Next". Mute switch in the menu, quiet by default until a first tap (browsers block
       autoplay anyway).
@@ -29,7 +29,6 @@ progress.
 - [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
       when and where. The data already has `image` and `price`.
 - [ ] **"Right now" view:** only what can be caught at this moment, as big picture tiles.
-- [ ] **Simple mode** for younger kids: just picture, name and button, no times or notes.
 - [x] **Installable app (PWA):** home-screen icon, works offline, critter icons stored locally (30 Oct 2026).
 - [ ] **Donation tracking UI.** The data model already has it (`trackDonations`, `donated`).
 - [ ] **Undo** for an accidental "Caught it" in the list, e.g. a short "Pale chub caught · Undo"
@@ -39,8 +38,8 @@ progress.
 
 - [x] Self-host the critter icons (30 Oct 2026). The large Critterpedia pictures (`image`) are still
       on acnhcdn.com; download them too once something uses them (e.g. the detail card).
-- [ ] Visible label next to the row tints, for kids who don't see the colors well.
-- [ ] Pin the color legend (it currently scrolls away with the list).
+- [x] Visible label next to the row tints, for kids who don't see the colors well. The chips do it,
+      and there's no colour legend any more (2 Nov 2026).
 - [ ] Switch the month filter when the app stays open past midnight into a new month.
 - [ ] Hold back re-sorting for a few seconds after a tap (rows can jump on the full hour).
 - [ ] Language switch on the welcome screen, not only in the menu.
@@ -50,8 +49,8 @@ progress.
 ## Open code-review findings
 
 - [x] German catch button: "Gefangen!" and "Gefangen ✓" read almost the same. Now "Hab ich!" (2 Nov 2026).
-- [ ] The non-breaking space after the en dash in times may still allow a line break there; a word
-      joiner (U+2060) would prevent it.
+- [x] German times could break after the dash ("4–" / "17 Uhr"); a word joiner prevents it now
+      (2 Nov 2026).
 - [ ] The catch button is a fixed `w-28` on phones; `min-w-28` would leave room for longer labels.
 - [ ] Language options use `aria-pressed`; radio semantics would fit a one-of-many choice better.
 - [x] `build-data.mjs` doesn't fail on a missing German name (it does now, 30 Oct 2026).

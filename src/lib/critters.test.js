@@ -33,8 +33,8 @@ function hours(start, end) {
   return list.sort((a, b) => a - b);
 }
 
-/** Times use non-breaking spaces; this lets expectations use plain ones. @param {string} text */
-const plain = (text) => text.replace(/ /g, ' ');
+/** Times use non-breaking spaces and word joiners; this lets expectations leave them out. @param {string} text */
+const plain = (text) => text.replace(/ /g, ' ').replace(/⁠/g, '');
 /**
  * @param {Period[]} periods
  * @param {number} [month]
@@ -72,11 +72,11 @@ describe('timeText', () => {
     expect(time(periods)).toBe('9–16 Uhr, 21–4 Uhr');
   });
 
-  test('keeps each time together with non-breaking spaces', () => {
+  test('keeps each time together with non-breaking spaces and, in German, a word joiner', () => {
     const periods = [{ months: [1], hours: hours(21, 4) }];
     expect(timeText(withPeriods(periods), 'north', 1)).toBe('9 PM – 4 AM');
     setLocale('de');
-    expect(timeText(withPeriods(periods), 'north', 1)).toBe('21–4 Uhr');
+    expect(timeText(withPeriods(periods), 'north', 1)).toBe('21–⁠4 Uhr');
   });
 
   describe('hours that change by season', () => {

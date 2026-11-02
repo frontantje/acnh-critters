@@ -1,1 +1,52 @@
 @import 'tailwindcss';
+
+/* Only the subsets English and German need, so the offline download stays small. */
+@font-face {
+  font-family: 'Nunito Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url('../node_modules/@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 1000;
+  src: url('../node_modules/@fontsource-variable/nunito/files/nunito-latin-ext-wght-normal.woff2') format('woff2-variations');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@theme {
+  --font-sans: 'Nunito Variable', ui-rounded, system-ui, sans-serif;
+
+  /* Warm browns instead of greys, like the ink on the game's letters; each text shade is checked for contrast. */
+  --color-stone-50: #fbf5e4;
+  --color-stone-100: #f6ecd2;
+  --color-stone-200: #eadfc3;
+  --color-stone-300: #d9c9a3;
+  --color-stone-400: #b3a07c;
+  --color-stone-500: #725d49;
+  --color-stone-600: #6a5642;
+  --color-stone-700: #5a4734;
+  --color-stone-800: #4e3b2a;
+  --color-stone-900: #3a2b1e;
+
+  /* Deeper than Tailwind's green, so white text on buttons stays readable (4.5:1). */
+  --color-green-50: #eef7e8;
+  --color-green-100: #d7efcf;
+  --color-green-600: #2e8642;
+  --color-green-700: #1f6431;
+  --color-green-800: #1f5527;
+
+  --color-sand: #f1e6c9;
+}
+
+/* The Critterpedia's dotted sand; fixed, so the pinned filter bar's dots line up with the page's. */
+@utility bg-sand-dots {
+  background-color: var(--color-sand);
+  background-image: radial-gradient(#e6d7b0 1.2px, transparent 1.4px);
+  background-size: 16px 16px;
+  background-attachment: fixed;
+}
