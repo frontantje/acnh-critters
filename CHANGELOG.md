@@ -7,6 +7,8 @@ changes.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-11
+
 ### Added
 
 - **Parties:** catching a critter from the list that finishes a milestone opens a popup with the
