@@ -3,8 +3,11 @@
   import ExportDialog from './lib/ExportDialog.svelte';
   import ImportDialog from './lib/ImportDialog.svelte';
   import MainView from './lib/MainView.svelte';
+  import PartyPopup from './lib/PartyPopup.svelte';
   import ProfileDialog from './lib/ProfileDialog.svelte';
+  import TrophyCase from './lib/TrophyCase.svelte';
   import Welcome from './lib/Welcome.svelte';
+  import { awardTrophies, party } from './lib/party.svelte.js';
   import { cancelNewProfile, previousProfile, profileName, profiles, restore, save } from './lib/progress.svelte.js';
 
   restore();
@@ -18,6 +21,12 @@
   let exporting = $state(false);
   let importMode = $state(/** @type {null | 'new' | 'replace'} */ (null));
   let profileMode = $state(/** @type {null | 'add' | 'edit'} */ (null));
+  let showingTrophies = $state(false);
+
+  // Also right at the start, for milestones reached before there were trophies.
+  $effect(() => {
+    if (!showWelcome) awardTrophies();
+  });
 </script>
 
 {#if showWelcome}
@@ -38,6 +47,7 @@
     onimport={() => (importMode = 'replace')}
     onaddprofile={() => (profileMode = 'add')}
     oneditprofile={() => (profileMode = 'edit')}
+    ontrophies={() => (showingTrophies = true)}
   />
 {/if}
 
@@ -53,4 +63,10 @@
 {/if}
 {#if profileMode}
   <ProfileDialog adding={profileMode === 'add'} onclose={() => (profileMode = null)} />
+{/if}
+{#if showingTrophies}
+  <TrophyCase onclose={() => (showingTrophies = false)} />
+{/if}
+{#if party.milestone}
+  <PartyPopup milestone={party.milestone} onclose={() => (party.milestone = null)} />
 {/if}

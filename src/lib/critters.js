@@ -18,6 +18,29 @@ export const CATEGORIES = [
 /** @type {Tab[]} */
 export const TABS = [{ id: 'all', label: 'tabAll' }, ...CATEGORIES];
 
+/**
+ * @param {Critter[]} list
+ * @param {{ has: (id: string) => boolean }} caught
+ */
+export function countCaught(list, caught) {
+  /** @type {Record<string, { caught: number, total: number }>} */
+  const counts = Object.fromEntries(TABS.map(({ id }) => [id, { caught: 0, total: 0 }]));
+  for (const critter of list) {
+    const isCaught = caught.has(critter.id);
+    for (const count of [counts[critter.type], counts.all]) {
+      count.total += 1;
+      if (isCaught) count.caught += 1;
+    }
+  }
+  return counts;
+}
+
+/** @type {Record<string, string>} */
+const CATEGORY_ICONS = { fish: 'sea-bass', bug: 'common-butterfly', sea: 'octopus' };
+
+/** @param {string} category */
+export const categoryIcon = (category) => critters.find((critter) => critter.id === CATEGORY_ICONS[category])?.icon;
+
 /** @param {Critter} critter */
 export function critterName(critter) {
   return critter.name[i18n.locale];

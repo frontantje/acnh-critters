@@ -15,8 +15,9 @@ progress.
       autoplay anyway).
 - [ ] **Cute icons and visuals:** icons for locations (river, pond, sea, trees, flowers…), pictures
       for shadow sizes instead of "X-Large", nicer empty states.
-- [ ] **Big party screen** when every critter is caught: full-screen confetti, the critters
-      parading by, a sound. Must respect "reduced motion".
+- [x] **Big party screen:** a popup with the category's critter and confetti that grows with the
+      milestone, up to all 200 caught. No confetti with "reduced motion" (2 Nov 2026).
+- [ ] **Bigger finale** for all 200: the critters parading by, a sound.
 
 ## Suggestions (from Claude)
 
@@ -24,8 +25,8 @@ progress.
       shared tablet, switchable from the menu. The export name is the profile name (30 Oct 2026).
 - [x] **A picture per profile:** each child picks a critter as their avatar, shown on the menu button
       and in the profile list, so kids who can't read yet find their own (30 Oct 2026).
-- [ ] **Smaller parties along the way:** a category finished, the first 10 caught, half the
-      Critterpedia done. Maybe stickers or stamps collected on a card.
+- [x] **Smaller parties along the way:** a month's critters, half and all of a category or of
+      everything. Each leaves a trophy in the menu's trophy case (2 Nov 2026).
 - [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
       when and where. The data already has `image` and `price`.
 - [ ] **"Right now" view:** only what can be caught at this moment, as big picture tiles.

@@ -1,6 +1,6 @@
 <script>
   import { tick } from 'svelte';
-  import { CATEGORIES, critterName, critters } from './critters.js';
+  import { CATEGORIES, categoryIcon, countCaught, critterName, critters } from './critters.js';
   import { t } from './i18n.svelte.js';
   import { prefersReducedMotion } from './motion.js';
   import { markCaught, markSynced, progress, unmarkCaught } from './progress.svelte.js';
@@ -16,10 +16,6 @@
   let dialog;
   $effect(() => dialog.showModal());
 
-  /** @type {Record<string, string>} */
-  const CATEGORY_ICONS = { fish: 'sea-bass', bug: 'common-butterfly', sea: 'octopus' };
-  /** @param {string} category */
-  const categoryIcon = (category) => critters.find((critter) => critter.id === CATEGORY_ICONS[category])?.icon;
   /** @param {string} category */
   const categoryLabel = (category) => t(CATEGORIES.find((c) => c.id === category)?.label ?? 'tabAll');
 
@@ -39,11 +35,7 @@
     if (next) new Image().src = next.icon;
   });
 
-  /** @param {string} id */
-  function counts(id) {
-    const all = critters.filter((critter) => critter.type === id);
-    return { total: all.length, caught: all.filter((critter) => progress.caught.has(critter.id)).length };
-  }
+  const counts = $derived(countCaught(critters, progress.caught));
 
   // The clicked button disappears, and focus would otherwise fall back to the body, outside the dialog.
   /** @param {string} selector */
@@ -149,10 +141,12 @@
 
   // Only shows the critter with its verdict; Caught or Not caught then changes it.
   function back() {
-    if (busy || !backTo) return;
+    // Read before category changes, since backTo then means the one before the current critter.
+    const target = backTo;
+    if (busy || !target) return;
     const fromList = category === null;
-    if (fromList) category = backTo.type;
-    index = queue.indexOf(backTo);
+    if (fromList) category = target.type;
+    index = queue.indexOf(target);
     slideIn(-48);
     // Focus stays on Back while it can go further, so pressing it again doesn't catch.
     if (fromList || index === 0) focusAfterRender('[data-action="caught"]');
@@ -296,7 +290,7 @@
 
       <ul class="mt-6 grid gap-3">
         {#each CATEGORIES as { id, label } (id)}
-          {@const count = counts(id)}
+          {@const count = counts[id]}
           <li>
             <button
               class="flex w-full items-center gap-4 rounded-2xl bg-white p-4 text-left shadow-[0_2px_0_var(--color-stone-200)] hover:bg-green-50"
@@ -307,7 +301,7 @@
               <span class="flex-1">
                 <span class="block text-lg font-extrabold">{t(label)}</span>
                 <span class="text-sm text-stone-500">
-                  {t('syncCount', { caught: String(count.caught), total: String(count.total) })}
+                  {t('caughtCount', { caught: String(count.caught), total: String(count.total) })}
                 </span>
               </span>
               {#if progress.synced.has(id)}

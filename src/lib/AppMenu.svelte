@@ -2,7 +2,8 @@
   import { version } from '../../package.json';
   import { avatarIcon } from './avatars.js';
   import { i18n, LOCALES, t } from './i18n.svelte.js';
-  import { activeProfile, chooseLocale, profileName, profiles, switchProfile } from './progress.svelte.js';
+  import { shownTrophies } from './party.svelte.js';
+  import { activeProfile, chooseLocale, profileName, profiles, progress, switchProfile } from './progress.svelte.js';
 
   /**
    * @type {{
@@ -11,9 +12,10 @@
    *   onimport: () => void,
    *   onaddprofile: () => void,
    *   oneditprofile: () => void,
+   *   ontrophies: () => void,
    * }}
    */
-  let { onsync, onexport, onimport, onaddprofile, oneditprofile } = $props();
+  let { onsync, onexport, onimport, onaddprofile, oneditprofile, ontrophies } = $props();
 
   let open = $state(false);
   /** @type {HTMLElement} */
@@ -26,6 +28,8 @@
     return profiles.list.length > 1 && active ? active : null;
   });
   const shownProfile = $derived(shown && profileName(shown));
+  // The trophy case's count, which leaves out trophies of a newer version.
+  const trophyCount = $derived(shownTrophies(progress.trophies).length);
 
   /** @param {MouseEvent} event */
   function closeOnOutsideClick(event) {
@@ -92,6 +96,10 @@
       class="absolute top-full right-0 z-20 mt-1 max-h-[calc(100dvh_-_4.5rem)] w-max max-w-72 min-w-52 overflow-y-auto rounded-xl border border-stone-200 bg-white p-1 shadow-lg"
     >
       <button class={itemClass} onclick={() => runAndClose(onsync)}>{t('syncTitle')}</button>
+      <button class={itemClass} onclick={() => runAndClose(ontrophies)}>
+        <span class="flex items-center gap-2"><span aria-hidden="true">🏆</span>{t('trophies')}</span>
+        {#if trophyCount}<span class="text-sm font-bold text-stone-500">{trophyCount}</span>{/if}
+      </button>
       <button class={itemClass} onclick={() => runAndClose(onexport)}>{t('exportData')}</button>
       <button class={itemClass} onclick={() => runAndClose(onimport)}>{t('importData')}</button>
 

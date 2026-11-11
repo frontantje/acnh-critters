@@ -8,10 +8,11 @@ import { decodeTransferCode, encodeTransferCode, findTransferCode, normalizeName
 /** @typedef {import('./i18n.svelte.js').Locale} Locale */
 /** @typedef {import('./transfer.js').ExportData} ExportData */
 /** @typedef {{ id: number, name: string, avatar: string | null }} Profile */
+/** year and month only for a month's trophy. @typedef {{ kind: string, scope: string, year?: number, month?: number, date: string }} Trophy */
 /**
  * @typedef {{
  *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean, name: string, avatar: string | null,
- *   locale: Locale | null, caught: string[], donated: string[], synced: string[],
+ *   locale: Locale | null, caught: string[], donated: string[], synced: string[], trophies: Trophy[],
  * }} Saved
  */
 
@@ -19,7 +20,8 @@ const STORAGE_KEY = 'acnh-critters';
 const ACTIVE_KEY = `${STORAGE_KEY}-active`;
 // Where version 1.0.0 kept the language, before it moved into the profile.
 const OLD_LOCALE_KEY = `${STORAGE_KEY}-locale`;
-const FORMAT_VERSION = 1;
+// 2 added trophies, so an older version still open refuses these profiles instead of saving over their trophies.
+const FORMAT_VERSION = 2;
 const KNOWN_IDS = new Set(critters.map((critter) => critter.id));
 const KNOWN_CATEGORIES = new Set(CATEGORIES.map((category) => category.id));
 
@@ -34,6 +36,7 @@ export const progress = $state({
   caught: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   donated: /** @type {SvelteSet<string>} */ (new SvelteSet()),
   synced: /** @type {SvelteSet<string>} */ (new SvelteSet()),
+  trophies: /** @type {Trophy[]} */ ([]),
 });
 
 /** Every profile is kept in memory too, so the app still works when storage is blocked. */
@@ -182,15 +185,14 @@ export function toggleShowCaught() {
   save();
 }
 
-/** @param {string} id */
-export function toggleCaught(id) {
-  if (progress.caught.has(id)) unmarkCaught(id);
-  else markCaught(id);
-}
-
-/** @param {string} id */
-export function markCaught(id) {
+/**
+ * The trophies it earns are saved in the same write, so other tabs never get the catch without them.
+ * @param {string} id
+ * @param {Trophy[]} [trophies]
+ */
+export function markCaught(id, trophies = []) {
   progress.caught.add(id);
+  progress.trophies = mergeTrophies(progress.trophies, trophies);
   save();
 }
 
@@ -200,6 +202,36 @@ export function unmarkCaught(id) {
   // A critter can't be donated without being caught.
   progress.donated.delete(id);
   save();
+}
+
+/**
+ * Saves only when one is new, since it runs after every change.
+ * @param {Trophy[]} trophies
+ */
+export function addTrophies(trophies) {
+  const merged = mergeTrophies(progress.trophies, trophies);
+  if (merged === progress.trophies) return;
+  progress.trophies = merged;
+  save();
+}
+
+/**
+ * The same month in another year is another trophy.
+ * @param {{ kind: string, scope: string, year?: number, month?: number }} trophy
+ */
+export function trophyKey({ kind, scope, year, month }) {
+  return [kind, scope, year, month].filter((part) => part !== undefined).join('-');
+}
+
+/**
+ * Each once, with the day it was first earned, so a party repeated after a correction adds none.
+ * @param {Trophy[]} own
+ * @param {Trophy[]} more
+ */
+function mergeTrophies(own, more) {
+  const byKey = new Map(own.map((trophy) => [trophyKey(trophy), trophy]));
+  for (const trophy of more) if (!byKey.has(trophyKey(trophy))) byKey.set(trophyKey(trophy), trophy);
+  return byKey.size === own.length ? own : [...byKey.values()];
 }
 
 /** @param {string} category */
@@ -243,6 +275,7 @@ export function importProgress(text) {
     name: progress.name || (takenName(saved.name) ? '' : saved.name),
     avatar: progress.avatar ?? (avatarAllowed(saved.avatar) ? saved.avatar : null),
     locale: saved.locale ?? progress.locale,
+    trophies: mergeTrophies(progress.trophies, saved.trophies),
   });
   save();
 }
@@ -332,7 +365,7 @@ function labels(profile) {
  * @param {Locale | null} locale
  */
 function startNew(hemisphere, locale) {
-  apply({ hemisphere, trackDonations: false, showCaught: false, name: '', avatar: null, locale, caught: [], donated: [], synced: [] });
+  apply({ hemisphere, trackDonations: false, showCaught: false, name: '', avatar: null, locale, caught: [], donated: [], synced: [], trophies: [] });
   profiles.active = null;
 }
 
@@ -417,6 +450,7 @@ function snapshot() {
     caught: [...progress.caught],
     donated: [...progress.donated],
     synced: [...progress.synced],
+    trophies: [...progress.trophies],
   };
 }
 
@@ -435,6 +469,7 @@ function toJSON(saved) {
     caught: saved.caught,
     donated: saved.donated,
     synced: saved.synced,
+    ...(saved.trophies.length ? { trophies: saved.trophies } : {}),
   };
 }
 
@@ -474,6 +509,7 @@ function parse(text) {
     caught: only(data.caught, KNOWN_IDS),
     donated: only(data.donated, KNOWN_IDS),
     synced: only(data.synced, KNOWN_CATEGORIES),
+    trophies: Array.isArray(data.trophies) ? mergeTrophies([], data.trophies.filter(isTrophy).map(trophyFields)) : [],
   };
 }
 
@@ -488,5 +524,33 @@ function apply(saved) {
   progress.caught = new SvelteSet(saved.caught);
   progress.donated = new SvelteSet(saved.donated);
   progress.synced = new SvelteSet(saved.synced);
+  progress.trophies = saved.trophies;
   setLocale(saved.locale ?? browserLocale());
+}
+
+/**
+ * Any kind and scope, so trophies of a newer version survive here; the trophy case leaves them out.
+ * @param {unknown} value
+ * @returns {value is Trophy}
+ */
+function isTrophy(value) {
+  const trophy = /** @type {Partial<Record<keyof Trophy, unknown>> | null} */ (value);
+  if (typeof trophy?.kind !== 'string' || typeof trophy.scope !== 'string' || !isDay(trophy.date)) return false;
+  if (trophy.year === undefined && trophy.month === undefined) return true;
+  const { year, month } = trophy;
+  return Number.isInteger(year) && typeof month === 'number' && Number.isInteger(month) && month >= 1 && month <= 12;
+}
+
+/** @param {Trophy} trophy */
+export function trophyFields({ kind, scope, year, month, date }) {
+  return year === undefined ? { kind, scope, date } : { kind, scope, year, month, date };
+}
+
+/** @param {unknown} date */
+function isDay(date) {
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  // The pattern alone would let 31 February through.
+  const [year, month, day] = date.split('-').map(Number);
+  const parsed = new Date(year, month - 1, day);
+  return parsed.getMonth() === month - 1 && parsed.getDate() === day;
 }

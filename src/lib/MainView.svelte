@@ -1,7 +1,7 @@
 <script>
   import AppMenu from './AppMenu.svelte';
   import CritterRow from './CritterRow.svelte';
-  import { critters, isAvailableIn, monthName, monthsLeft, sortForMonth, TABS } from './critters.js';
+  import { countCaught, critters, isAvailableIn, monthName, monthsLeft, sortForMonth, TABS } from './critters.js';
   import { clock } from './clock.svelte.js';
   import { t } from './i18n.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
@@ -13,9 +13,10 @@
    *   onimport: () => void,
    *   onaddprofile: () => void,
    *   oneditprofile: () => void,
+   *   ontrophies: () => void,
    * }}
    */
-  let { onsync, onexport, onimport, onaddprofile, oneditprofile } = $props();
+  let { onsync, onexport, onimport, onaddprofile, oneditprofile, ontrophies } = $props();
 
   // Only the hour matters for sorting, so the list only re-sorts when it changes.
   const hour = $derived(clock.now.getHours());
@@ -44,13 +45,20 @@
     ),
   );
 
+  const counts = $derived(countCaught(critters, progress.caught));
+
   const selectClass = 'w-full rounded-xl border-2 border-stone-200 bg-white px-2 py-1.5 font-semibold text-stone-800 md:w-auto';
 </script>
 
 <div class="mx-auto max-w-6xl">
   <header class="flex items-center justify-between gap-2 px-3 pt-2 md:px-4 md:pt-4">
-    <h1 class="shrink-0 text-xl font-black md:text-2xl">ACNH Critters</h1>
-    <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} />
+    <div class="shrink-0">
+      <h1 class="text-xl font-black md:text-2xl">ACNH Critters</h1>
+      <p class="text-sm font-bold text-stone-500" data-testid="caught-total">
+        {t('caughtCount', { caught: String(counts.all.caught), total: String(counts.all.total) })}
+      </p>
+    </div>
+    <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} {ontrophies} />
   </header>
 
   <div
@@ -83,17 +91,23 @@
             role="tab"
             aria-selected={tab === id}
             class={[
-              'min-h-11 grow rounded-full px-2 font-extrabold whitespace-nowrap md:grow-0 md:px-5',
+              'min-h-11 grow rounded-full px-2 leading-tight font-extrabold whitespace-nowrap md:grow-0 md:px-5',
               tab === id ? 'bg-stone-800 text-stone-50' : 'bg-stone-50 text-stone-500 hover:text-stone-800',
             ]}
             onclick={() => (tab = id)}
           >
-            <!-- "Meerestiere" doesn't fit next to the other tabs on a phone. -->
-            {#if id === 'sea'}
-              <span class="md:hidden">{t('tabSeaShort')}</span>
-              <span class="hidden md:inline">{t(label)}</span>
-            {:else}
-              {t(label)}
+            <span class="block">
+              <!-- "Meerestiere" doesn't fit next to the other tabs on a phone. -->
+              {#if id === 'sea'}
+                <span class="md:hidden">{t('tabSeaShort')}</span>
+                <span class="hidden md:inline">{t(label)}</span>
+              {:else}
+                {t(label)}
+              {/if}
+            </span>
+            <!-- Hidden from screen readers, so a tab's name stays its category; the header reads out the total. -->
+            {#if id !== 'all'}
+              <span class="block text-[11px] font-bold opacity-80" aria-hidden="true">{counts[id].caught}/{counts[id].total}</span>
             {/if}
           </button>
         {/each}

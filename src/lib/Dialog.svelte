@@ -1,5 +1,6 @@
 <script>
   import { t } from './i18n.svelte.js';
+  import { ignoreHeldEnter } from './keys.js';
 
   /**
    * Open while mounted; showModal() handles Escape, keeps focus inside and returns it afterwards.
@@ -20,6 +21,7 @@
 <dialog
   bind:this={dialog}
   {onclose}
+  onkeydown={ignoreHeldEnter}
   aria-labelledby={titleId}
   class="m-auto max-h-[calc(100%_-_2rem)] w-[calc(100%_-_2rem)] max-w-md overflow-y-auto rounded-2xl bg-stone-50 p-0 text-stone-800 shadow-xl backdrop:bg-stone-900/40"
 >

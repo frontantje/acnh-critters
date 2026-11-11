@@ -23,12 +23,12 @@ describe('pickLocale', () => {
 
 describe('t', () => {
   test('fills in placeholders', () => {
-    expect(t('syncCount', { caught: '3', total: '80' })).toBe('3 of 80 caught');
+    expect(t('caughtCount', { caught: '3', total: '80' })).toBe('3 of 80 caught');
   });
 
   test('follows the current language', () => {
     setLocale('de');
-    expect(t('syncCount', { caught: '3', total: '80' })).toBe('3 von 80 gefangen');
+    expect(t('caughtCount', { caught: '3', total: '80' })).toBe('3 von 80 gefangen');
   });
 
   test('leaves a missing placeholder empty', () => {

@@ -32,7 +32,8 @@ test.describe('German browser', () => {
 
   test('shows the list in German', async ({ page }) => {
     await skipWelcome(page, SKIP_DE);
-    await expect(page.getByRole('tab')).toHaveText(['Alle', 'Fische', 'Insekten', 'Meerestiere']);
+    await expect(page.getByRole('tab')).toHaveText(['Alle', 'Fische 0/80', 'Insekten 0/80', 'Meerestiere 0/40'], { useInnerText: true });
+    await expect(page.getByTestId('caught-total')).toHaveText('0 von 200 gefangen');
     await expect(hemisphereSelect(page).locator('option')).toHaveText(['Nordhalbkugel', 'Südhalbkugel']);
     await expect(monthSelect(page).locator('option')).toHaveText([
       'Alle Monate', 'Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',

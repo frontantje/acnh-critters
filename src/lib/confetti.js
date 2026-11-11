@@ -4,8 +4,11 @@ const COLORS = ['#16a34a', '#4ade80', '#facc15', '#fb923c', '#38bdf8', '#f472b6'
 const PIECES = 18;
 const DURATION = 900;
 
-/** @param {Element} element */
-export function confettiFrom(element) {
+/**
+ * @param {Element} element
+ * @param {{ pieces?: number, spread?: number }} [options]
+ */
+export function confettiFrom(element, { pieces = PIECES, spread = 1 } = {}) {
   if (prefersReducedMotion()) return;
 
   const box = element.getBoundingClientRect();
@@ -17,9 +20,10 @@ export function confettiFrom(element) {
   layer.dataset.confetti = '';
   layer.setAttribute('aria-hidden', 'true');
   layer.style.cssText = 'position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:50';
-  document.body.append(layer);
+  // A modal dialog draws above the page, so a burst from inside one goes into it.
+  (element.closest('dialog') ?? document.body).append(layer);
 
-  const animations = Array.from({ length: PIECES }, (_, i) => {
+  const animations = Array.from({ length: pieces }, (_, i) => {
     const width = 5 + Math.random() * 4;
     const piece = document.createElement('span');
     piece.style.cssText =
@@ -28,7 +32,7 @@ export function confettiFrom(element) {
     layer.append(piece);
 
     const angle = ((-90 + (Math.random() - 0.5) * 140) * Math.PI) / 180;
-    const distance = 45 + Math.random() * 45;
+    const distance = (45 + Math.random() * 45) * spread;
     const dx = Math.cos(angle) * distance;
     const dy = Math.sin(angle) * distance;
     const spin = (Math.random() - 0.5) * 720;
@@ -36,9 +40,9 @@ export function confettiFrom(element) {
       [
         { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
         { transform: `translate(${dx}px, ${dy}px) rotate(${spin / 2}deg)`, opacity: 1, offset: 0.55 },
-        { transform: `translate(${dx * 1.2}px, ${dy + 45}px) rotate(${spin}deg)`, opacity: 0 },
+        { transform: `translate(${dx * 1.2}px, ${dy + 45 * spread}px) rotate(${spin}deg)`, opacity: 0 },
       ],
-      { duration: DURATION * (0.8 + Math.random() * 0.4), easing: 'cubic-bezier(0.2, 0.6, 0.4, 1)' },
+      { duration: DURATION * (0.8 + Math.random() * 0.4) * Math.sqrt(spread), easing: 'cubic-bezier(0.2, 0.6, 0.4, 1)' },
     );
   });
   Promise.allSettled(animations.map((animation) => animation.finished)).then(() => layer.remove());

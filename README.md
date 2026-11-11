@@ -22,15 +22,22 @@ number of the profile used last. Each profile looks like this:
 
 ```json
 {
-  "version": 1,
+  "version": 2,
   "settings": { "hemisphere": "north", "trackDonations": false, "showCaught": false, "name": "Mia", "avatar": "octopus", "locale": "de" },
   "caught": ["bitterling"],
   "donated": ["bitterling"],
-  "synced": ["fish"]
+  "synced": ["fish"],
+  "trophies": [
+    { "kind": "month", "scope": "fish", "year": 2026, "month": 10, "date": "2026-10-15" },
+    { "kind": "half", "scope": "fish", "date": "2026-10-15" }
+  ]
 }
 ```
 
-`name` and `avatar` (the profile's critter, by id) also go into exports. `locale` is the language picked in the menu or brought by an import;
+Version 2 added `trophies` (see [Parties and trophies](#parties-and-trophies)), which is left out
+until the first one is earned. An older version of the app, e.g. one still open in another tab,
+refuses version 2 profiles instead of saving over them without their trophies; version 1 is still
+read. `name` and `avatar` (the profile's critter, by id) also go into exports. `locale` is the language picked in the menu or brought by an import;
 it's missing while the profile follows the browser's language. Version 1.0.0 kept the language in
 `acnh-critters-locale` instead; it moves into profile 1 on the first start.
 
@@ -100,13 +107,41 @@ The app keeps all profiles in memory and saves every change, so it also works wh
 blocked, just without remembering anything. Other tabs or windows of the app on the same device
 pick up changes right away (through `storage` events), so they don't undo each other's work.
 
+## Parties and trophies
+
+A catch from the list that reaches a milestone opens a party popup (`src/lib/party.svelte.js`):
+
+| Milestone | `kind` | `scope` | Size |
+| --- | --- | --- | --- |
+| All fish, insects or sea creatures there are this month | `month` | `fish`, `bug`, `sea` | 1 |
+| All critters there are this month | `month` | `all` | 2 |
+| Half of a category | `half` | `fish`, `bug`, `sea` | 2 |
+| Half of all critters | `half` | `all` | 3 |
+| All of a category | `full` | `fish`, `bug`, `sea` | 4 |
+| All 200 critters | `full` | `all` | 5 |
+
+"This month" is the real current month in the profile's hemisphere, not the month filter; a month's
+trophy also stores its `year` and `month`, so the same month in another year is another trophy. The
+size sets the confetti (more pieces, wider, more bursts) and, when one catch reaches several at
+once, which one the popup shows. Each milestone is saved as a trophy with the day it was earned, and
+the **Trophies** item in the menu lists them: newest day first, the biggest of a day on top.
+
+Only catches from the list celebrate. Milestones reached any other way earn their trophy quietly,
+without a popup: through the Critterpedia Sync or an import (critters caught long before), at the
+start of a month whose critters were all caught already, and on the first start of this version
+for what was reached before. A party is detected by comparing what's reached before and after the
+catch, so taking a catch back and catching it again throws the party again, but the trophy stays a
+single one with its first date. Trophies of a kind or scope from a newer version are kept in storage
+but not shown or counted.
+
 ## Moving data between devices
 
 Exports are **transfer codes** such as `ACNH2-MQAB…`: about 75 characters, up to about 100 with a
 name (see `src/lib/transfer.js`). A code holds one profile: caught and donated critters, Critterpedia
 Sync checkmarks, hemisphere, the show-caught switch, the language shown (picked in the menu or taken
 from the browser), the profile's picture, and its name of up to 20 characters. The export dialog can change the
-name, which then renames the profile too.
+name, which then renames the profile too. Trophies stay on the device; an import keeps the profile's
+own and adds any new ones from an old JSON export file.
 
 After `ACNH2-`, a code is base64url for these bytes (see `src/lib/transfer.js`):
 
@@ -150,7 +185,8 @@ npm run test:e2e     # browser tests only (Playwright, ~40 s)
 ### Unit tests
 
 `src/**/*.test.js`, run with Vitest in a simulated browser (jsdom). They cover the logic in
-`src/lib` (time and month formatting, reading save files, hemisphere and language guessing) and
+`src/lib` (time and month formatting, reading save files, hemisphere and language guessing, party
+milestones and trophies) and
 sanity-check `data/critters.json` and the translations: counts, ids, names, months and hours,
 south = north shifted by six months, and a German term for every location, shadow size and speed.
 Run them after regenerating the data. `npx vitest` keeps them running while you edit.

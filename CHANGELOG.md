@@ -7,6 +7,32 @@ changes.
 
 ## [Unreleased]
 
+### Added
+
+- **Parties:** catching a critter from the list that finishes a milestone opens a popup with the
+  category's critter, a title and confetti; the bigger the milestone, the more confetti. "Yay!"
+  ("Juhu!") closes it. Milestones: all fish, insects or sea creatures of the current month, all
+  critters of the month, half of a category or of everything, and all of a category or all 200.
+  The Critterpedia Sync and imports don't celebrate, since they record critters caught long before.
+  Taking a catch back and catching it again throws the party again.
+- **Trophy case** in the menu: every milestone leaves a trophy there, with a short description and
+  the day it was earned. Milestones reached without a party (through the sync or an import, at the
+  start of a month already all caught, or before this version) earn theirs quietly. Trophies stay
+  on the device; transfer codes don't carry them.
+- **Counts:** the header shows how many of the 200 critters are caught, and each category tab its
+  own count, e.g. "34/80".
+
+### Changed
+
+- Profiles are saved in format version 2, which adds the trophies. An older version of the app
+  still open somewhere refuses them instead of saving over them without the trophies.
+
+### Fixed
+
+- In the Critterpedia Sync, "Back to …" right after finishing a category led to the critter before
+  the last one instead of the last one.
+- Holding Enter a little too long on a menu item no longer closes the dialog it opens right away.
+
 ## [1.2.1] - 2026-11-02
 
 ### Changed

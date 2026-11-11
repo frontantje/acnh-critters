@@ -28,7 +28,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('defaults to the All tab, the current month and hiding caught critters', async ({ page }) => {
-  await expect(page.getByRole('tab')).toHaveText(['All', 'Fish', 'Insects', 'Sea creatures']);
+  await expect(page.getByRole('tab')).toHaveText(['All', 'Fish 0/80', 'Insects 0/80', 'Sea creatures 0/40'], { useInnerText: true });
   await expect(page.getByRole('tab', { name: 'All', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(monthSelect(page)).toHaveValue(String(MONTH));
   await expect(hemisphereSelect(page)).toHaveValue('north');
@@ -91,6 +91,19 @@ test.describe('catching', () => {
     await setShowCaught(page, true);
     await expect(rows(page)).toHaveCount(available('fish').length);
     await expect(row(page, 'Pale chub').getByRole('button')).toHaveAccessibleName('Caught');
+  });
+
+  test('the header counts every caught critter, and each tab its own', async ({ page }) => {
+    const total = page.getByTestId('caught-total');
+    const fishTab = page.getByRole('tab', { name: 'Fish', exact: true });
+    await expect(total).toHaveText('0 of 200 caught');
+
+    await row(page, 'Pale chub').getByRole('button', { name: 'Caught it' }).click();
+    await expect(total).toHaveText('1 of 200 caught');
+    await expect(fishTab).toHaveText('Fish 1/80', { useInnerText: true });
+    await expect(page.getByRole('tab', { name: 'Insects', exact: true })).toHaveText('Insects 0/80', { useInnerText: true });
+    // The count isn't part of the tab's name.
+    await expect(fishTab).toHaveAccessibleName('Fish');
   });
 
   test('caught critters and the switch are remembered', async ({ page }) => {

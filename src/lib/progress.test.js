@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { i18n, setLocale } from './i18n.svelte.js';
 import {
   addProfile,
+  addTrophies,
   cancelNewProfile,
   chooseLocale,
   deleteProfile,
@@ -20,7 +21,6 @@ import {
   setName,
   switchProfile,
   takenName,
-  toggleCaught,
   toggleShowCaught,
   transferCode,
   unmarkCaught,
@@ -56,11 +56,12 @@ const quietErrors = () => vi.spyOn(console, 'error').mockImplementation(() => {}
 describe('importProgress', () => {
   test('applies an export and saves it', () => {
     const file = {
-      version: 1,
+      version: 2,
       settings: { hemisphere: 'south', trackDonations: true, showCaught: true, name: 'Antje' },
       caught: ['pale-chub', 'koi'],
       donated: ['koi'],
       synced: ['fish'],
+      trophies: [{ kind: 'half', scope: 'fish', date: '2026-10-15' }],
     };
     load(file);
     expect(progress.hemisphere).toBe('south');
@@ -103,7 +104,7 @@ describe('importProgress', () => {
   );
 
   test('rejects files from a newer version', () => {
-    expect(() => load({ version: 2, caught: [] })).toThrow('This code is from a newer version of the app.');
+    expect(() => load({ version: 3, caught: [] })).toThrow('This code is from a newer version of the app.');
   });
 
   test('keeps the current progress when a file is rejected', () => {
@@ -674,17 +675,6 @@ describe('changes from another tab', () => {
 });
 
 describe('changes are saved right away', () => {
-  test('toggleCaught catches and un-catches; un-catching also removes the donation', () => {
-    load({ version: 1, caught: ['koi'], donated: ['koi'] });
-    toggleCaught('koi');
-    expect([...progress.caught]).toEqual([]);
-    expect([...progress.donated]).toEqual([]);
-    expect(saved()).toMatchObject({ caught: [], donated: [] });
-
-    toggleCaught('koi');
-    expect(saved()).toMatchObject({ caught: ['koi'], donated: [] });
-  });
-
   test('unmarkCaught takes a catch back, with the donation', () => {
     load({ version: 1, caught: ['koi', 'frog'], donated: ['koi'] });
     unmarkCaught('koi');
@@ -712,5 +702,85 @@ describe('changes are saved right away', () => {
     expect(saved().settings.showCaught).toBe(true);
     toggleShowCaught();
     expect(saved().settings.showCaught).toBe(false);
+  });
+});
+
+describe('trophies', () => {
+  const halfFish = { kind: 'half', scope: 'fish', date: '2026-10-15' };
+  const octoberFish = { kind: 'month', scope: 'fish', year: 2026, month: 10, date: '2026-10-15' };
+
+  test('each is kept once, with the day it was first earned; the same month of another year is another', () => {
+    addTrophies([halfFish, octoberFish]);
+    addTrophies([{ ...halfFish, date: '2026-10-16' }, { ...octoberFish, year: 2027, date: '2027-10-01' }]);
+    expect(saved().trophies).toEqual([halfFish, octoberFish, { ...octoberFish, year: 2027, date: '2027-10-01' }]);
+  });
+
+  test('a catch saves the trophies it earns in the same write', () => {
+    markCaught('pale-chub');
+    const setItem = vi.spyOn(Storage.prototype, 'setItem');
+    markCaught('koi', [halfFish]);
+    expect(setItem.mock.calls.filter(([key]) => key === STORAGE_KEY)).toHaveLength(1);
+    expect(saved()).toMatchObject({ caught: ['pale-chub', 'koi'], trophies: [halfFish] });
+  });
+
+  test('none are saved until one is earned', () => {
+    markCaught('koi');
+    expect(saved()).not.toHaveProperty('trophies');
+  });
+
+  test('saved ones load again, each once; broken ones are dropped, unknown kinds kept for newer versions', () => {
+    const mega = { kind: 'mega', scope: 'all', date: '2027-01-02' };
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        version: 2,
+        caught: [],
+        trophies: [
+          halfFish,
+          { ...halfFish, date: '2026-10-20' },
+          mega,
+          octoberFish,
+          { kind: 'full', scope: 'sea', date: '2026-10-15', note: 'hand-edited' },
+          { ...halfFish, date: 'yesterday' },
+          { ...halfFish, scope: 'bug', date: '2026-02-31' },
+          { ...octoberFish, month: 13 },
+          { ...octoberFish, month: 0 },
+          { kind: 'month', scope: 'sea', year: 2026, date: '2026-10-15' },
+          { kind: 3, scope: 'fish', date: '2026-10-15' },
+          'half-fish',
+          null,
+        ],
+      }),
+    );
+    restore();
+    expect(progress.trophies).toEqual([halfFish, mega, octoberFish, { kind: 'full', scope: 'sea', date: '2026-10-15' }]);
+  });
+
+  test('an import keeps the profile’s and adds the file’s new ones', () => {
+    addTrophies([halfFish]);
+    load({ version: 2, caught: [], trophies: [{ ...halfFish, date: '2026-10-20' }, { kind: 'full', scope: 'sea', date: '2026-10-21' }] });
+    expect(saved().trophies).toEqual([halfFish, { kind: 'full', scope: 'sea', date: '2026-10-21' }]);
+  });
+
+  test('a transfer code doesn’t carry them', () => {
+    addTrophies([halfFish]);
+    const code = transferCode();
+    localStorage.clear();
+    restore();
+    importProgress(code);
+    expect(progress.trophies).toEqual([]);
+  });
+
+  test('each profile has its own', () => {
+    addTrophies([halfFish]);
+    add('Mia');
+    expect(progress.trophies).toEqual([]);
+    switchProfile(1);
+    expect(progress.trophies).toEqual([halfFish]);
+  });
+
+  test('profiles are saved as version 2, which older versions refuse instead of dropping the trophies', () => {
+    markCaught('koi');
+    expect(saved().version).toBe(2);
   });
 });

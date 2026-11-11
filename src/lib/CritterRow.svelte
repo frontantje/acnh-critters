@@ -2,7 +2,8 @@
   import { confettiFrom } from './confetti.js';
   import { critterName, locationText, monthsLeft, notesText, timeText } from './critters.js';
   import { t } from './i18n.svelte.js';
-  import { progress, toggleCaught } from './progress.svelte.js';
+  import { catchFromList } from './party.svelte.js';
+  import { progress, unmarkCaught } from './progress.svelte.js';
 
   /**
    * @type {{
@@ -32,9 +33,12 @@
 
   /** @param {MouseEvent & { currentTarget: HTMLButtonElement }} event */
   function onclick(event) {
-    // Confetti first, since with caught critters hidden the row goes away once toggled.
-    if (!caught) confettiFrom(event.currentTarget);
-    toggleCaught(critter.id);
+    if (caught) {
+      unmarkCaught(critter.id);
+    } else if (!catchFromList(critter.id)) {
+      // The page only updates after this handler, so a row about to be hidden is still there to burst from.
+      confettiFrom(event.currentTarget);
+    }
     hoverWarns = false;
   }
 </script>

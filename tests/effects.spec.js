@@ -41,10 +41,17 @@ async function startSeaCreatures(page) {
 test.describe('confetti in the list', () => {
   test('catching bursts confetti that cleans up after itself', async ({ page }) => {
     await skipWelcome(page);
-    await row(page, 'Pale chub').getByRole('button', { name: 'Caught it' }).click();
+    const button = row(page, 'Pale chub').getByRole('button', { name: 'Caught it' });
+    await button.scrollIntoViewIfNeeded();
+    const box = await button.boundingBox();
+    if (!box) throw new Error('catch button not rendered');
+    await button.click();
     await expect(confetti(page)).toHaveCount(1);
     await expect(confetti(page)).toHaveAttribute('aria-hidden', 'true');
     await expect(confetti(page).locator('span')).toHaveCount(18);
+    // From the button, though its row is hidden once caught.
+    const left = await confetti(page).locator('span').first().evaluate((piece) => parseFloat(piece.style.left));
+    expect(Math.abs(left - (box.x + box.width / 2))).toBeLessThan(10);
     await expect(confetti(page)).toHaveCount(0, { timeout: 3000 });
   });
 
