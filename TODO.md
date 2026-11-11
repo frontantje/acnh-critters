@@ -5,19 +5,19 @@ progress.
 
 ## Next up
 
-- [x] **UI polish:** Nunito, self-hosted for offline use; dotted sand, warm browns and chunky green
-      buttons, checked for contrast. Rows are cards with a word chip for last chance, all year and
-      caught (2 Nov 2026).
-- [ ] **Dark theme:** follow the device setting, maybe with a switch in the menu. The colours are
-      Tailwind's stone and green, retuned in `src/app.css`; the chips and cards need dark versions.
 - [ ] **Sounds:** e.g. a short jingle for "Caught it", a pop for the sync's "Caught", a soft swoosh
       for "Next". Mute switch in the menu, quiet by default until a first tap (browsers block
       autoplay anyway).
+- [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
+      when and where. The data already has `image` and `price`; the large pictures still need
+      downloading for offline use (see below).
 - [ ] **Cute icons and visuals:** icons for locations (river, pond, sea, trees, flowers…), pictures
       for shadow sizes instead of "X-Large", nicer empty states.
+- [x] **UI polish:** Nunito, self-hosted for offline use; dotted sand, warm browns and chunky green
+      buttons, checked for contrast. Rows are cards with a word chip for last chance, all year and
+      caught (2 Nov 2026).
 - [x] **Big party screen:** a popup with the category's critter and confetti that grows with the
       milestone, up to all 200 caught. No confetti with "reduced motion" (2 Nov 2026).
-- [ ] **Bigger finale** for all 200: the critters parading by, a sound.
 
 ## Suggestions (from Claude)
 
@@ -27,13 +27,9 @@ progress.
       and in the profile list, so kids who can't read yet find their own (30 Oct 2026).
 - [x] **Smaller parties along the way:** a month's critters, half and all of a category or of
       everything. Each leaves a trophy in the menu's trophy case (2 Nov 2026).
-- [ ] **Critter detail card:** tap a row to see the big Critterpedia picture, the price in Bells,
-      when and where. The data already has `image` and `price`.
-- [ ] **"Right now" view:** only what can be caught at this moment, as big picture tiles.
 - [x] **Installable app (PWA):** home-screen icon, works offline, critter icons stored locally (30 Oct 2026).
-- [ ] **Donation tracking UI.** The data model already has it (`trackDonations`, `donated`).
-- [ ] **Undo** for an accidental "Caught it" in the list, e.g. a short "Pale chub caught · Undo"
-      message. The Critterpedia Sync can go back and change a verdict already (2 Nov 2026).
+- [x] **Undo:** a caught critter's ✓ in the list takes the catch back, and the Critterpedia Sync can
+      go back and change a verdict (11 Nov 2026).
 
 ## Smaller ideas mentioned along the way
 
