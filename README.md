@@ -115,16 +115,30 @@ A catch from the list that reaches a milestone opens a party popup (`src/lib/par
 | --- | --- | --- | --- |
 | All fish, insects or sea creatures there are this month | `month` | `fish`, `bug`, `sea` | 1 |
 | All critters there are this month | `month` | `all` | 2 |
-| Half of a category | `half` | `fish`, `bug`, `sea` | 2 |
-| Half of all critters | `half` | `all` | 3 |
-| All of a category | `full` | `fish`, `bug`, `sea` | 4 |
-| All 200 critters | `full` | `all` | 5 |
+| Half of a category | `half` | `fish`, `bug`, `sea` | 3 |
+| Half of all critters | `half` | `all` | 4 |
+| All of a category | `full` | `fish`, `bug`, `sea` | 5 |
+| All 200 critters | `full` | `all` | 6 |
 
 "This month" is the real current month in the profile's hemisphere, not the month filter; a month's
 trophy also stores its `year` and `month`, so the same month in another year is another trophy. The
-size sets the confetti (more pieces, wider, more bursts) and, when one catch reaches several at
-once, which one the popup shows. Each milestone is saved as a trophy with the day it was earned, and
-the **Trophies** item in the menu lists them: newest day first, the biggest of a day on top.
+size sets the confetti (more pieces, wider, more bursts). When one catch reaches several at once,
+each gets its own popup, one after the other, building up: smallest first, and a category before
+all critters, e.g. "All the insects of October!", then "All the critters of October!". Each popup's
+"Yay!" ignores taps, Enter and Escape for its first half second, so a double tap or press doesn't close the next one unseen.
+Each milestone is saved as a trophy with the day it was earned, and the **Trophies** item in the
+menu lists them: newest day first, the biggest of a day on top.
+
+The popup and the trophy case show the same medal (`src/lib/TrophyIcon.svelte`): bronze for a
+month, with the month's number, silver for half, gold for all of a category, and a rainbow one for
+all 200, whose gloss and sparkles only move without "reduced motion". The medals have their
+categories' critters (sea bass, common butterfly, octopus) embossed on them, drawn with the icons
+as masks.
+
+A trophy the trophy case hasn't shown yet, from a party or earned quietly, has a red dot on its
+medal there, and the menu button and its **Trophies** item get one too. Opening the trophy case
+saves them as `"seen": true`; their dots stay until it's closed, so the new ones can still be told
+apart.
 
 Only catches from the list celebrate. Milestones reached any other way earn their trophy quietly,
 without a popup: through the Critterpedia Sync or an import (critters caught long before), at the
@@ -133,6 +147,11 @@ for what was reached before. A party is detected by comparing what's reached bef
 catch, so taking a catch back and catching it again throws the party again, but the trophy stays a
 single one with its first date. Trophies of a kind or scope from a newer version are kept in storage
 but not shown or counted.
+
+Once a category's gold medal is earned, it earns no more month medals, since every month's critters
+of it are caught then anyway; the same goes for "All the critters of …" once the rainbow medal is
+earned. The catch that finishes a category still brings this month's medal along. This goes by the
+earned medal, not by what's caught now, so taking a catch back doesn't start the month medals again.
 
 ## Moving data between devices
 

@@ -37,7 +37,9 @@ test('catching the last of the month’s insects from the list throws a party an
   const party = page.getByRole('dialog', { name: 'All the insects of October!' });
   await expect(party).toBeVisible();
   expect(await party.evaluate((d) => d.matches(':modal'))).toBe(true);
-  expect(await party.locator('img').count()).toBe(1);
+  // A bronze medal with the category's symbol and the month's number.
+  await expect(party.locator('[data-medal="bronze"] [data-symbol]')).toHaveCount(1);
+  await expect(party.locator('[data-medal="bronze"] [data-month]')).toHaveText('10');
   // The smallest kind of party: one burst.
   await expect(confetti(page)).toHaveCount(1);
   await expect(confetti(page).locator('span')).toHaveCount(45);
@@ -84,13 +86,16 @@ test('a held Enter that caught the critter doesn’t close the party right away'
   await row(page, lastBug.name.en).getByRole('button', { name: 'Caught it' }).focus();
   await page.keyboard.down('Enter');
   const party = page.getByRole('dialog', { name: 'All the insects of October!' });
-  await expect(party.getByRole('button', { name: 'Yay!' })).toBeFocused();
+  const yay = party.getByRole('button', { name: 'Yay!' });
+  await expect(yay).toBeFocused();
   // Further downs without an up are key repeats.
   await page.keyboard.down('Enter');
   await page.keyboard.down('Enter');
   await page.keyboard.up('Enter');
   await expect(party).toBeVisible();
 
+  // A fresh press counts once the party has had its moment on screen.
+  await expect(yay).toBeEnabled();
   await page.keyboard.press('Enter');
   await expect(party).toHaveCount(0);
 });
@@ -121,22 +126,78 @@ test('after taking the catch back, catching it again throws the party again, but
   expect((await stored(page)).trophies).toHaveLength(1);
 });
 
-test('the biggest of several reached at once shows, with the most confetti', async ({ page }) => {
+/**
+ * Says Yay to the parties before the last one, which is left open.
+ * @param {import('@playwright/test').Page} page
+ * @param {string[]} titles
+ */
+async function partiesUpTo(page, titles) {
+  for (const title of titles.slice(0, -1)) {
+    await page.getByRole('dialog', { name: title }).getByRole('button', { name: 'Yay!' }).click();
+  }
+  return page.getByRole('dialog', { name: titles[titles.length - 1] });
+}
+
+// The last critter of all: every milestone it finishes, building up.
+const FINALE = ['All the insects of October!', 'All the critters of October!', 'All 80 insects!', 'All 200 critters!'];
+
+test('the last insect of a month whose other critters are caught: first its party, then the whole month’s', async ({ page }) => {
+  await startWith(page, available('all').filter((c) => c.id !== lastBug.id));
+  await catchLastBug(page);
+  const month = await partiesUpTo(page, ['All the insects of October!', 'All the critters of October!']);
+  // Each with its own medal and confetti.
+  await expect(month.locator('[data-medal="bronze"] [data-symbol]')).toHaveCount(3);
+  await expect(confetti(page).first().locator('span')).toHaveCount(70);
+  await month.getByRole('button', { name: 'Yay!' }).click();
+  await expect(dialog(page)).toHaveCount(0);
+});
+
+test('a double tap on Yay doesn’t skip the next party', async ({ page }) => {
+  await startWith(page, available('all').filter((c) => c.id !== lastBug.id));
+  await catchLastBug(page);
+  await expect(page.getByRole('dialog', { name: 'All the insects of October!' }).getByRole('button', { name: 'Yay!' })).toBeEnabled();
+  // Both taps in the page, so the second surely lands in the next party's first half second.
+  await page.evaluate(async () => {
+    const shown = () => document.querySelector('dialog[open]');
+    shown()?.querySelector('button')?.click();
+    while (!shown()) await new Promise(requestAnimationFrame);
+    shown()?.querySelector('button')?.click();
+  });
+  await expect(page.getByRole('dialog', { name: 'All the critters of October!' })).toBeVisible();
+});
+
+test('every milestone the very last critter finishes gets its party, up to the rainbow medal', async ({ page }) => {
   await oneCritterToGo(page);
   await catchLastBug(page);
-  const party = page.getByRole('dialog', { name: 'All 200 critters!' });
-  await expect(party).toBeVisible();
-  // One of each category's critters, for all of them.
-  expect(await party.locator('img').count()).toBe(3);
-  await expect(confetti(page).first().locator('span')).toHaveCount(145);
+  const party = await partiesUpTo(page, FINALE);
+  // The rainbow medal, with one category's symbol each.
+  await expect(party.locator('[data-medal="rainbow"] [data-symbol]')).toHaveCount(3);
+  await expect(confetti(page).first().locator('span')).toHaveCount(170);
   await expect(confetti(page)).toHaveCount(3);
+  // Its gloss and sparkles.
+  expect(await party.locator('[data-medal]').evaluate((medal) => medal.getAnimations({ subtree: true }).length)).toBeGreaterThan(0);
+  await party.getByRole('button', { name: 'Yay!' }).click();
+  await expect(dialog(page)).toHaveCount(0);
+});
+
+test.describe('with reduced motion', () => {
+  test.use({ reducedMotion: 'reduce' });
+
+  test('the rainbow medal holds still, and there is no confetti', async ({ page }) => {
+    await oneCritterToGo(page);
+    await catchLastBug(page);
+    const medal = (await partiesUpTo(page, FINALE)).locator('[data-medal="rainbow"]');
+    await expect(medal).toBeVisible();
+    expect(await medal.evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+    await expect(page.locator('[data-confetti]')).toHaveCount(0);
+  });
 });
 
 test('milestones reached before, e.g. brought by an import, earn their trophies without a party', async ({ page }) => {
   await oneCritterToGo(page);
   await expect(dialog(page)).toHaveCount(0);
   await page.getByRole('button', { name: 'Menu' }).click();
-  await expect(page.getByRole('button', { name: 'Trophies' })).toHaveAccessibleName(/^Trophies\s*8$/);
+  await expect(page.getByRole('button', { name: 'Trophies' })).toHaveAccessibleName(/^Trophies\s*New\s*8$/);
   await page.getByRole('button', { name: 'Trophies' }).click();
   await expect(dialog(page).locator('li p:first-child')).toHaveText([
     'All 40 sea creatures!',
@@ -148,6 +209,8 @@ test('milestones reached before, e.g. brought by an import, earn their trophies 
     'All the sea creatures of October!',
     'All the fish of October!',
   ]);
+  const medals = await dialog(page).locator('[data-medal]').evaluateAll((all) => all.map((medal) => medal.getAttribute('data-medal')));
+  expect(medals).toEqual(['gold', 'gold', 'silver', 'silver', 'silver', 'silver', 'bronze', 'bronze']);
 });
 
 test('the trophy case starts empty, and each party leaves its trophy there', async ({ page }) => {
@@ -159,12 +222,38 @@ test('the trophy case starts empty, and each party leaves its trophy there', asy
   await catchLastBug(page);
   await page.getByRole('button', { name: 'Yay!' }).click();
   await page.getByRole('button', { name: 'Menu' }).click();
-  await expect(page.getByRole('button', { name: 'Trophies' })).toHaveAccessibleName(/^Trophies\s*1$/);
+  await expect(page.getByRole('button', { name: 'Trophies' })).toHaveAccessibleName(/^Trophies\s*New\s*1$/);
   await page.getByRole('button', { name: 'Trophies' }).click();
   await expect(dialog(page).getByRole('listitem')).toHaveText(
     ['All the insects of October! Caught all there were in October 2026. Earned on October 15, 2026'],
     { useInnerText: true },
   );
+});
+
+test('new trophies, also ones earned quietly, have a dot until the trophy case has shown them', async ({ page }) => {
+  // Half the fish come with the import, so that trophy is earned without a party.
+  await startWith(page, [...critters.filter((c) => c.type === 'fish').slice(0, 40), ...bugs.slice(0, -1)]);
+  const menu = page.getByRole('button', { name: 'Menu' });
+  await expect(menu.locator('[data-new-dot]')).toBeVisible();
+  await expect(menu).toHaveAccessibleDescription('new trophies');
+  await catchLastBug(page);
+  await page.getByRole('button', { name: 'Yay!' }).click();
+
+  await menu.click();
+  const item = page.getByRole('button', { name: 'Trophies' });
+  await expect(item.locator('[data-new-dot]')).toBeVisible();
+  await item.click();
+  const trophies = page.getByRole('dialog', { name: 'Trophies' });
+  await expect(trophies.getByRole('img', { name: 'New' })).toHaveCount(2);
+  // Seen once shown, though their dots stay until the case is closed.
+  expect((await stored(page)).trophies.map((/** @type {{ seen?: boolean }} */ trophy) => trophy.seen)).toEqual([true, true]);
+  await page.keyboard.press('Escape');
+
+  await expect(menu.locator('[data-new-dot]')).toHaveCount(0);
+  await expect(menu).toHaveAccessibleDescription('');
+  await openMenuItem(page, 'Trophies');
+  await expect(trophies.getByRole('listitem')).toHaveCount(2);
+  await expect(trophies.getByRole('img', { name: 'New' })).toHaveCount(0);
 });
 
 test.describe('in German', () => {

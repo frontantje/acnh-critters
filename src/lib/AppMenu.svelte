@@ -28,8 +28,10 @@
     return profiles.list.length > 1 && active ? active : null;
   });
   const shownProfile = $derived(shown && profileName(shown));
-  // The trophy case's count, which leaves out trophies of a newer version.
-  const trophyCount = $derived(shownTrophies(progress.trophies).length);
+  // What the trophy case shows, which leaves out trophies of a newer version.
+  const trophies = $derived(shownTrophies(progress.trophies));
+  const newTrophies = $derived(trophies.some((trophy) => !trophy.seen));
+  const newTrophiesId = $props.id();
 
   /** @param {MouseEvent} event */
   function closeOnOutsideClick(event) {
@@ -70,10 +72,11 @@
   <button
     bind:this={toggle}
     class={[
-      'flex h-11 max-w-full items-center gap-1.5 rounded-full text-stone-600 hover:bg-stone-200/70',
+      'relative flex h-11 max-w-full items-center gap-1.5 rounded-full text-stone-600 hover:bg-stone-200/70',
       shownProfile ? 'pr-2 pl-3' : 'w-11 justify-center',
     ]}
     aria-label={shownProfile ? `${t('menu')}, ${shownProfile}` : t('menu')}
+    aria-describedby={newTrophies ? newTrophiesId : undefined}
     aria-expanded={open}
     aria-controls="app-menu"
     onclick={() => (open = !open)}
@@ -87,7 +90,10 @@
       <circle cx="12" cy="12" r="2" />
       <circle cx="12" cy="19" r="2" />
     </svg>
+    {#if newTrophies}<span class="absolute top-1 right-1 size-3 rounded-full bg-red-500 ring-2 ring-sand" data-new-dot></span>{/if}
   </button>
+  <!-- A description rather than part of the name, which stays the same for finding the button. -->
+  <span id={newTrophiesId} hidden>{t('trophiesNew')}</span>
 
   {#if open}
     <!-- Scrolls, since all the items may not fit on short screens. -->
@@ -97,8 +103,13 @@
     >
       <button class={itemClass} onclick={() => runAndClose(onsync)}>{t('syncTitle')}</button>
       <button class={itemClass} onclick={() => runAndClose(ontrophies)}>
-        <span class="flex items-center gap-2"><span aria-hidden="true">🏆</span>{t('trophies')}</span>
-        {#if trophyCount}<span class="text-sm font-bold text-stone-500">{trophyCount}</span>{/if}
+        <span class="flex items-center gap-2">
+          <span aria-hidden="true">🏆</span>{t('trophies')}
+          {#if newTrophies}
+            <span class="size-2.5 rounded-full bg-red-500" role="img" aria-label={t('trophyNew')} data-new-dot></span>
+          {/if}
+        </span>
+        {#if trophies.length}<span class="text-sm font-bold text-stone-500">{trophies.length}</span>{/if}
       </button>
       <button class={itemClass} onclick={() => runAndClose(onexport)}>{t('exportData')}</button>
       <button class={itemClass} onclick={() => runAndClose(onimport)}>{t('importData')}</button>

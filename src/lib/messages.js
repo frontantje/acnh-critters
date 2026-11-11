@@ -66,6 +66,8 @@ const en = {
   trophyHalf: 'Caught half of the {total}.',
   trophyFull: 'Caught every single one.',
   trophyEarned: 'Earned on {date}',
+  trophyNew: 'New',
+  trophiesNew: 'new trophies',
 
   close: 'Close',
   menu: 'Menu',
@@ -184,6 +186,8 @@ const de = {
   trophyHalf: 'Die Hälfte der {total} gefangen.',
   trophyFull: 'Jedes einzelne gefangen.',
   trophyEarned: 'Erhalten am {date}',
+  trophyNew: 'Neu',
+  trophiesNew: 'neue Trophäen',
 
   close: 'Schließen',
   menu: 'Menü',

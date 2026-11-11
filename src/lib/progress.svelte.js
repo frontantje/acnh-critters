@@ -8,7 +8,10 @@ import { decodeTransferCode, encodeTransferCode, findTransferCode, normalizeName
 /** @typedef {import('./i18n.svelte.js').Locale} Locale */
 /** @typedef {import('./transfer.js').ExportData} ExportData */
 /** @typedef {{ id: number, name: string, avatar: string | null }} Profile */
-/** year and month only for a month's trophy. @typedef {{ kind: string, scope: string, year?: number, month?: number, date: string }} Trophy */
+/**
+ * year and month only for a month's trophy; seen once the trophy case has shown it.
+ * @typedef {{ kind: string, scope: string, year?: number, month?: number, date: string, seen?: boolean }} Trophy
+ */
 /**
  * @typedef {{
  *   hemisphere: Hemisphere, trackDonations: boolean, showCaught: boolean, name: string, avatar: string | null,
@@ -212,6 +215,18 @@ export function addTrophies(trophies) {
   const merged = mergeTrophies(progress.trophies, trophies);
   if (merged === progress.trophies) return;
   progress.trophies = merged;
+  save();
+}
+
+/**
+ * Only the ones the trophy case showed, so a newer version's stay new; saves only when one wasn't seen yet.
+ * @param {Set<string>} keys
+ */
+export function markTrophiesSeen(keys) {
+  /** @param {Trophy} trophy */
+  const shown = (trophy) => keys.has(trophyKey(trophy));
+  if (progress.trophies.every((trophy) => trophy.seen || !shown(trophy))) return;
+  progress.trophies = progress.trophies.map((trophy) => (shown(trophy) ? { ...trophy, seen: true } : trophy));
   save();
 }
 
@@ -542,8 +557,8 @@ function isTrophy(value) {
 }
 
 /** @param {Trophy} trophy */
-export function trophyFields({ kind, scope, year, month, date }) {
-  return year === undefined ? { kind, scope, date } : { kind, scope, year, month, date };
+export function trophyFields({ kind, scope, year, month, date, seen }) {
+  return { kind, scope, ...(year === undefined ? {} : { year, month }), date, ...(seen === true ? { seen } : {}) };
 }
 
 /** @param {unknown} date */

@@ -67,6 +67,9 @@
 {#if showingTrophies}
   <TrophyCase onclose={() => (showingTrophies = false)} />
 {/if}
-{#if party.milestone}
-  <PartyPopup milestone={party.milestone} onclose={() => (party.milestone = null)} />
+{#if party.queue.length}
+  <!-- A new popup for each, so each opens with its own confetti. -->
+  {#key party.queue[0]}
+    <PartyPopup milestone={party.queue[0]} onclose={() => party.queue.shift()} />
+  {/key}
 {/if}

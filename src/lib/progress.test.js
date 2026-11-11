@@ -9,6 +9,7 @@ import {
   exportData,
   importProgress,
   markCaught,
+  markTrophiesSeen,
   markSynced,
   previousProfile,
   profileName,
@@ -721,6 +722,32 @@ describe('trophies', () => {
     markCaught('koi', [halfFish]);
     expect(setItem.mock.calls.filter(([key]) => key === STORAGE_KEY)).toHaveLength(1);
     expect(saved()).toMatchObject({ caught: ['pale-chub', 'koi'], trophies: [halfFish] });
+  });
+
+  test('new ones are unseen until the trophy case has shown them, which is saved', () => {
+    addTrophies([halfFish]);
+    expect(saved().trophies).toEqual([halfFish]);
+    markTrophiesSeen(new Set(['half-fish']));
+    expect(saved().trophies).toEqual([{ ...halfFish, seen: true }]);
+
+    addTrophies([octoberFish]);
+    restore();
+    expect(progress.trophies).toEqual([{ ...halfFish, seen: true }, octoberFish]);
+  });
+
+  test('only the ones shown are marked seen, so a newer version’s stay new', () => {
+    const mega = { kind: 'mega', scope: 'all', date: '2027-01-02' };
+    addTrophies([halfFish, mega]);
+    markTrophiesSeen(new Set(['half-fish']));
+    expect(saved().trophies).toEqual([{ ...halfFish, seen: true }, mega]);
+  });
+
+  test('marking them seen saves only when one was new', () => {
+    addTrophies([halfFish]);
+    markTrophiesSeen(new Set(['half-fish']));
+    const setItem = vi.spyOn(Storage.prototype, 'setItem');
+    markTrophiesSeen(new Set(['half-fish']));
+    expect(setItem).not.toHaveBeenCalled();
   });
 
   test('none are saved until one is earned', () => {

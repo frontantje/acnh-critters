@@ -41,6 +41,31 @@
   --color-green-800: #1f5527;
 
   --color-sand: #f1e6c9;
+
+  /* The rainbow medal's gloss sweeps across now and then, and its sparkles twinkle. */
+  --animate-medal-shine: medal-shine 3.2s ease-in-out infinite;
+  --animate-medal-twinkle: medal-twinkle 1.8s ease-in-out infinite;
+
+  @keyframes medal-shine {
+    0% {
+      background-position: 0% 0;
+    }
+    45%,
+    100% {
+      background-position: 100% 0;
+    }
+  }
+  @keyframes medal-twinkle {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.35;
+      transform: scale(0.6);
+    }
+  }
 }
 
 /* The Critterpedia's dotted sand; fixed, so the pinned filter bar's dots line up with the page's. */

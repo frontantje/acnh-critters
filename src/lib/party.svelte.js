@@ -9,12 +9,12 @@ import { addTrophies, markCaught, progress, trophyFields, trophyKey } from './pr
 /** @typedef {'fish' | 'bug' | 'sea' | 'all'} Scope */
 /** @typedef {'month' | 'half' | 'full'} Kind */
 /**
- * size: how big a deal it is, 1–5, for the confetti and for which one shows when several are reached at once.
+ * size: how big a deal it is, 1–6 by medal and a category before all critters, for the confetti and the order of parties.
  * @typedef {{ kind: Kind, scope: Scope, year?: number, month?: number, size: number }} Milestone
  */
 
 /** @type {Record<Kind, [number, number]>} */
-const SIZES = { month: [1, 2], half: [2, 3], full: [4, 5] };
+const SIZES = { month: [1, 2], half: [3, 4], full: [5, 6] };
 
 /** @type {Scope[]} */
 const SCOPES = [.../** @type {Scope[]} */ (CATEGORIES.map((category) => category.id)), 'all'];
@@ -28,7 +28,8 @@ const DESCRIPTIONS = { month: 'trophyMonth', half: 'trophyHalf', full: 'trophyFu
 
 const TOTALS = countCaught(critters, new Set());
 
-export const party = $state({ milestone: /** @type {Milestone | null} */ (null) });
+// The parties still to show, one popup after another.
+export const party = $state({ queue: /** @type {Milestone[]} */ ([]) });
 
 /**
  * @param {Kind} kind
@@ -37,7 +38,7 @@ export const party = $state({ milestone: /** @type {Milestone | null} */ (null) 
 const sizeOf = (kind, scope) => SIZES[kind][scope === 'all' ? 1 : 0];
 
 /**
- * Biggest first, since that's the one shown when a catch reaches several.
+ * In the order their parties show, building up: smallest first, and a category before all critters.
  * @param {{ has: (id: string) => boolean }} caught
  * @param {Hemisphere} hemisphere
  * @param {Date} now
@@ -59,7 +60,7 @@ export function milestones(caught, hemisphere, now) {
     if (done * 2 >= total) reached.push({ kind: 'half', scope, size: sizeOf('half', scope) });
     if (done === total) reached.push({ kind: 'full', scope, size: sizeOf('full', scope) });
   }
-  return reached.sort((a, b) => b.size - a.size);
+  return reached.sort((a, b) => a.size - b.size);
 }
 
 /**
@@ -70,18 +71,27 @@ export function milestones(caught, hemisphere, now) {
 export function catchFromList(id) {
   const now = clock.now;
   const had = new Set(milestones(progress.caught, progress.hemisphere, now).map(trophyKey));
-  const reached = milestones(new Set([...progress.caught, id]), progress.hemisphere, now).filter(
+  const reached = withoutFinishedMonths(milestones(new Set([...progress.caught, id]), progress.hemisphere, now)).filter(
     (milestone) => !had.has(trophyKey(milestone)),
   );
   markCaught(id, reached.map((milestone) => toTrophy(milestone, now)));
   if (reached.length === 0) return false;
-  party.milestone = reached[0];
+  party.queue.push(...reached);
   return true;
 }
 
 /** Milestones reached some other way (the sync, an import, a new month) still earn their trophy, just without a party. */
 export function awardTrophies(now = clock.now) {
-  addTrophies(milestones(progress.caught, progress.hemisphere, now).map((milestone) => toTrophy(milestone, now)));
+  addTrophies(withoutFinishedMonths(milestones(progress.caught, progress.hemisphere, now)).map((milestone) => toTrophy(milestone, now)));
+}
+
+/**
+ * Going by the earned gold or rainbow medal, so a scope caught in full earns no more month medals, even after a catch is taken back.
+ * @param {Milestone[]} reached
+ */
+function withoutFinishedMonths(reached) {
+  const finished = new Set(progress.trophies.filter((trophy) => trophy.kind === 'full').map((trophy) => trophy.scope));
+  return reached.filter((milestone) => milestone.kind !== 'month' || !finished.has(milestone.scope));
 }
 
 /**
@@ -106,7 +116,7 @@ export function shownTrophies(trophies) {
   return trophies
     .flatMap((trophy) => {
       const milestone = trophyMilestone(trophy);
-      return milestone ? [{ key: trophyKey(trophy), date: trophy.date, milestone }] : [];
+      return milestone ? [{ key: trophyKey(trophy), date: trophy.date, seen: trophy.seen === true, milestone }] : [];
     })
     .reverse()
     .sort((a, b) => b.date.localeCompare(a.date) || b.milestone.size - a.milestone.size);
@@ -133,6 +143,16 @@ function messageValues({ scope, year, month }) {
     year: String(year ?? ''),
     total: String(TOTALS[scope].total),
   };
+}
+
+/**
+ * @param {Milestone} milestone
+ * @returns {'bronze' | 'silver' | 'gold' | 'rainbow'}
+ */
+export function medalOf({ kind, scope }) {
+  if (kind === 'month') return 'bronze';
+  if (kind === 'half') return 'silver';
+  return scope === 'all' ? 'rainbow' : 'gold';
 }
 
 /** @param {Milestone} milestone */

@@ -14,11 +14,17 @@ changes.
   ("Juhu!") closes it. Milestones: all fish, insects or sea creatures of the current month, all
   critters of the month, half of a category or of everything, and all of a category or all 200.
   The Critterpedia Sync and imports don't celebrate, since they record critters caught long before.
-  Taking a catch back and catching it again throws the party again.
+  Taking a catch back and catching it again throws the party again. A catch that finishes several
+  milestones gets a popup for each, building up, e.g. first all the insects of the month, then all
+  its critters.
 - **Trophy case** in the menu: every milestone leaves a trophy there, with a short description and
-  the day it was earned. Milestones reached without a party (through the sync or an import, at the
-  start of a month already all caught, or before this version) earn theirs quietly. Trophies stay
-  on the device; transfer codes don't carry them.
+  the day it was earned. A month's critters earn a bronze medal with the month's number, half of a
+  category a silver one and all of it a gold one, each with the category's critter embossed; all 200
+  earn a shiny rainbow medal. New trophies have a red dot, also on the menu, until the trophy case
+  has been opened. Milestones reached without a party (through the sync or an import, at the
+  start of a month already all caught, or before this version) earn theirs quietly. A category with
+  its gold medal, or all critters with the rainbow one, earn no more month medals. Trophies stay on
+  the device; transfer codes don't carry them.
 - **Counts:** the header shows how many of the 200 critters are caught, and each category tab its
   own count, e.g. "34/80".
 

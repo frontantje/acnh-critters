@@ -5,6 +5,7 @@ import { setLocale } from './i18n.svelte.js';
 import {
   awardTrophies,
   catchFromList,
+  medalOf,
   milestoneDescription,
   milestoneIcons,
   milestones,
@@ -19,8 +20,12 @@ import { importProgress, markCaught, progress, restore, trophyKey, unmarkCaught 
 /** @typedef {import('./party.svelte.js').Milestone} Milestone */
 
 const OCTOBER = new Date(2026, 9, 15, 12);
+const NOVEMBER = new Date(2026, 10, 1, 9);
 const all = critters.map((critter) => critter.id);
 const fish = critters.filter((critter) => critter.type === 'fish').map((critter) => critter.id);
+const notInNovember = /** @type {string} */ (
+  critters.find((critter) => critter.type === 'fish' && !isAvailableIn(critter, 'north', 11))?.id
+);
 /**
  * @param {string} type
  * @param {number} [month]
@@ -49,7 +54,7 @@ beforeEach(() => {
   localStorage.clear();
   restore();
   clock.now = OCTOBER;
-  party.milestone = null;
+  party.queue = [];
 });
 
 afterEach(() => {
@@ -72,25 +77,35 @@ describe('milestones', () => {
     expect(reached(fish.slice(0, 39))).toEqual([]);
   });
 
-  test('everything reaches all of them, biggest first', () => {
+  test('everything reaches all of them, from bronze up to the rainbow, a category before all critters', () => {
     expect(reached(all)).toEqual([
-      'full-all',
-      'full-fish', 'full-bug', 'full-sea',
-      'half-all',
-      'half-fish', 'half-bug', 'half-sea',
-      'month-all-2026-10',
       'month-fish-2026-10', 'month-bug-2026-10', 'month-sea-2026-10',
+      'month-all-2026-10',
+      'half-fish', 'half-bug', 'half-sea',
+      'half-all',
+      'full-fish', 'full-bug', 'full-sea',
+      'full-all',
     ]);
+    expect(milestones(new Set(all), 'north', OCTOBER).map((milestone) => milestone.size)).toEqual([1, 1, 1, 2, 3, 3, 3, 4, 5, 5, 5, 6]);
+  });
+
+  test('half of the insects and all of the month at once: the silver one after the bronze one', () => {
+    const halfAndMonth = [...inMonth('fish'), ...inMonth('sea'), ...bugs.slice(0, -1)];
+    // 39 insects: October's but the last, and 6 from other months.
+    const otherBugs = critters.filter((critter) => critter.type === 'bug' && !bugs.includes(critter.id)).slice(0, 6);
+    load([...halfAndMonth, ...otherBugs.map((critter) => critter.id)]);
+    catchFromList(lastBug);
+    expect(party.queue.map(trophyKey)).toEqual(['month-bug-2026-10', 'month-all-2026-10', 'half-bug']);
   });
 });
 
 describe('catchFromList', () => {
   test('a catch from the list that reaches a milestone celebrates it and earns its trophy', () => {
     oneBugToGo();
-    expect(party.milestone).toBeNull();
+    expect(party.queue).toEqual([]);
 
     expect(catchFromList(lastBug)).toBe(true);
-    expect(party.milestone).toEqual({ kind: 'month', scope: 'bug', year: 2026, month: 10, size: 1 });
+    expect(party.queue).toEqual([{ kind: 'month', scope: 'bug', year: 2026, month: 10, size: 1 }]);
     expect(progress.trophies).toEqual([octoberBugs]);
     expect(saved().trophies).toEqual([octoberBugs]);
   });
@@ -105,28 +120,35 @@ describe('catchFromList', () => {
   test('a catch that reaches nothing new has no party', () => {
     load(fish.slice(0, 40));
     expect(catchFromList(fish[40])).toBe(false);
-    expect(party.milestone).toBeNull();
+    expect(party.queue).toEqual([]);
     expect(progress.trophies).toEqual([]);
   });
 
   test('after a correction, reaching it again celebrates again, without a second trophy', () => {
     oneBugToGo();
     catchFromList(lastBug);
-    party.milestone = null;
+    party.queue = [];
 
     clock.now = new Date(2026, 9, 16, 12);
     unmarkCaught(lastBug);
     catchFromList(lastBug);
-    expect(party.milestone).toMatchObject({ kind: 'month', scope: 'bug' });
+    expect(party.queue).toMatchObject([{ kind: 'month', scope: 'bug' }]);
     expect(progress.trophies).toEqual([octoberBugs]);
   });
 
-  test('of several reached at once, the biggest shows and all are earned', () => {
+  test('the last insect of a month whose other critters are all caught: a party for the insects, then one for the month', () => {
+    load([...inMonth('fish'), ...inMonth('sea'), ...bugs.slice(0, -1)]);
+    catchFromList(lastBug);
+    expect(party.queue.map(trophyKey)).toEqual(['month-bug-2026-10', 'month-all-2026-10']);
+  });
+
+  test('every milestone reached at once gets its party, building up to the biggest, and all are earned', () => {
     const last = inMonth('fish')[0];
     load(all.filter((id) => id !== last));
     catchFromList(last);
-    expect(party.milestone).toMatchObject({ kind: 'full', scope: 'all', size: 5 });
-    expect(earned()).toEqual(['full-all', 'full-fish', 'month-all-2026-10', 'month-fish-2026-10']);
+    const keys = ['month-fish-2026-10', 'month-all-2026-10', 'full-fish', 'full-all'];
+    expect(party.queue.map(trophyKey)).toEqual(keys);
+    expect(earned()).toEqual(keys);
   });
 
   test('the same month in another year is another trophy', () => {
@@ -147,7 +169,7 @@ describe('awardTrophies', () => {
     expect(progress.trophies).toEqual([]);
 
     awardTrophies();
-    expect(party.milestone).toBeNull();
+    expect(party.queue).toEqual([]);
     expect(saved().trophies).toEqual([octoberBugs]);
   });
 
@@ -166,6 +188,40 @@ describe('awardTrophies', () => {
     expect(earned()).toEqual([]);
     awardTrophies(new Date(2026, 10, 1, 9));
     expect(progress.trophies).toEqual([{ kind: 'month', scope: 'bug', year: 2026, month: 11, date: '2026-11-01' }]);
+  });
+
+  test('a category caught in full earns no more month medals, even after a catch is taken back', () => {
+    load(fish);
+    awardTrophies(OCTOBER);
+    const october = ['month-fish-2026-10', 'half-fish', 'full-fish'];
+    expect(earned()).toEqual(october);
+
+    awardTrophies(NOVEMBER);
+    expect(earned()).toEqual(october);
+    // All of November's fish are still caught, but the category isn't new to finish.
+    unmarkCaught(notInNovember);
+    awardTrophies(NOVEMBER);
+    expect(earned()).toEqual(october);
+  });
+
+  test('all 200 caught earn no more month medals at all', () => {
+    load(all);
+    awardTrophies(OCTOBER);
+    expect(earned()).toHaveLength(12);
+    awardTrophies(NOVEMBER);
+    expect(earned()).toHaveLength(12);
+  });
+
+  test('a catch taken back and caught again in a finished category: the gold party again, but no month medal', () => {
+    const last = inMonth('fish')[0];
+    load(fish.filter((id) => id !== last));
+    catchFromList(last);
+    expect(party.queue.map(trophyKey)).toEqual(['month-fish-2026-10', 'full-fish']);
+    party.queue = [];
+
+    unmarkCaught(last);
+    catchFromList(last);
+    expect(party.queue.map(trophyKey)).toEqual(['full-fish']);
   });
 });
 
@@ -192,6 +248,14 @@ describe('trophies', () => {
     expect(shown.map((trophy) => trophy.key)).toEqual(['full-bug', 'month-bug-2026-10', 'half-fish']);
   });
 
+  test('the trophy case knows which ones it hasn’t shown yet', () => {
+    const shown = shownTrophies([
+      { kind: 'half', scope: 'fish', date: '2026-10-14', seen: true },
+      { kind: 'full', scope: 'fish', date: '2026-10-15' },
+    ]);
+    expect(shown.map(({ key, seen }) => [key, seen])).toEqual([['full-fish', false], ['half-fish', true]]);
+  });
+
   test('titles and descriptions, in both languages', () => {
     const shown = [
       milestoneOf({ kind: 'month', scope: 'fish', year: 2026, month: 10 }),
@@ -214,6 +278,15 @@ describe('trophies', () => {
       'Die Hälfte der 40 gefangen.',
       'Jedes einzelne gefangen.',
     ]);
+  });
+
+  test('a month is a bronze medal, half silver, all of a category gold, and all 200 the rainbow one', () => {
+    expect(medalOf(milestoneOf({ kind: 'month', scope: 'sea', year: 2026, month: 10 }))).toBe('bronze');
+    expect(medalOf(milestoneOf({ kind: 'month', scope: 'all', year: 2026, month: 10 }))).toBe('bronze');
+    expect(medalOf(milestoneOf({ kind: 'half', scope: 'fish' }))).toBe('silver');
+    expect(medalOf(milestoneOf({ kind: 'half', scope: 'all' }))).toBe('silver');
+    expect(medalOf(milestoneOf({ kind: 'full', scope: 'bug' }))).toBe('gold');
+    expect(medalOf(milestoneOf({ kind: 'full', scope: 'all' }))).toBe('rainbow');
   });
 
   test('a category shows its own critter; all of them shows one of each', () => {
