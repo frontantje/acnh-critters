@@ -1,10 +1,13 @@
 <script>
+  import { MediaQuery } from 'svelte/reactivity';
   import AppMenu from './AppMenu.svelte';
   import CritterRow from './CritterRow.svelte';
   import { countCaught, critters, isAvailableIn, monthName, monthsLeft, sortForMonth, TABS } from './critters.js';
   import { clock } from './clock.svelte.js';
   import { t } from './i18n.svelte.js';
+  import { milestoneTitle, rainbowMedal } from './party.svelte.js';
   import { progress, setHemisphere, toggleShowCaught } from './progress.svelte.js';
+  import TrophyIcon from './TrophyIcon.svelte';
 
   /**
    * @type {{
@@ -46,17 +49,29 @@
   );
 
   const counts = $derived(countCaught(critters, progress.caught));
+  // Only while all of them are caught, so taking one back takes the golden frame and the medal away again.
+  const rainbow = $derived(counts.all.caught === counts.all.total ? rainbowMedal(progress.trophies) : null);
+  // Tailwind's md: the medal is sized in px, so it can't follow the header's breakpoint classes.
+  const wide = new MediaQuery('min-width: 48rem');
 
   const selectClass = 'w-full rounded-xl border-2 border-stone-200 bg-white px-2 py-1.5 font-semibold text-stone-800 md:w-auto';
 </script>
 
 <div class="mx-auto max-w-6xl">
   <header class="flex items-center justify-between gap-2 px-3 pt-2 md:px-4 md:pt-4">
-    <div class="shrink-0">
-      <h1 class="text-xl font-black md:text-2xl">ACNH Critters</h1>
-      <p class="text-sm font-bold text-stone-500" data-testid="caught-total">
-        {t('caughtCount', { caught: String(counts.all.caught), total: String(counts.all.total) })}
-      </p>
+    <div class="flex shrink-0 items-center gap-3 md:gap-4">
+      <div>
+        <h1 class="text-xl font-black md:text-4xl">ACNH Critters</h1>
+        <p class="text-sm font-bold text-stone-500 md:text-base" data-testid="caught-total">
+          {t('caughtCount', { caught: String(counts.all.caught), total: String(counts.all.total) })}
+        </p>
+      </div>
+      {#if rainbow}
+        <!-- Room below, so it doesn't butt against the filter bar pinned under the header. -->
+        <span class="flex pb-1.5" role="img" aria-label={milestoneTitle(rainbow)}>
+          <TrophyIcon milestone={rainbow} size={wide.current ? 72 : 48} />
+        </span>
+      {/if}
     </div>
     <AppMenu {onsync} {onexport} {onimport} {onaddprofile} {oneditprofile} {ontrophies} />
   </header>
@@ -148,4 +163,14 @@
       </li>
     {/each}
   </ul>
+
+  <!-- Fixed and click-through, so it frames the whole screen without getting in the way. -->
+  {#if rainbow}
+    <div
+      class="pointer-events-none fixed inset-0 z-30 border-[5px] shadow-[inset_0_0_12px_rgb(180_83_9/0.35)] md:border-8"
+      style:border-image="linear-gradient(135deg, #fef3c7, #fbbf24 25%, #b45309 50%, #fcd34d 75%, #fef3c7) 1"
+      aria-hidden="true"
+      data-testid="golden-frame"
+    ></div>
+  {/if}
 </div>

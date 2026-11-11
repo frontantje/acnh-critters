@@ -168,6 +168,7 @@ test('a double tap on Yay doesn’t skip the next party', async ({ page }) => {
 
 test('every milestone the very last critter finishes gets its party, up to the rainbow medal', async ({ page }) => {
   await oneCritterToGo(page);
+  await expect(page.getByTestId('golden-frame')).toHaveCount(0);
   await catchLastBug(page);
   const party = await partiesUpTo(page, FINALE);
   // The rainbow medal, with one category's symbol each.
@@ -178,6 +179,37 @@ test('every milestone the very last critter finishes gets its party, up to the r
   expect(await party.locator('[data-medal]').evaluate((medal) => medal.getAnimations({ subtree: true }).length)).toBeGreaterThan(0);
   await party.getByRole('button', { name: 'Yay!' }).click();
   await expect(dialog(page)).toHaveCount(0);
+  await expect(page.getByTestId('golden-frame')).toBeVisible();
+});
+
+test('while all 200 are caught, the app has a golden frame and the rainbow medal by its title', async ({ page }) => {
+  // Imported, so the medal is earned without a party.
+  await startWith(page, critters);
+  const frame = page.getByTestId('golden-frame');
+  const medal = page.getByRole('img', { name: 'All 200 critters!' });
+  await expect(frame).toBeVisible();
+  await expect(medal).toBeVisible();
+  const title = await page.getByRole('heading', { name: 'ACNH Critters' }).boundingBox();
+  const beside = await medal.boundingBox();
+  if (!title || !beside) throw new Error('title not shown');
+  expect(beside.x).toBeGreaterThan(title.x + title.width);
+  // Big, so it's seen.
+  expect(beside.height).toBeGreaterThan(title.height * 1.5);
+
+  // Taps go through the frame; taking a catch back takes both away, though the trophy stays.
+  await setShowCaught(page, true);
+  await row(page, 'Pale chub').getByRole('button').click();
+  await expect(page.getByTestId('caught-total')).toHaveText('199 of 200 caught');
+  await expect(frame).toHaveCount(0);
+  await expect(medal).toHaveCount(0);
+  expect((await stored(page)).trophies).toContainEqual({ kind: 'full', scope: 'all', date: '2026-10-15' });
+
+  // Caught again: its parties again, and both back.
+  await row(page, 'Pale chub').getByRole('button').click();
+  const party = await partiesUpTo(page, ['All 80 fish!', 'All 200 critters!']);
+  await party.getByRole('button', { name: 'Yay!' }).click();
+  await expect(frame).toBeVisible();
+  await expect(medal).toBeVisible();
 });
 
 test.describe('with reduced motion', () => {

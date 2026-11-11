@@ -27,9 +27,12 @@ changes.
   the device; transfer codes don't carry them.
 - **Counts:** the header shows how many of the 200 critters are caught, and each category tab its
   own count, e.g. "34/80".
+- **All 200 caught:** while they are, the app has a golden frame, and the rainbow medal shows next to
+  the title.
 
 ### Changed
 
+- On wide screens the title and the caught count in the header are bigger.
 - Profiles are saved in format version 2, which adds the trophies. An older version of the app
   still open somewhere refuses them instead of saving over them without the trophies.
 

@@ -11,6 +11,7 @@ import {
   milestones,
   milestoneTitle,
   party,
+  rainbowMedal,
   shownTrophies,
   trophyMilestone,
 } from './party.svelte.js';
@@ -246,6 +247,16 @@ describe('trophies', () => {
       { kind: 'full', scope: 'bug', date: '2026-10-15' },
     ]);
     expect(shown.map((trophy) => trophy.key)).toEqual(['full-bug', 'month-bug-2026-10', 'half-fish']);
+  });
+
+  test('the rainbow medal, once earned, for the golden frame and the title', () => {
+    expect(rainbowMedal([])).toBeNull();
+    expect(rainbowMedal([{ kind: 'full', scope: 'fish', date: '2026-10-15' }])).toBeNull();
+    expect(rainbowMedal([{ kind: 'half', scope: 'all', date: '2026-10-14' }, { kind: 'full', scope: 'all', date: '2026-10-15' }])).toEqual({
+      kind: 'full',
+      scope: 'all',
+      size: 6,
+    });
   });
 
   test('the trophy case knows which ones it hasn’t shown yet', () => {

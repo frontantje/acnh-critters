@@ -109,6 +109,15 @@ export function trophyMilestone(trophy) {
 }
 
 /**
+ * @param {Trophy[]} trophies
+ * @returns {Milestone | null} the rainbow medal, once earned
+ */
+export function rainbowMedal(trophies) {
+  const trophy = trophies.find(({ kind, scope }) => kind === 'full' && scope === 'all');
+  return trophy ? trophyMilestone(trophy) : null;
+}
+
+/**
  * Newest day first, the biggest of a day on top; trophies this version doesn't know are left out.
  * @param {Trophy[]} trophies
  */

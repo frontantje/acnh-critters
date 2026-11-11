@@ -60,7 +60,8 @@
   }
 </script>
 
-<span class="relative inline-block h-[13em] w-[10em]" style:font-size="{size / 10}px" data-medal={medal} aria-hidden="true">
+<!-- Tall enough for the disc's shadow, so nothing after the medal covers its lower edge. -->
+<span class="relative inline-block h-[13.3em] w-[10em]" style:font-size="{size / 10}px" data-medal={medal} aria-hidden="true">
   <!-- The ribbon, behind the disc; the strap at the back is darker. -->
   <span
     class="absolute top-0 right-[1.7em] h-[7.8em] w-[3.3em] origin-top rotate-16"
@@ -68,7 +69,7 @@
   ></span>
   <span class="absolute top-0 left-[1.7em] h-[7.8em] w-[3.3em] origin-top -rotate-16" style:background={metal.ribbon}></span>
 
-  <span class="absolute bottom-0 left-0 size-[10em] rounded-full shadow-[0_0.3em_0_rgb(0_0_0/0.18)]" style:background={metal.rim}>
+  <span class="absolute bottom-[0.3em] left-0 size-[10em] rounded-full shadow-[0_0.3em_0_rgb(0_0_0/0.18)]" style:background={metal.rim}>
     <span
       class="absolute inset-[0.7em] overflow-hidden rounded-full shadow-[inset_0.12em_0.15em_0.25em_rgb(0_0_0/0.3),inset_-0.1em_-0.1em_0.2em_rgb(255_255_255/0.6)]"
       style:background={metal.face}

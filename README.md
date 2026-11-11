@@ -140,6 +140,11 @@ medal there, and the menu button and its **Trophies** item get one too. Opening 
 saves them as `"seen": true`; their dots stay until it's closed, so the new ones can still be told
 apart.
 
+While all 200 critters are caught, the whole app has a golden frame (fixed over the screen's edges,
+letting taps through) and the rainbow medal shows next to the "ACNH Critters" title. Taking a catch
+back takes both away, though the trophy stays in the trophy case; catching it again brings them
+back, with its parties.
+
 Only catches from the list celebrate. Milestones reached any other way earn their trophy quietly,
 without a popup: through the Critterpedia Sync or an import (critters caught long before), at the
 start of a month whose critters were all caught already, and on the first start of this version
